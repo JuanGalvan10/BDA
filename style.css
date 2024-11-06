@@ -347,3 +347,57 @@ footer span {
   object-fit: cover;
   border-radius: 20px;
 }
+
+/*CAMBIOS PARA RESERVAS*/
+.image-container2 {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container2 img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: 50% 90%;
+}
+
+#btn-reserva {
+  background-color: #000000;
+  color: white;
+  border-radius: 40px;
+  width: 90%;
+  align-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin: 10px;
+  font-size: 30px;
+}
+
+.row-inline {
+  display: flex;
+  align-items: center;
+}
+
+.row-inline p,
+.row-inline .dropdown {
+  margin-right: 15px; 
+}
+#Reservas .container{
+  border: 1px solid black;
+  border-radius: 40px;
+  padding: 30px;
+}
+
+#txt-reserva {
+  background-color: #000000;
+  color: white;
+  border-radius: 40px;
+  width: 95%;
+  align-items: center;
+  padding: 10px;
+  font-size: 20px;
+}
