@@ -423,3 +423,24 @@ footer span {
   padding: 10px;
   font-size: 20px;
 }
+
+
+/*Carusel de fotos en pedidos */
+
+.carousel-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  padding: 5px 10px 10px 10px;
+  border-radius: 30px;
+}
+
+.col {
+  flex: 1;
+  padding: 0;
+}
