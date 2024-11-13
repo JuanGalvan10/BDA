@@ -2,16 +2,9 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* This will prevent horizontal scrolling */
-}
-
 .sidenav {
   height: 100%;
-  width: 0;
+  width: 10px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -51,12 +44,17 @@ html, body {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 
 .button {
-  background-color: #000000; 
+  background-color: #000000;
   border: none;
   color: white;
   padding: 20px;
@@ -64,7 +62,8 @@ html, body {
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  margin: 12px 4px 0; /* Esto cambia la altura del botón(es) */
+  margin: 12px 4px 0;
+  /* Esto cambia la altura del botón(es) */
   cursor: pointer;
   width: 190px;
   height: 40px;
@@ -72,17 +71,28 @@ html, body {
 }
 
 /* Esto cambia la curvatura del botón*/
-.button1 {border-radius: 30px;}
-.button2 {border-radius: 30px;}
+.button1 {
+  border-radius: 30px;
+}
+
+.button2 {
+  border-radius: 30px;
+}
 
 /* Esto cambia la altura del texto */
-.button1 {line-height: 0px;}
-.button2 {line-height: 0px;}
+.button1 {
+  line-height: 0px;
+}
+
+.button2 {
+  line-height: 0px;
+}
 
 /* Botón justo a la derecha */
 .button-container {
   top: 1;
   right: 0;
+
 }
 
 .scrolling-text {
@@ -90,7 +100,7 @@ html, body {
   top: 2px;
   left: 50%;
   transform: translateX(-50%);
-  animation: scroll-left 80s linear infinite;
+  animation: scroll-left 50s linear infinite;
   font-size: 150px;
   z-index: 10;
   margin-bottom: 10px;
@@ -102,6 +112,7 @@ html, body {
     left: 100%;
     width: 500%;
   }
+
   to {
     left: -100%;
     width: 500%;
@@ -117,18 +128,184 @@ html, body {
 .map-iframe {
   border: 0;
   border-radius: 20px;
-}
-
-#Redes {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  border: 2px solid black;
 }
 
 #texto {
   width: 100%;
   background-color: #000000;
+}
+
+#recuadro {
+  border: 2px solid black;
+  box-shadow: 10px 10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+  height: auot;
+}
+
+#btn-header {
+  background-color: #000000;
+  color: white;
+  border-radius: 20px;
+  width: auto;
+  height: 40px;
+  text-align: left;
+  padding-inline: 15px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 10px;
+}
+
+.light {
+  color: white
+}
+
+#bienvenido {
+  text-align: center;
+}
+
+#bienvenido h1 {
+  font-size: 80px;
+}
+
+
+#imagen {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+  width: 100%;
+}
+
+#precio {
+  background-color: #000000;
+  border-radius: 20px;
+  gap: 20px;
+  margin: 10px;
+}
+
+#precio h6 {
+  color: white;
+  height: 40px;
+  gap: 40px;
+  margin: 10px;
+  align-content: center;
+  text-align: center;
+}
+
+body hr {
+  background-color: black !important;
+  height: 2px !important;
+  opacity: 1;
+}
+
+footer span {
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+/*mini texto footer*/
+.small-text {
+  font-size: 12px;
+  color: white
+}
+
+.medium-text {
+  font-family: 'Inter';
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.big-text {
+  font-family: 'Inter';
+  font-size: 160px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.image-container {
+  width: 100%;
+  height: 750px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: 50% 90%;; 
+}
+
+.cuadradonegro, .cuadradonegro2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.6);
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container2 {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container2 img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: 50% 90%;
+}
+
+#btn-reserva {
+  background-color: #000000;
+  color: white;
+  border-radius: 40px;
+  width: 90%;
+  align-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin: 10px;
+  font-size: 30px;
+}
+
+.row-inline {
+  display: flex;
+  align-items: center;
+}
+
+.row-inline p,
+.row-inline .dropdown {
+  margin-right: 15px; 
+}
+#Reservas .container{
+  border: 1px solid black;
+  border-radius: 40px;
+  padding: 30px;
+}
+
+#txt-reserva {
+  background-color: #000000;
+  color: white;
+  border-radius: 40px;
+  width: 95%;
+  align-items: center;
+  padding: 10px;
+  font-size: 20px;
 }
 
 footer span {
