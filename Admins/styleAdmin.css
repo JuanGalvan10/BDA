@@ -537,4 +537,11 @@ a.sidebar-link:hover {
   flex: block;
 }
 
+#recuadro_grafica {
+  border: 2px solid black;
+  border-radius: 20px;
+  height: 350px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /*CSS ADMIN*/
