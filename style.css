@@ -361,3 +361,24 @@ footer span {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#Gracias-reserva{
+  color:aliceblue;
+  text-align: center;
+  padding: auto;
+  margin: auto;
+  height: 100%;
+  padding-top: 200px;
+  font-family: Inter;
+}
+#boton-gracias{
+  color: black;
+  border-radius: 40px;
+  align-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 70px;
+  padding-right: 70px;
+  margin: 10px;
+  font-size: 30px;
+  font-weight: 1000;
+}
