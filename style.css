@@ -220,6 +220,14 @@ footer span {
   margin-top: 10px;
 }
 
+.big-text-w {
+  font-family: 'Inter';
+  font-size: 160px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
+
 .image-container {
   width: 100%;
   height: 750px;
