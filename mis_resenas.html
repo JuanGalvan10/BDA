@@ -2,20 +2,18 @@
 <html>
 
 <head>
-
-  <title>Registro</title>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Estilos -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap">
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  
-
+    <title>Mis reseñas</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap">
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -37,6 +35,7 @@
                         <a href="#">Reseñas</a>
                         <a href="#">Soporte</a>
                     </div>
+                    <a href="/"><img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="50px"></a>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
                     <nav class="navbar navbar-expand-lg navbar-light">
@@ -79,24 +78,15 @@
         </div>
     </header>
 
-    <section id="descripcion_producto">
+    <section id="titulo_reserva">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="big-text-b text-center align-items-center">
-                        <span>
+                        <h1 id="titulo">
                             MIS RESEÑAS
-                        </span>
+                        </h1>
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4">
-                </div>
-
-                <div class="col-8">
-                    
                 </div>
             </div>
         </div>
@@ -104,58 +94,49 @@
         <div class="row">
             <div class="col-4">
             </div>
-
             <div class="col-8">
                 <hr>
-                
             </div>
         </div>
-        
     </section>
 
-    <section id="resenas">
-        <div class="big-text-b">
-            
-
-        </div>
+    <section id="pedidos">
         <div class="container">
-            <div clas="row"> 
-                <!--Jinja aqui para imprimir todas las resenas que ha hecho el usuario-->
-                <div class="col-12" id="recuadro-resenas">
-
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todas las reservas que ha hecho el usuario-->
+                <div class="col-11">
                     <div class="row">
-                        <div class="col-6">
-                            <div clas="small-text-b" style="padding: 10px 20px 10px 20px;">
+                        <div class="col-12">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
                                 <span>
-                                    <strong>Dia: </strong> bla / bla / bla
-                                </span>
-                            </div>
-                            
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <div class="button_3p d-flex align-items-center justify-content-center">
-                                <span class="threedots">
-                                    . . .
+                                    <strong>Dia: </strong> 11/03/2024
                                 </span>
                             </div>
                         </div>
-
-                        
-                    </div>
-                    <div clas="row">
-                        <div class="small-text-b-resenas" style="padding: 0px 20px 10px 20px;">
-                            <span>
-                                comentario de la reseña bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbbbbbbbb b b b b b b
-                            </span>
+                        <div class="col-12">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    Tu: bla bla bla bla bla bla bla bla
+                                </span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
-                <br>
-                <hr>
+                <div class="col-1">
+                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 50%;" id="precio">
+                        ⋮
+                    </button>
+                    <div class="dropdown-menu" id="btn-borrar">
+                        <a class="dropdown-item" id="btn-borrar" href="#">PEDIR DE NUEVO</a>
+                        <hr style="background-color: white !important">
+                        <a class="dropdown-item" id="btn-borrar" href="#">BORRAR</a>
+                    </div>
+                </div>
             </div>
+            <br>
+            <hr>
         </div>
-
     </section>
 
     <div class="map-container">
