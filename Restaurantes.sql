@@ -1,18 +1,26 @@
+CREATE TABLE Rol (
+    idRol INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50)
+);
+
 CREATE TABLE Usuario_Restaurante (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre_usuario VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    rol VARCHAR(20) NOT NULL
+    idRol INT NOT NULL,
+    FOREIGN KEY (idRol) REFERENCES Rol(idRol)
 );
 
 CREATE TABLE Cliente (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
+    idUsuario INT NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
     puntos INT DEFAULT 0,
     direccion VARCHAR(255) NOT NULL
+    FOREIGN KEY (idUsuario) REFERENCES Usuario_Restaurante(idUsuario)
 );
 
 CREATE TABLE Categoria (

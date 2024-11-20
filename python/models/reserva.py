@@ -12,9 +12,9 @@ class Reserva:
         return reservas
     
     @staticmethod
-    def get_by_id(empresa_id):
+    def get_by_id(reserva_id):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerReserva(%s)', (empresa_id,))
+        cur.callproc('obtenerReserva(%s)', (reserva_id,))
         reserva = cur.fetchone()
         cur.close()
         return reserva
