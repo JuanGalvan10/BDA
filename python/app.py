@@ -5,7 +5,8 @@ from models.user import register_user, login_user
 
 #controladores
 from controllers.usuario_controller import login, register, logout
-from controllers.empresa_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
+from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
+from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 
 app = Flask(__name__)
 
@@ -43,3 +44,8 @@ app.add_url_rule('/productos', view_func=mostrar_productos, methods = ['GET', 'P
 app.add_url_rule('/nuevo_producto', view_func=nuevo_producto,  methods = ['GET', 'POST'])
 app.add_url_rule('/editar_producto/<int:id>', view_func=editar_producto,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_producto/<int:id>', view_func=eliminar_producto,  methods = ['GET', 'POST'])
+
+#RUTAS PARA PEDIDOS
+app.add_url_rule('/pedidos', view_func=mostrar_pedidos, methods = ['GET', 'POST'])
+app.add_url_rule('/nuevo_pedido', view_func=nuevo_pedido,  methods = ['GET', 'POST'])
+app.add_url_rule('/eliminar_pedido/<int:id>', view_func=eliminar_pedido,  methods = ['GET', 'POST'])
