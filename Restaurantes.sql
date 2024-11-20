@@ -76,7 +76,6 @@ CREATE TABLE DetallesPedido (
     FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
 );
 
-
 CREATE TABLE Calificacion (
     idCalificacion INT PRIMARY KEY AUTO_INCREMENT,
     puntuacion INT NOT NULL,
@@ -125,14 +124,13 @@ END //
 DELIMITER ;
 
 DELIMITER //
-
 CREATE TRIGGER trigger_fecha_estimada 
 BEFORE INSERT ON Pedido
 FOR EACH ROW
 BEGIN
     SET NEW.fecha_entrega = DATE_ADD(NEW.fecha_Pedido, INTERVAL 3 DAY);
-END;
-//
+END //
+DELIMITER ;
 
 -- INSERTAR DATOS --
 
@@ -198,7 +196,6 @@ VALUES
 (5, '5678901256789012', '2025-02-28'), 
 (6, '6789012367890123', '2027-08-31'), 
 (7, '7890123478901234', '2026-07-31');
-
 
 
 INSERT INTO DetallesPedido (idPedido, idProducto, cantidad, precio_unitario)
@@ -269,11 +266,9 @@ INSERT INTO Promocion (descuento, fecha_inicio, fecha_fin, descripcion) VALUES
 (30.00, '2024-11-15', '2024-11-22', 'Semana del sushi: 30% de descuento en todos los rollos fríos.'),
 (5.00, '2024-11-05', '2024-11-30', 'Descuento de $5 en tu pedido cuando gastes más de $50 en productos seleccionados.');
 
-
-
 -- VISTAS --
 
-CREATE VIEW VW_ProductosDisponibles AS
+CREATE VIEW ProductosDisponibles AS
 SELECT 
     idProducto, 
     nombre, 
@@ -287,37 +282,215 @@ FROM
 WHERE 
     inventario > 0;
 
-
-CREATE VIEW VW_ReservasActivas as
-select idReserva, fecha_reserva, hora_reserva, num_personas, estatus,tema
-from reserva r
-where estatus = "activo" AND fecha_reserva > NOW();
+CREATE VIEW ReservasActivas as
+SELECT idReserva, fecha_reserva, hora_reserva, num_personas, estatus, tema
+FROM Reserva r
+WHERE estatus = "activo" AND fecha_reserva > NOW();
 
 -- EL ID CLIENTE CAMBIA DEPENDIENDO DEL CLIENTE EN LA SESION
-CREATE VIEW VW_PedidosCliente as
-select idPedido,fecha_pedido,fecha_entrega, total_pedido, estatus, idCliente
-from pedido p
-where p.idCliente = 2; 
+CREATE VIEW PedidosCliente as
+SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, estatus, idCliente
+FROM Pedido p
+WHERE p.idCliente = 2; 
 
-CREATE VIEW VW_CalificacionesProducto as
+CREATE VIEW CalificacionesProducto as
 SELECT c.idProducto, AVG(c.puntuacion) AS promedio_puntuacion
-FROM calificacion c
+FROM Calificacion c
 GROUP BY c.idProducto;
 
-CREATE VIEW VW_PromocionesVigentes as
-select idPromocion,descuento,fecha_inicio, fecha_fin,descripcion
-from promocion 
-where fecha_inicio < Now()  and fecha_fin > Now();
+CREATE VIEW PromocionesVigentes as
+SELECT idPromocion,descuento,fecha_inicio, fecha_fin,descripcion
+FROM Promocion 
+WHERE fecha_inicio < Now()  and fecha_fin > Now();
 
 -- cantidad a comparar se va modifcar o estatico? periodo de tiempo o cantidad?
-CREATE VIEW VW_TopProductosVendidos as
+CREATE VIEW TopProductosVendidos as
 SELECT idProducto
-FROM detallespedido 
+FROM DetallesPedido 
 GROUP BY idProducto
 HAVING SUM(cantidad) > 2; 
 
--- se agrupa por fecha de pedido y se suma
-CREATE VIEW VW_VentasDiarias as
-select SUM(total_pedido)
-from pedido p 
-group by fecha_pedido;
+-- Se agrupa por fecha de pedido y se suma
+CREATE VIEW VentasDiarias as
+SELECT SUM(total_pedido)
+FROM Pedido p 
+GROUP BY fecha_pedido;
+
+-- TRIGGERS --
+
+-- 1. NoStockProducto (Tostada de Hamaichi Aji y Edamame)
+DELIMITER $$
+CREATE TRIGGER NoStockProducto
+BEFORE INSERT ON Producto
+FOR EACH ROW
+BEGIN 
+    IF NEW.inventario = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay inventario de ese producto.';
+        END IF;
+END $$
+
+DELIMITER ;
+
+-- 1.2 NoStockProductoDeshabilitado
+DELIMITER $$
+CREATE TRIGGER NoStockProductoDeshabilitado 
+AFTER DELETE ON Producto
+FOR EACH ROW
+BEGIN
+DELETE FROM inventario
+    WHERE inventario = 0;
+    END;
+END $$
+
+DELIMITER ;
+
+INSERT INTO Producto (nombre, imagen_URL, precio, descripcion,inventario, idCategoria) VALUES
+('Tostada de Atún', 'URL_de_imagen', 100.00, 'Aleta azul, aioli de búfalo, aguacate, cilantro',20, 1),
+('Tostada de Hamachi Aji', 'URL_de_imagen', 120.00, 'Yuzu-soya, aji amarillo, mayo ajo tatemado, cebollín, furakake shiso',0, 1),
+('Batera de Toro', 'URL_de_imagen', 140.00, 'Aleta azul, yuzu-aioli, aguacate, aji amarillo',10, 1),
+('Batera de Salmón', 'URL_de_imagen', 130.00, 'Salmón, aioli habanero, lemon soy, cebollín, cilantro criollo', 18, 1),
+('Tartar de Toro', 'URL_de_imagen', 150.00, 'Aleta azul, vinagreta yuzu-trufa', 12, 1),
+('Edamame', 'URL_de_imagen', 80.00, 'Sal Maldon, salsa negra, polvo piquín', 0, 2),
+('Shishitos', 'URL_de_imagen', 90.00, 'Sal Maldon, limón california', 20, 2),
+('Papás Fritas', 'URL_de_imagen', 70.00, 'Sal matcha, soya-trufa', 30, 2),
+('Camarones Roca', 'URL_de_imagen', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
+('Jalapeño Poppers', 'URL_de_imagen', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
+('Huachinango Tempura', 'URL_de_imagen', 200.00, 'Sal Maldon, salsa negra, polvo piquín',18, 2);
+
+-- 2. ActualizarPuntosCliente
+DELIMITER $$
+CREATE TRIGGER ActualizarPuntosCliente
+BEFORE UPDATE ON Pedido 
+FOR EACH ROW
+BEGIN
+    IF NEW.estatus = 'inactivo' THEN 
+    UPDATE Cliente
+    SET NuevosPuntos = NuevosPuntos + (NEW.puntos - OLD.puntos)
+    WHERE idCliente = NEW.idCliente;
+    END IF;
+END;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER ActualizarPuntosCliente
+BEFORE UPDATE ON Pedido
+FOR EACH ROW
+BEGIN
+    IF NEW.estatus = 'inactivo' THEN 
+    UPDATE Cliente
+    SET puntos = puntos + 5;
+    END IF;
+END $$
+
+DELIMITER ;
+
+INSERT INTO Cliente (nombre, apellido, telefono, correo, puntos, direccion)
+VALUES
+('Juan', 'Gomez', '5551234567', 'juan.gomez@email.com', 10, 'Calle Falsa 123, Ciudad, CP 12345'),
+('Maria', 'Lopez', '5552345678', 'maria.lopez@email.com', 15, 'Av. Siempre Viva 456, Ciudad, CP 67890'),
+('Carlos', 'Rodriguez', '5553456789', 'carlos.rodriguez@email.com', 5, 'Calle del Sol 789, Ciudad, CP 11223'),
+('Ana', 'Martinez', '5554567890', 'ana.martinez@email.com', 8, 'Paseo de la Reforma 101, Ciudad, CP 33445'),
+('Esteban', 'Perez', '5555678901', 'esteban.perez@email.com', 12, 'Boulevard de los Héroes 202, Ciudad, CP 55667'),
+('Lucia', 'Garcia', '5556789012', 'lucia.garcia@email.com', 20, 'Calle de la Luna 303, Ciudad, CP 77889'),
+('Pedro', 'Sanchez', '5557890123', 'pedro.sanchez@email.com', 25, 'Plaza Mayor 404, Ciudad, CP 99001');
+
+INSERT INTO Categoria (nombre) VALUES
+
+-- 3. ValidarFechaReserva fecha_reserva DATE NOT NULL / INSERT INTO Reserva (fecha_reserva, hora_reserva, num_personas, estatus, tema) VALUES ('2024-11-20', '19:00:00', 4, 'activo', 'Reunión de trabajo'),
+DELIMITER $$
+CREATE TRIGGER ValidarFechaReserva
+BEFORE INSERT ON Reserva
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_reserva < '2024-%' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La reserva ha expirado.';
+        END IF;
+END $$
+
+DELIMITER ;
+
+-- 4. BloquearCambioPedidoCompletado
+INSERT INTO Pedido (fecha_pedido, fecha_entrega, total_pedido, estatus, idCliente)
+VALUES
+('2024-11-01', '2024-11-02', 250.00, 'activo', 2),  
+('2024-11-02', '2024-11-03', 300.00, 'cancelado', 2), 
+('2024-11-03', '2024-11-04', 150.00, 'inactivo', 3), 
+('2024-11-04', '2024-11-05', 200.00, 'activo', 4),   
+('2024-11-05', '2024-11-06', 180.00, 'activo', 5),   
+('2024-11-06', '2024-11-07', 220.00, 'cancelado', 6), 
+('2024-11-07', '2024-11-08', 270.00, 'activo', 7);    
+
+DELIMITER $$
+CREATE TRIGGER BloquearCambioPedidoCompletado
+BEFORE INSERT ON Pedido
+FOR EACH ROW
+BEGIN
+    IF NEW.estatus = 'inactivo' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El pedido ya no se puede modificar.';
+        END IF;
+END $$
+
+DELIMITER ; 
+
+-- 5. LogEliminacionProducto
+
+-- 6. CalcularTotalPedido CALCULA EL TOTAL AUTOMATICAMENTE AL INSERTAR UN NUEVO DETALLE DE PEDIDO
+DELIMITER $$
+CREATE TRIGGER CalcularTotalPedido
+AFTER INSERT ON Pedido
+FOR EACH ROW
+BEGIN 
+    UPDATE total_pedido 
+        SET total_suma = (total_suma + 
+                    (SELECT precio p FROM Producto p WHERE p.idProducto = :NEW.idProducto)
+                    )
+        WHERE idPedido = :NEW.idPedido
+END;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER CalcularTotalPedido
+AFTER UPDATE ON Pedido
+FOR EACH ROW
+BEGIN 
+    UPDATE total_pedido
+        SET total_suma = total_suma + (precio - precio)
+        WHERE idProducto = idProducto;
+END;
+END $$
+
+DELIMITER ;
+
+CREATE OR REPLACE TRIGGER update_sum
+AFTER INSERT ON bought
+FOR EACH ROW
+BEGIN
+  UPDATE Receipt
+      SET total_sum = (total_sum +
+                       (select i.price from items i where i.item_id = :new.item_id)
+                      )
+      WHERE receipt_id = :new.receipt_id
+END;
+
+-- 7. NotificarPromocionExpirada Voy a poner como inactivas las promociones de noviembre.
+Marca una promoción como inactiva si su fecha de finalizacion ha pasado
+
+DELIMITER $$
+CREATE TRIGGER NotificarPromocionExpirada
+BEFORE INSERT ON Promocion
+FOR EACH ROW
+BEGIN 
+    IF NEW.fecha_inicio > '2024-11-01' AND NEW.fecha_inicio < '2024-11-30' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La promoción ya ha expirado.';
+        END IF;
+END $$
+
+DELIMITER ; 
