@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from config import MYSQL_HOST, MYSQL_USER,MYSQL_PASSWORD,MYSQL_DB, SECRET_KEY
 from database import mysql, init_app
-from models.user import register_user, login_user
+from models.login import register_user, login_user
 
 #controladores
-from controllers.usuario_controller import login, register, logout
+from controllers.login_controller import login, register, logout
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 
