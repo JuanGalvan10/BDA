@@ -1,12 +1,30 @@
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Inter";
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* This will prevent horizontal scrolling */
+#inicio{
+  background-image: url('https://www.filipaonunes.com/wp-content/uploads/2023/04/ST2.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  align-content: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+p {
+  font-weight: 400;
+  text-align: left;
+  font-size: 20px;
+}
+
+a {
+  color: #f1f1f1 !important;
+}
+
+input, button{
+  background-color: #c0c0c0 !important;
+  border-color: #c0c0c0 !important;
 }
 
 .sidenav {
@@ -155,11 +173,6 @@ footer span {
   color: white
 } 
 
-.background-image {
-  background-image: url('https://www.filipaonunes.com/wp-content/uploads/2023/04/ST2.jpg');
-  background-size: cover;
-  background-position: center;
-}
 
 .background-image::before {
   content: "";
