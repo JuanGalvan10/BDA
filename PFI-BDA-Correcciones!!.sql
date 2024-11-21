@@ -69,9 +69,9 @@ CREATE TABLE RESERVA (
     fecha_reserva DATE NOT NULL,
     hora_reserva TIME NOT NULL,
     num_personas INT NOT NULL,
-    idstatus VARCHAR(20) NOT NULL,
+    idStatus VARCHAR(20) NOT NULL,
     tema VARCHAR(100),
-    FOREIGN KEY (idSatus) REFERENCES STATUS_RESERVAS(idSatus)
+    FOREIGN KEY (idStatus) REFERENCES STATUS_RESERVAS(idStatus)
 );
 
 CREATE TABLE TIPOPROMOCION (
