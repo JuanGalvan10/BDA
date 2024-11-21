@@ -19,7 +19,7 @@ CREATE TABLE Cliente (
     telefono VARCHAR(15) NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
     puntos INT DEFAULT 0,
-    direccion VARCHAR(255) NOT NULL
+    direccion VARCHAR(255) NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES Usuario_Restaurante(idUsuario)
 );
 
