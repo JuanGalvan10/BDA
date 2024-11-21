@@ -19,17 +19,14 @@
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-4 login-container text-center" style="background-color: black; padding: 40px; border-radius: 40px; color: #FFFFFF;">
               <h5 class="mb-4">Inicio de Sesión:</h5>
-              <form method="post" action="">
+              <form method="post" action="/register_cliente">
                 <div class="mb-3">
-                    <p>Usuario :</p>
-                  <input type="text" class="form-control rounded-pill" required>
+                    <p>Usuario:</p>
+                  <input type="text" class="form-control rounded-pill" name="usuario" required>
                 </div>
                 <div class="mb-3">
-                    <p>Contraseña :</p>
-                  <input type="password" class="form-control rounded-pill" required>
-                </div>
-                <div class="mb-3 text-start">
-                  <a href="#">Olvidé mi contraseña</a>
+                    <p>Contraseña:</p>
+                  <input type="password" class="form-control rounded-pill" name="contrasena" required>
                 </div>
                 <button type="submit" class="btn btn-light w-100 rounded-pill">Ingresar
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -38,7 +35,7 @@
                 </button>
               </form>
               <div class="mt-4">
-                <a href="#">¿No tienes una cuenta? Regístrate</a>
+                <a href="/register">¿No tienes una cuenta? Regístrate</a>
               </div>
             </div>
           </div>

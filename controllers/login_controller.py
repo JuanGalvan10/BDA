@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from DB.PROYECTOGIT.BDA.python.models.login import register_user, login_user, register_cliente
+from models.login import register_user, login_user, register_cliente
 import hashlib
 
 def login():
@@ -17,34 +17,6 @@ def login():
         else:
             flash('Usuario o password incorrecto, verifique de nuevo', 'error')
     return render_template('login.html')
-
-def register_user():
-    if request.method == 'POST':
-        username = request.form['user']
-        password = hashlib.sha256(request.form['passwd'].encode()).hexdigest()
-        username = request.form['rol']
-        success, message = register_user(username, password)
-        if success:
-            flash('Registro exitoso', 'success')
-            return redirect(url_for('login'))
-        else:
-            flash(message, 'error')
-            return redirect(url_for('register'))
-    return render_template('registro.html')
-
-def register_user():
-    if request.method == 'POST':
-        username = request.form['user']
-        password = hashlib.sha256(request.form['passwd'].encode()).hexdigest()
-        username = request.form['rol']
-        success, message = register_user(username, password)
-        if success:
-            flash('Registro exitoso', 'success')
-            return redirect(url_for('login'))
-        else:
-            flash(message, 'error')
-            return redirect(url_for('register'))
-    return render_template('registro.html')
 
 def register_user():
     if request.method == 'POST':

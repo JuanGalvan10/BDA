@@ -4,7 +4,7 @@ from database import mysql, init_app
 from models.login import register_user, login_user
 
 #controladores
-from controllers.login_controller import login, register, logout
+from controllers.login_controller import login_user, register_user,register_client, logout
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 
@@ -35,8 +35,9 @@ def vista_principal():
         return redirect(url_for('login'))
 
 #RUTAS PARA LA AUTENTICACION
-app.add_url_rule('/login', view_func=login, methods = ['GET', 'POST'])
-app.add_url_rule('/register', view_func=register, methods = ['GET', 'POST'])
+app.add_url_rule('/login', view_func=login_user, methods = ['GET', 'POST'])
+app.add_url_rule('/register_cliente', view_func=register_cliente, methods = ['GET', 'POST'])
+app.add_url_rule('/register_user', view_func=register_user, methods = ['GET', 'POST'])
 app.add_url_rule('/logout', view_func=logout)
 
 #RUTAS PARA PRODUCTOS
