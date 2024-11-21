@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from config import MYSQL_HOST, MYSQL_USER,MYSQL_PASSWORD,MYSQL_DB, SECRET_KEY
 from database import mysql, init_app
-from models.login import register_user, login_user
+from models.login import register_usuario, login_user, register_cliente
 
 #controladores
-from controllers.login_controller import login_user, register_user,register_client, logout
+from controllers.login_controller import login, register_user,register_user_client, register_client, logout
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 
@@ -35,8 +35,9 @@ def vista_principal():
         return redirect(url_for('login'))
 
 #RUTAS PARA LA AUTENTICACION
-app.add_url_rule('/login', view_func=login_user, methods = ['GET', 'POST'])
-app.add_url_rule('/register_cliente', view_func=register_cliente, methods = ['GET', 'POST'])
+app.add_url_rule('/login', view_func=login, methods = ['GET', 'POST'])
+app.add_url_rule('/register_client/<int:idUsuario>', view_func=register_client, methods = ['GET', 'POST'])
+app.add_url_rule('/register_user_client', view_func=register_user_client, methods = ['GET', 'POST'])
 app.add_url_rule('/register_user', view_func=register_user, methods = ['GET', 'POST'])
 app.add_url_rule('/logout', view_func=logout)
 

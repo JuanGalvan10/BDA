@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from DB.Proyecto.models.reserva import Reserva
+from models.reserva import Reserva
 
 def mostrar_reservas():
     if 'loggedin' in session:

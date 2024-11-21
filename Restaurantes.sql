@@ -94,31 +94,10 @@ CREATE TABLE Calificacion (
     FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
 );
 
-DELIMITER //
-CREATE PROCEDURE insertarUsuario(
-    nom varchar(50),
-    apell varchar(50),
-    tel varchar(50),
-    correo varchar(100),
-    direc varchar(100)
-)
-BEGIN
-    INSERT INTO Cliente (nombre, apellido, telefono, correo, direccion)
-    VALUES (nom, apell, tel, correo, direc) ;
-END //
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE insertarCliente(
-    nom varchar(50),
-    pass varchar(225),
-    rol varchar(20)
-)
-BEGIN
-    INSERT INTO Cliente (nombre_usuario, password, rol)
-    VALUES (nom, pass, rol) ;
-END //
-DELIMITER ;
+INSERT INTO Rol(nombre) Values
+('cliente')
+('admin')
+('staff')
 
 DELIMITER //
 CREATE PROCEDURE BuscaUsuario(

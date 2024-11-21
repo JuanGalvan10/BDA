@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from DB.Proyecto.models.producto import Producto
+from models.producto import Producto
 
 def mostrar_productos():
     if 'loggedin' in session:

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from DB.Proyecto.models.pedido import Pedido
+from models.pedido import Pedido
 
 def mostrar_pedidos():
     if 'loggedin' in session:

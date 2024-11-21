@@ -3,22 +3,29 @@ import MySQLdb.cursors
 import hashlib
 
 
-def register_user(username,password, rol):
+def register_usuario(username,password, rol):
     cur = mysql.connection.cursor()
     try: 
-        cur.callproc('registrarUsuario', [username, password, rol])
+        id_usuario = None
+        cur.callproc('registrarUsuario', [username, password, rol, id_usuario])
+        result = cur.fetchone()
+        id_usuario = result[0]
         mysql.connection.commit()
-        return True, 'Registro de usuario exitoso'
+        cur.close()
+        return True, 'Registro de usuario exitoso', id_usuario
     except MySQLdb.OperationalError as e:
-        return False, str(e)
+        cur.close()
+        return False, str(e), None
     
-def register_cliente(nombre,apellido, telefono, correo, direccion):
+def register_cliente(idUsuario, nombre,apellido, telefono, correo, direccion):
     cur = mysql.connection.cursor()
     try: 
-        cur.callproc('registrarCliente', [nombre, apellido, telefono, correo, direccion])
+        cur.callproc('registrarCliente', [idUsuario, nombre, apellido, telefono, correo, direccion])
         mysql.connection.commit()
+        cur.close()
         return True, 'Registro existoso'
     except MySQLdb.OperationalError as e:
+        cur.close()
         return False, str(e)
 
 def login_user(username,password): 

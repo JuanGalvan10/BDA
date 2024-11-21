@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from DB.Proyecto.models.cliente import Cliente
+from models.cliente import Cliente
 
 def mostrar_clientes():
     if 'loggedin' in session:
