@@ -4,14 +4,14 @@ import hashlib
 
 def login():
     if request.method == 'POST':
-        username = request.form['user']
-        password = hashlib.sha256(request.form['passwd'].encode()).hexdigest()
+        username = request.form['username']
+        password = hashlib.sha256(request.form['password'].encode()).hexdigest()
         user = login_user(username,password)
         if user:
             session['loggedin'] = True
             session['idUsuario'] = user['idUsuario']
-            session['usuario'] = user['username']
-            session['rol'] = user['rol']
+            session['usuario'] = user['nombre_usuario']
+            session['rol'] = user['nombre']
             flash('Acceso exitoso', 'success')
             return redirect(url_for('vista_principal'))
         else:
@@ -40,7 +40,6 @@ def register_user_client():
         success, message, idUsuario = register_usuario(username, password, rol)
         if success:
             flash('Registro exitoso', 'success')
-            print(idUsuario)
             return redirect(url_for('register_client', idUsuario = idUsuario))
         else:
             flash(message, 'error')

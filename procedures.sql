@@ -19,7 +19,7 @@ CREATE PROCEDURE BuscaUsuario(
 BEGIN
     SELECT * 
     FROM InfoUsuario
-    where username = nombre_usuario;
+    where nombre_usuario = username;
 END //
 DELIMITER ;
 
