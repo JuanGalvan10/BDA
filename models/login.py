@@ -7,7 +7,7 @@ def register_usuario(username,password, rol):
     cur = mysql.connection.cursor()
     try: 
         id_usuario = None
-        cur.callproc('registrarUsuario', [username, password, rol, id_usuario])
+        cur.callproc('registrarUsuario', [username, password, rol])
         result = cur.fetchone()
         id_usuario = result[0]
         mysql.connection.commit()
@@ -30,7 +30,6 @@ def register_cliente(idUsuario, nombre,apellido, telefono, correo, direccion):
 
 def login_user(username,password): 
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-#    hashed_password = hashlib.sha256(request.form['passwd'].encode()).hexdigest()
     cur.callproc('BuscaUsuario', [username])
     user = cur.fetchone()
     cur.close()
