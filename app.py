@@ -27,9 +27,9 @@ def inicio():
 def vista_principal():
     if 'loggedin' in session:
         if session['rol'] == 'cliente':
-            return render_template('dashboard_cliente.html', usuario = session['usuario'])
+            return render_template('dashboard_clientes.html', usuario = session['usuario'])
         else:
-            return render_template('dashboard_cliente.html', usuario = session['usuario'])
+            return render_template('DashboardAdmins.html', usuario = session['usuario'])
     else:
         flash('Primero ingresa al sistema','error')
         return redirect(url_for('login'))
