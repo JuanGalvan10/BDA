@@ -72,6 +72,7 @@ app.add_url_rule('/resenas', view_func=mostrar_resenas, methods = ['GET', 'POST'
 app.add_url_rule('/nuevo_resena', view_func=nuevo_resena,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_resena/<int:id>', view_func=eliminar_resena,  methods = ['GET', 'POST'])
 
+#RUTAS DE CLIENTES
 @app.route('/catalogo')
 def catalogo():
     return render_template('catalogo.html')
