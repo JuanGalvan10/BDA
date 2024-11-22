@@ -50,7 +50,7 @@ app.add_url_rule('/nuevo_producto', view_func=nuevo_producto,  methods = ['GET',
 app.add_url_rule('/editar_producto/<int:id>', view_func=editar_producto,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_producto/<int:id>', view_func=eliminar_producto,  methods = ['GET', 'POST'])
 
-#RUTAS PARA Clientes
+#RUTAS PARA CLIENTES
 app.add_url_rule('/clientes', view_func=mostrar_clientes, methods = ['GET', 'POST'])
 app.add_url_rule('/nuevo_cliente', view_func=nuevo_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/editar_cliente/<int:id>', view_func=editar_cliente,  methods = ['GET', 'POST'])
