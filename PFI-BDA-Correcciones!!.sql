@@ -323,3 +323,33 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 ('Sucursal Valle Oriente', 'Av. Gonzalitos 123, Col. Valle Oriente, Monterrey, N.L.', '81-1234-5678', 'Se trata de una sucursal moderna con un ambiente acogedor, ideal para cenas familiares y reuniones de negocios.'),
 ('Sucursal Centro', 'Paseo Santa Lucía 456, Col. Centro, Monterrey, N.L.', '81-2345-6789', 'Ubicada en el corazón de Monterrey, ofrece una experiencia gastronómica única con sabores frescos y auténticos.'),
 ('Sucursal Carretera Nacional', 'Carretera Nacional 789, Col. Cumbres, Monterrey, N.L.', '81-3456-7890', 'Ofrece un espacio amplio y cómodo, ideal para disfrutar de un almuerzo en familia o una cena con amigos.');
+
+-- VIEWS --
+
+CREATE VIEW ProductosDisponibles AS
+SELECT 
+    idPlatillo, 
+    nombre, 
+    imagen_URL, 
+    precio, 
+    descripcion, 
+    inventario, 
+    idCategoria
+FROM 
+    PLATILLOS p
+WHERE 
+    inventario > 0;
+
+
+-- SE INGRESARA EL IDCLIENTE --
+CREATE VIEW PedidosCliente as
+SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, sp.nombre_status 
+FROM PEDIDOS p natural join status_pedido sp
+where idCliente = 2;
+
+CREATE VIEW ReservasActivas as
+SELECT idReserva, fecha_reserva, hora_reserva, num_personas, sr.Status_Reservas , tema
+FROM RESERVAS r natural join status_reservas sr 
+where sr.Status_Reservas = "Pendiente" AND fecha_reserva > NOW();
+
+
