@@ -9,7 +9,7 @@ from controllers.producto_controller import mostrar_productos, nuevo_producto, e
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
-from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva
+from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva, horas_disponibles
 
 app = Flask(__name__)
 
@@ -71,6 +71,8 @@ app.add_url_rule('/eliminar_pedido/<int:id>', view_func=eliminar_pedido,  method
 app.add_url_rule('/resenas', view_func=mostrar_resenas, methods = ['GET', 'POST'])
 app.add_url_rule('/nuevo_resena', view_func=nuevo_resena,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_resena/<int:id>', view_func=eliminar_resena,  methods = ['GET', 'POST'])
+app.add_url_rule('/horas_disponibles',view_func=horas_disponibles, methods=['POST'])
+
 
 @app.route('/catalogo')
 def catalogo():

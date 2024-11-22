@@ -65,3 +65,12 @@ def eliminar_reserva(id):
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
+
+def horas_disponibles():
+    fecha = request.form['fecha']
+    if not fecha:
+        return "Fecha no proporcionada", 400
+
+    horas_ocupadas = Reserva.get_by_dia(fecha)
+
+    return render_template('Autocomplete_reservas.html', horas_ocupadas=horas_ocupadas)

@@ -26,6 +26,21 @@ class Reserva:
         reservas = cur.fetchall()
         cur.close()
         return reservas
+    
+    @staticmethod
+    def get_by_dia(fecha):
+        cur = mysql.connection.cursor()
+        # Consulta SQL para obtener las horas ocupadas
+        cur.execute("""
+            SELECT hora_reserva
+            FROM RESERVA
+            WHERE fecha_reserva = %s
+            GROUP BY hora_reserva
+            HAVING COUNT(*) >= 10
+        """, [fecha])
+        horas_ocupadas = [row[0] for row in cur.fetchall()]
+        cur.close()    
+        return horas_ocupadas
 
     @staticmethod
     def insert(nombre, imagen_URL, precio, descripcion, categoria):
