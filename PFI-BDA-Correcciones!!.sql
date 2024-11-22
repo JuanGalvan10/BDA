@@ -36,7 +36,10 @@ INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
 ('MariaLo', SHA2('666', 256), 1),
 ('CarlosGo', SHA2('666', 256), 1),
 ('AnaMar', SHA2('666', 256), 1),
-('LuisSa', SHA2('666', 256), 1);
+('LuisSa', SHA2('666', 256), 1),
+('Josefo', SHA2('666', 256), 3),
+('Rob', SHA2('666', 256), 3),
+('Susy', SHA2('666', 256), 3);
 
 CREATE TABLE ROLES_STAFF (
     idUsuario INT NOT NULL,
