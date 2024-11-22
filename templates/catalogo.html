@@ -33,11 +33,25 @@
           </button>
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="dashboard_inicio.html">Inicio</a><!--TE LLEVA A INICIO-->
-            <a href="#">Promociones</a><!--TE LLEVA A PROMOCIONES-->
-            <a href="#">Últimos pedidos</a><!--TE LLEVA A ULTIMOSPEDIDOS-->
-            <a href="#">Reseñas</a><!--TE LLEVA A RESEÑAS-->
-            <a href="#">Soporte</a><!--TE LLEVA A SOPORTE-->
+            <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
+            <hr style="border-color: #FFFFFF;">
+            <a href="/dashboard">Inicio ></a> 
+            <a href="/catalogo">Productos ></a> 
+            <a href="/reservasC">Reservar ></a>
+            <a href="/galeria">Galeria ></a>
+            <li class="mb-1">
+              <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                Mi perfil ↓
+              </button>
+              <div class="collapse closeNav" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
+                  <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
+                  <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
+                  <li><a href="/mi_perfil" class="link-dark rounded">Mi info ></a></li>
+                </ul>
+              </div>
+            </li>
           </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
