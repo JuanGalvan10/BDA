@@ -48,8 +48,8 @@ CREATE TABLE METODOPAGOS (
     nombre_metodo VARCHAR(255),
     idCliente INT NOT NULL,
     idDetalleMetodoPago INT NOT NULL,
-    FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLE_METODOPAGOS(idDetalleMetodoPago)
-    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idDetalleMetodoPago)
+    FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLE_METODOPAGOS(idDetalleMetodoPago),
+    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
 );
 
 
@@ -69,7 +69,7 @@ CREATE TABLE RESERVA (
     fecha_reserva DATE NOT NULL,
     hora_reserva TIME NOT NULL,
     num_personas INT NOT NULL,
-    idStatus VARCHAR(20) NOT NULL,
+    idStatus INT NOT NULL,
     tema VARCHAR(100),
     FOREIGN KEY (idStatus) REFERENCES STATUS_RESERVAS(idStatus)
 );
@@ -114,7 +114,7 @@ CREATE TABLE PEDIDOS (
     total_pedido DECIMAL(10, 2) NOT NULL,
     idCliente INT NOT NULL,
     idStatus INT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
+    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente),
     FOREIGN KEY (idStatus) REFERENCES STATUS_PEDIDO(idStatus)
 );
 
@@ -122,32 +122,32 @@ CREATE TABLE PEDIDOS (
 
 CREATE TABLE DETALLESPEDIDO (
     idPedido INT,
-    idProducto INT,
+    idPlatillo INT,
     cantidad INT NOT NULL,
     precio_unitario DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY (idPedido, idProducto),
+    PRIMARY KEY (idPedido, idPlatillo),
     FOREIGN KEY (idPedido) REFERENCES PEDIDOS(idPedido),
-    FOREIGN KEY (idProducto) REFERENCES PLATILLOS(idPlatillo)
+    FOREIGN KEY (idPlatillo) REFERENCES PLATILLOS(idPlatillo)
 );
 
-CREATE TABLE TIPO_RESEÑA (
-    idTipoReseña INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE TIPO_RESENA (
+    idTipoResena INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255)
 );
 
-CREATE TABLE Reseñas (
-    idReseña INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE RESENAS (
+    idResena INT PRIMARY KEY AUTO_INCREMENT,
     puntuacion INT NOT NULL,
     comentario TEXT,
     idCliente INT NOT NULL,
-    idTipoReseña INT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente),
-    FOREIGN KEY (idTipoReseña) REFERENCES TIPO_RESEÑA(idTipoReseña) ON DELETE CASCADE,
+    idTipoResena INT NOT NULL,
+    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente),
+    FOREIGN KEY (idTipoResena) REFERENCES TIPO_RESENA(idTipoResena) ON DELETE CASCADE
 );
 
-CREATE TABLE Restaurante (
+CREATE TABLE RESTAURANTE (
     idRestaurante INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VAR(255), -- puede ser un alias --
+    nombre_sucursal VARCHAR(255),
     ubicacion TEXT,
     telefono VARCHAR(20) NOT NULL,
     descripcion TEXT
