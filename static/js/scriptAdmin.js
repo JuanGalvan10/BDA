@@ -10,3 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Elementos no encontrados: revisa las clases o IDs.");
     }
 });
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
