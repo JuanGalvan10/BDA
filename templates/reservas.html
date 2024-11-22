@@ -109,59 +109,19 @@
                 <label for="hora">Hora:</label>
                 <br>
                 <div class="row">
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 3:00 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 3:30 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 4:00 PM </button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 4:30 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 5:00 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 5:30 PM </button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 6:00 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 6:30 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 7:00 PM </button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 7:30 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 8:00 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 8:30 PM </button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 9:00 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 9:30 PM </button>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" id="btn-header"> 10:00 PM </button>
-                  </div>
+                  {% for hora in ['15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'] %}
+                      <div class="col-4">
+                          {% if hora in horas_ocupadas %}
+                              <button type="button" id="btn-header" disabled style="background-color: gray; color: white;">
+                                  {{ hora }}
+                              </button>
+                          {% else %}
+                              <button type="button" id="btn-header">
+                                  {{ hora }}
+                              </button>
+                          {% endif %}
+                      </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
