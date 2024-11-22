@@ -84,6 +84,6 @@ def reservas():
 def galeria():
     return render_template('galeria.html')
 
-@app.route('/galeria')
-def galeria():
+@app.route('/mi_perfil')
+def mi_perfil():
     return render_template('mi_perfil.html')
