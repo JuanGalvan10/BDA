@@ -1,12 +1,26 @@
 CREATE TABLE ROLES (
     idRol INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(50)
+    nombre VARCHAR(50),
+    tipo_staff INT,
+    FOREIGN KEY tipo_staff REFERENCES ROL_STAFF(idRolStaff)
 );
 -- CUALES SERAN LOS ROLES OFICIALES? --
 INSERT INTO ROLES (nombre) VALUES
 ('Cliente'),
 ('Admin'),
-('Usuario');
+('Staff');
+
+CREATE TABLE ROLES_STAFF (
+    idRolStaff INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_staff VARCHAR(255)
+);
+
+INSERT INTO ROLES_STAFF (nombre_staff) VALUES
+('Gerente'),
+('Mesero'),
+('Cocinero'),
+('Repartidor');
+
 
 CREATE TABLE USUARIOS_RESTAURANTE (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
