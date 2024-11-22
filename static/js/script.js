@@ -15,3 +15,23 @@ function decrement() {
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
 })
+
+$(document).ready(function(){
+    $('#fecha').change(function(){
+        const fechaSeleccionada = $(this).val();
+        
+        if (!fechaSeleccionada) return;
+
+        $.ajax({
+            type: 'POST',
+            url: '/Auto_complete_reservas',
+            data: { fecha: fechaSeleccionada },
+            success: function(data){
+                $('#horas-disponibles').html(data);
+            },
+            error: function(){
+                alert('No se cargaron las horas');
+            }
+        });
+    });
+});
