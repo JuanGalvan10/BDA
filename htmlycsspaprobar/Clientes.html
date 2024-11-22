@@ -14,7 +14,12 @@
 </head>
 
 <body>
+    <!-- Scripts para modal -->
     <script src="scriptAdmin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Scripts para modal -->
     <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
@@ -143,8 +148,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>  <!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -160,8 +165,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -176,8 +181,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -193,8 +198,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -210,8 +215,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -226,8 +231,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -243,8 +248,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!--ELIMINAR CLIENTE-->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -316,8 +321,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -333,8 +338,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -349,8 +354,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -366,8 +371,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -383,8 +388,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -399,8 +404,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -416,8 +421,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -491,8 +496,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -508,8 +513,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -524,8 +529,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -541,8 +546,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -558,8 +563,8 @@
                                             <td>@fat</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-dang er btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -574,8 +579,8 @@
                                             <td>@twitter</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -591,8 +596,8 @@
                                             <td>@mdo</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Confirmación">
+                                                        <i class="bi bi-trash-fill"></i> <!-- Modal a CONFIRMAR ELIMINACION-->
                                                     </button>
                                                     <a href="#">
                                                         <button class="btn btn-success btn-sm"
@@ -608,6 +613,22 @@
                     </div>
                 </div>
             </div>
+            <!-- HTML para modal -->
+            <div class="modal fade" id="Confirmación" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+                    <div class="modal-content w-75">
+                        <div class="modal-header justify-content-center">
+                            <h5 class="modal-title" id="exampleModalLongTitle">¿Deseas eliminar este dato?</h5>
+                            </button>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-primary btn-danger">Eliminar</button>
+                                <button type="button" class="btn btn-primary close" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- HTML para modal -->
             <footer style="background-color: black;">
                 <section id="Redes" style="background-color: #FAFBFE;">
                     <div class="container">
