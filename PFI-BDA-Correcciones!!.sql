@@ -39,7 +39,8 @@ INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
 ('LuisSa', SHA2('666', 256), 1),
 ('Josefo', SHA2('666', 256), 3),
 ('Rob', SHA2('666', 256), 3),
-('Susy', SHA2('666', 256), 3);
+('Susy', SHA2('666', 256), 3),
+('George', SHA2('666', 256), 3);
 
 CREATE TABLE ROLES_STAFF (
     idUsuario INT NOT NULL,
@@ -50,10 +51,10 @@ CREATE TABLE ROLES_STAFF (
 
 /*CHECAR CUAL USUARIO ES ADMIN NO USAR INSERT HASTA CHECAR ESO*/
 INSERT INTO ROLES_STAFF VALUES
-('1','1'),
-('2','2'),
-('3','3'),
-('4','4');
+('10','1'),
+('11','2'),
+('12','3'),
+('13','4');
 
 CREATE TABLE PUNTOS_CLIENTES (
     idPuntos INT PRIMARY KEY AUTO_INCREMENT,
