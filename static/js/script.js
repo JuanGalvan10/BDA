@@ -24,7 +24,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: 'POST',
-            url: '/Auto_complete_reservas',
+            url: '/horas-disponibles',
             data: { fecha: fechaSeleccionada },
             success: function(data){
                 $('#horas-disponibles').html(data);
