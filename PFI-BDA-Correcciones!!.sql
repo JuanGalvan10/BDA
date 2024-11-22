@@ -1,9 +1,9 @@
-CREATE TABLE ROL (
+CREATE TABLE ROLES (
     idRol INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50)
 );
 -- CUALES SERAN LOS ROLES OFICIALES? --
-INSERT INTO ROL (nombre) VALUES
+INSERT INTO ROLES (nombre) VALUES
 ('Cliente'),
 ('Admin'),
 ('Usuario');
@@ -13,7 +13,7 @@ CREATE TABLE USUARIOS_RESTAURANTE (
     nombre_usuario VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     idRol INT NOT NULL,
-    FOREIGN KEY (idRol) REFERENCES ROL(idRol)
+    FOREIGN KEY (idRol) REFERENCES ROLES(idRol)
 );
 
 INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
@@ -71,13 +71,13 @@ INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono,
 (4, 8, 1, 'Ana', 'Martínez', '5554567890', 'ana.martinez@email.com', 'Paseo de la Reforma 101, Ciudad, CP 33445'),
 (5, 9, 2, 'Luis', 'Sánchez', '5555678901', 'luis.sanchez@email.com', 'Plaza Mayor 202, Ciudad, CP 55667');
 
-CREATE TABLE DETALLE_METODOPAGOS(
+CREATE TABLE DETALLES_METODOPAGOS(
     idDetalleMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
     num_tarjeta VARCHAR(255),
     fecha_expiracion DATE
 );
 
-INSERT INTO DETALLE_METODOPAGOS (num_tarjeta, fecha_expiracion) VALUES
+INSERT INTO DETALLES_METODOPAGOS (num_tarjeta, fecha_expiracion) VALUES
 ('1234567812345678', '2025-12-31'),
 ('2345678923456789', '2024-10-31'),
 ('3456789034567890', '2026-05-31'),
@@ -89,7 +89,7 @@ CREATE TABLE METODOPAGOS (
     nombre_metodo VARCHAR(255),
     idCliente INT NOT NULL,
     idDetalleMetodoPago INT,
-    FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLE_METODOPAGOS(idDetalleMetodoPago),
+    FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLES_METODOPAGOS(idDetalleMetodoPago),
     FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
 );
 
@@ -121,7 +121,7 @@ INSERT INTO STATUS_RESERVAS (Status_Reservas) VALUES
 ('Pendiente'),
 ('Cancelada');
 
-CREATE TABLE RESERVA (
+CREATE TABLE RESERVAS (
     idReserva INT PRIMARY KEY AUTO_INCREMENT,
     fecha_reserva DATE NOT NULL,
     hora_reserva TIME NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE RESERVA (
     FOREIGN KEY (idStatus) REFERENCES STATUS_RESERVAS(idStatus)
 );
 
-INSERT INTO RESERVA (fecha_reserva, hora_reserva, num_personas, idStatus, tema) VALUES
+INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema) VALUES
 ('2024-11-20', '19:00:00', 4, 1, 'Reunión de trabajo'),
 ('2024-12-25', '13:30:00', 2, 2, 'Comida de navidad'),
 ('2024-11-30', '18:00:00', 6, 3, 'Cena con amigos'),
@@ -163,12 +163,12 @@ INSERT INTO PLATILLOS (nombre, imagen_URL, precio, descripcion, inventario, idCa
 ('Jalapeño Poppers', 'URL_de_imagen', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
 ('Huachinango Tempura', 'URL_de_imagen', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
 
-CREATE TABLE TIPOPROMOCION (
+CREATE TABLE TIPOSPROMOCION (
     idTipoPromocion INT PRIMARY KEY AUTO_INCREMENT,
     tipo_promocion VARCHAR(255)
 );
 
-INSERT INTO TIPOPROMOCION (tipo_promocion) VALUES
+INSERT INTO TIPOSPROMOCION (tipo_promocion) VALUES
 ('VeranoLoco'),
 ('Black Friday'), 
 ('Navidad'),    
@@ -183,7 +183,7 @@ CREATE TABLE PROMOCIONES (
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
-    FOREIGN KEY (idTipoPromocion) REFERENCES TIPOPROMOCION(idTipoPromocion),
+    FOREIGN KEY (idTipoPromocion) REFERENCES TIPOSPROMOCION(idTipoPromocion),
     FOREIGN KEY (idPlatillo) REFERENCES PLATILLOS(idPlatillo)
 );
 
@@ -255,12 +255,12 @@ INSERT INTO DETALLESPEDIDO (idPedido, idPlatillo, cantidad, precio_unitario) VAL
 (6, 10, 3, 90.00),  
 (7, 11, 1, 70.00);  
 
-CREATE TABLE TIPO_RESENA (
+CREATE TABLE TIPOS_RESENA (
     idTipoResena INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255)
 );
 
-INSERT INTO TIPO_RESENA (nombre) VALUES
+INSERT INTO TIPOS_RESENA (nombre) VALUES
 ('Restaurante'),
 ('Platillo');
 
@@ -273,7 +273,7 @@ CREATE TABLE RESENAS (
     idCliente INT NOT NULL,
     idTipoResena INT NOT NULL,
     FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente),
-    FOREIGN KEY (idTipoResena) REFERENCES TIPO_RESENA(idTipoResena) ON DELETE CASCADE
+    FOREIGN KEY (idTipoResena) REFERENCES TIPOS_RESENA(idTipoResena) ON DELETE CASCADE
 );
 
 INSERT INTO RESENAS (puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena) VALUES
@@ -284,7 +284,7 @@ INSERT INTO RESENAS (puntuacion, titulo, comentario, fecha_comentario, idCliente
 (4, 'Delicioso Edamame', 'El Edamame estuvo delicioso, aunque podría mejorar la presentación.', '2024-11-19', 5, 2),
 (5, 'Recomendado', 'Las Tostadas de Atún fueron una maravilla, todo en su punto perfecto. ¡Altamente recomendable!', '2024-11-20', 5, 2);
 
-CREATE TABLE RESTAURANTE (
+CREATE TABLE RESTAURANTES (
     idRestaurante INT PRIMARY KEY AUTO_INCREMENT,
     nombre_sucursal VARCHAR(255),
     ubicacion TEXT,
@@ -292,9 +292,7 @@ CREATE TABLE RESTAURANTE (
     descripcion TEXT
 );
 
-INSERT INTO RESTAURANTE (nombre_sucursal, ubicacion, telefono, descripcion) VALUES
+INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VALUES
 ('Sucursal Valle Oriente', 'Av. Gonzalitos 123, Col. Valle Oriente, Monterrey, N.L.', '81-1234-5678', 'Se trata de una sucursal moderna con un ambiente acogedor, ideal para cenas familiares y reuniones de negocios.'),
 ('Sucursal Centro', 'Paseo Santa Lucía 456, Col. Centro, Monterrey, N.L.', '81-2345-6789', 'Ubicada en el corazón de Monterrey, ofrece una experiencia gastronómica única con sabores frescos y auténticos.'),
 ('Sucursal Carretera Nacional', 'Carretera Nacional 789, Col. Cumbres, Monterrey, N.L.', '81-3456-7890', 'Ofrece un espacio amplio y cómodo, ideal para disfrutar de un almuerzo en familia o una cena con amigos.');
-
-
