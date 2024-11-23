@@ -326,7 +326,9 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 ('Sucursal Carretera Nacional', 'Carretera Nacional 789, Col. Cumbres, Monterrey, N.L.', '81-3456-7890', 'Ofrece un espacio amplio y cómodo, ideal para disfrutar de un almuerzo en familia o una cena con amigos.');
 
 
--- PROCS PARA PRODUCTOS (MUESTRA PRODUCTOS DISPONIBLES) -- 
+-- PROCS PARA PRODUCTOS -- 
+
+--  (MUESTRA PRODUCTOS DISPONIBLES) --
 CREATE VIEW
     ProductosDisponibles_vw AS
 SELECT
