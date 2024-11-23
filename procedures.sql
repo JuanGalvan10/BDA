@@ -57,3 +57,23 @@ BEGIN
     VALUES (idUsuario, nom, apell, tel, correo, direc) ;
 END //
 DELIMITER ;
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE mostrarProductos()
+BEGIN
+    SELECT 
+        idPlatillo, 
+        nombre, 
+        imagen_URL, 
+        precio, 
+        descripcion, 
+        inventario, 
+        idCategoria
+    FROM 
+        ProductosDisponibles;
+END //
+DELIMITER ;

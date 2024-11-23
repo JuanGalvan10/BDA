@@ -332,37 +332,43 @@ SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCatego
 FROM PLATILLOS p
 WHERE inventario > 0;
 
--- SE INGRESARA EL IDCLIENTE --
+-- HACERLO STORED PROCEDURE --
 CREATE VIEW PedidosCliente as
 SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, sp.nombre_status 
-FROM PEDIDOS p natural join status_pedido sp
+FROM PEDIDOS p natural join STATUS_PEDIDO sp
 where idCliente = 2;
 
 CREATE VIEW ReservasActivas as
 SELECT idReserva, fecha_reserva, hora_reserva, num_personas, sr.Status_Reservas , tema
-FROM RESERVAS r natural join status_reservas sr 
+FROM RESERVAS r natural join STATUS_RESERVAS sr 
 where sr.Status_Reservas = "Pendiente" AND fecha_reserva > NOW();
 
+-- HACER STORED PROCEDURE --
 select d.idPlatillo, AVG(puntuacion)
-FROM resenas c natural join tipos_resena tr natural join Pedidos natural join detallespedido d 
+FROM RESENAS c natural join TIPOS_RESENA tr natural join PEDIDOS natural join DETALLESPEDIDO d 
 WHERE tr.idTipoResena = 2 && c.idCliente = 2
 group by d.idPlatillo;
 
 CREATE VIEW PromocionesVigentes as
 SELECT p.idPlatillo,p.nombre,pr.descuento,pr.fecha_inicio,pr.fecha_fin, t.tipo_promocion, pr.descripcion
-FROM platillos p LEFT JOIN promociones pr  natural join TIPOSPROMOCION t
+FROM PLATILLOS p LEFT JOIN PROMOCIONES pr  natural join TIPOSPROMOCION t
 ON p.idPlatillo = pr.idPlatillo
 WHERE fecha_inicio < Now()  and fecha_fin > Now();
 
 CREATE VIEW TopProductosVendidos as
 SELECT idPlatillo, SUM(cantidad) as total_cant
-FROM DetallesPedido
+FROM DETALLESPEDIDO
 GROUP BY idPlatillo
 HAVING total_cant > 2; 
 
 CREATE VIEW VentasDiarias as
 SELECT idCliente, fecha_pedido, SUM(total_pedido) as total
-FROM Pedidos p
+FROM PEDIDOS p
 WHERE idStatus != 3 AND p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
     AND p.fecha_pedido < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 DAY), '%Y-%m-%d 00:00:00')
 GROUP BY idCliente;
+
+
+
+
+-- VIEWS PARA ADMINS -- 
