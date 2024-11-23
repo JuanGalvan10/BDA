@@ -390,6 +390,46 @@ DELIMITER ;
 
 
 
+-- PROCS PARA PEDIDOS 
+create view
+    mostrarPedidos_vw as
+select
+    idPedido,
+    fecha_pedido,
+    fecha_entrega,
+    total_pedido,
+    idCliente,
+    nombre_status,
+    p.nombre,
+    p.imagen_URL,
+    d.cantidad,
+    d.precio_unitario
+from
+    DETALLESPEDIDO d
+    natural join PEDIDOS
+    natural join STATUS_PEDIDO sp
+    natural join PLATILLOS p;
+
+DELIMITER / / CREATE PROCEDURE mostrarPedidos (IN id_Sesion INT) BEGIN
+SELECT
+    idPedido,
+    fecha_pedido,
+    fecha_entrega,
+    total_pedido,
+    idCliente,
+    nombre_status,
+    p.nombre,
+    p.imagen_URL,
+    d.cantidad,
+    d.precio_unitario
+FROM
+    mostrarPedidos_vw
+WHERE
+    idCliente = id_Sesion;
+END / / DELIMITER;
+
+
+
 
 
 -- PROCS PARA PRODUCTOS -- 
