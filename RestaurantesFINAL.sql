@@ -331,30 +331,26 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 
 -- PROCS PARA LOGIN --
 
-CREATE VIEW InfoUsuario AS
-SELECT 
+CREATE VIEW
+    InfoUsuario AS
+SELECT
     ur.idUsuario,
     ur.nombre_usuario,
     ur.password,
     r.nombre
-FROM 
-    Usuario_Restaurante ur
-JOIN 
-    Rol r
-ON 
-    ur.idRol = r.idRol;
+FROM
+    USUARIOS_RESTAURANTE ur
+    JOIN ROLES r ON ur.idRol = r.idRol;
 
+DELIMITER / / CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) BEGIN
+SELECT
+    *
+FROM
+    InfoUsuario
+where
+    nombre_usuario = username;
 
-DELIMITER //
-CREATE PROCEDURE BuscaUsuario(
-    IN username varchar(50)
-)
-BEGIN
-    SELECT * 
-    FROM InfoUsuario
-    where nombre_usuario = username;
-END //
-DELIMITER ;
+END / / DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE registrarUsuario(
@@ -366,10 +362,10 @@ BEGIN
     DECLARE rolU INT;
 
     SELECT idRol INTO rolU
-    FROM Rol
+    FROM ROLES
     where nombre = rol;
 
-    INSERT INTO Usuario_Restaurante(nombre_usuario, password, idRol)
+    INSERT INTO USUARIOS_RESTAURANTE(nombre_usuario, password, idRol)
     VALUES (nom, pass, rolU);
 
     SELECT LAST_INSERT_ID() AS idUsuario;
@@ -386,11 +382,10 @@ CREATE PROCEDURE registrarCliente(
     IN direc varchar(100),
 )
 BEGIN
-    INSERT INTO Cliente (idUsuario, nombre, apellido, telefono, correo, direccion)
+    INSERT INTO CLIENTES (idUsuario, nombre, apellido, telefono, correo, direccion)
     VALUES (idUsuario, nom, apell, tel, correo, direc) ;
 END //
 DELIMITER ;
-
 
 
 -- PROCS PARA PEDIDOS 
