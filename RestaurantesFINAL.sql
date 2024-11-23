@@ -506,3 +506,42 @@ WHERE
     idCliente = id_Sesion;
 END / / DELIMITER;
 
+
+--PROCS PARA RESERVAS --
+create view
+    muestrareservas_vw as
+select
+    idReserva,
+    fecha_reserva,
+    hora_reserva,
+    num_personas,
+    r.idStatus,
+    tema,
+    c.idCliente,
+    nombre,
+    apellido,
+    telefono,
+    correo
+from
+    RESERVAS r
+    left join CLIENTES c on c.idCliente = r.idCliente;
+
+DELIMITER / / CREATE PROCEDURE mostrarreservas (IN id_Sesion INT) BEGIN
+SELECT
+    idReserva,
+    fecha_reserva,
+    hora_reserva,
+    num_personas,
+    idStatus,
+    tema,
+    idCliente,
+    nombre,
+    apellido,
+    telefono,
+    correo
+FROM
+    mostrarreservas_vw
+WHERE
+    idCliente = id_Sesion;
+
+END / / DELIMITER;
