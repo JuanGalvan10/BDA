@@ -45,7 +45,7 @@
               </div>
             </li>
           </div>
-          <a href="/"><img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="50px"></a>
+          <a href="/dashboard"><img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="50px"></a>
 
         </div>
         <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
@@ -113,6 +113,13 @@
               <div class="col-5" style="height: 100%;">
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fecha" required>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                      const fechaInput = document.getElementById('fecha');
+                      const today = new Date().toISOString().split('T')[0]; // Fecha actual en formato 'YYYY-MM-DD'
+                      fechaInput.setAttribute('min', today); // Establece la fecha mínima
+                  });
+              </script>
                 <br><br><br><br><br><br><br><br><br><br><br><br>
                 <label for="num_personas">Personas:</label><br>
                 Cantidad:

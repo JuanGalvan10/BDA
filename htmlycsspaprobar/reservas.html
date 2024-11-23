@@ -92,9 +92,10 @@
     <div class="container">
       <div class="row">
         <div class="col-8" style="border-right: 2px solid black;">
-          <p>Tema:</p>
-          <input type="text" id="txt-reserva"/>
+
           <form method="POST" action="/reservar">
+            <p>Tema:</p>
+            <input type="text" name="tema" id="txt-reserva" required>
             <div class="row py-4">
               <div class="col-5" style="height: 100%;">
                 <label for="fecha">Fecha:</label>
@@ -110,74 +111,114 @@
                 <br>
                 <div class="row">
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 3:00 PM </button>
+                      <input type="button" name="hora" value="2:00 PM" class="btn-hora" id="btn-header"></input>
                   </div>
                   <div class="col-4">
                     <button type="button" id="btn-header"> 3:30 PM </button>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 4:00 PM </button>
+                    <input type="radio" id="btn-header"> 4:00 PM </input>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 4:30 PM </button>
+                    <input type="radio" id="btn-header"> 4:30 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 5:00 PM </button>
+                    <input type="radio" id="btn-header"> 5:00 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 5:30 PM </button>
+                    <input type="radio" id="btn-header"> 5:30 PM </input>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 6:00 PM </button>
+                    <input type="radio" id="btn-header"> 6:00 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 6:30 PM </button>
+                    <input type="radio" id="btn-header"> 6:30 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 7:00 PM </button>
+                    <input type="radio" id="btn-header"> 7:00 PM </input>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 7:30 PM </button>
+                    <input type="radio" id="btn-header"> 7:30 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 8:00 PM </button>
+                    <input type="radio" id="btn-header"> 8:00 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 8:30 PM </button>
+                    <input type="radio" id="btn-header"> 8:30 PM </input>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 9:00 PM </button>
+                    <input type="radio" id="btn-header"> 9:00 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 9:30 PM </button>
+                    <input type="radio" id="btn-header"> 9:30 PM </input>
                   </div>
                   <div class="col-4">
-                    <button type="button" id="btn-header"> 10:00 PM </button>
+                    <input type="radio" id="btn-header"> 10:00 PM </input>
                   </div>
+                  <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const fechaInput = document.getElementById('fecha');
+                        const personasInput = document.getElementById('num_personas');
+                        const horaInput = document.querySelectorAll('.btn-hora');
+                        const temaInput = document.getElementById('txt-reserva');
+
+                        const datoFecha = document.getElementById('dia-reserva');
+                        const datoPersonas = document.getElementById('cant-reserva');
+                        const datoHora = document.getElementById('hora-reserva');
+                        const datoTema = document.getElementById('tema-reserva');
+                
+                        fechaInput.addEventListener('change', () => {
+                            const fechaSeleccionada = fechaInput.value;
+                            datoFecha.textContent = `Dia: ${fechaSeleccionada}`
+                        });
+                
+                        personasInput.addEventListener('input', () => {
+                            const numPersonas = personasInput.value;
+                            datoPersonas.textContent = `Personas: ${numPersonas}`
+                        });
+
+                        horaInput.forEach((input) => {
+                          input.addEventListener('input', () => {
+                                const horaSeleccionada = input.innerText.trim(); 
+                                datoHora.textContent = `Hora: ${horaSeleccionada}`;
+                            });
+                        });
+                    });
+                    document.addEventListener('DOMContentLoaded', () => {
+                      const temaInput = document.getElementById('txt-reserva'); 
+                      const datoTema = document.getElementById('tema-reserva'); 
+
+                      datoTema.textContent = 'Tema: Ingresa un tema';
+
+                      temaInput.addEventListener('input', () => {
+                          const tema = temaInput.value.trim(); 
+                          datoTema.textContent = tema
+                              ? `Tema: ${tema}` 
+                              : 'Tema: Ingresa un tema'; 
+                      });
+                  });
+                </script>
                 </div>
               </div>
             </div>
-            <br>
-
-          </form>
         </div>
         <div class="col-4" style="padding-left: 20px;">
           <div class="row">
-            <div class="col-12">
-              <h4 class="py-2">Reserva:</h4>
-              <p>Tema: Cumpleaños de Carlitos</p>
-              <p>Día: 01 / 11 / 2024</p>
-              <p>Hora: 3:30 PM</p>
-              <p>Cantidad: 6 Personas</p>
-            </div>
+            <div id="resumen-seleccion" style="margin-top: 20px;">
+              <h4>Resumen de la selección:</h4>
+              <p id="tema-reserva"></p>
+              <p id="dia-reserva">Día: Selecciona un día</p>
+              <p id="hora-reserva">Hora: Selecciona una hora</p>
+              <p id="cant-reserva">Personas: Ingresa una cantidad</p>
+          </div>
           </div>
           <div class="row" style="padding-top: 100px;">
             <div class="col-12">
@@ -185,7 +226,6 @@
               <p style="font-size: 12px; padding-left: 20px;">*Se tendrá tolerancia de 15 min.</p>
             </div>
             <div class="col-12">
-              <form method="POST" action="/reservar">
                 <button type="submit" id="btn-reserva"><p>Reservar</p></button>
               </form>
               </div>
