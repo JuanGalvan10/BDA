@@ -15,14 +15,14 @@ class Cliente:
     def insert(nombre,apellidos,correo, telefono, direccion, puntos, password, nombre_usuario):
         # Insertar el User
         cur = mysql.connection.cursor()
-        cur.callproc('registrarUsuario', (nombre_usuario, password, 'cliente'))
+        cur.callproc('registrarUsuario', (nombre_usuario, password, 'Cliente'))
         mysql.connection.commit()
         
         # Obtener el ID del User recién insertado
         id_usuario = cur.lastrowid
 
         # Insertar detalles del User
-        cur.callproc('insertarCliente', (id_usuario, nombre, apellidos, telefono, correo, puntos, direccion))      
+        cur.callproc('registrarCliente', (id_usuario, nombre, apellidos, telefono, correo, puntos, direccion))      
         mysql.connection.commit()
         cur.close()
     
