@@ -15,6 +15,7 @@ class Cliente:
     def insert(nombre,apellidos,correo, telefono, direccion, puntos, password, nombre_usuario):
         # Insertar el User
         cur = mysql.connection.cursor()
+        # corregir nombre de proc
         cur.callproc('registrarUsuario', (nombre_usuario, password, 'cliente'))
         mysql.connection.commit()
         
