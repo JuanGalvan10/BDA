@@ -372,7 +372,7 @@ HAVING total_cant > 2;
 
 CREATE VIEW VentasDiarias as
 SELECT idCliente, fecha_pedido, SUM(total_pedido) as total
-from Pedidos p
-where idStatus != 3 and p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
+FROM Pedidos p
+WHERE idStatus != 3 AND p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
     AND p.fecha_pedido < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 DAY), '%Y-%m-%d 00:00:00')
-group by idCliente;
+GROUP BY idCliente;
