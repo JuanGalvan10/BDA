@@ -6,9 +6,7 @@
                     {{ hora }}
                 </button>
             {% else %}
-                <button type="button" value="{{hora}}" id="btn-header">
-                    {{ hora }}
-                </button>
+            <input type="button" name="hora" value="{{ hora }}" class="btn-hora" id="btn-header"></input>
             {% endif %}
         </div>
     {% endfor %}

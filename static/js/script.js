@@ -35,3 +35,51 @@ $(document).ready(function(){
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const fechaInput = document.getElementById('fecha');
+    const today = new Date().toISOString().split('T')[0]; 
+    fechaInput.setAttribute('min', today); 
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fechaInput = document.getElementById('fecha');
+    const personasInput = document.getElementById('num_personas');
+    const horaInput = document.querySelectorAll('.btn-hora');
+    const temaInput = document.getElementById('txt-reserva');
+
+    const datoFecha = document.getElementById('dia-reserva');
+    const datoPersonas = document.getElementById('cant-reserva');
+    const datoHora = document.getElementById('hora-reserva');
+    const datoTema = document.getElementById('tema-reserva');
+
+    fechaInput.addEventListener('change', () => {
+        const fechaSeleccionada = fechaInput.value;
+        datoFecha.textContent = `Dia: ${fechaSeleccionada}`
+    });
+
+    personasInput.addEventListener('input', () => {
+        const numPersonas = personasInput.value;
+        datoPersonas.textContent = `Personas: ${numPersonas}`
+    });
+    const botonesHora = document.querySelectorAll('.btn-hora');
+    botonesHora.forEach((boton) => {
+        boton.addEventListener('click', () => {
+            const horaSeleccionada = boton.value;
+            datoHora.textContent = `Hora: ${horaSeleccionada}`;
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const temaInput = document.getElementById('txt-reserva'); 
+  const datoTema = document.getElementById('tema-reserva'); 
+
+  datoTema.textContent = 'Tema: Ingresa un tema';
+
+  temaInput.addEventListener('input', () => {
+      const tema = temaInput.value.trim(); 
+      datoTema.textContent = tema
+          ? `Tema: ${tema}` 
+          : 'Tema: Ingresa un tema'; 
+  });
+});
