@@ -106,20 +106,13 @@
     <div class="container">
       <div class="row">
         <div class="col-8" style="border-right: 2px solid black;">
-          <p>Tema:</p>
-          <input type="text" id="txt-reserva"/>
           <form method="POST" action="/reservar">
+            <p>Tema:</p>
+            <input type="text" name="tema" id="txt-reserva"/>
             <div class="row py-4">
               <div class="col-5" style="height: 100%;">
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha" name="fecha" required>
-                <script>
-                  document.addEventListener('DOMContentLoaded', function () {
-                      const fechaInput = document.getElementById('fecha');
-                      const today = new Date().toISOString().split('T')[0]; // Fecha actual en formato 'YYYY-MM-DD'
-                      fechaInput.setAttribute('min', today); // Establece la fecha mínima
-                  });
-              </script>
                 <br><br><br><br><br><br><br><br><br><br><br><br>
                 <label for="num_personas">Personas:</label><br>
                 Cantidad:
@@ -134,17 +127,15 @@
               </div>
             </div>
             <br>
-
-          </form>
         </div>
         <div class="col-4" style="padding-left: 20px;">
           <div class="row">
             <div class="col-12">
               <h4 class="py-2">Reserva:</h4>
-              <p>Tema: Cumpleaños de Carlitos</p>
-              <p>Día: 01 / 11 / 2024</p>
-              <p>Hora: 3:30 PM</p>
-              <p>Cantidad: 6 Personas</p>
+              <p id="tema-reserva"></p>
+              <p id="dia-reserva">Día: Selecciona un día</p>
+              <p id="hora-reserva">Hora: Selecciona una hora</p>
+              <p id="cant-reserva">Personas: Ingresa una cantidad</p>
             </div>
           </div>
           <div class="row" style="padding-top: 100px;">
@@ -153,7 +144,6 @@
               <p style="font-size: 12px; padding-left: 20px;">*Se tendrá tolerancia de 15 min.</p>
             </div>
             <div class="col-12">
-              <form method="POST" action="/reservar">
                 <button type="submit" id="btn-reserva"><p>Reservar</p></button>
               </form>
               </div>

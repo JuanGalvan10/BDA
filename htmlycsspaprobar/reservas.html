@@ -184,10 +184,10 @@
                             const numPersonas = personasInput.value;
                             datoPersonas.textContent = `Personas: ${numPersonas}`
                         });
-
-                        horaInput.forEach((input) => {
-                          input.addEventListener('input', () => {
-                                const horaSeleccionada = input.innerText.trim(); 
+                        const botonesHora = document.querySelectorAll('.btn-hora');
+                        botonesHora.forEach((boton) => {
+                            boton.addEventListener('click', () => {
+                                const horaSeleccionada = boton.value;
                                 datoHora.textContent = `Hora: ${horaSeleccionada}`;
                             });
                         });
