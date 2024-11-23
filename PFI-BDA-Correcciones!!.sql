@@ -19,6 +19,7 @@ INSERT INTO TIPOS_STAFF (nombre_staff) VALUES
 ('Cocinero'),
 ('Repartidor');
 
+
 CREATE TABLE USUARIOS_RESTAURANTE (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre_usuario VARCHAR(50) NOT NULL,
@@ -36,11 +37,8 @@ INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
 ('MariaLo', SHA2('666', 256), 1),
 ('CarlosGo', SHA2('666', 256), 1),
 ('AnaMar', SHA2('666', 256), 1),
-('LuisSa', SHA2('666', 256), 1),
-('Josefo', SHA2('666', 256), 3),
-('Rob', SHA2('666', 256), 3),
-('Susy', SHA2('666', 256), 3),
-('George', SHA2('666', 256), 3);
+('LuisSa', SHA2('666', 256), 1);
+
 
 CREATE TABLE ROLES_STAFF (
     idUsuario INT NOT NULL,
@@ -51,10 +49,10 @@ CREATE TABLE ROLES_STAFF (
 
 /*CHECAR CUAL USUARIO ES ADMIN NO USAR INSERT HASTA CHECAR ESO*/
 INSERT INTO ROLES_STAFF VALUES
-('10','1'),
-('11','2'),
-('12','3'),
-('13','4');
+('1','1'),
+('2','2'),
+('3','3'),
+('4','4');
 
 CREATE TABLE PUNTOS_CLIENTES (
     idPuntos INT PRIMARY KEY AUTO_INCREMENT,
@@ -300,17 +298,19 @@ CREATE TABLE RESENAS (
     fecha_comentario DATE NOT NULL,
     idCliente INT NOT NULL,
     idTipoResena INT NOT NULL,
+    idPedido INT ,
     FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente),
+    FOREIGN KEY (idPedido) REFERENCES PEDIDOS(idPedido),
     FOREIGN KEY (idTipoResena) REFERENCES TIPOS_RESENA(idTipoResena) ON DELETE CASCADE
 );
 
-INSERT INTO RESENAS (puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena) VALUES
-(5, 'Increíble experiencia', 'Excelente ambiente, atención de primera y los platillos deliciosos. Sin duda volveré.', '2024-11-15', 1, 1), 
-(4, 'Buen servicio', 'El servicio fue bueno, pero la comida estuvo un poco más salada de lo que esperaba.', '2024-11-16', 2, 1), 
-(3, 'Regular', 'El lugar es bonito, pero el servicio fue lento y algunos platillos no estaban disponibles.', '2024-11-17', 3, 1),
-(5, 'Espectacular platillo', 'El Tartar de Toro es espectacular, fresco y con un sabor único.', '2024-11-18', 4, 2),
-(4, 'Delicioso Edamame', 'El Edamame estuvo delicioso, aunque podría mejorar la presentación.', '2024-11-19', 5, 2),
-(5, 'Recomendado', 'Las Tostadas de Atún fueron una maravilla, todo en su punto perfecto. ¡Altamente recomendable!', '2024-11-20', 5, 2);
+INSERT INTO RESENAS (puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido) VALUES
+(5, 'Increíble experiencia', 'Excelente ambiente, atención de primera y los platillos deliciosos. Sin duda volveré.', '2024-11-15', 2, 2, 2), 
+(4, 'Buen servicio', 'El servicio fue bueno, pero la comida estuvo un poco más salada de lo que esperaba.', '2024-11-16', 2, 2, 1), 
+(3, 'Regular', 'El lugar es bonito, pero el servicio fue lento y algunos platillos no estaban disponibles.', '2024-11-17', 3, 1, null),
+(5, 'Espectacular platillo', 'El Tartar de Toro es espectacular, fresco y con un sabor único.', '2024-11-18', 4, 2, 4),
+(4, 'Delicioso Edamame', 'El Edamame estuvo delicioso, aunque podría mejorar la presentación.', '2024-11-19', 5, 2, 6),
+(5, 'Recomendado', 'Las Tostadas de Atún fueron una maravilla, todo en su punto perfecto. ¡Altamente recomendable!', '2024-11-20', 5, 2, 7);
 
 CREATE TABLE RESTAURANTES (
     idRestaurante INT PRIMARY KEY AUTO_INCREMENT,
@@ -324,3 +324,45 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 ('Sucursal Valle Oriente', 'Av. Gonzalitos 123, Col. Valle Oriente, Monterrey, N.L.', '81-1234-5678', 'Se trata de una sucursal moderna con un ambiente acogedor, ideal para cenas familiares y reuniones de negocios.'),
 ('Sucursal Centro', 'Paseo Santa Lucía 456, Col. Centro, Monterrey, N.L.', '81-2345-6789', 'Ubicada en el corazón de Monterrey, ofrece una experiencia gastronómica única con sabores frescos y auténticos.'),
 ('Sucursal Carretera Nacional', 'Carretera Nacional 789, Col. Cumbres, Monterrey, N.L.', '81-3456-7890', 'Ofrece un espacio amplio y cómodo, ideal para disfrutar de un almuerzo en familia o una cena con amigos.');
+
+-- VIEWS --
+
+CREATE VIEW ProductosDisponibles AS
+SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
+FROM PLATILLOS p
+WHERE inventario > 0;
+
+-- SE INGRESARA EL IDCLIENTE --
+CREATE VIEW PedidosCliente as
+SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, sp.nombre_status 
+FROM PEDIDOS p natural join status_pedido sp
+where idCliente = 2;
+
+CREATE VIEW ReservasActivas as
+SELECT idReserva, fecha_reserva, hora_reserva, num_personas, sr.Status_Reservas , tema
+FROM RESERVAS r natural join status_reservas sr 
+where sr.Status_Reservas = "Pendiente" AND fecha_reserva > NOW();
+
+select d.idPlatillo, AVG(puntuacion)
+FROM resenas c natural join tipos_resena tr natural join Pedidos natural join detallespedido d 
+WHERE tr.idTipoResena = 2 && c.idCliente = 2
+group by d.idPlatillo;
+
+CREATE VIEW PromocionesVigentes as
+SELECT p.idPlatillo,p.nombre,pr.descuento,pr.fecha_inicio,pr.fecha_fin, t.tipo_promocion, pr.descripcion
+FROM platillos p LEFT JOIN promociones pr  natural join TIPOSPROMOCION t
+ON p.idPlatillo = pr.idPlatillo
+WHERE fecha_inicio < Now()  and fecha_fin > Now();
+
+CREATE VIEW TopProductosVendidos as
+SELECT idPlatillo, SUM(cantidad) as total_cant
+FROM DetallesPedido
+GROUP BY idPlatillo
+HAVING total_cant > 2; 
+
+CREATE VIEW VentasDiarias as
+SELECT idCliente, fecha_pedido, SUM(total_pedido) as total
+FROM Pedidos p
+WHERE idStatus != 3 AND p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
+    AND p.fecha_pedido < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 DAY), '%Y-%m-%d 00:00:00')
+GROUP BY idCliente;
