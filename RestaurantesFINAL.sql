@@ -94,34 +94,38 @@ INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono,
 (4, 8, 1, 'Ana', 'Martínez', '5554567890', 'ana.martinez@email.com', 'Paseo de la Reforma 101, Ciudad, CP 33445'),
 (5, 9, 2, 'Luis', 'Sánchez', '5555678901', 'luis.sanchez@email.com', 'Plaza Mayor 202, Ciudad, CP 55667');
 
-CREATE TABLE DETALLES_METODOPAGOS(
-    idDetalleMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
-    num_tarjeta VARCHAR(255),
-    fecha_expiracion DATE
-);
+CREATE TABLE
+    DETALLES_METODOPAGOS (
+        idDetalleMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
+        num_tarjeta VARCHAR(255),
+        fecha_expiracion DATE
+    );
 
-INSERT INTO DETALLES_METODOPAGOS (num_tarjeta, fecha_expiracion) VALUES
-('1234567812345678', '2025-12-31'),
-('2345678923456789', '2024-10-31'),
-('3456789034567890', '2026-05-31'),
-('4567890145678901', '2025-11-30'),
-('5678901256789012', '2025-02-28');
+INSERT INTO
+    DETALLES_METODOPAGOS (num_tarjeta, fecha_expiracion)
+VALUES
+    ('1234567812345678', '2025-12-31'),
+    ('2345678923456789', '2024-10-31'),
+    ('3456789034567890', '2026-05-31');
 
-CREATE TABLE METODOPAGOS (
-    idMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_metodo VARCHAR(255),
-    idCliente INT NOT NULL,
-    idDetalleMetodoPago INT,
-    FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLES_METODOPAGOS(idDetalleMetodoPago),
-    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
-);
+CREATE TABLE
+    METODOPAGOS (
+        idMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
+        nombre_metodo VARCHAR(255),
+        idCliente INT NOT NULL,
+        idDetalleMetodoPago INT,
+        FOREIGN KEY (idDetalleMetodoPago) REFERENCES DETALLES_METODOPAGOS (idDetalleMetodoPago),
+        FOREIGN KEY (idCliente) REFERENCES CLIENTES (idCliente)
+    );
 
-INSERT INTO METODOPAGOS (nombre_metodo, idCliente, idDetalleMetodoPago) VALUES
-('Visa', 1, 1),
-('MasterCard', 2, 2),
-('American Express', 3, NULL),
-('Discover', 4, 4),
-('Efectivo', 5, NULL);
+INSERT INTO
+    METODOPAGOS (nombre_metodo, idCliente, idDetalleMetodoPago)
+VALUES
+    ('Visa', 1, 1),
+    ('MasterCard', 2, 2),
+    ('American Express', 3, NULL),
+    ('Discover', 4, 3),
+    ('Efectivo', 5, NULL);
 
 CREATE TABLE CATEGORIAS (
     idCategoria INT PRIMARY KEY AUTO_INCREMENT,
