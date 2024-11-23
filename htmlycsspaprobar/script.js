@@ -7,7 +7,7 @@ function increment() {
 function decrement() {
     const quantityInput = document.getElementById('quantity');
     let value = parseInt(quantityInput.value, 10);
-    if (value > 1) {
+    if (value >= 1) {
         quantityInput.value = value - 1;
     }
 }

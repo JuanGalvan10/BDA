@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
     <title>Resumen de Pedido</title>
 </head>
 <body>
@@ -72,8 +73,7 @@
         </div>
     </header>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+
 
 
 
@@ -107,30 +107,33 @@
             </div>
         </div>
         <div class="row justify-content-start">  
-            <div class="col-sm-2 col-md-3">
-                <div>
-                    <img src="cocktail.png" class="img-fluid rounded" alt="Cocktail" style=" box-shadow: 0px 4px 6px black;">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="mt-3">
-                    <h4 class="fs-3">Cocktail Arándanos - $100.00</h4>
-                </div>
-                <div style="display: flex; justify-content: space-between;  align-items: center;">
-                    <p style="font-size: 15px; width:380px;">Una refrescante mezcla de jugo de arándano, un toque de limón y soda, adornado con arándanos frescos. Ideal para disfrutar en cualquier ocasión.</p>
-                    <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 100px;">
-                        <span>
-                            <div class="input-group mb-3" style="max-width: 150px;">
-                                <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                <input type="text" class="form-control text-center" value="1" id="quantity" readonly>
-                                <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+            <div class="col-9">
+                <div class="row"> <!-- Producto del carrito -->
+                    <div class="col-sm-4 col-md-4"> 
+                        <div>
+                            <img src="cocktail.png" class="img-fluid rounded" alt="Cocktail" style=" box-shadow: 0px 4px 6px black;">
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-8"> 
+                        <div class="mt-3">
+                            <h4 class="fs-3">Cocktail Arándanos - $100.00</h4>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;  align-items: center;">
+                            <p style="font-size: 15px; width:380px;">Una refrescante mezcla de jugo de arándano, un toque de limón y soda, adornado con arándanos frescos. Ideal para disfrutar en cualquier ocasión.</p>
+                            <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 100px;">
+                                <span>
+                                    <div class="input-group mb-3" style="max-width: 150px;">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
+                                        <input type="text" class="form-control text-center" value="1" id="quantity" readonly>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                                    </div>
+                                </span>
                             </div>
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
+            <div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center"> <!-- Producto recomendado -->
                 <div class="card bg-dark text-white" style="border: none;">
                     <img class="card-img" src="Raspberry.png" alt="Card image" style="opacity: 0.9; box-shadow: 0px 4px 6px black;" >
                     <div class="card-img-overlay">
@@ -150,126 +153,8 @@
                     </div>
                   </div>
             </div>
-
-            <div class="col-sm-8 col-md-9 pl-2 pt-2 border-bottom"></div>     <!--Salto de linea con borde-->
-        </div>
-
-        <div class="col-sm-8 col-md-9 pl-2 pt-2"></div>        <!--Salto de linea con borde-->
-
-
-
-
-        <div class="row">
-            <div class="col-sm-2 col-md-3">
-                <div>
-                    <img src="burger.png" class="img-fluid rounded" alt="Wagyu Burger" style=" box-shadow: 0px 4px 6px black;">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="mt-3">
-                    <h4 class="fs-3">Wagyu Burger - $450.00</h4>
-                </div>
-                <div style="display: flex; justify-content: space-between;  align-items: center;">
-                    <p style="font-size: 15px; width:380px;">Jugosa hamburguesa de carne Wagyu, con queso derretido, vegetales frescos y pan artesanal. Un lujo en cada bocado.</p>
-                    <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 100px;">
-                        <span>
-                            <div class="input-group mb-3" style="max-width: 150px;">
-                                <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                <input type="text" class="form-control text-center" value="1" id="quantity" readonly>
-                                <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
-                <div class="card bg-dark text-white" style="border: none;">
-                    <img class="card-img" src="matcha.png" alt="Card image" style="opacity: 0.9; box-shadow: 0px 4px 6px black;" >
-                    <div class="card-img-overlay">
-                      <h5 class="card-title fs-3 fw-bold text-light text-end" style="text-shadow: 2px 2px 2px black;">Tarta de Matcha</h5>
-                      <div class="side-area">
-                        <div class="side-add">
-                            <span>
-                                <strong>$160</strong>
-                            </span>
-                            <div>
-                                <button type="button" class="btn btn-light btn-sm" style="border-radius: 30px;">
-                                    <i class="bi bi-plus"></i>
-                                </button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-sm-8 col-md-9 pb-2 pl-2 pt-2 border-bottom "></div>
-        </div>
-
-        
-
-        <div class="col-sm-8 col-md-9 pl-2 pt-2"></div>        <!--Salto de linea con borde-->
-
-        <div class="row justify-content-start">
-            <div class="col-sm-2 col-md-3">
-                <div>
-                    <img src="sushi.png" class="img-fluid rounded" alt="Fukui Roll" style=" box-shadow: 0px 4px 6px black;">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="mt-3">
-                    <h4 class="fs-3">Fukui Roll - $190.00</h4>
-                </div>
-                <div style="display: flex; justify-content: space-between;  align-items: center;">
-                    <p style="font-size: 15px; width:380px;">Delicado rollo de sushi relleno de salmón fresco, aguacate y pepino, cubierto con láminas de atún y un toque de salsa especial. Una explosión de sabor japonés.</p>
-                    <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 100px;">
-                        <span>
-                            <div class="input-group mb-3" style="max-width: 150px;">
-                                <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                <input type="text" class="form-control text-center" value="1" id="quantity" readonly>
-                                <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
-                <div class="card bg-dark text-white" style="border: none;">
-                    <img class="card-img" src="smash.png" alt="Card image" style="opacity: 0.9; box-shadow: 0px 4px 6px black;" >
-                    <div class="card-img-overlay">
-                      <h5 class="card-title fs-3 fw-bold text-light text-end" style="text-shadow: 2px 2px 2px black;">Smash, smash, smash!</h5>
-                      <div class="side-area">
-                        <div class="side-add">
-                            <span>
-                                <strong>$180</strong>
-                            </span>
-                            <div>
-                                <button type="button" class="btn btn-light btn-sm" style="border-radius: 30px;">
-                                    <i class="bi bi-plus"></i>
-                                </button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-            </div>
+            
             <div class="col-sm-8 col-md-9 pb-2 pl-2 pt-2 border-bottom"></div>
-        </div>
-
-        
-        <div class="row">
-            <div class="col-sm-8 col-md-9 text-center">
-                <div>
-                    <h5 class="text-start pl-4 pt-4">Instrucciones adicionales</h5>
-                </div>
-            </div>
-            <form>
-                <div class="col-sm-8 col-md-9 form-group">
-                    <label for="exampleFormControlTextarea1"></label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-            </form>
-            <div class="col-sm-8 col-md-9 pb-2 pl-2 pt-2 border-bottom"></div>
-        </div>
 
         <div class="col-sm-8 col-md-9 pl-2 pt-2"></div>        <!--Salto de linea con borde-->
         

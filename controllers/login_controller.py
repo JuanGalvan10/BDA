@@ -12,6 +12,8 @@ def login():
             session['idUsuario'] = user['idUsuario']
             session['usuario'] = user['nombre_usuario']
             session['rol'] = user['nombre']
+            session['productos'] = []
+            session['subtotal'] = 0
             flash('Acceso exitoso', 'success')
             return redirect(url_for('vista_principal'))
         else:
@@ -63,10 +65,7 @@ def register_client(idUsuario):
     return render_template('registro_login.html')
 
 def logout():
-    session.pop('loggedin', None)
-    session.pop('usuario', None)
-    session.pop('idUsuario', None)
-    session.pop('rol', None)
+    session.clear()
     flash('Sesión cerrada', 'info')
     return redirect(url_for('login'))
 
