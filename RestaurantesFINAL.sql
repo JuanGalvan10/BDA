@@ -384,6 +384,39 @@ BEGIN
 END //
 DELIMITER ;
 
+--PROCS DE CLIENTES --
+CREATE VIEW mostrarUsuarios_vw AS
+SELECT 
+    ur.idUsuario as idUsuario, 
+    ur.nombre_usuario AS nombre_usuario,
+    ur.password AS password,
+    ur.idRol AS idRol,
+    r.nombre AS rol_nombre,
+    rs.idRolStaff AS tipo_rol_id,
+    ts.nombre_staff AS tipo_rol_nombre
+FROM 
+    USUARIOS_RESTAURANTE ur
+LEFT JOIN 
+    roles r ON ur.idRol = r.idRol
+LEFT JOIN 
+    ROLES_STAFF rs ON ur.idUsuario = rs.idUsuario
+LEFT JOIN 
+    TIPOS_STAFF ts ON rs.idRolStaff = ts.idRolStaff;
+
+DELIMITER / / CREATE PROCEDURE mostrarUsuarios() BEGIN
+SELECT
+    idUsuario, 
+    nombre_usuario,
+    password,
+    idRol,
+    rol_nombre,
+    tipo_rol_id,
+    tipo_rol_nombre
+FROM
+    mostrarUsuarios_vw;
+END / / 
+DELIMITER ;
+
 
 -- PROCS PARA PEDIDOS 
 create view
@@ -511,7 +544,7 @@ SELECT
     idTipoResena,
     idPedido
 FROM
-    ProductosDisponibles;
+    mostrarResenas_vw
 END / / 
 DELIMITER ;
 
@@ -527,7 +560,7 @@ SELECT
     idTipoResena,
     idPedido
 FROM
-    ProductosDisponibles
+    mostrarResenas_vw
 WHERE
     idCliente = id_Sesion;
 END / / DELIMITER ;
