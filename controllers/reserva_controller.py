@@ -25,41 +25,40 @@ def mostrar_reservas():
 def nuevo_reserva():
     if 'loggedin' in session:
         if request.method =='POST':
-            nombre = request.form['nombre']
-            imagen_URL = request.form['imagen']
-            precio = request.form['precio']
-            descripcion= request.form['desc']
-            categoria= request.form['categoria']
-            Reserva.insert(nombre, imagen_URL, precio, descripcion, categoria)
+            fechaReserva = request.form['fecha']
+            hora_reserva = request.form['hora']
+            num_personas = request.form['num_personas']
+            idStatus = 2
+            tema = request.form['tema']
+            Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema)
             return redirect(url_for('mostrar_reservas'))
-        return render_template('Crear_reserva.html')
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
 
-def editar_reserva(id):
-    if 'loggedin' in session:
-        if request.method =='POST':
-            nombre = request.form['nombre']
-            imagen_URL = request.form['imagen']
-            precio = request.form['precio']
-            descripcion= request.form['desc']
-            categoria= request.form['categoria']
-            Reserva.update(nombre, imagen_URL, precio, descripcion, categoria)
-            flash('Prdocuto actualizado correctamente', 'success')
-            return redirect(url_for('mostrar_reservas'))
-        reserva = Reserva.get_by_id(id)
-        return render_template('Editar_reserva.html', reserva = reserva)
-    else:
-        flash('Primero debes de ingresar.', 'error')
-        return redirect(url_for('login'))
+# def editar_reserva(id):
+#     if 'loggedin' in session:
+#         if request.method =='POST':
+#             nombre = request.form['nombre']
+#             imagen_URL = request.form['imagen']
+#             precio = request.form['precio']
+#             descripcion= request.form['desc']
+#             categoria= request.form['categoria']
+#             Reserva.update(nombre, imagen_URL, precio, descripcion, categoria)
+#             flash('Prdocuto actualizado correctamente', 'success')
+#             return redirect(url_for('mostrar_reservas'))
+#         reserva = Reserva.get_by_id(id)
+#         return render_template('Editar_reserva.html', reserva = reserva)
+#     else:
+#         flash('Primero debes de ingresar.', 'error')
+#         return redirect(url_for('login'))
 
 def eliminar_reserva(id):
     if 'loggedin' in session:
         if request.method =='POST':
             Reserva.delete(id,)
-            flash('Reserva eliminado correctamente', 'success')
-            return redirect(url_for('mostrar_prodcutos'))
+            flash('Reserva eliminada correctamente', 'success')
+            return redirect(url_for('mostrar_reservas'))
         else:
             flash('Metodo de acceso incorrecto')
     else:

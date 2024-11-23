@@ -43,9 +43,9 @@ class Reserva:
         return horas_ocupadas
 
     @staticmethod
-    def insert(nombre, imagen_URL, precio, descripcion, categoria):
+    def insert(fechaReserva, hora_reserva, num_personas, idStatus, tema):
         cur = mysql.connection.cursor()
-        cur.callproc("nuevoReserva(%s,%s,%s,%s,%s)", (nombre, imagen_URL, precio, descripcion, categoria))
+        cur.callproc("nuevoReserva(%s,%s,%s,%s,%s)", (fechaReserva, hora_reserva, num_personas, idStatus, tema))
         mysql.connection.commit()
         cur.close()
 
