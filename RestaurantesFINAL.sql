@@ -413,7 +413,24 @@ from
     natural join STATUS_PEDIDO sp
     natural join PLATILLOS p;
 
-DELIMITER / / CREATE PROCEDURE mostrarPedidos (IN id_Sesion INT) BEGIN
+DELIMITER / / CREATE PROCEDURE mostrarPedidos () BEGIN
+SELECT
+    idPedido,
+    fecha_pedido,
+    fecha_entrega,
+    total_pedido,
+    idCliente,
+    nombre_status,
+    p.nombre,
+    p.imagen_URL,
+    d.cantidad,
+    d.precio_unitario
+FROM
+    mostrarPedidos_vw;
+END / / 
+DELIMITER ;
+
+DELIMITER / / CREATE PROCEDURE obtenerPedidosCliente (IN id_Sesion INT) BEGIN
 SELECT
     idPedido,
     fecha_pedido,
@@ -429,7 +446,8 @@ FROM
     mostrarPedidos_vw
 WHERE
     idCliente = id_Sesion;
-END / / DELIMITER;
+END / / 
+DELIMITER ;
 
 
 
