@@ -147,23 +147,26 @@ INSERT INTO STATUS_RESERVAS (Status_Reservas) VALUES
 ('Pendiente'),
 ('Cancelada');
 
-CREATE TABLE RESERVAS (
-    idReserva INT PRIMARY KEY AUTO_INCREMENT,
-    fecha_reserva DATE NOT NULL,
-    hora_reserva TIME NOT NULL,
-    num_personas INT NOT NULL,
-    idStatus INT NOT NULL,
-    tema VARCHAR(100),
-    FOREIGN KEY (idStatus) REFERENCES STATUS_RESERVAS(idStatus)
-);
+CREATE TABLE
+    RESERVAS (
+        idReserva INT PRIMARY KEY AUTO_INCREMENT,
+        fecha_reserva DATE NOT NULL,
+        hora_reserva TIME NOT NULL,
+        num_personas INT NOT NULL,
+        idStatus INT NOT NULL,
+        tema VARCHAR(100),
+        idCliente INT NOT NULL,
+        FOREIGN KEY (idStatus) REFERENCES STATUS_RESERVAS (idStatus),
+        FOREIGN KEY (idCliente) REFERENCES CLIENTES (idCliente)
+    );
 
-INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema) VALUES
-('2024-11-20', '19:00:00', 4, 1, 'Reunión de trabajo'),
-('2024-12-25', '13:30:00', 2, 2, 'Comida de navidad'),
-('2024-11-30', '18:00:00', 6, 3, 'Cena con amigos'),
-('2024-12-01', '20:00:00', 3, 1, 'Cena familiar'),
-('2024-08-15', '14:00:00', 5, 3, 'Reunión de equipo'),
-('2023-09-10', '12:00:00', 2, 2, 'Comida de trabajo');
+INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema, idCliente) VALUES
+('2024-11-20', '19:00:00', 4, 1, 'Reunión de trabajo', 1), 
+('2024-12-25', '13:30:00', 2, 2, 'Comida de navidad', 2),  
+('2024-11-30', '18:00:00', 6, 3, 'Cena con amigos', 3),   
+('2024-12-01', '20:00:00', 3, 1, 'Cena familiar', 4),       
+('2024-08-15', '14:00:00', 5, 3, 'Reunión de equipo', 5),  
+('2023-09-10', '12:00:00', 2, 2, 'Comida de trabajo', 5);
 
 CREATE TABLE PLATILLOS (
     idPlatillo INT PRIMARY KEY AUTO_INCREMENT,
