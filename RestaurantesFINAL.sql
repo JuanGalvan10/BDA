@@ -507,7 +507,23 @@ from
     natural join CLIENTES
     natural join RESENAS;
 
-DELIMITER / / CREATE PROCEDURE mostrarResenas (IN id_Sesion INT) BEGIN
+DELIMITER / / CREATE PROCEDURE mostrarResenas () BEGIN
+SELECT
+    idCliente,
+    nombre_usuario,
+    idResena,
+    puntuacion,
+    titulo,
+    comentario,
+    fecha_comentario,
+    idTipoResena,
+    idPedido
+FROM
+    ProductosDisponibles;
+END / / 
+DELIMITER ;
+
+DELIMITER / / CREATE PROCEDURE obtenerResenasCliente (IN id_Sesion INT) BEGIN
 SELECT
     idCliente,
     nombre_usuario,
@@ -522,7 +538,7 @@ FROM
     ProductosDisponibles
 WHERE
     idCliente = id_Sesion;
-END / / DELIMITER;
+END / / DELIMITER ;
 
 
 --PROCS PARA RESERVAS --
@@ -544,7 +560,25 @@ from
     RESERVAS r
     left join CLIENTES c on c.idCliente = r.idCliente;
 
-DELIMITER / / CREATE PROCEDURE mostrarreservas (IN id_Sesion INT) BEGIN
+DELIMITER / / CREATE PROCEDURE mostrarReservas () BEGIN
+SELECT
+    idReserva,
+    fecha_reserva,
+    hora_reserva,
+    num_personas,
+    idStatus,
+    tema,
+    idCliente,
+    nombre,
+    apellido,
+    telefono,
+    correo
+FROM
+    mostrarreservas_vw;
+END / / 
+DELIMITER ;
+
+DELIMITER / / CREATE PROCEDURE obtenerReservasCliente (IN id_Sesion INT) BEGIN
 SELECT
     idReserva,
     fecha_reserva,
@@ -561,5 +595,5 @@ FROM
     mostrarreservas_vw
 WHERE
     idCliente = id_Sesion;
-
-END / / DELIMITER;
+END / / 
+DELIMITER ;
