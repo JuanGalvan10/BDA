@@ -325,44 +325,73 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 ('Sucursal Centro', 'Paseo Santa Lucía 456, Col. Centro, Monterrey, N.L.', '81-2345-6789', 'Ubicada en el corazón de Monterrey, ofrece una experiencia gastronómica única con sabores frescos y auténticos.'),
 ('Sucursal Carretera Nacional', 'Carretera Nacional 789, Col. Cumbres, Monterrey, N.L.', '81-3456-7890', 'Ofrece un espacio amplio y cómodo, ideal para disfrutar de un almuerzo en familia o una cena con amigos.');
 
--- VIEWS --
 
-CREATE VIEW ProductosDisponibles AS
-SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
-FROM PLATILLOS p
-WHERE inventario > 0;
+-- PROCS PARA PRODUCTOS (MUESTRA PRODUCTOS DISPONIBLES) -- 
+CREATE VIEW
+    ProductosDisponibles_vw AS
+SELECT
+    idPlatillo,
+    nombre,
+    imagen_URL,
+    precio,
+    descripcion,
+    inventario,
+    idCategoria
+FROM
+    PLATILLOS p
+WHERE
+    inventario > 0;
 
--- SE INGRESARA EL IDCLIENTE --
-CREATE VIEW PedidosCliente as
-SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, sp.nombre_status 
-FROM PEDIDOS p natural join status_pedido sp
-where idCliente = 2;
+DELIMITER / / CREATE PROCEDURE mostrarProductos () BEGIN
+SELECT
+    idPlatillo,
+    nombre,
+    imagen_URL,
+    precio,
+    descripcion,
+    inventario,
+    idCategoria
+FROM
+    ProductosDisponibles;
 
-CREATE VIEW ReservasActivas as
-SELECT idReserva, fecha_reserva, hora_reserva, num_personas, sr.Status_Reservas , tema
-FROM RESERVAS r natural join status_reservas sr 
-where sr.Status_Reservas = "Pendiente" AND fecha_reserva > NOW();
+END / / DELIMITER;
 
-select d.idPlatillo, AVG(puntuacion)
-FROM resenas c natural join tipos_resena tr natural join Pedidos natural join detallespedido d 
-WHERE tr.idTipoResena = 2 && c.idCliente = 2
-group by d.idPlatillo;
 
-CREATE VIEW PromocionesVigentes as
-SELECT p.idPlatillo,p.nombre,pr.descuento,pr.fecha_inicio,pr.fecha_fin, t.tipo_promocion, pr.descripcion
-FROM platillos p LEFT JOIN promociones pr  natural join TIPOSPROMOCION t
-ON p.idPlatillo = pr.idPlatillo
-WHERE fecha_inicio < Now()  and fecha_fin > Now();
 
-CREATE VIEW TopProductosVendidos as
-SELECT idPlatillo, SUM(cantidad) as total_cant
-FROM DetallesPedido
-GROUP BY idPlatillo
-HAVING total_cant > 2; 
 
-CREATE VIEW VentasDiarias as
-SELECT idCliente, fecha_pedido, SUM(total_pedido) as total
-FROM Pedidos p
-WHERE idStatus != 3 AND p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
-    AND p.fecha_pedido < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 DAY), '%Y-%m-%d 00:00:00')
-GROUP BY idCliente;
+
+-- PROCS PARA RESENAS -- 
+create view
+    mostrarResenas_vw as
+select
+    idCliente,
+    nombre_usuario,
+    idResena,
+    puntuacion,
+    titulo,
+    comentario,
+    fecha_comentario,
+    idTipoResena,
+    idPedido
+from
+    USUARIOS_RESTAURANTE
+    natural join CLIENTES
+    natural join RESENAS;
+
+DELIMITER / / CREATE PROCEDURE mostrarResenas (IN id_Sesion INT) BEGIN
+SELECT
+    idCliente,
+    nombre_usuario,
+    idResena,
+    puntuacion,
+    titulo,
+    comentario,
+    fecha_comentario,
+    idTipoResena,
+    idPedido
+FROM
+    ProductosDisponibles
+WHERE
+    idCliente = id_Sesion;
+END / / DELIMITER;
+
