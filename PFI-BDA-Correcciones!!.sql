@@ -20,7 +20,6 @@ INSERT INTO TIPOS_STAFF (nombre_staff) VALUES
 ('Repartidor');
 
 
-
 CREATE TABLE USUARIOS_RESTAURANTE (
     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nombre_usuario VARCHAR(50) NOT NULL,
@@ -299,8 +298,9 @@ CREATE TABLE RESENAS (
     fecha_comentario DATE NOT NULL,
     idCliente INT NOT NULL,
     idTipoResena INT NOT NULL,
-    idPedido INT, ----------------------------------------
+    idPedido INT ,
     FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente),
+    FOREIGN KEY (idPedido) REFERENCES PEDIDOS(idPedido),
     FOREIGN KEY (idTipoResena) REFERENCES TIPOS_RESENA(idTipoResena) ON DELETE CASCADE
 );
 
@@ -352,5 +352,16 @@ CREATE VIEW ReservasActivas as
 SELECT idReserva, fecha_reserva, hora_reserva, num_personas, sr.Status_Reservas , tema
 FROM RESERVAS r natural join status_reservas sr 
 where sr.Status_Reservas = "Pendiente" AND fecha_reserva > NOW();
+
+select d.idPlatillo, AVG(puntuacion)
+FROM resenas c natural join tipos_resena tr natural join Pedidos natural join detallespedido d 
+WHERE tr.idTipoResena = 2 && c.idCliente = 2
+group by d.idPlatillo;
+
+CREATE VIEW PromocionesVigentes as
+SELECT p.idPlatillo,p.nombre,pr.descuento,pr.fecha_inicio,pr.fecha_fin, t.tipo_promocion, pr.descripcion
+FROM platillos p LEFT JOIN promociones pr  natural join TIPOSPROMOCION t
+ON p.idPlatillo = pr.idPlatillo
+WHERE fecha_inicio < Now()  and fecha_fin > Now();
 
 
