@@ -366,3 +366,5 @@ FROM Pedidos p
 WHERE idStatus != 3 AND p.fecha_pedido >= DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00')
     AND p.fecha_pedido < DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 DAY), '%Y-%m-%d 00:00:00')
 GROUP BY idCliente;
+
+-- hola --
