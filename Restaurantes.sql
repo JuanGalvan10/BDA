@@ -253,55 +253,8 @@ INSERT INTO Promocion (descuento, fecha_inicio, fecha_fin, descripcion) VALUES
 (30.00, '2024-11-15', '2024-11-22', 'Semana del sushi: 30% de descuento en todos los rollos fríos.'),
 (5.00, '2024-11-05', '2024-11-30', 'Descuento de $5 en tu pedido cuando gastes más de $50 en productos seleccionados.');
 
--- VISTAS --
 
-CREATE VIEW ProductosDisponibles AS
-SELECT 
-    idProducto, 
-    nombre, 
-    imagen_URL, 
-    precio, 
-    descripcion, 
-    inventario, 
-    idCategoria
-FROM 
-    Producto p
-WHERE 
-    inventario > 0;
 
-CREATE VIEW ReservasActivas as
-SELECT idReserva, fecha_reserva, hora_reserva, num_personas, estatus, tema
-FROM Reserva r
-WHERE estatus = "activo" AND fecha_reserva > NOW();
-
--- EL ID CLIENTE CAMBIA DEPENDIENDO DEL CLIENTE EN LA SESION
-CREATE VIEW PedidosCliente as
-SELECT idPedido,fecha_pedido,fecha_entrega, total_pedido, estatus, idCliente
-FROM Pedido p
-WHERE p.idCliente = 2; 
-
-CREATE VIEW CalificacionesProducto as
-SELECT c.idProducto, AVG(c.puntuacion) AS promedio_puntuacion
-FROM Calificacion c
-GROUP BY c.idProducto;
-
-CREATE VIEW PromocionesVigentes as
-SELECT idPromocion,descuento,fecha_inicio, fecha_fin,descripcion
-FROM Promocion 
-WHERE fecha_inicio < Now()  and fecha_fin > Now();
-
--- cantidad a comparar se va modifcar o estatico? periodo de tiempo o cantidad?
-CREATE VIEW TopProductosVendidos as
-SELECT idProducto
-FROM DetallesPedido 
-GROUP BY idProducto
-HAVING SUM(cantidad) > 2; 
-
--- Se agrupa por fecha de pedido y se suma
-CREATE VIEW VentasDiarias as
-SELECT SUM(total_pedido)
-FROM Pedido p 
-GROUP BY fecha_pedido;
 
 -- TRIGGERS --
 

@@ -328,19 +328,9 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 -- VIEWS --
 
 CREATE VIEW ProductosDisponibles AS
-SELECT 
-    idPlatillo, 
-    nombre, 
-    imagen_URL, 
-    precio, 
-    descripcion, 
-    inventario, 
-    idCategoria
-FROM 
-    PLATILLOS p
-WHERE 
-    inventario > 0;
-
+SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
+FROM PLATILLOS p
+WHERE inventario > 0;
 
 -- SE INGRESARA EL IDCLIENTE --
 CREATE VIEW PedidosCliente as
