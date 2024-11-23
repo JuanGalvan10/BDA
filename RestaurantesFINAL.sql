@@ -33,7 +33,7 @@ INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
 ('FernandoOlivares', SHA2('666', 256), 2),
 ('PamelaRodriguez', SHA2('666', 256), 2),
 ('EstefaniaNajera', SHA2('666', 256), 2),
-('JuanPe', SHA2('666', 256), 1),
+('JuanPe', SHA2('666', 256), 3),
 ('MariaLo', SHA2('666', 256), 1),
 ('CarlosGo', SHA2('666', 256), 1),
 ('AnaMar', SHA2('666', 256), 1),
@@ -49,10 +49,7 @@ CREATE TABLE ROLES_STAFF (
 
 /*CHECAR CUAL USUARIO ES ADMIN NO USAR INSERT HASTA CHECAR ESO*/
 INSERT INTO ROLES_STAFF VALUES
-('1','1'),
-('2','2'),
-('3','3'),
-('4','4');
+('5', '1');
 
 CREATE TABLE PUNTOS_CLIENTES (
     idPuntos INT PRIMARY KEY AUTO_INCREMENT,
@@ -448,11 +445,11 @@ DELIMITER ;
 
 
 
--- PROCS PARA PRODUCTOS -- 
+-- PROCS PARA PLATILLOS -- 
 
---  (MUESTRA PRODUCTOS DISPONIBLES) --
+--  (MUESTRA PLATILLOS DISPONIBLES) --
 CREATE VIEW
-    ProductosDisponibles_vw AS
+    PlatillosDisponibles_vw AS
 SELECT
     idPlatillo,
     nombre,
@@ -466,7 +463,7 @@ FROM
 WHERE
     inventario > 0;
 
-DELIMITER / / CREATE PROCEDURE mostrarProductos () BEGIN
+DELIMITER / / CREATE PROCEDURE mostrarPlatillos () BEGIN
 SELECT
     idPlatillo,
     nombre,
