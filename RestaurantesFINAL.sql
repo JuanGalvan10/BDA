@@ -77,9 +77,9 @@ INSERT INTO STATUS_CLIENTES (Status_Clientes) VALUES
 
 CREATE TABLE CLIENTES (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
-    idPuntos INT NOT NULL,
+    idPuntos INT NOT NULL DEFAULT 0,
     idUsuario INT NOT NULL,
-    idStatus INT NOT NULL,
+    idStatus INT NOT NULL DEFAULT 1,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
