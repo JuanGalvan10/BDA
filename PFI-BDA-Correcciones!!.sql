@@ -364,4 +364,10 @@ FROM platillos p LEFT JOIN promociones pr  natural join TIPOSPROMOCION t
 ON p.idPlatillo = pr.idPlatillo
 WHERE fecha_inicio < Now()  and fecha_fin > Now();
 
+CREATE VIEW TopProductosVendidos as
+SELECT idPlatillo, SUM(cantidad) as total_cant
+FROM DetallesPedido
+GROUP BY idPlatillo
+HAVING total_cant > 2; 
+
 
