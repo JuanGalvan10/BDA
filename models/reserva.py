@@ -31,21 +31,15 @@ class Reserva:
     def get_by_dia(fecha):
         cur = mysql.connection.cursor()
         # Consulta SQL para obtener las horas ocupadas
-        cur.execute("""
-            SELECT hora_reserva
-            FROM RESERVA
-            WHERE fecha_reserva = %s
-            GROUP BY hora_reserva
-            HAVING COUNT(*) >= 10
-        """, [fecha])
+        cur.execute('obtenerReservasDia(%s)', [fecha])
         horas_ocupadas = [row[0] for row in cur.fetchall()]
         cur.close()    
         return horas_ocupadas
 
     @staticmethod
-    def insert(fechaReserva, hora_reserva, num_personas, idStatus, tema):
+    def insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc("nuevoReserva(%s,%s,%s,%s,%s)", (fechaReserva, hora_reserva, num_personas, idStatus, tema))
+        cur.callproc("nuevaReserva(%s,%s,%s,%s,%s)", (fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente))
         mysql.connection.commit()
         cur.close()
 

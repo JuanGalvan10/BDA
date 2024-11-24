@@ -30,7 +30,8 @@ def nuevo_reserva():
             num_personas = request.form['num_personas']
             idStatus = 2
             tema = request.form['tema']
-            Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema)
+            idCliente = session['idCliente']
+            Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente)
             return render_template('gracias_reserva.html')
     else: 
         flash('Primero debes de ingresar.', 'error')
