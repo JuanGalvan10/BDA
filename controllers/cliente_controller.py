@@ -72,12 +72,12 @@ def eliminar_cliente(id):
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
     
-def guardar_direccion(id):
+def guardar_direccion():
     if 'loggedin' in session:
         if request.method =='POST':
             try:
                 nuevaDireccion = request.form['nuevaDireccion']
-                Cliente.guardar_direccion(session['idUsuario'], nuevaDireccion)
+                Cliente.update_direccion(session['idUsuario'], nuevaDireccion)
                 redirect(url_for('CheckoutEnvio'))
             except Exception as e:
                 return {"error": str(e)}, 500
