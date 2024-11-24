@@ -1007,14 +1007,13 @@ CREATE PROCEDURE nuevaResena(
     IN punt INT,
     IN title VARCHAR(50),
     IN coment TEXT,
-    IN fechaComent DATE,
     IN idClientePar INT,
     IN idTipoRes INT,
     IN idPedidoPar INT
 )
 BEGIN
     INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
-    VALUES (punt, title, coment, fechaComent, idClientePar, idTipoRes, idPedidoPar);
+    VALUES (punt, title, coment, CURDATE(), idClientePar, idTipoRes, idPedidoPar);
 END $$
 DELIMITER ;
 
