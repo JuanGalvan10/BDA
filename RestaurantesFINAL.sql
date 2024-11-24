@@ -578,6 +578,33 @@ BEGIN
 END // 
 DELIMITER ;
 
+DELIMITER // 
+CREATE PROCEDURE nuevaTarjetaCliente(
+	in NEWidCliente INT,
+    IN NEWnum_tarjeta INT,
+    IN NEWfecha_expiracion DATE,
+    in NEWnombre_metodo VARCHAR(255)
+)
+begin
+	DECLARE idDetalleMetodoPago INT;
+
+	IF NEWnombre_metodo = 'Efectivo' THEN
+        INSERT INTO METODOPAGOS (nombre_metodo, id_Cliente, idDetalleMetodoPago)
+        VALUES (NEWnombre_metodo, NEWidCliente, NULL);
+       
+    ELSE
+        INSERT INTO DETALLES_METODOPAGOS (num_tarjeta, fecha_expiracion)
+        VALUES (NEWnum_tarjeta, NEWfecha_expiracion);
+
+        SET idDetalleMetodoPago = LAST_INSERT_ID();
+        
+        INSERT INTO METODOPAGOS (nombre_metodo, id_Cliente, idDetalleMetodoPago)
+        VALUES (NEWnombre_metodo, NEWidCliente, idDetalleMetodoPago);
+    END IF;
+    
+END // 
+DELIMITER ; 
+
 -- PROCS PARA PEDIDOS --
 
 CREATE VIEW
