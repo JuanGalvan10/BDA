@@ -13,7 +13,7 @@ def mostrar_clientes():
                     return redirect(url_for('eliminar_cliente', id=id))
         if session['rol'] == 'cliente':
             username = session['usuario']
-            cliente = Cliente.get_cliente_by_id(session['idUsuario'])
+            cliente = Cliente.get_cliente_by_id(session['idCliente'])
             return render_template('mi_perfil.html', cliente = cliente, username = username)
         else:
             clientes = Cliente.get_all()
@@ -58,7 +58,7 @@ def editar_cliente(id):
             flash('Cliente actualizado correctamente', 'success')
             return redirect(url_for('mostrar_clientes'))
         if session['rol'] == 'cliente':
-            cliente = Cliente.get_cliente_by_id(session['idUsuario'])
+            cliente = Cliente.get_cliente_by_id(session['idCliente'])
             return render_template('editar_mi_perfil.html', cliente = cliente)
         else:
             cliente = Cliente.get_cliente_by_id(id)

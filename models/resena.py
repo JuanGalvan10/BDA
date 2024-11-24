@@ -28,9 +28,9 @@ class Resena:
         return resenas
     
     @staticmethod
-    def get_by_cliente(idUsuario):
+    def get_by_cliente(idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerResenasCliente(%s)', (idUsuario,))
+        cur.callproc('obtenerResenasCliente(%s)', (idCliente,))
         resenas = cur.fetchall()
         cur.close()
         return resenas

@@ -36,14 +36,6 @@ class Cliente:
         return User
     
     @staticmethod
-    def get_id_cliente(idCliente):
-        cur = mysql.connection.cursor()
-        cur.callproc('obtenerId(%s)', (idCliente,))
-        id = cur.fetchone()
-        cur.close()
-        return id
-    
-    @staticmethod
     def get_cliente_by_id(idCliente):
         cur = mysql.connection.cursor()
         cur.callproc('obtenerCliente(%s)', (idCliente,))
@@ -73,9 +65,9 @@ class Cliente:
         cur.close()
 
     @staticmethod
-    def nueva_tarjeta(num_tarjeta, fecha_expiracion, nombre_metodo):
+    def nueva_tarjeta(idCliente, num_tarjeta, fecha_expiracion, nombre_metodo):
         cur = mysql.connection.cursor()
-        cur.callproc('nuevaTarjeta(%s,%s,%s)', (num_tarjeta,fecha_expiracion,nombre_metodo,))
+        cur.callproc('nuevaTarjeta(%s,%s,%s,%s)', (idCliente,num_tarjeta,fecha_expiracion,nombre_metodo,))
         mysql.connection.commit()
         cur.close()
 

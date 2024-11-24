@@ -64,6 +64,7 @@ def checkoutEnvio():
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
             usuario = Cliente.get_cliente_by_id(session['idCliente'])
+            direccionUser = usuario['direccion']
             direcciones = Carrito.get_direccion_restaurantes()
             return render_template('CheckoutDomicilio.html', subtotal = subtotal, direccionUser = direccionUser, direcciones = direcciones)
         return redirect(url_for('checkoutResumen'))
@@ -142,7 +143,7 @@ def nueva_tarjeta():
                     nombre_metodo = "Discover"
                 else:
                     return "Desconocido"
-                Cliente.nueva_tarjeta(num_tarjeta, fecha_expiracion, nombre_metodo)
+                Cliente.nueva_tarjeta(session['idCliente'], num_tarjeta, fecha_expiracion, nombre_metodo)
                 redirect(url_for('checkoutPago'))
             except Exception as e:
                 return {"error": str(e)}, 500

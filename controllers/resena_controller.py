@@ -7,7 +7,7 @@ def mostrar_resenas():
             resenas = Resena.get_all()
             return render_template('Resenas.html', resenas = resenas,nombre_usuario = session['usuario'])
         else:
-            resenas = Resena.get_by_cliente(session['idUsuario'])
+            resenas = Resena.get_by_cliente(session['idCliente'])
             return render_template('Mis_resenas.html', resenas = resenas)
     else:
         flash('Primero debes de ingresar.', 'error')

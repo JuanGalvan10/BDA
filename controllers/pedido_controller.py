@@ -65,7 +65,7 @@ def nuevo_pedido():
         if request.method == 'POST':
             productos = request.form.getlist('productos[]')
             cantidades = request.form.getlist('cantidades[]') 
-            id_cliente  = session['idUsuario']
+            id_cliente  = session['idCliente']
             Pedido.insert(id_cliente, productos, cantidades)
             return render_template('Confirmacion.html')
         return render_template('Pago.html')
@@ -83,7 +83,7 @@ def eliminar_pedido(id):
                     pedidos = Pedido.get_all()
                     return render_template('Ventas.html', pedidos = pedidos, nombre_usuario = session['usuario'])
                 else:
-                    pedidos = Pedido.get_by_cliente(session['idUsuario'])
+                    pedidos = Pedido.get_by_cliente(session['idCliente'])
                     return render_template('Mis_pedidos.html', pedidos = pedidos)
             except Exception as e:
                 return {"error": str(e)}, 500
