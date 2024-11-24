@@ -78,84 +78,104 @@
     </header>
 
     <section id="descripcion_producto">
-        <div class="container">
-            <div class="row">
-                <div class="col-8">
-                    <div class="row" style="height: 50%;">
-                        <div class="col-12">
-                            <div class="medium-big-text-b">
-                                NOMBRE PRODUCTO
-                                <br>
-                                <hr>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="small-text-b">
-                                    DESCRIPCION
-                                </div>
-                            </div>
+        <form action="/agregarCarrito" method="post">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-8">
+                      <div class="row" style="height: 50%;">
+                          <div class="col-12">
+                              <div class="medium-big-text-b">
+                                  NOMBRE PRODUCTO
+                                  <br>
+                                  <hr>
+                              </div>
+          
+                              <div class="col-12">
+                                  <div class="small-text-b">
+                                      DESCRIPCION
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-6">
+                              <div class="medium-big-text-b">
+                                  Ingredientes:
+                                  <br>
+                                  <div class="small-text-b">
+                                      - Alga <br>
+                                      - Queso crema <br>
+                                  </div>
+                              </div>
+                          </div>
+          
+                          <div class="col-6">
+                              <div id="cuadradonegro-cantproductos">
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <div class="col-6">
+                                              <div class=" medium-big-text-w">
+                                                  <span>
+                                                      Cantidad:
+                                                  </span>
+                                              </div>
+                                          </div>
+          
+          
+                                          <!--Aqui va el boton de ir agregando cantidad de productos -->
+          
+                                      </div>
+                                  </div>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <div class="row">
+                                      <div class="col-12 d-flex justify-content-center">
+                                          <div id="cuadradonegro-cantproductos-w">
+                                              <div class=" medium-text-b">
+                                                  <span>
+                                                      Agregar <!-- boton sumbit que lo agrega al carrito -->
+                                                  </span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-4" style="margin-left: auto;">
+                        <img src="https://sratanaka.com/wp-content/uploads/2024/05/DSC07659.jpg" alt="platillo"
+                            id="imagen" />
+                        <br>
+                        <div class="container" id="precio">
+                            <h6> ${{producto[2]}}</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="medium-big-text-b">
-                                Ingredientes:
-                                <br>
-                                <div class="small-text-b">
-                                    - Alga <br>
-                                    - Queso crema <br>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div id="cuadradonegro-cantproductos">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="col-6">
-                                            <div class=" medium-big-text-w">
-                                                <span>
-                                                    Cantidad:
-                                                </span>
-                                            </div>
-                                        </div>
-
-
-                                        <!--Aqui va el boton de ir agregando cantidad de productos -->
-
-                                    </div>
-                                </div>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <div id="cuadradonegro-cantproductos-w">
-                                            <div class=" medium-text-b">
-                                                <span>
-                                                    Agregar <!-- boton sumbit que lo agrega al carrito -->
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-8">
+          
                     </div>
-                </div>
-
-                <div class="col-4" style="margin-left: auto;">
-                    <img src="https://sratanaka.com/wp-content/uploads/2024/05/DSC07659.jpg" alt="platillo"
-                        id="imagen" />
-                    <br>
-                    <div class="container" id="precio">
-                        <h6> ${{producto[2]}}</h6>
+                    <div class="col-4">
+                      <div class="container">
+                        <button type="submit" tyle="width: 100%; border-radius: 30px;">
+                          <p style="text-align: center; font-size: larger; font-weight: 600; padding-top: 10px;">Agregar</p>
+                        </button>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                        <label for="cantidad" style="margin-right: 10px;">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" value="1"  min="1"  max="10" style="width: 60px; text-align: center; border-radius: 5px; border: 1px solid #ccc;"  />
+                      </div>
                     </div>
-                </div>
+                  </div>
             </div>
-        </div>
-        <hr>
-    </section>
+        </form> 
+          <div class="container">
+              <div class="row">
+  
+              </div>
+          </div>
+          <hr>
+      </section>
 
     <section id="resenas">
         <div class="medium-big-text-b" style="padding: 10px 50px;">
@@ -187,11 +207,11 @@
 
                         </div>
                     </div>
-                    <div clas="row">
-                        <div class="small-text-b-resenas">
-                            <span>
-                                comentario de la reseña
-                            </span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                    comentario de la res
+                            </div>
                         </div>
                     </div>
                     

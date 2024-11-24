@@ -94,129 +94,107 @@
     </header>
 
     <section id="descripcion_producto">
-        <div class="container">
-            <div class="row">
-                <div class="col-8">
+      <form action="/agregarCarrito" method="post">
+        <input type="hidden" value="{{producto[0]}}">
+          <div class="container">
+              <div class="row"> 
+                  <div class="col-8">
                     <div class="row" style="height: 50%;">
                         <div class="col-12">
                             <div class="medium-big-text-b">
-                                NOMBRE PRODUCTO
+                                {{producto[1]}}
                                 <br>
                                 <hr>
                             </div>
-
+        
                             <div class="col-12">
                                 <div class="small-text-b">
-                                    DESCRIPCION
+                                    {{producto[4]}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="medium-big-text-b">
-                                Ingredientes:
-                                <br>
-                                <div class="small-text-b">
-                                    - Alga <br>
-                                    - Queso crema <br>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div id="cuadradonegro-cantproductos">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="col-6">
-                                            <div class=" medium-big-text-w">
-                                                <span>
-                                                    Cantidad:
-                                                </span>
-                                            </div>
-                                        </div>
-
-
-                                        <!--Aqui va el boton de ir agregando cantidad de productos -->
-
-                                    </div>
-                                </div>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <div id="cuadradonegro-cantproductos-w">
-                                            <div class=" medium-text-b">
-                                                <span>
-                                                    Agregar <!-- boton sumbit que lo agrega al carrito -->
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+                  <div class="col-4" style="margin-left: auto;">
+                      <img src="{{producto[2]}}" alt="imagen_{{producto[1]}}"
+                          id="imagen" />
+                      <br>
+                      <div class="container" id="precio">
+                          <h6> ${{producto[3]}}</h6>
+                      </div>
+                  </div>
+                  <div class="col-8">
+        
+                  </div>
+                  <div class="col-4">
+                    <div class="container">
+                      <button type="submit" tyle="width: 100%; border-radius: 30px;">
+                        <p style="text-align: center; font-size: larger; font-weight: 600; padding-top: 10px;">Agregar</p>
+                      </button>
                     </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                      <label for="cantidad" style="margin-right: 10px;">Cantidad:</label>
+                      <input type="number" id="cantidad" name="cantidad" value="1"  min="1"  max="10" style="width: 60px; text-align: center; border-radius: 5px; border: 1px solid #ccc;"  />
+                    </div>
+                  </div>
                 </div>
+          </div>
+      </form> 
+        <div class="container">
+            <div class="row">
 
-                <div class="col-4" style="margin-left: auto;">
-                    <img src="https://sratanaka.com/wp-content/uploads/2024/05/DSC07659.jpg" alt="platillo"
-                        id="imagen" />
-                    <br>
-                    <div class="container" id="precio">
-                        <h6> ${{producto[2]}}</h6>
-                    </div>
-                </div>
             </div>
         </div>
         <hr>
     </section>
 
     <section id="resenas">
-        <div class="medium-big-text-b" style="padding: 10px 50px;">
-            <span>
-                RESEÑAS:
-            </span>
+      <div class="medium-big-text-b" style="padding: 10px 50px;">
+          <span>
+              RESEÑAS:
+          </span>
 
-        </div>
-        <div class="container">
-            <div clas="row">
-                <div class="col-12" id="recuadro-resenas">
+      </div>
+      <div class="container">
+          <div clas="row">
+            {% for resena in resenas %}
+              <div class="col-12" id="recuadro-resenas">
 
-                    <div class="row">
-                        <div class="col-6">
-                            <div clas="small-text-b" style="padding: 5px 10px 0px 10px;">
-                                <span>
-                                    <strong>fecha: </strong> bla bla bla
-                                </span>
+                  <div class="row">
+                      <div class="col-6">
+                          <div clas="small-text-b" style="padding: 5px 10px 0px 10px;">
+                              <span>
+                                  <strong>fecha: </strong> {{resena.fecha_comentario}}
+                              </span>
+                          </div>
 
-                            </div>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                          <div clas="small-text-b" style="padding: 5px 30px 0px 10px;">
+                              <span>
+                                  <strong>@{{resena.nombre_usuario}}</strong>
+                              </span>
+                          </div>
 
-                        </div>
-                        <div class="col-6 d-flex justify-content-end">
-                            <div clas="small-text-b" style="padding: 5px 30px 0px 10px;">
-                                <span>
-                                    <strong>@usuario</strong>
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div clas="row">
-                        <div class="small-text-b-resenas">
-                            <span>
-                                comentario de la reseña
-                            </span>
-                        </div>
-                    </div>
-                    
-                </div>
-                <hr>
-            </div>
-        </div>
-        
-    </section>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                          <div clas="small-text-b" style="padding: 5px 10px 0px 10px;">
+                              <span>
+                                {{resena.comentario}}
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <hr>
+            {% endfor %}
+          </div>
+      </div>
+      
+  </section>
     
 
 

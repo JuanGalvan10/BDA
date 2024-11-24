@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models.producto import Producto
+from models.resena import Resena
 
 def mostrar_productos():
     if 'loggedin' in session:
@@ -20,7 +21,11 @@ def mostrar_productos():
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
 
-
+def ver_producto(id):
+    producto = Producto.get_by_id(id)
+    resenas = Resena.get_by_producto(id)
+    return render_template('producto_especifico.html', producto = producto, resenas = resenas)
+    
 def nuevo_producto():
     if 'loggedin' in session:
         if request.method =='POST':
