@@ -6,7 +6,7 @@ class Reserva:
     @staticmethod
     def get_all():
         cur = mysql.connection.cursor()
-        cur.callproc('mostrarReservas')
+        cur.callproc('obtenerReservas')
         reservas = cur.fetchall()
         cur.close()
         return reservas
@@ -20,9 +20,9 @@ class Reserva:
         return reserva
     
     @staticmethod
-    def get_by_cliente(idUsuario):
+    def get_by_cliente(IdCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerReservasCliente(%s)', (idUsuario,))
+        cur.callproc('obtenerReservasCliente(%s)', (IdCliente,))
         reservas = cur.fetchall()
         cur.close()
         return reservas
