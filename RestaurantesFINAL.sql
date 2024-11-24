@@ -239,7 +239,8 @@ CREATE TABLE STATUS_PEDIDO (
 INSERT INTO STATUS_PEDIDO (nombre_status) VALUES
 ('Orden Recibida'),
 ('En Preparación'), 
-('Pedido Completo'); 
+('Pedido Completo'),
+('Cancelado'); 
 
 
 CREATE TABLE PEDIDOS (
@@ -650,6 +651,24 @@ END / / DELIMITER;
 
 
 -- GRAFICAS --
+
+DELIMITER // CREATE PROCEDURE VentasXMes_gr () BEGIN
+select
+    YEAR (fecha_pedido),
+    MONTH (fecha_pedido) AS Mes,
+    SUM(total_pedido) as Total
+from
+    PEDIDOS
+    natural join STATUS_PEDIDO sp
+where
+    idStatus != 4
+group by
+    year (fecha_pedido),
+    month (fecha_pedido)
+order by
+    Mes;
+END // DELIMITER;
+
 
 DELIMITER //
 CREATE PROCEDURE UsuariosXRol_gr()
