@@ -36,9 +36,9 @@ class Resena:
         return resenas
 
     @staticmethod
-    def insert(puntuacion, comentario, idPedido, idProducto):
+    def insert(puntuacion, titulo, comentario, idCliente, idTipoRes):
         cur = mysql.connection.cursor()
-        cur.callproc("nuevaResena(%s,%s,%s,%s)", (puntuacion, comentario, idPedido, idProducto))
+        cur.callproc("nuevaResena(%s,%s,%s,%s)", (puntuacion, titulo, comentario, idCliente,idTipoRes))
         mysql.connection.commit()
         cur.close()
 

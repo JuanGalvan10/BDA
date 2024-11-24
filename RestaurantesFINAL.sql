@@ -1129,6 +1129,26 @@ END $$
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE obtenerReservas()
+BEGIN
+SELECT
+    idReserva,
+    fecha_reserva,
+    hora_reserva,
+    num_personas,
+    idStatus,
+    tema,
+    idCliente,
+    nombre,
+    apellido,
+    telefono,
+    correo
+FROM
+    muestrareservas_vw
+END // 
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE obtenerReservasCliente (IN id_Sesion INT)
 BEGIN
 SELECT
