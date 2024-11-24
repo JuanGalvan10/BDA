@@ -481,17 +481,17 @@ END // DELIMITER;
 
 CREATE VIEW mostrarUsuarios_vw AS
 SELECT 
-    ur.idUsuario as idUsuario, 
+    ur.idUsuario AS idUsuario, 
     ur.nombre_usuario AS nombre_usuario,
     ur.password AS password,
     ur.idRol AS idRol,
-    r.nombre AS rol_nombre,
-    rs.idRolStaff AS tipo_rol_id,
-    ts.nombre_staff AS tipo_rol_nombre
+    r.nombre AS nombre,
+    rs.idRolStaff,
+    ts.nombre_staff
 FROM 
     USUARIOS_RESTAURANTE ur
 LEFT JOIN 
-    roles r ON ur.idRol = r.idRol
+    ROLES r ON ur.idRol = r.idRol
 LEFT JOIN 
     ROLES_STAFF rs ON ur.idUsuario = rs.idUsuario
 LEFT JOIN 
@@ -523,22 +523,25 @@ CREATE VIEW
 SELECT
     *
 FROM
-    metodopagos m
-    NATURAL JOIN detalles_metodopagos dm;
+    METODOPAGOS m
+    NATURAL JOIN DETALLES_METODOPAGOS dm;
 
-DELIMITER / / CREATE PROCEDURE mostrarUsuarios() BEGIN
+DELIMITER //
+CREATE PROCEDURE mostrarUsuarios()
+BEGIN
 SELECT
     idUsuario, 
     nombre_usuario,
     password,
     idRol,
-    rol_nombre,
-    tipo_rol_id,
-    tipo_rol_nombre
+    nombre,
+    idRolStaff,
+    nombre_staff
 FROM
     mostrarUsuarios_vw;
-END / / 
+END //
 DELIMITER ;
+
 
  -- INSERTAR CLIENTES -------- - - - - - - -  - - - - - - - - - - - - - - -- - 
 
@@ -553,7 +556,7 @@ BEGIN
 END / /
 DELIMITER ;
 
-DELIMITER / /
+DELIMITER //
 CREATE PROCEDURE obtenerCliente(
     IN New_idCliente INT
 )
@@ -563,7 +566,7 @@ BEGIN
     JOIN USUARIOS_RESTAURANTE u ON c.idUsuario = u.idUsuario 
     JOIN PUNTOS_CLIENTES ON c.idPuntos = p.idPuntos
     WHERE idCliente = New_idCliente;
-END / /
+END //
 DELIMITER ;
 
 DELIMITER / / 
@@ -640,17 +643,20 @@ begin
 END // 
 DELIMITER ; 
 
-DELIMITER / / CREATE PROCEDURE mostrarMetodoPagoCliente (IN id_Sesion INT) BEGIN
-SELECT
-    idMetodoPago,
-    nombre_metodo,
-    idCliente,
-    num_tarjeta
-FROM
-    mostrarMetodoPagos_vw
-WHERE
-    idCliente = id_Sesion;
-END / / DELIMITER;
+DELIMITER //
+CREATE PROCEDURE mostrarMetodoPagoCliente (IN id_Sesion INT) 
+BEGIN
+    SELECT
+        idMetodoPago,
+        nombre_metodo,
+        idCliente,
+        num_tarjeta
+    FROM
+        mostrarMetodoPagos_vw
+    WHERE
+        idCliente = id_Sesion;
+END //
+DELIMITER ;
 
 -- PROCS PARA PEDIDOS ---------------------------------------------------------------------------------------------------
 
@@ -688,7 +694,9 @@ SELECT c.idCliente, p.idPedido, p.fecha_pedido
 FROM PEDIDOS p
 JOIN CLIENTES c ON c.idCliente = p.idCliente;
 
-DELIMITER / / CREATE PROCEDURE mostrarPedidos () BEGIN
+DELIMITER //
+CREATE PROCEDURE mostrarPedidos()
+BEGIN
 SELECT
     idPedido,
     fecha_pedido,
@@ -696,13 +704,13 @@ SELECT
     total_pedido,
     idCliente,
     nombre_status,
-    p.nombre,
-    p.imagen_URL,
-    d.cantidad,
-    d.precio_unitario
+    nombre,
+    imagen_URL,
+    cantidad,
+    precio_unitario
 FROM
     mostrarPedidos_vw;
-END / /
+END //
 DELIMITER ;
 
 DELIMITER / /
@@ -738,35 +746,56 @@ BEGIN
 END / /
 DELIMITER ; 
 
--- obtenerpedidos() - - - - - - - - - - - --  - - -- - - - - -- - - - - 
+DELIMITER $$
+CREATE PROCEDURE obtenerPedido (IN in_idPedido INT)
+BEGIN
+    SELECT 
+        idPedido, 
+        fecha_pedido, 
+        fecha_entrega, 
+        total_pedido, 
+        idCliente, 
+        nombre_status, 
+        nombre, 
+        imagen_URL, 
+        cantidad, 
+        precio_unitario
+    FROM 
+        mostrarPedidos_vw
+    WHERE 
+        idPedido = in_idPedido;
+END $$
+DELIMITER ;
 
-DELIMITER / / CREATE PROCEDURE obtenerPedidosCliente (IN id_Sesion INT) BEGIN
-SELECT
+DELIMITER //
+CREATE PROCEDURE obtenerPedidosCliente (IN id_Sesion INT) 
+BEGIN
+    SELECT
     idPedido,
     fecha_pedido,
     fecha_entrega,
     total_pedido,
     idCliente,
     nombre_status,
-    p.nombre,
-    p.imagen_URL,
-    d.cantidad,
-    d.precio_unitario
+    nombre,
+    imagen_URL,
+    cantidad,
+    precio_unitario
 FROM
     mostrarPedidos_vw
 WHERE
     idCliente = id_Sesion;
-END / / 
+END //
 DELIMITER ;
 
-DELIMITER / /
+DELIMITER //
 CREATE PROCEDURE eliminarPedido (
     IN New_idPedido INT
 )
 BEGIN 
     DELETE FROM PEDIDOS
     WHERE idPedido = New_idPedido;
-END / / 
+END // 
 DELIMITER ; 
 
 -- PROCS PARA PLATILLOS ------------------------------------------------------------------------------------------------- 
@@ -786,7 +815,9 @@ FROM
 WHERE
     inventario > 0;
 
-DELIMITER / / CREATE PROCEDURE mostrarPlatillos () BEGIN
+DELIMITER //
+CREATE PROCEDURE mostrarPlatillos ()
+BEGIN
 SELECT
     idPlatillo,
     nombre,
@@ -797,12 +828,10 @@ SELECT
     idCategoria
 FROM
     ProductosDisponibles;
-END / / DELIMITER;
+END // DELIMITER ;
 
--- obtenerPlatillo -- - - - - - - - - - - - - - - - - -
--- Vista de TODOS los platillos disponibles o no :D --
 CREATE VIEW ListaPlatillos AS
-SELECT * FROM PLATILLOS
+SELECT * FROM PLATILLOS;
 
 DELIMITER $$
 CREATE PROCEDURE obtenerPlatillo(IN idPlatillo INT)
@@ -812,8 +841,6 @@ BEGIN
     WHERE idPlatillo = idPlatillo;
 END $$
 DELIMITER ;
-
--- nuevoPlatillo -- - - - - - - - - - - - - -- - - --
 
 DELIMITER $$
 CREATE PROCEDURE nuevoPlatillo(
@@ -829,8 +856,6 @@ BEGIN
     VALUES (nombre, imagen_URL, precio, descripcion, inventario, idCategoria);
 END $$
 DELIMITER ;
-
--- actualizaPlatillo -- - - - - - - - - - - - - - - - - -
 
 DELIMITER $$
 CREATE PROCEDURE actualizarPlatillo(
@@ -854,19 +879,17 @@ BEGIN
 END $$
 DELIMITER ;
 
--- eliminarPlatillo -- - - - - - - - - - - - - - - - - -
-
 DELIMITER $$
 CREATE PROCEDURE eliminarPlatillo(
     IN idPlatillo INT
 )
 BEGIN
     DELETE FROM PLATILLOS
-    WHERE idPlatillo = idPlatillo;
-END $$
-DELIMITER ;
+    WHERE idPlatillo = idPlatillo; 
+END $$
+DELIMITER ;
 
--------------------------------------------
+
 
 DELIMITER //
 CREATE PROCEDURE recomendarPlatillosCliente(
@@ -921,7 +944,7 @@ DELIMITTER ;
 CREATE VIEW
     mostrarResenas_vw AS
 SELECT
-    idCliente,
+    c.idCliente,
     nombre_usuario,
     idResena,
     puntuacion,
@@ -932,10 +955,12 @@ SELECT
     idPedido
 FROM
     USUARIOS_RESTAURANTE
-    NATURAL JOIN CLIENTES
+    NATURAL JOIN CLIENTES c
     NATURAL JOIN RESENAS;
 
-DELIMITER / / CREATE PROCEDURE mostrarResenas () BEGIN
+DELIMITER // 
+CREATE PROCEDURE mostrarResenas()
+BEGIN
 SELECT
     idCliente,
     nombre_usuario,
@@ -947,12 +972,14 @@ SELECT
     idTipoResena,
     idPedido
 FROM
-    mostrarResenas_vw
-END / / 
+    mostrarResenas_vw;
+END //
 DELIMITER ;
 
-DELIMITER / / CREATE PROCEDURE obtenerResenasCliente (IN id_Sesion INT) BEGIN
-SELECT
+DELIMITER //
+CREATE PROCEDURE  obtenerResenasCliente (IN id_Sesion INT) 
+BEGIN
+    SELECT
     idCliente,
     nombre_usuario,
     idResena,
@@ -966,8 +993,8 @@ FROM
     mostrarResenas_vw
 WHERE
     idCliente = id_Sesion;
-END / / DELIMITER ;
-
+END //
+DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE nuevaResena(
@@ -995,6 +1022,30 @@ BEGIN
 END $$
 DELIMITER ;
 
+CREATE VIEW obtenerResenasProducto_vw AS
+SELECT *
+FROM DETALLESPEDIDO NATURAL JOIN PLATILLOS NATURAL JOIN PEDIDOS NATURAL JOIN RESENAS r
+WHERE r.idTipoResena = 2;
+
+DELIMITER //
+CREATE PROCEDURE  obtenerResenasProducto (IN id_Platillo INT) 
+BEGIN
+    SELECT 
+	idCliente,
+	idPlatillo,
+	nombre,
+	imagen_URL,
+	descripcion,
+	idResena,
+	puntuacion,
+	comentario
+FROM
+    obtenerResenasProducto_vw
+WHERE
+    idPlatillo = id_Platillo;
+END //
+DELIMITER ;
+
 -- PROCS PARA RESERVAS -----------------------------------------------------------------------------------------------
 
 CREATE VIEW
@@ -1016,16 +1067,23 @@ FROM
     LEFT JOIN CLIENTES c ON c.idCliente = r.idCliente;
 
 CREATE VIEW eliminarPedido AS
-SELECT c.idCliente, p.idPedido, p.fecha_pedido
-FROM PEDIDOS p
-JOIN CLIENTES c ON c.idCliente = p.idCliente;
+SELECT 
+    c.idCliente, 
+    p.idPedido, 
+    p.fecha_pedido
+FROM 
+    PEDIDOS p
+JOIN 
+    CLIENTES c ON c.idCliente = p.idCliente;
 
 CREATE VIEW eliminarReserva AS
 SELECT c.idCliente, r.idReserva, r.fecha_reserva, r.hora_reserva
 FROM RESERVAS r
 JOIN CLIENTES c ON r.idCliente = c.idCliente;
 
-DELIMITER / / CREATE PROCEDURE mostrarReservas () BEGIN
+DELIMITER //
+CREATE PROCEDURE mostrarReservas ()
+BEGIN
 SELECT
     idReserva,
     fecha_reserva,
@@ -1039,13 +1097,36 @@ SELECT
     telefono,
     correo
 FROM
-    mostrarreservas_vw;
-END / / 
+    muestrareservas_vw;
+END //
 DELIMITER ;
 
--- obtenerReserva - - - - - - - - - - - --- - - - - -
+DELIMITER $$
 
-DELIMITER / / CREATE PROCEDURE obtenerReservasCliente (IN id_Sesion INT) BEGIN
+CREATE PROCEDURE obtenerReserva (IN in_idReserva INT)
+BEGIN
+    SELECT 
+        idReserva, 
+        fecha_reserva, 
+        hora_reserva, 
+        num_personas, 
+        idStatus, 
+        tema, 
+        idCliente, 
+        nombre, 
+        apellido, 
+        telefono, 
+        correo
+    FROM 
+        muestrareservas_vw
+    WHERE 
+        idReserva = in_idReserva;
+END $$
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtenerReservasCliente (IN id_Sesion INT)
+BEGIN
 SELECT
     idReserva,
     fecha_reserva,
@@ -1059,10 +1140,10 @@ SELECT
     telefono,
     correo
 FROM
-    mostrarreservas_vw
+    muestrareservas_vw
 WHERE
     idCliente = id_Sesion;
-END / / 
+END // 
 DELIMITER ;
 
 
@@ -1093,7 +1174,9 @@ DELIMITER ;
 
 -- GRAFICAS ------------------------------------------------------------------------------------------------------------
 
-DELIMITER // CREATE PROCEDURE VentasXMes_gr () BEGIN
+DELIMITER //
+CREATE PROCEDURE VentasXMes_gr ()
+BEGIN
 SELECT
     YEAR (fecha_pedido),
     MONTH (fecha_pedido) AS Mes,
@@ -1108,7 +1191,8 @@ GROUP BY
     month (fecha_pedido)
 ORDER BY
     Mes;
-END // DELIMITER;
+END //
+DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE UsuariosXRol_gr()
