@@ -63,7 +63,7 @@ def checkoutEnvio():
                     })
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
-            direccionUser = Carrito.get_direccion(session['idUsuario'])
+            usuario = Cliente.get_cliente_by_id(session['idCliente'])
             direcciones = Carrito.get_direccion_restaurantes()
             return render_template('CheckoutDomicilio.html', subtotal = subtotal, direccionUser = direccionUser, direcciones = direcciones)
         return redirect(url_for('checkoutResumen'))

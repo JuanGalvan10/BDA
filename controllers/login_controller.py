@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from models.login import register_usuario, login_user, register_cliente, get_users
+from models.login import register_usuario, login_user, register_cliente, get_users, get_id_cliente
 import hashlib
 
 def login():
@@ -12,6 +12,8 @@ def login():
             session['idUsuario'] = user['idUsuario']
             session['usuario'] = user['username']
             session['rol'] = user['nombre']
+            if session['rol'] == 'cliente':
+                session['idCliente'] = get_id_cliente(session['idUsuario'])
             session['productos'] = []
             session['subtotal'] = 0
             flash('Acceso exitoso', 'success')

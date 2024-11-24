@@ -51,3 +51,10 @@ def get_users():
     except MySQLdb.OperationalError as e:
         cur.close()
         return False, str(e)
+    
+def get_id_cliente(idCliente):
+    cur = mysql.connection.cursor()
+    cur.callproc('obtenerId(%s)', (idCliente,))
+    id = cur.fetchone()
+    cur.close()
+    return id

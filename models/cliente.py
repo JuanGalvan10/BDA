@@ -23,7 +23,7 @@ class Cliente:
         id_usuario = cur.lastrowid
 
         # Insertar detalles del User
-        cur.callproc('insertarCliente', (id_usuario, nombre, apellidos, telefono, correo, puntos, direccion))      
+        cur.callproc('registrarCliente', (id_usuario, nombre, apellidos, telefono, correo, puntos, direccion))      
         mysql.connection.commit()
         cur.close()
     
@@ -34,6 +34,14 @@ class Cliente:
         User = cur.fetchone()
         cur.close()
         return User
+    
+    @staticmethod
+    def get_id_cliente(idCliente):
+        cur = mysql.connection.cursor()
+        cur.callproc('obtenerId(%s)', (idCliente,))
+        id = cur.fetchone()
+        cur.close()
+        return id
     
     @staticmethod
     def get_cliente_by_id(idCliente):

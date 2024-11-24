@@ -6,7 +6,7 @@ class Carrito:
     @staticmethod
     def get_metodos(idUser):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerMetodos(%s)',(idUser,))
+        cur.callproc('mostrarMetodoPagoCliente(%s)',(idUser,))
         metodos = cur.fetchall()
         cur.close()
         return metodos
