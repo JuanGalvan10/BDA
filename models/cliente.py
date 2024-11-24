@@ -56,5 +56,12 @@ class Cliente:
         mysql.connection.commit()
         cur.close()
 
+    @staticmethod
+    def nueva_tarjeta(num_tarjeta, fecha_expiracion, nombre_metodo):
+        cur = mysql.connection.cursor()
+        cur.callproc('nuevaTarjeta(%s,%s,%s)', (num_tarjeta,fecha_expiracion,nombre_metodo,))
+        mysql.connection.commit()
+        cur.close()
+
 
 

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from models.carrito import Carrito
 from models.pedido import Pedido
 from models.producto import Producto
+from models.cliente import Cliente
 
 def agregarCarrito():
     if 'loggedin' in session:
@@ -107,3 +108,47 @@ def pagar():
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
+    
+def guardar_direccion():
+    if 'loggedin' in session:
+        if request.method =='POST':
+            try:
+                nuevaDireccion = request.form['nuevaDireccion']
+                Cliente.update_direccion(session['idUsuario'], nuevaDireccion)
+                redirect(url_for('CheckoutEnvio'))
+            except Exception as e:
+                return {"error": str(e)}, 500
+        else:
+            flash('Metodo de acceso incorrecto')
+    else:
+        flash('Primero debes de ingresar.', 'error')
+        return redirect(url_for('login'))
+    
+def nueva_tarjeta():
+    if 'loggedin' in session:
+        if request.method =='POST':
+            try:
+                num_tarjeta = request.form['nuevaDireccion']
+                fecha_expiracion = request.form['fecha']
+                if num_tarjeta.startswith("4"):
+                    nombre_metodo = "Visa"
+                elif num_tarjeta[:2] in ["51", "52", "53", "54", "55"] or \
+                    2221 <= int(num_tarjeta[:4]) <= 2720:
+                    nombre_metodo = "Mastercard"
+                elif num_tarjeta[:2] in ["34", "37"]:
+                    nombre_metodo = "American Express"
+                elif num_tarjeta[:4] == "6011" or num_tarjeta.startswith("65") or \
+                    622126 <= int(num_tarjeta[:6]) <= 622925:
+                    nombre_metodo = "Discover"
+                else:
+                    return "Desconocido"
+                Cliente.nueva_tarjeta(num_tarjeta, fecha_expiracion, nombre_metodo)
+                redirect(url_for('checkoutPago'))
+            except Exception as e:
+                return {"error": str(e)}, 500
+        else:
+            flash('Metodo de acceso incorrecto')
+    else:
+        flash('Primero debes de ingresar.', 'error')
+        return redirect(url_for('login'))
+

@@ -56,7 +56,7 @@ app.add_url_rule('/clientes', view_func=mostrar_clientes, methods = ['GET', 'POS
 app.add_url_rule('/nuevo_cliente', view_func=nuevo_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/editar_cliente/<int:id>', view_func=editar_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_cliente/<int:id>', view_func=eliminar_cliente,  methods = ['GET', 'POST'])
-app.add_url_rule('/guardar_direccion', view_func=guardar_direccion,  methods = ['GET', 'POST'])
+
 
 #RUTAS PARA RESERVAS
 app.add_url_rule('/reservas', view_func=mostrar_reservas, methods = ['GET', 'POST'])
@@ -81,7 +81,8 @@ app.add_url_rule('/chechoutResumen', view_func=checkoutResumen,  methods = ['GET
 app.add_url_rule('/checkoutEnvio', view_func=checkoutEnvio,  methods = ['GET', 'POST'])
 app.add_url_rule('/checkoutPago',view_func=checkoutPago, methods=['POST'])
 app.add_url_rule('/pagar',view_func=pagar, methods=['POST'])
-
+app.add_url_rule('/guardar_direccion', view_func=guardar_direccion,  methods = ['GET', 'POST'])
+app.add_url_rule('/insertar_tarjeta', view_func=guardar_direccion,  methods = ['GET', 'POST'])
 
 @app.route('/reservasC')
 def reservas():
@@ -94,3 +95,7 @@ def galeria():
 @app.route('/mi_perfil')
 def mi_perfil():
     return render_template('mi_perfil.html')
+
+@app.route('/nueva_tarjeta')
+def nueva_tarjeta():
+    return render_template('AgregarNuevaTarjeta.html')
