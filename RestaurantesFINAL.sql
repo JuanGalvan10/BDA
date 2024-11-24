@@ -332,7 +332,6 @@ BEGIN
         SET MESSAGE_TEXT = 'No hay inventario suficiente de ese producto, hay que hacer stock.';
         END IF;
 END $$
-
 DELIMITER ;
 
 -- 2. NoStockProductoDeshabilitado
@@ -341,9 +340,8 @@ CREATE TRIGGER NoStockProductoDeshabilitado
 AFTER DELETE ON PLATILLOS
 FOR EACH ROW
 BEGIN
-DELETE FROM inventario
+    DELETE FROM inventario
     WHERE inventario = 0;
-    END;
 END $$
 
 DELIMITER ;
