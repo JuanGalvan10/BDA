@@ -57,3 +57,14 @@ BEGIN
     VALUES (idUsuario, nom, apell, tel, correo, direc) ;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE obtenerId(
+    IN idU INT,
+)
+BEGIN
+    SELECT idCliente
+    FROM CLIENTES
+    WHERE idUsuario = idU
+END //
+DELIMITER ;

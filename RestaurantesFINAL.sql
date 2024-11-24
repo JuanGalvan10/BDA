@@ -1252,3 +1252,13 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE PromedioXTipoResenas_gr()
+BEGIN
+    select nombre, AVG(puntuacion)
+	from RESENAS natural join TIPOS_RESENA tr 
+	group by idTipoResena;
+END $$
+DELIMITER ;
+
+
