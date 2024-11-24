@@ -785,6 +785,21 @@ FROM
     RESERVAS r
     LEFT JOIN CLIENTES c ON c.idCliente = r.idCliente;
 
+DELIMITER $$
+CREATE PROCEDURE nuevaReserva(
+    IN fecha_reservaPar DATE,
+    IN hora_reservaPar TIME,
+    IN num_personasPar INT,
+    IN idStatusPar INT,
+    IN temaPar VARCHAR(100),
+    IN idClientePar INT
+)
+BEGIN
+    INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema, idCliente)
+    VALUES (fecha_reservaPar, hora_reservaPar, num_personasPar, idStatusPar, temaPar, idClientePar);
+END $$
+DELIMITER ;
+
 DELIMITER / / CREATE PROCEDURE mostrarReservas () BEGIN
 SELECT
     idReserva,
