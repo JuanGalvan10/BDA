@@ -30,7 +30,7 @@ def nuevo_producto():
     if 'loggedin' in session:
         if request.method =='POST':
             nombre = request.form['nombre']
-            imagen_URL = request.form['imagen']
+            imagen_URL = request.form['urlImagen']
             precio = request.form['precio']
             descripcion= request.form['desc']
             categoria= request.form['categoria']
