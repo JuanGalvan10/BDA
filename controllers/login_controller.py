@@ -72,7 +72,7 @@ def logout():
 def mostrar_usuarios():
     if 'loggedin' in session:
         usuarios = get_users()
-        return render_template('Usuarios.html', usuarios = usuarios)
+        return render_template('Usuarios.html', usuarios = usuarios, nombre_usuario = session['usuario'])
     else:
         flash('Credenciales invalidas', 'error')
         return redirect(url_for(login))

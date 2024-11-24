@@ -36,7 +36,7 @@ def vista_principal():
         if session['rol'] == 'cliente':
             return render_template('dashboard_clientes.html', usuario = session['usuario'])
         else:
-            return render_template('DashboardAdmins.html', usuario = session['usuario'])
+            return render_template('DashboardAdmins.html', nombre_usuario = session['usuario'])
     else:
         flash('Primero ingresa al sistema','error')
         return redirect(url_for('login'))
@@ -121,3 +121,9 @@ def menu():
     if 'loggedin' in session:
         loggedin= True
     return render_template('menu.html', loggedin = loggedin)
+
+@app.route('/agregarUsuario')
+def agregarUser():
+    if 'loggedin' in session:
+        if session['rol'] == 'admin':
+            return render_template('Crear_Usuario.html', nombre_usuario = session['usuario'])

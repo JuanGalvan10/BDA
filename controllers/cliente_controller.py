@@ -62,7 +62,7 @@ def editar_cliente(id):
             return render_template('editar_mi_perfil.html', cliente = cliente)
         else:
             cliente = Cliente.get_cliente_by_id(id)
-            return render_template('Editar_cliente.html', cliente = cliente)
+            return render_template('Editar_cliente.html', cliente = cliente, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -75,7 +75,7 @@ def eliminar_cliente(id):
                 flash('cliente eliminado correctamente', 'success')
                 if session['rol'] == 'admin':
                     clientes = Cliente.get_all()
-                    return render_template('Ventas.html', clientes = clientes)
+                    return render_template('Ventas.html', clientes = clientes, nombre_usuario = session['usuario'])
             except Exception as e:
                 return {"error": str(e)}, 500
         else:

@@ -54,7 +54,7 @@ def mostrar_pedidos():
                     'cantidad': row['cantidad'],
                     'precio_unitario': row['precio_unitario']
                 })
-            return render_template('Ventas.html', pedidos = pedidos)
+            return render_template('Ventas.html', pedidos = pedidos, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -81,7 +81,7 @@ def eliminar_pedido(id):
                 flash('Pedido eliminado correctamente', 'success')
                 if session['rol'] == 'admin':
                     pedidos = Pedido.get_all()
-                    return render_template('Ventas.html', pedidos = pedidos)
+                    return render_template('Ventas.html', pedidos = pedidos, nombre_usuario = session['usuario'])
                 else:
                     pedidos = Pedido.get_by_cliente(session['idUsuario'])
                     return render_template('Mis_pedidos.html', pedidos = pedidos)

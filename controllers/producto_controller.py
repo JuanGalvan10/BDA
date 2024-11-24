@@ -14,7 +14,7 @@ def mostrar_productos():
                     return redirect(url_for('eliminar_producto', id=id))
         productos = Producto.get_all()
         if session['rol'] == 'admin':
-            return render_template('inventario.html', productos = productos)
+            return render_template('inventario.html', productos = productos, nombre_usuario = session['usuario'])
         else:
             return render_template('catalogo.html', productos = productos)
     else:
@@ -36,7 +36,7 @@ def nuevo_producto():
             categoria= request.form['categoria']
             Producto.insert(nombre, imagen_URL, precio, descripcion, categoria)
             return redirect(url_for('mostrar_productos'))
-        return render_template('Crear_producto.html')
+        return render_template('Crear_producto.html', nombre_usuario = session['usuario'])
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -53,7 +53,7 @@ def editar_producto(id):
             flash('Prdocuto actualizado correctamente', 'success')
             return redirect(url_for('mostrar_productos'))
         producto = Producto.get_by_id(id)
-        return render_template('Editar_producto.html', producto = producto)
+        return render_template('Editar_producto.html', producto = producto, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

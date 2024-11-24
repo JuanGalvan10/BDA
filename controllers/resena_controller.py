@@ -3,17 +3,9 @@ from models.resena import Resena
 
 def mostrar_resenas():
     if 'loggedin' in session:
-        if request.method == 'POST':
-            accion = request.form['accion']
-            if accion:
-                id = request.form['id']
-                if accion == 'Editar':
-                    return redirect(url_for('editar_resena', id=id))
-                else:
-                    return redirect(url_for('eliminar_resena', id=id))
         if session['rol'] == 'admin':
             resenas = Resena.get_all()
-            return render_template('Resenas.html', resenas = resenas)
+            return render_template('Resenas.html', resenas = resenas,nombre_usuario = session['usuario'])
         else:
             resenas = Resena.get_by_cliente(session['idUsuario'])
             return render_template('Mis_resenas.html', resenas = resenas)
