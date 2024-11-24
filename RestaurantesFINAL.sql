@@ -814,6 +814,34 @@ WHERE
     idCliente = id_Sesion;
 END / / DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE eliminarResena(
+    IN idRes INT
+)
+BEGIN
+    DELETE FROM RESENAS
+    WHERE idResena = idRes;
+END $$
+DELIMITER ;
+
+-- LISTO --
+
+DELIMITER $$
+CREATE PROCEDURE nuevaResena(
+    IN punt INT,
+    IN title VARCHAR(50),
+    IN coment TEXT,
+    IN fechaComent DATE,
+    IN idClientePar INT,
+    IN idTipoRes INT,
+    IN idPedidoPar INT
+)
+BEGIN
+    INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
+    VALUES (punt, title, coment, fechaComent, idClientePar, idTipoRes, idPedidoPar);
+END $$
+DELIMITER ;
+
 -- PROCS PARA RESERVAS --
 
 CREATE VIEW
