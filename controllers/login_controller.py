@@ -67,6 +67,6 @@ def register_client(idUsuario):
 def logout():
     session.clear()
     flash('Sesión cerrada', 'info')
-    return redirect(url_for('login'))
+    return render_template('DASHBOARD_LOGOUT.html')
 
 

@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+  <link rel="stylesheet" href="../static/css/style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -18,26 +18,12 @@
           </button>
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
-            <hr style="border-color: #FFFFFF;">
-            <a href="/dashboard">Inicio ></a> 
-            <a href="/catalogo">Productos ></a> 
-            <a href="/reservasC">Reservar ></a>
-            <a href="/galeria">Galeria ></a>
-            <a href="/menu">Galeria ></a>
-            <li class="mb-1">
-              <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                Mi perfil ↓
-              </button>
-              <div class="collapse closeNav" id="home-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
-                  <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
-                  <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
-                  <li><a href="/mi_perfil" class="link-dark rounded">Mi info ></a></li>
-                </ul>
-              </div>
-            </li>
+            <a href="dashboard_inicio.html">Inicio</a> 
+            <a href="menu.html">Men&uacute;</a> 
+            <a href="#">Promociones</a>
+            <a href="#">Últimos pedidos</a>
+            <a href="#">Reseñas</a>
+            <a href="#">Soporte</a>
           </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
@@ -45,7 +31,7 @@
             <div class="container-fluid">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <button onclick="location.href='/login'" type="button" id="btn-header"> Iniciar Sesión  
+                  <button onclick="location.href='login.html'" type="button" id="btn-header"> Iniciar Sesión  
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                       <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                       <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>

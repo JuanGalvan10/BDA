@@ -11,12 +11,50 @@ def mostrar_pedidos():
                     return redirect(url_for('editar_pedido', id=id))
                 else:
                     return redirect(url_for('eliminar_pedido', id=id))
-        if session['rol'] == 'admin':
-            pedidos = Pedido.get_all()
-            return render_template('Ventas.html', pedidos = pedidos)
-        else:
-            pedidos = Pedido.get_by_cliente(session['idUsuario'])
+        if session['rol'] == 'cliente':
+            resultados = Pedido.get_by_cliente(session['idUsuario'])
+            pedidos = {}
+            for row in resultados:
+                id_pedido = row['idPedido']
+                if id_pedido not in pedidos:
+                    pedidos[id_pedido] = {
+                        'idPedido': id_pedido,
+                        'fecha_pedido': row['fecha_pedido'],
+                        'fecha_entrega': row['fecha_entrega'],
+                        'total_pedido': row['total_pedido'],
+                        'idCliente': row['idCliente'],
+                        'nombre_status': row['nombre_status'],
+                        'platillos': []  
+                    }
+                pedidos[id_pedido]['platillos'].append({
+                    'nombre': row['nombre'],
+                    'imagen_URL': row['imagen_URL'],
+                    'cantidad': row['cantidad'],
+                    'precio_unitario': row['precio_unitario']
+                })
             return render_template('Mis_pedidos.html', pedidos = pedidos)
+        else:
+            resultados = Pedido.get_by_all()
+            pedidos = {}
+            for row in resultados:
+                id_pedido = row['idPedido']
+                if id_pedido not in pedidos:
+                    pedidos[id_pedido] = {
+                        'idPedido': id_pedido,
+                        'fecha_pedido': row['fecha_pedido'],
+                        'fecha_entrega': row['fecha_entrega'],
+                        'total_pedido': row['total_pedido'],
+                        'idCliente': row['idCliente'],
+                        'nombre_status': row['nombre_status'],
+                        'platillos': []  
+                    }
+                pedidos[id_pedido]['platillos'].append({
+                    'nombre': row['nombre'],
+                    'imagen_URL': row['imagen_URL'],
+                    'cantidad': row['cantidad'],
+                    'precio_unitario': row['precio_unitario']
+                })
+            return render_template('Ventas.html', pedidos = pedidos)
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

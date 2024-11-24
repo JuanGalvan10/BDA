@@ -25,7 +25,10 @@ init_app(app)
 #definimos la ruta del landing
 @app.route('/')
 def inicio():
-    return redirect(url_for('login'))
+    if 'loggedin' in session:
+        return redirect(url_for('vista_principal'))
+    else:
+        return render_template('index.html')
 
 @app.route('/dashboard')
 def vista_principal():
@@ -86,16 +89,34 @@ app.add_url_rule('/insertar_tarjeta', view_func=guardar_direccion,  methods = ['
 
 @app.route('/reservasC')
 def reservas():
-    return render_template('reservas.html')
-
+    if 'loggedin' in session:
+        return render_template('reservas.html')
+    else:
+        flash('Primero ingresa al sistema','error')
+        return redirect(url_for('login'))
+    
 @app.route('/galeria')
 def galeria():
-    return render_template('galeria.html')
+    loggedin = False
+    if 'loggedin' in session:
+        loggedin = True
+    return render_template('galeria.html', loggedin = loggedin)
 
 @app.route('/mi_perfil')
 def mi_perfil():
-    return render_template('mi_perfil.html')
+    if 'loggedin' in session:
+        return render_template('mi_perfil.html')
+    else:
+        flash('Primero ingresa al sistema','error')
+        return redirect(url_for('login'))
 
 @app.route('/nueva_tarjeta')
 def nueva_tarjeta():
     return render_template('AgregarNuevaTarjeta.html')
+
+@app.route('/menu')
+def menu():
+    loggedin = False
+    if 'loggedin' in session:
+        loggedin= True
+    return render_template('menu.html', loggedin = loggedin)

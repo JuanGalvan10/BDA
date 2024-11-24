@@ -11,7 +11,11 @@ def mostrar_clientes():
                     return redirect(url_for('editar_cliente', id=id))
                 else:
                     return redirect(url_for('eliminar_cliente', id=id))
-        if session['rol'] == 'admin':
+        if session['rol'] == 'cliente':
+            username = session['usuario']
+            cliente = Cliente.get_cliente_by_id(session['idUsuario'])
+            return render_template('mi_perfil.html', cliente = cliente, username = username)
+        else:
             clientes = Cliente.get_all()
             return render_template('Clientes.html', clientes = clientes)
     else:
@@ -49,8 +53,12 @@ def editar_cliente(id):
             Cliente.update(nombre, apellidos, correo, telefono, direccion)
             flash('Cliente actualizado correctamente', 'success')
             return redirect(url_for('mostrar_clientes'))
-        cliente = Cliente.get_by_id(id)
-        return render_template('Editar_cliente.html', cliente = cliente)
+        if session['rol'] == 'cliente':
+            cliente = Cliente.get_cliente_by_id(session['idUsuario'])
+            return render_template('editar_mi_perfil.html', cliente = cliente)
+        else:
+            cliente = Cliente.get_cliente_by_id(id)
+            return render_template('Editar_cliente.html', cliente = cliente)
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

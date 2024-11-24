@@ -36,6 +36,14 @@ class Cliente:
         return User
     
     @staticmethod
+    def get_cliente_by_id(idCliente):
+        cur = mysql.connection.cursor()
+        cur.callproc('obtenerCliente(%s)', (idCliente,))
+        Cliente = cur.fetchone()
+        cur.close()
+        return Cliente
+    
+    @staticmethod
     def update(nombre,apellidos,correo, telefono, direccion, puntos):
         cur = mysql.connection.cursor()
         cur.callproc("actualizaCliente(%s,%s,%s,%s,%s,%s)", (nombre,apellidos,correo, telefono, direccion, puntos))

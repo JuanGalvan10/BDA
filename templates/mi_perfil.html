@@ -21,71 +21,62 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <button id="hamburgesa" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="hamburger" onclick="openNav()">&#9776;</span>
+                    <button id="hamburgesa" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="hamburger" onclick="openNav()">&#9776;</span>
                     </button>
                     <div id="mySidenav" class="sidenav">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
-                        <hr style="border-color: #FFFFFF;">
-                        <a href="/dashboard">Inicio ></a> 
-                        <a href="/catalogo">Productos ></a> 
-                        <a href="/reservasC">Reservar ></a>
-                        <a href="/galeria">Galeria ></a>
-                        <li class="mb-1">
-                          <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                            Mi perfil ↓
-                          </button>
-                          <div class="collapse closeNav" id="home-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                              <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
-                              <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
-                              <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
-                              <li><a href="/mi_perfil" class="link-dark rounded">Mi info ></a></li>
-                            </ul>
-                          </div>
-                        </li>
-                      </div>
-                    <a href="/dashboard"><img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="50px"></a>
-                </div>
-                <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <div class="container-fluid">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <button onclick="location.href='#'" type="button" id="btn-header"> Reservar
-                                        <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="20" height="16"
-                                            fill="currentColor">
-                                            <path
-                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5" />
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li class="nav-item">
-                                    <button onclick="location.href='#'" type="button" id="btn-header">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li class="nav-item">
-                                    <button onclick="location.href='#'" type="button" id="btn-header">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-                                            <path fill-rule="evenodd"
-                                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
-                                        </svg>
-                                    </button>
-                                </li>
+                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                      <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
+                      <hr style="border-color: #FFFFFF;">
+                      <a href="/dashboard">Inicio ></a> 
+                      <a href="/catalogo">Productos ></a> 
+                      <a href="/reservasC">Reservar ></a>
+                      <a href="/galeria">Galeria ></a>
+                      <a href="/menu">Menu ></a>
+                      <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                          Mi perfil ↓
+                        </button>
+                        <div class="collapse closeNav" id="home-collapse">
+                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
+                            <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
+                            <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
+                            <li><a href="/mostrar_clientes" class="link-dark rounded">Mi info ></a></li>
+                          </ul>
                         </div>
+                      </li>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
+                    <nav  class="navbar navbar-expand-lg navbar-light">
+                      <div class="container-fluid">
+                        <ul class="navbar-nav ml-auto">
+                          <li class="nav-item">
+                            <button onclick="location.href='/reservasC'" type="button" id="btn-header"> Reservar  
+                              <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/>
+                              </svg>
+                            </button>
+                          </li>
+                          <li class="nav-item">
+                            <button onclick="location.href='/checkoutResumen'" type="button" id="btn-header">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                              </svg>
+                            </button>
+                          </li>
+                          <li class="nav-item">
+                            <button onclick="location.href='/logout'" type="button" id="btn-header">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                              </svg>
+                            </button>
+                          </li>
+                      </div>
                     </nav>
-                </div>
+                  </div>
             </div>
             <hr>
         </div>
@@ -119,7 +110,7 @@
                 <div class="col-11">
                 </div>
                 <div class="col-1">
-                    <button onclick="location.href='#'" type="button" style="padding-left: 20px;padding-right: 20px;" id="btn-header">
+                    <button onclick="location.href='/editar_cliente/{{cliente[0]}}'" type="button" style="padding-left: 20px;padding-right: 20px;" id="btn-header">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                             <path  d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                           </svg>
@@ -127,7 +118,6 @@
                 </div>
             </div>
             <div class="row" id="recuadro-resenas" style="height: 100%;">
-                <!--Jinja aqui para imprimir todos los nombres del usuario-->
                 <div class="col-12">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-6">
@@ -144,7 +134,7 @@
                         <div class="col-6">
                             <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
                                 <span>
-                                    @nombre
+                                    {{username}}
                                 </span>
                             </div>
 
@@ -172,7 +162,7 @@
                         <div class="col-6">
                             <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
                                 <span>
-                                    Lolo
+                                    {{cliente[4]}}
                                 </span>
                             </div>
 
@@ -183,7 +173,6 @@
         </div>
         <div class="container py-3">
             <div class="row" id="recuadro-resenas" style="height: 100%;">
-                <!--Jinja aqui para imprimir todos los nombres del usuario-->
                 <div class="col-12">
                     <div class="row" style="padding-bottom: 20px;">
                         <div class="col-6">
@@ -200,7 +189,7 @@
                         <div class="col-6">
                             <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
                                 <span>
-                                    Ramirez
+                                    {{cliente[5]}}
                                 </span>
                             </div>
 
@@ -228,7 +217,7 @@
                         <div class="col-6">
                             <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
                                 <span>
-                                    94387987458
+                                    {{cliente[6]}}
                                 </span>
                             </div>
                         </div>
@@ -255,7 +244,7 @@
                         <div class="col-6">
                             <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
                                 <span>
-                                    ejermplo@udem.edu
+                                    {{cliente[7]}}
                                 </span>
                             </div>
 
