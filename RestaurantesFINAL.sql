@@ -407,7 +407,35 @@ DELIMITER ;
 
 -- STORED PROCEDURES --
 
+-- PROCS PARA Cliente --
+DELIMITER $$
+CREATE PROCEDURE actualizaCliente(
+    IN p_idCliente INT,
+    IN nombre VARCHAR(50),
+    IN apellido VARCHAR(50),
+    IN correo VARCHAR(100),
+    IN telefono VARCHAR(15),
+    IN direccion VARCHAR(255),
+    IN cant_puntos INT
+)
+BEGIN
+    UPDATE CLIENTES
+    SET 
+        nombre = nombre, 
+        apellido = apellido,
+        correo = correo,
+        telefono = telefono,
+        direccion = direccion
+    WHERE idCliente = p_idCliente;
+    
+    UPDATE PUNTOS_CLIENTES
+    SET 
+        cant_puntos = cant_puntos
+    WHERE idPuntos = (SELECT idPuntos FROM CLIENTES WHERE idCliente = p_idCliente);
+END $$ 
+DELIMITER ;
 -- PROCS PARA LOGIN --
+
 
 CREATE VIEW
     InfoUsuario AS
@@ -804,6 +832,27 @@ END //
 DELIMITER ; 
 
 -- PROCS PARA PLATILLOS -- 
+DELIMITER $$
+CREATE PROCEDURE actualizaPlatillo(
+    IN idPlatillo INT,
+    IN nombre VARCHAR(100),
+    IN imagen_URL VARCHAR(100),
+    IN precio DECIMAL(10,2),
+    IN descripcion VARCHAR(255),
+    IN inventario INT,
+    IN idCategoria INT
+)
+BEGIN
+    UPDATE PLATILLOS
+    SET nombre = nombre, 
+        imagen_URL = imagen_URL, 
+        precio = precio, 
+        descripcion = descripcion,
+        inventario = inventario,
+        idCategoria = idCategoria
+    WHERE idPlatillo = idPlatillo;
+END $$
+DELIMITER ;
 
 --  (MUESTRA PLATILLOS DISPONIBLES) --
 CREATE VIEW
