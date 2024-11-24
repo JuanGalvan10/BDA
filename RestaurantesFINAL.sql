@@ -484,6 +484,74 @@ DELIMITER ;
 
 
 -- PROCS PARA PLATILLOS -- 
+-- (MUESTRA TODOS LOS PLATILLOS DISPONIBLES O NO) --
+CREATE VIEW ListaPlatillos AS
+    SELECT * FROM PLATILLOS
+
+DELIMITER $$
+CREATE PROCEDURE obtenerPlatillo(IN idPlatoPar INT)
+BEGIN
+    SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
+    FROM ListaPlatillos
+    WHERE idPlatillo = idPlatoPar;
+END $$
+DELIMITER ;
+
+--------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE nuevoPlatillo(
+    IN nom VARCHAR(100),
+    IN img VARCHAR(100),
+    IN precioPar DECIMAL(10,2),
+    IN descr VARCHAR(255),
+    IN invent INT,
+    IN idCat INT
+)
+BEGIN
+    INSERT INTO PLATILLOS(nombre, imagen_URL, precio, descripcion, inventario, idCategoria)
+    VALUES (nom, img, precioPar, descr, invent, idCat);
+END $$
+DELIMITER ;
+
+--------------------------------------------------------
+
+
+DELIMITER $$
+CREATE PROCEDURE actualizarPlatillo(
+    IN idPlat INT,
+    IN nom VARCHAR(100),
+    IN img VARCHAR(100),
+    IN precioPar DECIMAL(10,2),
+    IN descr VARCHAR(255),
+    IN invent INT,
+    IN idCat INT
+)
+BEGIN
+    UPDATE PLATILLOS
+    SET nombre = nom, 
+        imagen_URL = img, 
+        precio = precioPar, 
+        descripcion = descr,
+        inventario = invent,
+        idCategoria = idCat
+    WHERE idPlatillo = idPlat;
+END $$
+DELIMITER ;
+
+--------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE eliminarPlatillo(
+    IN idPlat INT
+)
+BEGIN
+    DELETE FROM PLATILLOS
+    WHERE idPlatillo = idPlat;
+END $$
+DELIMITER ;
+
+--------------------------------------------------------
 
 --  (MUESTRA PLATILLOS DISPONIBLES) --
 CREATE VIEW
@@ -537,6 +605,8 @@ from
     natural join CLIENTES
     natural join RESENAS;
 
+--------------------------------------------------------
+
 DELIMITER / / CREATE PROCEDURE mostrarResenas () BEGIN
 SELECT
     idCliente,
@@ -552,6 +622,8 @@ FROM
     mostrarResenas_vw
 END / / 
 DELIMITER ;
+
+--------------------------------------------------------
 
 DELIMITER / / CREATE PROCEDURE obtenerResenasCliente (IN id_Sesion INT) BEGIN
 SELECT
@@ -570,6 +642,35 @@ WHERE
     idCliente = id_Sesion;
 END / / DELIMITER ;
 
+--------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE eliminarResena(
+    IN idRes INT
+)
+BEGIN
+    DELETE FROM RESENAS
+    WHERE idResena = idRes;
+END $$
+DELIMITER ;
+
+--------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE nuevaResena(
+    IN punt INT,
+    IN title VARCHAR(50),
+    IN coment TEXT,
+    IN fechaComent DATE,
+    IN idClientePar INT,
+    IN idTipoRes INT,
+    IN idPedidoPar INT
+)
+BEGIN
+    INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
+    VALUES (punt, title, coment, fechaComent, idClientePar, idTipoRes, idPedidoPar);
+END $$
+DELIMITER ;
 
 --PROCS PARA RESERVAS --
 create view
