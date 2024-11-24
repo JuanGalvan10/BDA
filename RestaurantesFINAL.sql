@@ -1009,7 +1009,6 @@ CREATE PROCEDURE nuevaResena(
     IN coment TEXT,
     IN idClientePar INT,
     IN idTipoRes INT,
-    IN idPedidoPar INT
 )
 BEGIN
     INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
