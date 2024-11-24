@@ -647,3 +647,21 @@ FROM
 WHERE
     idCliente = id_Sesion;
 END / / DELIMITER;
+
+
+-- GRAFICAS --
+
+DELIMITER //
+CREATE PROCEDURE UsuariosXRol_gr()
+BEGIN
+    SELECT
+        r.nombre AS rol_nombre,
+        COUNT(*) AS total_usuarios
+    FROM
+        USUARIOS_RESTAURANTE ur
+    NATURAL JOIN
+        ROLES r
+    GROUP BY
+        r.idRol;
+END //
+DELIMITER ;
