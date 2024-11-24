@@ -17,7 +17,7 @@ def mostrar_clientes():
             return render_template('mi_perfil.html', cliente = cliente, username = username)
         else:
             clientes = Cliente.get_all()
-            return render_template('Clientes.html', clientes = clientes)
+            return render_template('Clientes.html', clientes = clientes, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -37,7 +37,11 @@ def nuevo_cliente():
             Cliente.insert(nombre, apellidos, correo, telefono, direccion, puntos, password, nombre_usuario)
             flash('Cliente creado correctamente', 'success')
             return redirect(url_for('mostrar_clientes'))
-        return render_template('Crear_cliente.html')
+        if session['rol'] == 'admin':
+            return render_template('Crear_cliente.html')
+        else: 
+            flash('No tienes permisos para acceder a esta pagina.', 'error')
+            return redirect(url_for('login'))
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

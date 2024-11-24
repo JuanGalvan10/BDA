@@ -29,48 +29,41 @@
                 <div class="profile-info h-40 w-100">
                     <div class="justify-content-center d-flex flex-column">
                         <div class="d-flex justify-content-center">
-                            <img src="perfill.jpg" class="img-thumbnail" alt="Profile Picture"
-                                style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
+                            <img src="perfill.jpg" class="img-thumbnail" alt="Profile Picture" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
                         </div>
                         <div class="d-flex justify-content-center p-3" style="color: white; ">
-                            <span class="profile-name">María Fernanda</span> <!--NOMBRE DE ADMIN-->
+                            <span class="profile-name">{{nombre_usuario}}</span> <!--NOMBRE DEL ADMIN-->
                         </div>
                     </div>
                 </div>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/mostrar_pedidos" class="sidebar-link">
                         <i class="bi bi-piggy-bank-fill"></i>
-                        <span>Ventas</span> <!--TE ENVIA A VENTAS-->
+                        <span>Ventas</span>  <!--TE MANDA A VENTAS-->
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/mostrar_clientes" class="sidebar-link">
                         <i class="bi bi-people-fill"></i>
-                        <span>Clientes</span> <!--TE ENVIA A CLIENTES-->
+                        <span>Clientes</span>  <!--TE MANDA A CLIENTES-->
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/mostrar_platillos" class="sidebar-link">
                         <i class="bi bi-dropbox"></i>
-                        <span>Inventario</span><!--TE ENVIA A INVENTARIO-->
+                        <span>Inventario</span> <!--TE MANDA A INVENTARIO-->
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-basket-fill"></i>
-                        <span>Ordenes</span> <!--TE ENVIA A ORDENES-->
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="/mostrar_reservas" class="sidebar-link">
                         <i class="bi bi-alarm-fill"></i>
-                        <span>Reservas</span> <!--TE ENVIA A RESERVAS-->
+                        <span>Reservas</span> <!--TE MANDA A RESERVAS-->
                     </a>
                 </li>
                 <li class="sidebar-item " style="padding-top: 30px;">
-                    <a href="#" class="sidebar-link">
+                    <a href="/logout" class="sidebar-link">
                         <i class="lni lni-exit"></i>
-                        <span>Logout</span> <!--CIERRA SESION-->
+                        <span>Logout</span><!--CERRAR SESION-->
                     </a>
                 </li>
             </ul>
