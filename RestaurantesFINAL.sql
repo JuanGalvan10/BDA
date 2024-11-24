@@ -1174,21 +1174,13 @@ DELIMITER //
 CREATE PROCEDURE obtenerReservasDia (IN fecha date)
 BEGIN
 SELECT
-    idReserva,
-    fecha_reserva,
-    hora_reserva,
-    num_personas,
-    idStatus,
-    tema,
-    idCliente,
-    nombre,
-    apellido,
-    telefono,
-    correo
+hora_reserva
 FROM
-    muestrareservas_vw
-WHERE
-    fecha_reserva = fecha;
+RESERVA
+WHERE 
+fecha_reserva = fecha
+GROUP BY hora_reserva
+HAVING COUNT(*) >= 10
 END // 
 DELIMITER ;
 
