@@ -713,6 +713,55 @@ FROM
 
 END / / DELIMITER;
 
+DELIMITER //
+CREATE PROCEDURE recomendarPlatillosCliente(
+    IN cliente_id INT
+)
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM PEDIDOS p
+        WHERE p.idCliente = cliente_id
+    ) THEN
+        SELECT DISTINCT
+            p.idPlatillo,
+            p.nombre,
+            p.imagen_URL,
+            p.idCategoria,
+            p.descripcion, 
+            p.precio
+        FROM
+            PLATILLOS p
+        WHERE
+            p.idCategoria IN (
+                SELECT DISTINCT pl.idCategoria
+                FROM pedidos pd NATURAL JOIN DETALLESPEDIDO dp NATURAL JOIN PLATILLOS pl
+                WHERE pd.idCliente = cliente_id
+            )
+            AND p.idPlatillo NOT IN (
+                SELECT dp.idPlatillo
+                FROM pedidos pd NATURAL JOIN detallespedido dp
+                WHERE pd.idCliente = cliente_id
+            )
+        LIMIT 10;
+
+    ELSE
+        SELECT 
+            idPlatillo,
+            nombre,
+            imagen_URL,
+            idCategoria,
+            descripcion, 
+            precio
+        FROM 
+            PLATILLOS
+        ORDER BY RAND()
+        LIMIT 10;
+    END IF;
+END //
+DELIMITTER ;
+
+
 -- PROCS PARA RESEÑAS -- 
 
 CREATE VIEW
