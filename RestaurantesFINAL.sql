@@ -1208,3 +1208,19 @@ BEGIN
         r.idRol;
 END //
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE StatusReservas_gr()
+BEGIN
+    SELECT 
+        sr.Status_Reservas as Status, 
+        COUNT(r.idReserva) AS total
+    FROM 
+        RESERVAS r
+    NATURAL JOIN 
+        STATUS_RESERVAS sr
+    GROUP BY 
+        sr.idStatus;
+END $$
+DELIMITER ;
+
