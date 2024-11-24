@@ -548,6 +548,18 @@ BEGIN
 END / / 
 DELIMITER ; 
 
+DELIMITER // 
+CREATE PROCEDURE actualizaDireccion(
+    IN NewidCliente INT,
+    IN NewDireccion VARCHAR(255)
+)
+BEGIN
+    UPDATE CLIENTES
+    SET direccion = NewDireccion
+    WHERE idCliente = NewidCliente;
+END // 
+DELIMITER ; 
+
 CREATE VIEW eliminarCliente_vw AS
 SELECT
     c.idCliente
@@ -565,6 +577,33 @@ BEGIN
     WHERE idCliente = idCliente;
 END // 
 DELIMITER ;
+
+DELIMITER // 
+CREATE PROCEDURE nuevaTarjetaCliente(
+	in NEWidCliente INT,
+    IN NEWnum_tarjeta INT,
+    IN NEWfecha_expiracion DATE,
+    in NEWnombre_metodo VARCHAR(255)
+)
+begin
+	DECLARE idDetalleMetodoPago INT;
+
+	IF NEWnombre_metodo = 'Efectivo' THEN
+        INSERT INTO METODOPAGOS (nombre_metodo, id_Cliente, idDetalleMetodoPago)
+        VALUES (NEWnombre_metodo, NEWidCliente, NULL);
+       
+    ELSE
+        INSERT INTO DETALLES_METODOPAGOS (num_tarjeta, fecha_expiracion)
+        VALUES (NEWnum_tarjeta, NEWfecha_expiracion);
+
+        SET idDetalleMetodoPago = LAST_INSERT_ID();
+        
+        INSERT INTO METODOPAGOS (nombre_metodo, id_Cliente, idDetalleMetodoPago)
+        VALUES (NEWnombre_metodo, NEWidCliente, idDetalleMetodoPago);
+    END IF;
+    
+END // 
+DELIMITER ; 
 
 -- PROCS PARA PEDIDOS --
 
@@ -713,6 +752,55 @@ FROM
 
 END / / DELIMITER;
 
+DELIMITER //
+CREATE PROCEDURE recomendarPlatillosCliente(
+    IN cliente_id INT
+)
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM PEDIDOS p
+        WHERE p.idCliente = cliente_id
+    ) THEN
+        SELECT DISTINCT
+            p.idPlatillo,
+            p.nombre,
+            p.imagen_URL,
+            p.idCategoria,
+            p.descripcion, 
+            p.precio
+        FROM
+            PLATILLOS p
+        WHERE
+            p.idCategoria IN (
+                SELECT DISTINCT pl.idCategoria
+                FROM pedidos pd NATURAL JOIN DETALLESPEDIDO dp NATURAL JOIN PLATILLOS pl
+                WHERE pd.idCliente = cliente_id
+            )
+            AND p.idPlatillo NOT IN (
+                SELECT dp.idPlatillo
+                FROM pedidos pd NATURAL JOIN detallespedido dp
+                WHERE pd.idCliente = cliente_id
+            )
+        LIMIT 10;
+
+    ELSE
+        SELECT 
+            idPlatillo,
+            nombre,
+            imagen_URL,
+            idCategoria,
+            descripcion, 
+            precio
+        FROM 
+            PLATILLOS
+        ORDER BY RAND()
+        LIMIT 10;
+    END IF;
+END //
+DELIMITTER ;
+
+
 -- PROCS PARA RESEÑAS -- 
 
 CREATE VIEW
@@ -764,6 +852,34 @@ FROM
 WHERE
     idCliente = id_Sesion;
 END / / DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE eliminarResena(
+    IN idRes INT
+)
+BEGIN
+    DELETE FROM RESENAS
+    WHERE idResena = idRes;
+END $$
+DELIMITER ;
+
+-- LISTO --
+
+DELIMITER $$
+CREATE PROCEDURE nuevaResena(
+    IN punt INT,
+    IN title VARCHAR(50),
+    IN coment TEXT,
+    IN fechaComent DATE,
+    IN idClientePar INT,
+    IN idTipoRes INT,
+    IN idPedidoPar INT
+)
+BEGIN
+    INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
+    VALUES (punt, title, coment, fechaComent, idClientePar, idTipoRes, idPedidoPar);
+END $$
+DELIMITER ;
 
 -- PROCS PARA RESERVAS --
 
