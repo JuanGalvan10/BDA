@@ -548,6 +548,18 @@ BEGIN
 END / / 
 DELIMITER ; 
 
+DELIMITER // 
+CREATE PROCEDURE actualizaDireccion(
+    IN NewidCliente INT,
+    IN NewDireccion VARCHAR(255)
+)
+BEGIN
+    UPDATE CLIENTES
+    SET direccion = NewDireccion
+    WHERE idCliente = NewidCliente;
+END // 
+DELIMITER ; 
+
 CREATE VIEW eliminarCliente_vw AS
 SELECT
     c.idCliente
