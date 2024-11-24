@@ -11,3 +11,17 @@ class Carrito:
         cur.close()
         return metodos
     
+    def get_direccion_User(idUser):
+        cur = mysql.connection.cursor()
+        cur.callproc('obtenerDireccion(%s)',(idUser,))
+        direcccion = cur.fetchall()
+        cur.close()
+        return direcccion
+
+    def get_direccion_restaurantes():
+        cur = mysql.connection.cursor()
+        cur.callproc('obtenerRestaurantes')
+        direccciones = cur.fetchall()
+        cur.close()
+        return direccciones
+    

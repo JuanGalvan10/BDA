@@ -21,12 +21,11 @@ def checkoutResumen():
     if 'loggedin' in session:
         prods = session['productos']
         productos = []
-        cantidades = []
         for producto in prods:
             idProducto = producto['id']
             productos.append(Producto.get_by_id(idProducto))
             productos.append(producto['cantidad'])
-        return render_template('checkoutResumen.html', productos = productos, cantidades = cantidades)
+        return render_template('CheckoutResumen.html', productos = productos, subtotal = session['subtotal'])
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -63,27 +62,30 @@ def checkoutEnvio():
                     })
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
+            total = subtotal + 50
+            direccionUser = Carrito.get_direccion(session['idUsuario'])
+            direccionesR = Carrito.get_direccion_restaurantes()
+            return render_template('CheckoutDomicilio.html', subtotal = subtotal, total = total, direccionUser = direccionUser, direccionesR = direccionesR)
+        return redirect(url_for('checkoutResumen'))
+    else: 
+        flash('Primero debes de ingresar.', 'error')
+        return redirect(url_for('login'))
+    
+def checkoutPago():
+    if 'loggedin' in session:
+        if request.method =='POST':
+            direccion = request.form['opcion_entrega']
+            total = session['subtotal']
+            costo = 0
+            if direccion == 'domicilio':
+                costo = 50
+                total += costo
             metodos = Carrito.get_Metodos(session['idUsuario'])
             for metodo in metodos:
                 num_tarjeta = metodo['num_tarjeta']
                 censurado = '*' * (len(num_tarjeta) - 4) + num_tarjeta[-4:]  
                 metodo['num_tarjeta'] = censurado
-            total = subtotal + 50
-            return render_template('CheckoutPago.html', subtotal = subtotal, total = total, metodos = metodos)
-    else: 
-        flash('Primero debes de ingresar.', 'error')
-        return redirect(url_for('login'))
-    
-def checkoutPago(subtotal):
-    if 'loggedin' in session:
-        if request.method =='POST':
-            productoID = request.form['productoID']
-            cantidad = request.form['cantidad']
-            precio = request.form['precio']
-            producto = {'id': productoID, 'cantidad': cantidad, 'precio': precio}
-            session['productos'].append(producto)
-            session['subtotal'] += cantidad*precio
-            return render_template('catalogo.html')
+            return render_template('CheckoutPago.html', total = total, costo = costo, metodos = metodos, subtotal = session['subtotal'])
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
