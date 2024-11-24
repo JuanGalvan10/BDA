@@ -20,7 +20,7 @@ class Carrito:
 
     def get_direccion_restaurantes():
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerRestaurantes')
+        cur.callproc('obtenerDireccionesR')
         direccciones = cur.fetchall()
         cur.close()
         return direccciones

@@ -99,27 +99,15 @@
         <h4>Recomendados:</h4>
         <hr>
         <div class="row">
+          {% for producto in producto %}
           <div class="col-4">
-              <img src="https://sratanaka.com/wp-content/uploads/2024/05/DSC07659.jpg" alt="platillo"  id="imagen"/>
+              <img src="{{producto.imagen_URL}}" alt="{{producto.nombre}}"  id="imagen"/>
             <br>
             <div class="container" id="precio">
-             <h6> ${{producto[2]}}</h6>
+             <h6> ${{producto.precio}}</h6>
             </div>
           </div>
-          <div class="col-4">
-              <img src="{{imagenes[1]}}" alt="platillo"  id="imagen"/>
-            <br>
-            <div class="container" id="precio">
-              <h6> ${{producto[2]}}</h6>
-            </div>
-          </div>
-          <div class="col-4">
-              <img src="{{imagenes[1]}}" alt="platillo"  id="imagen"/>
-            <br>
-            <div class="container" id="precio">
-              <h6> ${{producto[2]}}</h6>
-            </div>
-          </div>
+          {% endfor %}
         </div>
         <hr>
       </div>

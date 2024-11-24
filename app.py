@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from config import MYSQL_HOST, MYSQL_USER,MYSQL_PASSWORD,MYSQL_DB, SECRET_KEY
 from database import mysql, init_app
-from models.login import register_usuario, login_user, register_cliente
+from models.producto import Producto
 
 #controladores
 from controllers.login_controller import login, register_user,register_user_client, register_client, logout, mostrar_usuarios
@@ -34,7 +34,8 @@ def inicio():
 def vista_principal():
     if 'loggedin' in session:
         if session['rol'] == 'cliente':
-            return render_template('dashboard_clientes.html', usuario = session['usuario'])
+            productos = Producto.obtenerRecomendados()
+            return render_template('dashboard_clientes.html', usuario = session['usuario'], productos = productos)
         else:
             return render_template('DashboardAdmins.html', nombre_usuario = session['usuario'])
     else:

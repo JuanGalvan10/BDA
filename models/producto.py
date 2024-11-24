@@ -39,3 +39,13 @@ class Producto:
         cur.callproc('eliminarPlatillo(%s)', (producto_id,))
         mysql.connection.commit()
         cur.close()
+
+    @staticmethod
+    def obtenerRecomendados(idCliente):
+        cur = mysql.connection.cursor()
+        cur.callproc('recomendarPlatillosCliente(%s)', (idCliente,))
+        productos = cur.fetchall()
+        cur.close()
+        return productos
+
+
