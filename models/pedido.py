@@ -13,20 +13,28 @@ class Pedido:
     
     @staticmethod
     def insert(productos,cantidades,id_cliente):
-        # Insertar el pedido
         cur = mysql.connection.cursor()
-        cur.callproc('insertarPedido', (id_cliente,))
-        mysql.connection.commit()
-        
-        # Obtener el ID del pedido recién insertado
-        id_pedido = cur.lastrowid
+        try:
+            # Insertar el pedido
+            cur.callproc('insertarPedido', (id_cliente,))
+            mysql.connection.commit()
+            
+            # Obtener el ID del pedido recién insertado
+            id_pedido = cur.lastrowid
 
-        # Insertar detalles del pedido
-        for i, id_producto in enumerate(productos):
-            cantidad = cantidades[i]
-            cur.callproc('insertarDetallePedido', (id_pedido, id_producto, cantidad))      
-        mysql.connection.commit()
-        cur.close()
+            # Insertar detalles del pedido
+            for i, id_producto in enumerate(productos):
+                cantidad = cantidades[i]
+                cur.callproc('insertarDetallePedido', (id_pedido, id_producto, cantidad))      
+            mysql.connection.commit()
+            cur.close()
+            return True, 'Pedido exitoso'
+
+        except MySQLdb.OperationalError as e:
+            cur.close()
+            return False, str(e)
+
+        
     
     @staticmethod
     def get_by_id(idPedido):

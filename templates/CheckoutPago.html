@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <form>
+        <form method="post" action="/pagar">
             <div class="row">
                 <div class="col-sm-8 col-md-8 text-center">
                     <div>
@@ -122,8 +122,8 @@
                     <div class="p-5 border-bottom text-light" style="height: 150px; display: flex; align-items: center;" >
                         <div class="card-container d-flex justify-content-center align-items-center bg-white" style="height: 80px; width: 800px; color: black;">
                             <input type="radio" name="payment" value="{{metodo[0]}}" class="form-check-input me-2">
-                            <img src="Visa_Logo.png" alt="Visa" class="card-logo d-flex d-flex p-1">
-                            <span class="card-description flex-grow-1 d-flex p-2" >{{nombre_metodo}} **** 4444</span>
+                            <img src="{{metodo[1]}}.png" alt="Visa" class="card-logo d-flex d-flex p-1">
+                            <span class="card-description flex-grow-1 d-flex p-2" >{{metodo[1]}} {{metodo[3]}}</span>
                             <button class="delete-button btn p-0 ms-2">
                                 <img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" alt="Delete">
                             </button>
@@ -132,7 +132,7 @@
                     {% end for %}
                     <div class="p-5 border-bottom text-light" style="height: 150px; display: flex; align-items: center;" >
                         <div class="card-container d-flex justify-content-center align-items-center bg-white" style="height: 80px; width: 800px; color: black;">
-                            <input type="radio" name="payment" class="form-check-input me-2">
+                            <input type="radio" name="payment" value="5" class="form-check-input me-2">
                             <img src="cash-icon.png" alt="Money" class="card-logo d-flex d-flex p-1">
                             <span class="card-description flex-grow-1 d-flex p-2" >Pago en efectivo</span>
                         </div>
