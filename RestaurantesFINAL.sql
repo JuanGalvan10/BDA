@@ -406,8 +406,29 @@ END $$
 DELIMITER ; 
 
 -- STORED PROCEDURES --
+-- PROCS PARA Restaurante --
+DELIMITER $$
+CREATE PROCEDURE obtenerDireccionesR()
+BEGIN
+    SELECT ubicacion
+    FROM RESTAURANTES
+END $$ 
+DELIMITER ;
 
 -- PROCS PARA Cliente --
+DELIMITER $$
+CREATE PROCEDURE nuevaDireccion(
+    IN p_idUsuario INT,
+    IN direc
+)
+BEGIN
+    UPDATE CLIENTES
+    SET 
+        direccion = direc
+    WHERE idUsuario = p_idUsuario;
+END $$ 
+DELIMITER ;
+
 DELIMITER $$
 CREATE PROCEDURE actualizaCliente(
     IN p_idCliente INT,
