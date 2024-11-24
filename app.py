@@ -7,7 +7,7 @@ from models.login import register_usuario, login_user, register_cliente
 from controllers.login_controller import login, register_user,register_user_client, register_client, logout
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
-from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
+from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente, guardar_direccion
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
 from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva, horas_disponibles
 from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar
@@ -56,6 +56,7 @@ app.add_url_rule('/clientes', view_func=mostrar_clientes, methods = ['GET', 'POS
 app.add_url_rule('/nuevo_cliente', view_func=nuevo_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/editar_cliente/<int:id>', view_func=editar_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_cliente/<int:id>', view_func=eliminar_cliente,  methods = ['GET', 'POST'])
+app.add_url_rule('/guardar_direccion', view_func=guardar_direccion,  methods = ['GET', 'POST'])
 
 #RUTAS PARA RESERVAS
 app.add_url_rule('/reservas', view_func=mostrar_reservas, methods = ['GET', 'POST'])

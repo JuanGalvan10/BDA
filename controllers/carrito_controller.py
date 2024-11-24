@@ -62,10 +62,9 @@ def checkoutEnvio():
                     })
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
-            total = subtotal + 50
             direccionUser = Carrito.get_direccion(session['idUsuario'])
             direccionesR = Carrito.get_direccion_restaurantes()
-            return render_template('CheckoutDomicilio.html', subtotal = subtotal, total = total, direccionUser = direccionUser, direccionesR = direccionesR)
+            return render_template('CheckoutDomicilio.html', subtotal = subtotal, direccionUser = direccionUser, direcciones = direcciones)
         return redirect(url_for('checkoutResumen'))
     else: 
         flash('Primero debes de ingresar.', 'error')

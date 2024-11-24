@@ -49,5 +49,12 @@ class Cliente:
         mysql.connection.commit()
         cur.close()
 
+    @staticmethod
+    def update_direccion(idUsuario, nuevadireccion):
+        cur = mysql.connection.cursor()
+        cur.callproc('nuevaDireccion(%s,%s)', (idUsuario,nuevadireccion,))
+        mysql.connection.commit()
+        cur.close()
+
 
 

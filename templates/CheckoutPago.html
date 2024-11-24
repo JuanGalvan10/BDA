@@ -265,3 +265,33 @@
         </section>
     </footer>
 </body>
+</html>
+document.addEventListener('DOMContentLoaded', () => {
+    const envioElement = document.getElementById('costo-envio');
+    const totalElement = document.getElementById('total');
+    const subtotalElement = document.getElementById('subtotal');
+    const entregaDomicilioRadio = document.getElementById('flexRadioDefault2');
+    const recogerRestauranteRadio = document.getElementById('recoger_restaurante');
+
+    // Obtener el subtotal inicial
+    const subtotal = parseFloat(subtotalElement.textContent.replace('$', ''));
+
+    // Función para actualizar el costo de envío y el total
+    function actualizarCosto() {
+        let costoEnvio = 0;
+
+        if (entregaDomicilioRadio.checked) {
+            costoEnvio = 50; // Costo de envío a domicilio
+        }
+
+        envioElement.textContent = `$${costoEnvio.toFixed(2)}`;
+        totalElement.textContent = `$${(subtotal + costoEnvio).toFixed(2)}`;
+    }
+
+    // Escuchar cambios en los radios
+    entregaDomicilioRadio.addEventListener('change', actualizarCosto);
+    recogerRestauranteRadio.addEventListener('change', actualizarCosto);
+
+    // Inicializar los valores al cargar la página
+    actualizarCosto();
+});

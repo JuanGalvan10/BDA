@@ -127,11 +127,11 @@
                         <div class="domicilio">
                             <div class="row" style="width: 810px; height: 100px; justify-content: center;">
                                 <div class="col-1 d-flex justify-content-center align-items-top mt-3">
-                                    <input class="form-check-input p-2" type="radio" name="opcion_entrega" id="entrega_domicilio" value="domicilio" checked>
+                                    <input type="radio" id="flexRadioDefault2" name="opcion_entrega" value="domicilio" checked>
                                 </div>
                                 <div class="col-9  d-flex flex-column justify-content-left align-items-top" style="margin-top: 15px;">
                                     <h5><strong>Dirección de Entrega</strong></h5>
-                                    <p style="font-size: 14px;">{{direccion}}</p>
+                                    <p style="font-size: 14px;">{{direccionUser}}</p>
                                 </div>
                                 <div class="col-2 d-flex flex-column justify-content-center align-items-center border-left">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">editar</button>
@@ -150,7 +150,7 @@
                             <div class="domicilio">
                                 <div class="row" style="width: 810px; height: 100px; justify-content: center;">
                                     <div class="col-1 d-flex justify-content-center align-items-top mt-3">
-                                        <input class="form-check-input p-2" type="radio" name="opcion_entrega" id="recoger_restaurante" value="restaurante">
+                                        <input type="radio" id="recoger_restaurante" name="opcion_entrega" value="restaurante">
                                     </div>
                                     <div class="col-9 d-flex flex-column justify-content-left align-items-top" style="margin-top: 15px;">
                                         <h5><strong>Dirección de Restaurante</strong></h5>
@@ -190,11 +190,11 @@
                         </div>
                         <div class="top-bottom-resumen">
                             <div class="left-resumen"><strong>Subtotal</strong></div>
-                            <div class="right-resumen" id="subtotal">$1290.00</div>
+                            <div class="right-resumen" id="subtotal">${{subtotal}}</div>
                         </div>
                         <div class="top-bottom-resumen border-bottom border-top">
                             <div class="left-resumen"><strong>Total</strong></div>
-                            <div class="right-resumen" id="total">$1340.00</div>
+                            <div class="right-resumen" id="total">$</div>
                         </div>
                         
                         <div class="d-flex justify-content-end">
@@ -222,13 +222,13 @@
                     <div>
                         <div class="form-group col-md-12 pb-3">
                             <label for="inputEmail4">Dirección</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="ej. Río Orinoco #504 Valle">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="{{direccionUser}}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" onclick="location.href='/guardarDireccion'" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -332,26 +332,22 @@
     const entregaDomicilioRadio = document.getElementById('flexRadioDefault2');
     const recogerRestauranteRadio = document.getElementById('recoger_restaurante');
 
-    // Obtener el subtotal inicial
     const subtotal = parseFloat(subtotalElement.textContent.replace('$', ''));
 
-    // Función para actualizar el costo de envío y el total
     function actualizarCosto() {
         let costoEnvio = 0;
 
         if (entregaDomicilioRadio.checked) {
-            costoEnvio = 50; // Costo de envío a domicilio
+            costoEnvio = 50; 
         }
 
         envioElement.textContent = `$${costoEnvio.toFixed(2)}`;
         totalElement.textContent = `$${(subtotal + costoEnvio).toFixed(2)}`;
     }
 
-    // Escuchar cambios en los radios
     entregaDomicilioRadio.addEventListener('change', actualizarCosto);
     recogerRestauranteRadio.addEventListener('change', actualizarCosto);
 
-    // Inicializar los valores al cargar la página
     actualizarCosto();
 });
 
