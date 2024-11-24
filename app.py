@@ -4,7 +4,7 @@ from database import mysql, init_app
 from models.login import register_usuario, login_user, register_cliente
 
 #controladores
-from controllers.login_controller import login, register_user,register_user_client, register_client, logout
+from controllers.login_controller import login, register_user,register_user_client, register_client, logout, mostrar_usuarios
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente, guardar_direccion
@@ -47,6 +47,8 @@ app.add_url_rule('/register_client/<int:idUsuario>', view_func=register_client, 
 app.add_url_rule('/register_user_client', view_func=register_user_client, methods = ['GET', 'POST'])
 app.add_url_rule('/register_user', view_func=register_user, methods = ['GET', 'POST'])
 app.add_url_rule('/logout', view_func=logout)
+app.add_url_rule('/usuarios', view_func=mostrar_usuarios, methods = ['GET', 'POST'])
+
 
 #RUTAS PARA PRODUCTOS
 app.add_url_rule('/productos', view_func=mostrar_productos, methods = ['GET', 'POST'])
@@ -59,7 +61,6 @@ app.add_url_rule('/clientes', view_func=mostrar_clientes, methods = ['GET', 'POS
 app.add_url_rule('/nuevo_cliente', view_func=nuevo_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/editar_cliente/<int:id>', view_func=editar_cliente,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_cliente/<int:id>', view_func=eliminar_cliente,  methods = ['GET', 'POST'])
-
 
 #RUTAS PARA RESERVAS
 app.add_url_rule('/reservas', view_func=mostrar_reservas, methods = ['GET', 'POST'])

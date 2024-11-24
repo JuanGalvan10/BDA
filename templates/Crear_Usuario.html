@@ -88,12 +88,12 @@
                                     <strong>Información De Usuario</strong>
                                 </h5>
                             </div>
-                            <form>
+                            <form method="post" action="/register_user">
                                 <div class="form-row" style="display: flex; justify-content: left;">
                                     <div class="form-group" style="padding-left: 20px; width: 1100px;">
                                         <label for="inputEmail4">Nombre de Usuario:</label>
                                         <br>
-                                        <input type="email" class="form-control" id="inputEmail4"
+                                        <input name="username" type="email" class="form-control" id="inputEmail4"
                                             placeholder="ej. Maria_1245"> <!--NOMBRE DE NUEVO CLIENTE-->
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <div class="form-group" style="padding-left: 20px; width: 1100px;">
                                         <label for="inputEmail4">Contraseña:</label>
                                         <br>
-                                        <input type="email" class="form-control" id="inputEmail4"
+                                        <input name="password" type="password" class="form-control" id="inputEmail4"
                                             placeholder="Mayor a 7 letras"> <!--APELLIDO DE NUEVO CLIENTE-->
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                     <div class="form-group" style="padding-left: 20px; width: 1100px;">
                                         <label for="inputEmail4">Rol:</label>
                                         <br>
-                                        <input type="email" class="form-control" id="inputEmail4"
+                                        <input name="rol" type="email" class="form-control" id="inputEmail4"
                                             placeholder="ej. Cocinero"> <!--DIRECCION DE NUEVO CLIENTE-->
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                 style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 <br>
                                 <div style="display: flex; justify-content: center; gap: 10px;">
-                                    <button style="width: 150px;" type="button" class="btn btn-danger">Cancelar</button>
+                                    <button style="width: 150px;" type="button" class="btn btn-danger" onclick="location.href='/mostrar_usuarios'">Cancelar</button>
                                     <!--CANCELAR LOS CAMBIOS-->
                                     <button style="width: 150px;" type="button" class="btn btn-success">Guardar</button>
                                     <!--BORRAR LOS CAMBIOS-->

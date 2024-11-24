@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from models.login import register_usuario, login_user, register_cliente
+from models.login import register_usuario, login_user, register_cliente, get_users
 import hashlib
 
 def login():
@@ -10,7 +10,7 @@ def login():
         if user:
             session['loggedin'] = True
             session['idUsuario'] = user['idUsuario']
-            session['usuario'] = user['nombre_usuario']
+            session['usuario'] = user['username']
             session['rol'] = user['nombre']
             session['productos'] = []
             session['subtotal'] = 0
@@ -69,4 +69,10 @@ def logout():
     flash('Sesión cerrada', 'info')
     return render_template('DASHBOARD_LOGOUT.html')
 
-
+def mostrar_usuarios():
+    if 'loggedin' in session:
+        usuarios = get_users()
+        return render_template('Usuarios.html', usuarios = usuarios)
+    else:
+        flash('Credenciales invalidas', 'error')
+        return redirect(url_for(login))

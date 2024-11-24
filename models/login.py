@@ -41,3 +41,13 @@ def login_user(username,password):
     else:
         return None
 
+def get_users():
+    cur = mysql.connection.cursor()
+    try: 
+        cur.callproc('mostrarUsuarios')
+        usuarios = cur.fetchone()
+        cur.close()
+        return usuarios
+    except MySQLdb.OperationalError as e:
+        cur.close()
+        return False, str(e)

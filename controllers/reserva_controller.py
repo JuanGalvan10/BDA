@@ -13,7 +13,7 @@ def mostrar_reservas():
                     return redirect(url_for('eliminar_reserva', id=id))
         if session['rol'] == 'admin':
             reservas = Reserva.get_all()
-            return render_template('Reservas.html', reservas = reservas)
+            return render_template('ReservasAdmin.html', reservas = reservas)
         else:
             reservas = Reserva.get_by_cliente()
             return render_template('Mis_reservas.html', reservas = reservas)

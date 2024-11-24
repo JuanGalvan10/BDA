@@ -119,9 +119,11 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="col-3">IDventa</th>
-                                        <th scope="col" class="col-3">Total</th>
-                                        <th scope="col" class="col-3">IDusuario </th>
+                                            <td scope="row" class="col-1">ID Orden</td> <!-- VALOR DE ID-->
+                                            <td scope="row" class="col-2">ID cliente</td> <!-- VALOR DE ID-->
+                                            <td scope="row" class="col-2">Fecha</td> <!-- VALOR DE ID-->
+                                            <td scope="row" class="col-2">Estatus</td> <!-- VALOR DE ID-->
+                                            <td scope="row" class="col-2">Total</td> <!-- VALOR DE ID-->
                                         <th scope="col" class="col-3" style="width: 110px;text-align: center;">Actions
                                         </th>
                                     </tr>
@@ -131,8 +133,10 @@
                                         {% for pedido in pedidos %}
                                         <tr>
                                             <th scope="row">{{pedido.idPedido}}</th>
-                                            <td>{{pedido.total_pedido}}</td>
                                             <td>{{pedido.idCliente}}</td>
+                                            <td>{{pedido.fecha_pedido}}</td>
+                                            <td>{{pedido.nombre_status}}</td>
+                                            <td>{{pedido.total_pedido}}</td>
                                             <td>
                                                 <div
                                                     style="display: flex; justify-content: center; align-items: center; height: 100%;">

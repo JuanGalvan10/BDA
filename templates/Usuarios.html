@@ -114,101 +114,27 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <div class="scroll">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Cajero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Cajero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Jacob</td>
-                                            <td>Cocinero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Mecero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Mecero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Jacob</td>
-                                            <td>Mecero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Mecero</td>
-                                            <td>
-                                                <div
-                                                    style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i><!-- ELIMINAR REGSITRO-->
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </div>
+                                <form action="/eliminar_usuario/{{usuario.idUsuario}}" method="post">
+                                    <div class="scroll">
+                                        <tbody>
+                                            {% for usuario in usuarios %}
+                                            <tr>
+                                                <th scope="row">{{usuario.idUsuario}}</th>
+                                                <td>{{usuario.nombre_usuario}}</td>
+                                                <td>{{usuario.rol_nombre}}</td>
+                                                <td>
+                                                    <div
+                                                        style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                                        <button class="btn btn-danger btn-sm" type="submit">
+                                                            <i class="bi bi-trash-fill"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor%}
+                                        </tbody>
+                                    </div>
+                                </form>
                             </table>
                         </div>
                     </div>
