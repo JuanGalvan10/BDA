@@ -73,3 +73,5 @@ def horas_disponibles():
     horas_ocupadas = Reserva.get_by_dia(fecha)
 
     return render_template('Autocomplete_reservas.html', horas_ocupadas=horas_ocupadas)
+
+    

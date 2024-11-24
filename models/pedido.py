@@ -34,8 +34,6 @@ class Pedido:
             cur.close()
             return False, str(e)
 
-        
-    
     @staticmethod
     def get_by_id(idPedido):
         cur = mysql.connection.cursor()

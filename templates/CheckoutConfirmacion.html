@@ -16,34 +16,34 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-6">
-                    <button id="hamburgesa" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="hamburger" onclick="openNav()">&#9776;</span>
+              <div class="col-6">
+                <button id="hamburgesa" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="hamburger" onclick="openNav()">&#9776;</span>
+                </button>
+                <div id="mySidenav" class="sidenav">
+                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                  <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
+                  <hr style="border-color: #FFFFFF;">
+                  <a href="/dashboard">Inicio ></a> 
+                  <a href="/catalogo">Productos ></a> 
+                  <a href="/reservasC">Reservar ></a>
+                  <a href="/galeria">Galeria ></a>
+                  <a href="/menu">Menu ></a>
+                  <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                      Mi perfil ↓
                     </button>
-                    <div id="mySidenav" class="sidenav">
-                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                      <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
-                      <hr style="border-color: #FFFFFF;">
-                      <a href="/dashboard">Inicio ></a> 
-                      <a href="/catalogo">Productos ></a> 
-                      <a href="/reservasC">Reservar ></a>
-                      <a href="/galeria">Galeria ></a>
-                      <a href="/menu">Galeria ></a>
-                      <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                          Mi perfil ↓
-                        </button>
-                        <div class="collapse closeNav" id="home-collapse">
-                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
-                            <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
-                            <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
-                            <li><a href="/mi_perfil" class="link-dark rounded">Mi info ></a></li>
-                          </ul>
-                        </div>
-                      </li>
+                    <div class="collapse closeNav" id="home-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
+                        <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
+                        <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
+                        <li><a href="/mostrar_clientes" class="link-dark rounded">Mi info ></a></li>
+                      </ul>
                     </div>
-                  </div>
+                  </li>
+                </div>
+              </div>
                 <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
                     <nav  class="navbar navbar-expand-lg navbar-light">
                       <div class="container-fluid">
