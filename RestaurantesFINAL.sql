@@ -477,7 +477,8 @@ FROM
 where
     nombre_usuario = username;
 
-END / / DELIMITER;
+END / / 
+DELIMITER;
 
 DELIMITER //
 CREATE PROCEDURE registrarUsuario(
