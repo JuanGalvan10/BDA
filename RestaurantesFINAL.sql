@@ -375,7 +375,7 @@ END $$
 
 DELIMITER ; 
 
--- 6. CalcularTotalPedido
+-- 5. CalcularTotalPedido
 DELIMITER $$
 CREATE TRIGGER CalcularTotalPedido
 AFTER INSERT ON DETALLESPEDIDO
@@ -391,7 +391,7 @@ END $$
 
 DELIMITER ;
 
--- 7. NotificarPromocionExpirada 
+-- 6. NotificarPromocionExpirada 
 DELIMITER $$
 CREATE TRIGGER NotificarPromocionExpirada
 BEFORE INSERT ON PROMOCIONES
@@ -460,7 +460,7 @@ CREATE PROCEDURE registrarCliente(
     IN apell varchar(50),
     IN tel varchar(15),
     IN correo varchar(100),
-    IN direc varchar(100),
+    IN direc varchar(100)
 )
 BEGIN
     INSERT INTO CLIENTES (idUsuario, nombre, apellido, telefono, correo, direccion)
@@ -468,15 +468,13 @@ BEGIN
 END //
 DELIMITER ;
 
-DELIMITER / / CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) BEGIN
-SELECT
-    *
+DELIMITER // CREATE PROCEDURE BuscaUsuario (IN NEWusername varchar(50)) BEGIN
+SELECT *
 FROM
     InfoUsuario
 where
-    nombre_usuario = username;
-
-END / / DELIMITER;
+    nombre_usuario = NEWusername;
+END // DELIMITER;
 
 
 -- PROCS DE CLIENTES ----------------------------------------------------------------------------------------------------
