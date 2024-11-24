@@ -10,6 +10,7 @@ from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, elimina
 from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
 from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva, horas_disponibles
+from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar
 
 app = Flask(__name__)
 
@@ -73,10 +74,13 @@ app.add_url_rule('/nuevo_resena', view_func=nuevo_resena,  methods = ['GET', 'PO
 app.add_url_rule('/eliminar_resena/<int:id>', view_func=eliminar_resena,  methods = ['GET', 'POST'])
 app.add_url_rule('/horas_disponibles',view_func=horas_disponibles, methods=['POST'])
 
+#RUTAS PARA EL CHECKOUT
+app.add_url_rule('/agregarCarrito', view_func=agregarCarrito, methods = ['GET', 'POST'])
+app.add_url_rule('/chechoutResumen', view_func=checkoutResumen,  methods = ['GET', 'POST'])
+app.add_url_rule('/checkoutEnvio', view_func=checkoutEnvio,  methods = ['GET', 'POST'])
+app.add_url_rule('/checkoutPago',view_func=checkoutPago, methods=['POST'])
+app.add_url_rule('/pagar',view_func=pagar, methods=['POST'])
 
-@app.route('/catalogo')
-def catalogo():
-    return render_template('catalogo.html')
 
 @app.route('/reservasC')
 def reservas():
