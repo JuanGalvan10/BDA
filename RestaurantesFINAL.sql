@@ -802,12 +802,73 @@ FROM
 END / / DELIMITER;
 
 -- obtenerPlatillo -- - - - - - - - - - - - - - - - - -
+-- Vista de TODOS los platillos disponibles o no :D --
+CREATE VIEW ListaPlatillos AS
+SELECT * FROM PLATILLOS
+
+DELIMITER $$
+CREATE PROCEDURE obtenerPlatillo(IN idPlatillo INT)
+BEGIN
+    SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
+    FROM ListaPlatillos
+    WHERE idPlatillo = idPlatillo;
+END $$
+DELIMITER ;
 
 -- nuevoPlatillo -- - - - - - - - - - - - - -- - - --
 
+DELIMITER $$
+CREATE PROCEDURE nuevoPlatillo(
+    IN nombre VARCHAR(100),
+    IN imagen_URL VARCHAR(100),
+    IN precio DECIMAL(10,2),
+    IN descripcion VARCHAR(255),
+    IN inventario INT,
+    IN idCategoria INT
+)
+BEGIN
+    INSERT INTO PLATILLOS(nombre, imagen_URL, precio, descripcion, inventario, idCategoria)
+    VALUES (nombre, imagen_URL, precio, descripcion, inventario, idCategoria);
+END $$
+DELIMITER ;
+
 -- actualizaPlatillo -- - - - - - - - - - - - - - - - - -
 
+DELIMITER $$
+CREATE PROCEDURE actualizarPlatillo(
+    IN idPlatillo INT,
+    IN nombre VARCHAR(100),
+    IN imagen_URL VARCHAR(100),
+    IN precio DECIMAL(10,2),
+    IN descripcion VARCHAR(255),
+    IN inventario INT,
+    IN idCategoria INT
+)
+BEGIN
+    UPDATE PLATILLOS
+    SET nombre = nombre, 
+        imagen_URL = imagen_URL, 
+        precio = precio, 
+        descripcion = descripcion,
+        inventario = inventario,
+        idCategoria = idCategoria
+    WHERE idPlatillo = idPlatillo;
+END $$
+DELIMITER ;
+
 -- eliminarPlatillo -- - - - - - - - - - - - - - - - - -
+
+DELIMITER $$
+CREATE PROCEDURE eliminarPlatillo(
+    IN idPlatillo INT
+)
+BEGIN
+    DELETE FROM PLATILLOS
+    WHERE idPlatillo = idPlatillo;
+END $$
+DELIMITER ;
+
+-------------------------------------------
 
 DELIMITER //
 CREATE PROCEDURE recomendarPlatillosCliente(
