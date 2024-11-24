@@ -626,3 +626,24 @@ WHERE
     idCliente = id_Sesion;
 END / / 
 DELIMITER ;
+
+-- EXTRAS -- 
+CREATE VIEW
+    mostrarMetodoPagos_vw AS
+SELECT
+    *
+FROM
+    metodopagos m
+    natural join detalles_metodopagos dm;
+
+DELIMITER / / CREATE PROCEDURE mostrarMetodoPagoCliente (IN id_Sesion INT) BEGIN
+SELECT
+    idMetodoPago,
+    nombre_metodo,
+    idCliente,
+    num_tarjeta
+FROM
+    mostrarMetodoPagos_vw
+WHERE
+    idCliente = id_Sesion;
+END / / DELIMITER;
