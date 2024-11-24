@@ -17,11 +17,11 @@ def mostrar_resenas():
 def nuevo_resena():
     if 'loggedin' in session:
         if request.method =='POST':
+            idTipoRes = request.form['idTipoRes']
+            titulo = request.form['titulo']
             puntuacion = request.form['puntuacion']
             comentario = request.form['comentario']
-            idProducto = request.form['idProducto']
-            idPedido = request.form['idPedido']
-            Resena.insert(puntuacion, comentario, idProducto, idPedido)
+            Resena.insert(puntuacion, titulo, comentario, session['idCliente'], idTipoRes)
             return redirect(url_for('mostrar_resenas'))
         return render_template('Crear_resena.html') #HTML de crear
     else: 

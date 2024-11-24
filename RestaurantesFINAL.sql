@@ -1013,7 +1013,7 @@ CREATE PROCEDURE nuevaResena(
 )
 BEGIN
     INSERT INTO RESENAS(puntuacion, titulo, comentario, fecha_comentario, idCliente, idTipoResena, idPedido)
-    VALUES (punt, title, coment, CURDATE(), idClientePar, idTipoRes, idPedidoPar);
+    VALUES (punt, title, coment, CURDATE(), idClientePar, idTipoRes, NULL);
 END $$
 DELIMITER ;
 
