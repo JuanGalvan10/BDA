@@ -100,7 +100,7 @@ def galeria():
     loggedin = False
     if 'loggedin' in session:
         loggedin = True
-    return render_template('galeria.html', loggedin = loggedin)
+    return render_template('galeria.html', nombre_usuario = session['usuario'])
 
 @app.route('/mi_perfil')
 def mi_perfil():
@@ -115,7 +115,7 @@ def menu():
     loggedin = False
     if 'loggedin' in session:
         loggedin= True
-    return render_template('menu.html', loggedin = loggedin)
+    return render_template('menu.html',  nombre_usuario = session['usuario'] =  nombre_usuario = session['usuario'])
 
 @app.route('/agregarUsuario')
 def agregarUser():

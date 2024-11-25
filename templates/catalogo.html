@@ -57,7 +57,7 @@
           <nav  class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
               <ul class="navbar-nav ml-auto">
-                {% if loggedin %}
+                {% if nombre_usuario %}
                 <li class="nav-item">
                   <button onclick="location.href='/reservasC'" type="button" id="btn-header"> Reservar  
                     <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor">
@@ -135,12 +135,13 @@
               <h6> ${{producto.precio}}</h6> 
             </div>
             <div class="container">
-              <button type="submit" tyle="width: 100%; border-radius: 30px;">
+              <button onclick="location.href='/agregarCarrito'" style="width: 100%; border-radius: 30px;">
                 <p style="text-align: center; font-size: larger; font-weight: 600; padding-top: 10px;">Agregar</p>
               </button>
             </div>
+            <br>
             <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
-              <label for="cantidad" style="margin-right: 10px;">Cantidad:</label>
+              <label for="cantidad" style="margin-right: 10px; text-align: justify;">Cantidad:</label>
               <input type="number" id="cantidad" name="cantidad" value="1"  min="1"  max="10" style="width: 60px; text-align: center; border-radius: 5px; border: 1px solid #ccc;"  />
             </div>
           </div>

@@ -99,17 +99,31 @@
       <div class="container">
         <h4>Recomendados:</h4>
         <hr>
-        <div class="row">
-          {% for producto in producto %}
-          <div class="col-4">
-              <img src="{{producto.imagen_URL}}" alt="{{producto.nombre}}"  id="imagen"/>
-            <br>
-            <div class="container" id="precio">
-             <h6> ${{producto.precio}}</h6>
+        <form action="/agregarCarrito" method="post">
+          <div class="row" > 
+            {% for producto in productos %}
+            <div class="col-4" style="height: max-content;"> 
+              <img src="{{producto.URL_de_imagen}}" alt="platillo" id="imagen"/>
+              <input type="hidden" name ="productoID" value="{{producto.idPlatillo}}">
+              <input type="hidden" name ="precio" value="{{producto.precio}}">
+              <h2 style="text-align: center;">{{producto.nombre}}</h2>
+              <div class="container" id="precio">
+                <h6> ${{producto.precio}}</h6> 
+              </div>
+              <div class="container">
+                <button onclick="location.href='/agregarCarrito'" style="width: 100%; border-radius: 30px;">
+                  <p style="text-align: center; font-size: larger; font-weight: 600; padding-top: 10px;">Agregar</p>
+                </button>
+              </div>
+              <br>
+              <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <label for="cantidad" style="margin-right: 10px; text-align: justify;">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" value="1"  min="1"  max="10" style="width: 60px; text-align: center; border-radius: 5px; border: 1px solid #ccc;"  />
+              </div>
             </div>
-          </div>
-          {% endfor %}
-        </div>
+            {% endfor %}
+          </div>  
+        </form>  
         <hr>
       </div>
     </section>

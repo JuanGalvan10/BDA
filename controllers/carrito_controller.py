@@ -36,14 +36,17 @@ def checkoutEnvio():
         if request.method == 'POST':
             cambios = []
             subtotal = 0
-            nuevos_productos = []  
+            nuevos_productos = []
 
             for producto in session['productos']:
                 product_id = producto['id']
+                cantidad_nueva = request.form.get(f'cantidad_{product_id}', '0')
+                
                 if not cantidad_nueva.isdigit():
                     cantidad_nueva = 0
                 else:
                     cantidad_nueva = int(cantidad_nueva)
+                
                 cantidad_anterior = producto['cantidad']
 
                 if cantidad_nueva > 0:
@@ -67,11 +70,11 @@ def checkoutEnvio():
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
             usuario = Cliente.get_cliente_by_id(session['idCliente'])
-            direccionUser = usuario[7]
+            direccionUser = usuario['direccion']
             direcciones = Carrito.get_direccion_restaurantes()
-            return render_template('CheckoutDomicilio.html', subtotal = subtotal, direccionUser = direccionUser, direcciones = direcciones)
+            return render_template('CheckoutDomicilio.html', subtotal=subtotal, direccionUser=direccionUser, direcciones=direcciones)
         return redirect(url_for('checkoutResumen'))
-    else: 
+    else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
     

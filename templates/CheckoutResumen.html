@@ -114,28 +114,29 @@
                 <div class="col-9">
                     <div class="row"> 
                         {% for producto in productos %}
-                        <div class="col-sm-4 col-md-4"> 
+                        <div class="col-sm-4 col-md-4">
                             <div>
-                                <img src="{{producto[2]}}" class="img-fluid rounded" alt="{{producto[1]}}" style=" box-shadow: 0px 4px 6px black;">
+                                <img src="{{producto.URL_de_imagen}}" class="img-fluid rounded" alt="{{producto.nombre}}" style=" box-shadow: 0px 4px 6px black;">
                             </div>
                         </div>
-                        <div class="col-sm-8 col-md-8"> 
+                        <div class="col-sm-8 col-md-8">
                             <div class="mt-3">
-                                <h4 class="fs-3">{{producto[1]}} - ${{producto[3]}}</h4>
+                                <h4 class="fs-3">{{producto.nombre}} - ${{producto.precio}}</h4>
                             </div>
                             <div style="display: flex; justify-content: space-between;  align-items: center;">
-                                <p style="font-size: 15px; width:380px;">{{producto[4]}}</p>
+                                <p style="font-size: 15px; width:380px;">{{producto.descripcion}}</p>
                                 <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 100px;">
                                     <span>
                                         <div class="input-group mb-3" style="max-width: 150px;">
                                             <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto[0]}}" id="quantity_{{ producto[0]}}" readonly>
+                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto.idPlatillo}}" id="quantity_{{ producto.idPlatillo}}" readonly>
                                             <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
                                         </div>
                                     </span>
                                 </div>
                             </div>
                         </div>
+                        <hr>
                         {% endfor %}
                     </div>
                 </div>
