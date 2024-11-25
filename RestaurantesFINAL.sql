@@ -417,7 +417,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE nuevaDireccion(
     IN p_idUsuario INT,
-    IN direc
+    IN direc INT
 )
 BEGIN
     UPDATE CLIENTES
