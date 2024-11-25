@@ -182,8 +182,8 @@ INSERT INTO PLATILLOS (nombre, imagen_URL, precio, descripcion, inventario, idCa
 ('Shishitos', 'https://www.justonecookbook.com/wp-content/uploads/2022/08/Blistered-Shishito-Peppers-With-Ginger-Soy-Sauce-9223-II.jpg', 90.00, 'Sal Maldon, limón california', 20, 2),
 ('Papás Fritas', 'https://kodamasushi.cl/wp-content/uploads/2019/08/papas-fritas-touri-sushi02.jpg', 70.00, 'Sal matcha, soya-trufa', 30, 2),
 ('Camarones Roca', 'https://i0.wp.com/cucharamia.com/wp-content/uploads/2021/07/camarones-roca.jpg?w=798&ssl=1', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
-('Jalapeño Poppers', 'URL_de_imagen', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
-('Huachinango Tempura', 'URL_de_imagen', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
+('Jalapeño Poppers', 'https://www.recipetineats.com/tachyon/2024/02/Jalapeno-poppers_2.jpg?resize=1200%2C1500&zoom=0.54', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
+('Huachinango Tempura', 'https://tofuu.getjusto.com/orioneat-local/resized2/rcgzQe2pLxFQT8Ghw-800-x.webp', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
 
 CREATE TABLE TIPOSPROMOCION (
     idTipoPromocion INT PRIMARY KEY AUTO_INCREMENT,
