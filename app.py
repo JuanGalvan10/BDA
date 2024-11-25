@@ -39,8 +39,7 @@ def vista_principal():
         else:
             return render_template('DashboardAdmins.html', nombre_usuario = session['usuario'])
     else:
-        flash('Primero ingresa al sistema','error')
-        return redirect(url_for('login'))
+        return redirect(url_for('/'))
 
 #RUTAS PARA LA AUTENTICACION
 app.add_url_rule('/login', view_func=login, methods = ['GET', 'POST'])

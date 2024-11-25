@@ -31,7 +31,7 @@ class Reserva:
     def get_by_dia(fecha):
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         # Consulta SQL para obtener las horas ocupadas
-        cur.execute('obtenerReservasDia', [fecha])
+        cur.callproc('obtenerReservasDia', [fecha])
         horas_ocupadas = [row[0] for row in cur.fetchall()]
         cur.close()    
         return horas_ocupadas
@@ -44,8 +44,8 @@ class Reserva:
         cur.close()
 
     @staticmethod
-    def delete(empresa_id):
+    def delete(reserva_id):
         cur = mysql.connection.cursor()
-        cur.callproc('eliminarReserva', (empresa_id,))
+        cur.callproc('eliminarReserva', (reserva_id,))
         mysql.connection.commit()
         cur.close()

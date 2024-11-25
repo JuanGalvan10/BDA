@@ -1250,13 +1250,13 @@ DELIMITER //
 CREATE PROCEDURE obtenerReservasDia (IN fecha date)
 BEGIN
 SELECT
-hora_reserva
+    hora_reserva
 FROM
-RESERVA
+    RESERVAS
 WHERE 
-fecha_reserva = fecha
+    fecha_reserva = fecha
 GROUP BY hora_reserva
-HAVING COUNT(*) >= 10
+HAVING COUNT(*) >= 10;
 END // 
 DELIMITER ;
 

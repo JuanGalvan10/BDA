@@ -26,7 +26,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: 'POST',
-            url: '/horas-disponibles',
+            url: '/horas_disponibles',
             data: { fecha: fechaSeleccionada },
             success: function(data){
                 $('#horas-disponibles').html(data);
