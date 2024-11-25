@@ -68,3 +68,18 @@ BEGIN
     WHERE idUsuario = idU;
 END //
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER usuarioOcupado
+BEFORE INSERT ON USUARIOS_RESTAURANTE
+FOR EACH ROW
+BEGIN 
+    IF EXISTS (
+        SELECT 1 FROM USUARIOS_RESTAURANTE WHERE nombre_usuario = NEW.nombre_usuario.
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario ya registrado, intente on otro.';
+        END IF;
+END $$
+
+DELIMITER ;

@@ -10,7 +10,7 @@ from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, elimina
 from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
 from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, horas_disponibles
-from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar, guardar_direccion
+from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar, guardar_direccion, nueva_tarjeta
 
 app = Flask(__name__)
 
@@ -86,7 +86,7 @@ app.add_url_rule('/checkoutEnvio', view_func=checkoutEnvio,  methods = ['GET', '
 app.add_url_rule('/checkoutPago',view_func=checkoutPago, methods=['POST'])
 app.add_url_rule('/pagar',view_func=pagar, methods=['POST'])
 app.add_url_rule('/guardar_direccion', view_func=guardar_direccion,  methods = ['GET', 'POST'])
-app.add_url_rule('/insertar_tarjeta', view_func=guardar_direccion,  methods = ['GET', 'POST'])
+app.add_url_rule('/nueva_tarjeta', view_func=nueva_tarjeta,  methods = ['GET', 'POST'])
 
 @app.route('/reservasC')
 def reservas():

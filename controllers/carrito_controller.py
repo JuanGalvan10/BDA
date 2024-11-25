@@ -67,7 +67,7 @@ def checkoutEnvio():
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
             usuario = Cliente.get_cliente_by_id(session['idCliente'])
-            direccionUser = usuario['direccion']
+            direccionUser = usuario[7]
             direcciones = Carrito.get_direccion_restaurantes()
             return render_template('CheckoutDomicilio.html', subtotal = subtotal, direccionUser = direccionUser, direcciones = direcciones)
         return redirect(url_for('checkoutResumen'))
@@ -84,7 +84,7 @@ def checkoutPago():
             if direccion == 'domicilio':
                 costo = 50
                 total += costo
-            metodos = Carrito.get_Metodos(session['idUsuario'])
+            metodos = Carrito.get_metodos(session['idUsuario'])
             for metodo in metodos:
                 num_tarjeta = metodo['num_tarjeta']
                 censurado = '*' * (len(num_tarjeta) - 4) + num_tarjeta[-4:]  
