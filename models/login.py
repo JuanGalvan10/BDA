@@ -4,7 +4,7 @@ import hashlib
 
 
 def register_usuario(username,password, rol):
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur = mysql.connection.cursor()
     try:
         cur.callproc('registrarUsuario', [username, password, rol])
         result = cur.fetchone()  

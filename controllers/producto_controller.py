@@ -15,11 +15,8 @@ def mostrar_productos():
         productos = Producto.get_all()
         if session['rol'] == 'admin':
             return render_template('Inventario.html', productos = productos, nombre_usuario = session['usuario'])
-        else:
-            return render_template('catalogo.html', productos = productos)
-    else:
-        flash('Primero debes de ingresar.', 'error')
-        return redirect(url_for('login'))
+        
+    return render_template('catalogo.html', productos = productos)
 
 def ver_producto(id):
     producto = Producto.get_by_id(id)
