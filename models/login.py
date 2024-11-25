@@ -5,14 +5,17 @@ import hashlib
 
 def register_usuario(username,password, rol):
     cur = mysql.connection.cursor()
-    try: 
-        id_usuario = None
+    try:
         cur.callproc('registrarUsuario', [username, password, rol])
-        result = cur.fetchone()
-        id_usuario = result[0]
+        result = cur.fetchone()  
+        if result:
+            idUsuario = result[0]  
+
+        while cur.nextset():
+            pass
+
         mysql.connection.commit()
-        cur.close()
-        return True, 'Registro de usuario exitoso', id_usuario
+        return True, 'Registro de usuario exitoso', idUsuario
     except MySQLdb.OperationalError as e:
         cur.close()
         return False, str(e), None

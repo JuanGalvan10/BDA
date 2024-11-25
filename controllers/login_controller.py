@@ -10,7 +10,7 @@ def login():
         if user:
             session['loggedin'] = True
             session['idUsuario'] = user['idUsuario']
-            session['usuario'] = user['username']
+            session['usuario'] = user['nombre_usuario']
             session['rol'] = user['nombre']
             if session['rol'] == 'cliente':
                 session['idCliente'] = get_id_cliente(session['idUsuario'])

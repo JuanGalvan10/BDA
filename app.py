@@ -9,7 +9,7 @@ from controllers.producto_controller import mostrar_productos, nuevo_producto, e
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
 from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
-from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva, horas_disponibles
+from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, horas_disponibles
 from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar, guardar_direccion
 
 app = Flask(__name__)
@@ -66,7 +66,6 @@ app.add_url_rule('/eliminar_cliente/<int:id>', view_func=eliminar_cliente,  meth
 #RUTAS PARA RESERVAS
 app.add_url_rule('/reservas', view_func=mostrar_reservas, methods = ['GET', 'POST'])
 app.add_url_rule('/nuevo_reserva', view_func=nuevo_reserva,  methods = ['GET', 'POST'])
-app.add_url_rule('/editar_reserva/<int:id>', view_func=editar_reserva,  methods = ['GET', 'POST'])
 app.add_url_rule('/eliminar_reserva/<int:id>', view_func=eliminar_reserva,  methods = ['GET', 'POST'])
 
 #RUTAS PARA PEDIDOS

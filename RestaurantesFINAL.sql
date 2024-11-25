@@ -502,15 +502,21 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE registrarCliente(
     IN idUsuario INT,
-    IN nom varchar(50),
-    IN apell varchar(50),
-    IN tel varchar(15),
-    IN correo varchar(100),
-    IN direc varchar(100),
+    IN nom VARCHAR(50),
+    IN apell VARCHAR(50),
+    IN tel VARCHAR(15),
+    IN correo VARCHAR(100),
+    IN direc VARCHAR(100)
 )
 BEGIN
-    INSERT INTO CLIENTES (idUsuario, nombre, apellido, telefono, correo, direccion)
-    VALUES (idUsuario, nom, apell, tel, correo, direc) ;
+    DECLARE newIdPuntos INT;
+    INSERT INTO PUNTOS_CLIENTES (cant_puntos)
+    VALUES (0);
+
+    SET newIdPuntos = LAST_INSERT_ID();
+
+    INSERT INTO CLIENTES (idUsuario, nombre, apellido, telefono, correo, direccion, idPuntos)
+    VALUES (idUsuario, nom, apell, tel, correo, direc, newIdPuntos);
 END //
 DELIMITER ;
 
