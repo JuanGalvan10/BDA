@@ -1382,3 +1382,42 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER / / 
+CREATE PROCEDURE StatusDeClientes()
+BEGIN
+    SELECT Status_Clientes, COUNT(*) AS Total
+    FROM STATUS_CLIENTES
+    GROUP BY Status_Clientes;
+END / /
+
+DELIMITER ;
+
+DELIMITER / /
+CREATE PROCEDURE resenasCalificaciones()
+BEGIN
+    SELECT puntuacion, COUNT(*) AS Total
+    FROM RESENAS
+    GROUP BY puntuacion;
+END / /
+
+DELIMITER ;
+
+DELIMITER / /
+CREATE PROCEDURE Status_Reservas()
+BEGIN
+    SELECT Status_Reservas, COUNT(*) AS Reservas
+    FROM STATUS_RESERVAS
+    GROUP BY Status_Reservas;
+END / /
+
+DELIMITER ; 
+
+DELIMITER / /
+CREATE PROCEDURE PlatillosStock()
+BEGIN
+    SELECT inventario, COUNT(*) AS Stock
+    FROM PLATILLOS
+    GROUP BY inventario;
+END / /
+
+DELIMITER ;
