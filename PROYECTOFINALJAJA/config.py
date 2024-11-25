@@ -1,5 +1,0 @@
-MYSQL_HOST = 'localhost'
-MYSQL_USER = 'user_01'
-MYSQL_PASSWORD = '666'
-MYSQL_DB = 'Restaurantes'
-SECRET_KEY = 'UDEM'
