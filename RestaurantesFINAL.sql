@@ -173,15 +173,15 @@ CREATE TABLE PLATILLOS (
 );
 
 INSERT INTO PLATILLOS (nombre, imagen_URL, precio, descripcion, inventario, idCategoria) VALUES
-('Tostada de Atún', 'URL_de_imagen', 100.00, 'Aleta azul, aioli de búfalo, aguacate, cilantro', 20, 1),
-('Tostada de Hamachi Aji', 'URL_de_imagen', 120.00, 'Yuzu-soya, aji amarillo, mayo ajo tatemado, cebollín, furakake shiso', 0, 1),
-('Batera de Toro', 'URL_de_imagen', 140.00, 'Aleta azul, yuzu-aioli, aguacate, aji amarillo', 10, 1),
-('Batera de Salmón', 'URL_de_imagen', 130.00, 'Salmón, aioli habanero, lemon soy, cebollín, cilantro criollo', 18, 1),
-('Tartar de Toro', 'URL_de_imagen', 150.00, 'Aleta azul, vinagreta yuzu-trufa', 12, 1),
-('Edamame', 'URL_de_imagen', 80.00, 'Sal Maldon, salsa negra, polvo piquín', 0, 2),
-('Shishitos', 'URL_de_imagen', 90.00, 'Sal Maldon, limón california', 20, 2),
-('Papás Fritas', 'URL_de_imagen', 70.00, 'Sal matcha, soya-trufa', 30, 2),
-('Camarones Roca', 'URL_de_imagen', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
+('Tostada de Atún', 'https://media-cdn.tripadvisor.com/media/photo-s/18/84/96/2b/tostada-de-atun-fresco.jpg', 100.00, 'Aleta azul, aioli de búfalo, aguacate, cilantro', 20, 1),
+('Tostada de Hamachi Aji', 'https://www.foodgal.com/wp-content/uploads/2022/10/Juniper-Ivy-hamachi-tostada.jpg', 120.00, 'Yuzu-soya, aji amarillo, mayo ajo tatemado, cebollín, furakake shiso', 0, 1),
+('Batera de Toro', 'https://losarrocesdekiko.com/wp-content/uploads/2022/04/Rabo-de-toro--scaled.jpg', 140.00, 'Aleta azul, yuzu-aioli, aguacate, aji amarillo', 10, 1),
+('Batera de Salmón', 'https://media-cdn.tripadvisor.com/media/photo-s/1d/3f/0b/0e/batera-de-salmao.jpg', 130.00, 'Salmón, aioli habanero, lemon soy, cebollín, cilantro criollo', 18, 1),
+('Tarta de Toro', 'https://cdn7.kiwilimon.com/recetaimagen/29776/960x720/31682.jpg.webp', 150.00, 'Aleta azul, vinagreta yuzu-trufa', 12, 1),
+('Edamame', 'https://misssushi.es/wp-content/uploads/edamame.jpg', 80.00, 'Sal Maldon, salsa negra, polvo piquín', 0, 2),
+('Shishitos', 'https://www.justonecookbook.com/wp-content/uploads/2022/08/Blistered-Shishito-Peppers-With-Ginger-Soy-Sauce-9223-II.jpg', 90.00, 'Sal Maldon, limón california', 20, 2),
+('Papás Fritas', 'https://kodamasushi.cl/wp-content/uploads/2019/08/papas-fritas-touri-sushi02.jpg', 70.00, 'Sal matcha, soya-trufa', 30, 2),
+('Camarones Roca', 'https://i0.wp.com/cucharamia.com/wp-content/uploads/2021/07/camarones-roca.jpg?w=798&ssl=1', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
 ('Jalapeño Poppers', 'URL_de_imagen', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
 ('Huachinango Tempura', 'URL_de_imagen', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
 
