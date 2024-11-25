@@ -69,7 +69,7 @@
   <div style="text-align: center; margin-top: 110px;">
     <img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="290">
   </div>  
-  <div class="container">
+  <div class="container" style="text-align: center;">
     <h1> SESION CERRADA {{username}}!</h1>
   </div>
 
@@ -162,3 +162,18 @@
   
 </body>
 </html>
+<script>
+  function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+function scrollleft(){
+  document.getElementById("scrolling-text").style.left = '100%';
+  setTimeout(scrollleft, 25);
+}
+scrollleft();
+</script>
