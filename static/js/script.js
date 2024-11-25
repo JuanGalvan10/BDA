@@ -85,3 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
           : 'Tema: Ingresa un tema'; 
   });
 });
+
+function openNav() {
+document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+}
+
+function scrollleft(){
+document.getElementById("scrolling-text").style.left = '100%';
+setTimeout(scrollleft, 25);
+}
+scrollleft();
