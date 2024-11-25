@@ -1292,4 +1292,24 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE ComprasXCategoria_gr()
+BEGIN
+    SELECT ct.nombre AS Categoria, COUNT(pl.idCategoria) AS Total_Compras
+    FROM PEDIDOS pe JOIN DETALLESPEDIDO dp 
+    ON pe.idPedido=dp.idPedido JOIN PLATILLOS pl 
+    ON dp.idPlatillo=pl.idPlatillo JOIN CATEGORIAS ct 
+    ON pl.idCategoria=ct.idCategoria
+    GROUP BY ct.nombre;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE VentasXDia_gr()
+BEGIN
+    SELECT fecha_entrega, sum(total_pedido) AS Ventas_totales
+    FROM pedidosCompletos_vw
+    GROUP BY fecha_entrega;
+END $$
+DELIMITER ;
 
