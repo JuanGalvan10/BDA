@@ -420,6 +420,7 @@ END $$
 DELIMITER ; 
 
 -- STORED PROCEDURES --
+
 -- PROCS PARA Restaurante --
 DELIMITER $$
 CREATE PROCEDURE obtenerDireccionesR()
@@ -430,6 +431,7 @@ END $$
 DELIMITER ;
 
 -- PROCS PARA Cliente --
+
 DELIMITER $$
 CREATE PROCEDURE nuevaDireccion(
     IN p_idUsuario INT,
@@ -469,8 +471,8 @@ BEGIN
     WHERE idPuntos = (SELECT idPuntos FROM CLIENTES WHERE idCliente = p_idCliente);
 END $$ 
 DELIMITER ;
--- PROCS PARA LOGIN --
 
+-- PROCS PARA LOGIN --
 
 CREATE VIEW
     InfoUsuario AS
@@ -595,7 +597,7 @@ END //
 DELIMITER ;
 
 
- -- INSERTAR CLIENTES -------- - - - - - - -  - - - - - - - - - - - - - - -- - 
+ -- INSERTAR CLIENTES --
 
 DELIMITER / /
 CREATE PROCEDURE obtenerUser(
@@ -717,7 +719,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- PROCS PARA PEDIDOS ---------------------------------------------------------------------------------------------------
+-- PROCS PARA PEDIDOS --
 
 CREATE VIEW
     mostrarPedidos_vw AS
@@ -1030,7 +1032,7 @@ BEGIN
 END //
 DELIMITTER ;
 
--- PROCS PARA RESEÑAS -------------------------------------------------------------------------------------------------
+-- PROCS PARA RESEÑAS --
 
 CREATE VIEW
     mostrarResenas_vw AS
@@ -1135,7 +1137,7 @@ WHERE
 END //
 DELIMITER ;
 
--- PROCS PARA RESERVAS -----------------------------------------------------------------------------------------------
+-- PROCS PARA RESERVAS --
 
 CREATE VIEW
     muestrareservas_vw AS
@@ -1319,7 +1321,7 @@ END / / DELIMITER;
 -- GRAFICAS --
 
 DELIMITER //
-CREATE PROCEDURE VentasXMes_gr ()
+CREATE PROCEDURE VentasXMes_gr () 
 BEGIN
 SELECT
     YEAR (fecha_pedido),
@@ -1336,11 +1338,11 @@ GROUP BY
 ORDER BY
     Mes;
 END //
+
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE UsuariosXRol_gr()
-BEGIN
+CREATE PROCEDURE UsuariosXRol_gr() 
     SELECT
         r.nombre AS rol_nombre,
         COUNT(*) AS total_usuarios
@@ -1351,34 +1353,21 @@ BEGIN
     GROUP BY
         r.idRol;
 END //
-DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE StatusReservas_gr()
-BEGIN
-    SELECT 
-        sr.Status_Reservas as Status, 
-        COUNT(r.idReserva) AS total
-    FROM 
-        RESERVAS r
-    NATURAL JOIN 
-        STATUS_RESERVAS sr
-    GROUP BY 
-        sr.idStatus;
-END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE PromedioXTipoResenas_gr()
 BEGIN
-    select nombre, AVG(puntuacion)
-	from RESENAS natural join TIPOS_RESENA tr 
-	group by idTipoResena;
+    SELECT nombre, AVG(puntuacion)
+	FROM RESENAS NATURAL JOIN TIPOS_RESENA tr 
+	GROUP BY idTipoResena;
 END $$
+
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE ComprasXCategoria_gr()
+CREATE PROCEDURE ComprasXCategoria_gr() 
 BEGIN
     SELECT ct.nombre AS Categoria, COUNT(pl.idCategoria) AS Total_Compras
     FROM PEDIDOS pe JOIN DETALLESPEDIDO dp 
@@ -1387,19 +1376,21 @@ BEGIN
     ON pl.idCategoria=ct.idCategoria
     GROUP BY ct.nombre;
 END $$
+
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE VentasXDia_gr()
+CREATE PROCEDURE VentasXDia_gr() 
 BEGIN
     SELECT fecha_entrega, sum(total_pedido) AS Ventas_totales
     FROM pedidosCompletos_vw
     GROUP BY fecha_entrega;
 END $$
+
 DELIMITER ;
 
 DELIMITER / / 
-CREATE PROCEDURE StatusDeClientes()
+CREATE PROCEDURE StatusDeClientes() 
 BEGIN
     SELECT Status_Clientes, COUNT(*) AS Total
     FROM STATUS_CLIENTES
@@ -1409,7 +1400,7 @@ END / /
 DELIMITER ;
 
 DELIMITER / /
-CREATE PROCEDURE resenasCalificaciones()
+CREATE PROCEDURE resenasCalificaciones() 
 BEGIN
     SELECT puntuacion, COUNT(*) AS Total
     FROM RESENAS
@@ -1419,7 +1410,7 @@ END / /
 DELIMITER ;
 
 DELIMITER / /
-CREATE PROCEDURE Status_Reservas()
+CREATE PROCEDURE Status_Reservas() 
 BEGIN
     SELECT Status_Reservas, COUNT(*) AS Reservas
     FROM STATUS_RESERVAS
@@ -1429,7 +1420,7 @@ END / /
 DELIMITER ; 
 
 DELIMITER / /
-CREATE PROCEDURE PlatillosStock()
+CREATE PROCEDURE PlatillosStock() 
 BEGIN
     SELECT inventario, COUNT(*) AS Stock
     FROM PLATILLOS
