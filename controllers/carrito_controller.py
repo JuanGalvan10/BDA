@@ -24,10 +24,12 @@ def checkoutResumen():
         productos = []
         for producto in prods:
             idProducto = producto['id']
-            productos.append(Producto.get_by_id(idProducto))
-            productos.append(producto['cantidad'])
+            productos_checkout = Producto.get_by_id(idProducto)
+            productos_checkout['cantidad'] = producto['cantidad']
+            productos.append(productos_checkout)
+        print(productos)
         return render_template('CheckoutResumen.html', productos = productos, subtotal = session['subtotal'])
-    else: 
+    else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
     
@@ -100,7 +102,7 @@ def checkoutPago():
 def pagar():
     if 'loggedin' in session:
         if request.method =='POST':
-            productos = session['producto']
+            productos = session['productos']
             idProductos = []
             cantidades = []
             for producto in productos:
