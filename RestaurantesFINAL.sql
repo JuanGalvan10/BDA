@@ -774,16 +774,11 @@ CREATE PROCEDURE insertarPedido (
 )
 BEGIN
     DECLARE New_fecha_entrega DATE;
-    DECLARE New_idStatus INT;
     
-    SET New_fecha_entrega = CURDATE();
-
-    SELECT idStatus INTO New_idStatus
-    FROM CLIENTES
-    WHERE idCliente = New_idCliente;
+    SET New_fecha_entrega = DATE_ADD(CURDATE(), INTERVAL 3 DAY);
 
     INSERT INTO PEDIDOS (fecha_pedido, fecha_entrega, total_pedido, idCliente, idStatus)
-    VALUES (CURDATE(), New_fecha_entrega, 0.0, New_idCliente, New_idStatus);
+    VALUES (CURDATE(), New_fecha_entrega, 0.0, New_idCliente, 1);
 END / /
 DELIMITER ;
 
