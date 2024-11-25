@@ -34,7 +34,7 @@ def inicio():
 def vista_principal():
     if 'loggedin' in session:
         if session['rol'] == 'cliente':
-            productos = Producto.obtenerRecomendados()
+            productos = Producto.obtenerRecomendados(session['idCliente'])
             return render_template('dashboard_clientes.html', usuario = session['usuario'], productos = productos)
         else:
             return render_template('DashboardAdmins.html', nombre_usuario = session['usuario'])
