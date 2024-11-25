@@ -129,14 +129,14 @@
                                     <span>
                                         <div class="input-group mb-3" style="max-width: 150px;">
                                             <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                            <input type="number" class="form-control text-center" value="{{producto[7]}}" name="cantidad_{{producto[0]}}" id="quantity_{{ producto[0]}}" readonly>
+                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto[0]}}" id="quantity_{{ producto[0]}}" readonly>
                                             <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
                                         </div>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        {% end for %}
+                        {% endfor %}
                     </div>
                 </div>
     

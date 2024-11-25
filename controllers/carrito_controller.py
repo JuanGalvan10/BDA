@@ -8,8 +8,8 @@ def agregarCarrito():
     if 'loggedin' in session:
         if request.method =='POST':
             productoID = request.form['productoID']
-            cantidad = request.form['cantidad']
-            precio = request.form['precio']
+            cantidad = int(request.form['cantidad'])
+            precio = float(request.form['precio'])
             producto = {'id': productoID, 'cantidad': cantidad, 'precio': precio}
             session['productos'].append(producto)
             session['subtotal'] += cantidad*precio
@@ -40,7 +40,10 @@ def checkoutEnvio():
 
             for producto in session['productos']:
                 product_id = producto['id']
-                cantidad_nueva = int(request.form.get(f'cantidad_{product_id}', 0))
+                if not cantidad_nueva.isdigit():
+                    cantidad_nueva = 0
+                else:
+                    cantidad_nueva = int(cantidad_nueva)
                 cantidad_anterior = producto['cantidad']
 
                 if cantidad_nueva > 0:

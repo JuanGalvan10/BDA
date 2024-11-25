@@ -81,7 +81,7 @@ app.add_url_rule('/horas_disponibles',view_func=horas_disponibles, methods=['POS
 
 #RUTAS PARA EL CHECKOUT
 app.add_url_rule('/agregarCarrito', view_func=agregarCarrito, methods = ['GET', 'POST'])
-app.add_url_rule('/chechoutResumen', view_func=checkoutResumen,  methods = ['GET', 'POST'])
+app.add_url_rule('/checkoutResumen', view_func=checkoutResumen,  methods = ['GET', 'POST'])
 app.add_url_rule('/checkoutEnvio', view_func=checkoutEnvio,  methods = ['GET', 'POST'])
 app.add_url_rule('/checkoutPago',view_func=checkoutPago, methods=['POST'])
 app.add_url_rule('/pagar',view_func=pagar, methods=['POST'])

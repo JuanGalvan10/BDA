@@ -607,7 +607,7 @@ BEGIN
     SELECT u.nombre_usuario, c.idCliente, c.nombre, c.apellido, c.telefono, c.correo, p.cant_puntos, c.direccion
     FROM CLIENTES c
     JOIN USUARIOS_RESTAURANTE u ON c.idUsuario = u.idUsuario 
-    JOIN PUNTOS_CLIENTES ON c.idPuntos = p.idPuntos
+    JOIN PUNTOS_CLIENTES p ON c.idPuntos = p.idPuntos
     WHERE idCliente = New_idCliente;
 END //
 DELIMITER ;
