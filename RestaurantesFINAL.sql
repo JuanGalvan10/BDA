@@ -164,7 +164,7 @@ INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema,
 CREATE TABLE PLATILLOS (
     idPlatillo INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    imagen_URL VARCHAR(255) NOT NULL,
+    imagen_URL TEXT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
     descripcion VARCHAR(255),
     inventario INT,
