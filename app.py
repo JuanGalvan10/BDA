@@ -7,10 +7,10 @@ from models.producto import Producto
 from controllers.login_controller import login, register_user,register_user_client, register_client, logout, mostrar_usuarios
 from controllers.producto_controller import mostrar_productos, nuevo_producto, editar_producto, eliminar_producto
 from controllers.pedido_controller import mostrar_pedidos, nuevo_pedido, eliminar_pedido
-from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente, guardar_direccion
+from controllers.cliente_controller import mostrar_clientes, nuevo_cliente, eliminar_cliente, editar_cliente
 from controllers.resena_controller import mostrar_resenas, nuevo_resena, eliminar_resena
 from controllers.reserva_controller import mostrar_reservas, nuevo_reserva, eliminar_reserva, editar_reserva, horas_disponibles
-from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar
+from controllers.carrito_controller import agregarCarrito, checkoutResumen, checkoutPago, checkoutEnvio, pagar, guardar_direccion
 
 app = Flask(__name__)
 
