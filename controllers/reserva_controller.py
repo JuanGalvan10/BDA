@@ -15,8 +15,8 @@ def mostrar_reservas():
             reservas = Reserva.get_all()
             return render_template('ReservasAdmin.html', reservas = reservas, nombre_usuario = session['usuario'])
         else:
-            reservas = Reserva.get_by_cliente(session['IdCliente'])
-            return render_template('Mis_reservas.html', reservas = reservas)
+            reservas = Reserva.get_by_cliente(session['idCliente'])
+            return render_template('mis_reservas.html', reservas = reservas)
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

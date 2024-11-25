@@ -14,7 +14,7 @@ class Resena:
     @staticmethod
     def get_by_id(resena_id):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerResena(%s)', (resena_id,))
+        cur.callproc('obtenerResena', (resena_id,))
         resena = cur.fetchone()
         cur.close()
         return resena
@@ -22,7 +22,7 @@ class Resena:
     @staticmethod
     def get_by_producto(productoID):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerResenasProducto(%s)', (productoID,))
+        cur.callproc('obtenerResenasProducto', (productoID,))
         resenas = cur.fetchall()
         cur.close()
         return resenas
@@ -30,7 +30,7 @@ class Resena:
     @staticmethod
     def get_by_cliente(idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerResenasCliente(%s)', (idCliente,))
+        cur.callproc('obtenerResenasCliente', (idCliente,))
         resenas = cur.fetchall()
         cur.close()
         return resenas
@@ -45,6 +45,6 @@ class Resena:
     @staticmethod
     def delete(resena_id):
         cur = mysql.connection.cursor()
-        cur.callproc('eliminarResena(%s)', (resena_id,))
+        cur.callproc('eliminarResena', (resena_id,))
         mysql.connection.commit()
         cur.close()

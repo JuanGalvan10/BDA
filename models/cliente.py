@@ -30,7 +30,7 @@ class Cliente:
     @staticmethod
     def get_by_id(idUser):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerUser(%s)', (idUser,))
+        cur.callproc('obtenerUser', (idUser,))
         User = cur.fetchone()
         cur.close()
         return User
@@ -38,7 +38,7 @@ class Cliente:
     @staticmethod
     def get_cliente_by_id(idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerCliente(%s)', (idCliente,))
+        cur.callproc('obtenerCliente', (idCliente,))
         Cliente = cur.fetchone()
         cur.close()
         return Cliente
@@ -53,7 +53,7 @@ class Cliente:
     @staticmethod
     def delete(idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('eliminarCliente(%s)', (idCliente,))
+        cur.callproc('eliminarCliente', (idCliente,))
         mysql.connection.commit()
         cur.close()
 

@@ -32,7 +32,7 @@ def mostrar_pedidos():
                     'cantidad': row['cantidad'],
                     'precio_unitario': row['precio_unitario']
                 })
-            return render_template('Mis_pedidos.html', pedidos = pedidos)
+            return render_template('mis_pedidos.html', pedidos = pedidos)
         else:
             resultados = Pedido.get_by_all()
             pedidos = {}

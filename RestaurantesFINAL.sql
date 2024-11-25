@@ -909,7 +909,7 @@ SELECT
     inventario,
     idCategoria
 FROM
-    ProductosDisponibles;
+    PlatillosDisponibles_vw;
 END // DELIMITER ;
 
 CREATE VIEW ListaPlatillos AS

@@ -14,7 +14,7 @@ class Producto:
     @staticmethod
     def get_by_id(producto_id):
         cur = mysql.connection.cursor()
-        cur.callproc('obtenerPlatillo(%s)', (producto_id,))
+        cur.callproc('obtenerPlatillo', (producto_id,))
         producto = cur.fetchone()
         cur.close()
         return producto
@@ -36,14 +36,14 @@ class Producto:
     @staticmethod
     def delete(producto_id):
         cur = mysql.connection.cursor()
-        cur.callproc('eliminarPlatillo(%s)', (producto_id,))
+        cur.callproc('eliminarPlatillo', (producto_id,))
         mysql.connection.commit()
         cur.close()
 
     @staticmethod
     def obtenerRecomendados(idCliente):
         cur = mysql.connection.cursor()
-        cur.callproc('recomendarPlatillosCliente(%s)', (idCliente,))
+        cur.callproc('recomendarPlatillosCliente', (idCliente,))
         productos = cur.fetchall()
         cur.close()
         return productos
