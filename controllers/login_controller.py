@@ -57,7 +57,7 @@ def register_client(idUsuario):
         correo = request.form['correo']
         telefono = request.form['telefono']
         direccion = request.form['direccion']
-        success, message = register_cliente(idUsuario, nombre, apellido, correo, telefono, direccion)
+        success, message = register_cliente(idUsuario, nombre, apellido, telefono , correo, direccion)
         if success:
             flash('Registro exitoso', 'success')
             return redirect(url_for('login'))
