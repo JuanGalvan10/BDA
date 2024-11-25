@@ -111,10 +111,6 @@ def mi_perfil():
         flash('Primero ingresa al sistema','error')
         return redirect(url_for('login'))
 
-@app.route('/nueva_tarjeta')
-def nueva_tarjeta():
-    return render_template('AgregarNuevaTarjeta.html')
-
 @app.route('/menu')
 def menu():
     loggedin = False

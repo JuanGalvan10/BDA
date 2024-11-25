@@ -150,8 +150,7 @@ def nueva_tarjeta():
                 redirect(url_for('checkoutPago'))
             except Exception as e:
                 return {"error": str(e)}, 500
-        else:
-            flash('Metodo de acceso incorrecto')
+        return render_template('AgregarNuevaTarjeta.html')
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
