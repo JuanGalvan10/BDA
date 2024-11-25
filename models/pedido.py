@@ -5,7 +5,7 @@ import hashlib
 class Pedido:
     @staticmethod
     def get_all():
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('mostrarPedidos')
         pedidos = cur.fetchall()
         cur.close()
@@ -36,7 +36,7 @@ class Pedido:
 
     @staticmethod
     def get_by_id(idPedido):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerPedido', (idPedido,))
         pedido = cur.fetchone()
         cur.close()
@@ -44,7 +44,7 @@ class Pedido:
     
     @staticmethod
     def get_by_cliente(idCliente):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerPedidosCliente', (idCliente,))
         pedidos = cur.fetchall()
         cur.close()

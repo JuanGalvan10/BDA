@@ -4,7 +4,7 @@ import hashlib
 
 
 def register_usuario(username,password, rol):
-    cur = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     try:
         cur.callproc('registrarUsuario', [username, password, rol])
         result = cur.fetchone()  
@@ -45,7 +45,7 @@ def login_user(username,password):
         return None
 
 def get_users():
-    cur = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     try: 
         cur.callproc('mostrarUsuarios')
         usuarios = cur.fetchone()
@@ -56,7 +56,7 @@ def get_users():
         return False, str(e)
     
 def get_id_cliente(idCliente):
-    cur = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cur.callproc('obtenerId', (idCliente,))
     id = cur.fetchone()
     cur.close()

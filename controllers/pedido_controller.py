@@ -34,7 +34,7 @@ def mostrar_pedidos():
                 })
             return render_template('mis_pedidos.html', pedidos = pedidos)
         else:
-            resultados = Pedido.get_by_all()
+            resultados = Pedido.get_all()
             pedidos = {}
             for row in resultados:
                 id_pedido = row['idPedido']

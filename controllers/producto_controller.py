@@ -14,7 +14,7 @@ def mostrar_productos():
                     return redirect(url_for('eliminar_producto', id=id))
         productos = Producto.get_all()
         if session['rol'] == 'admin':
-            return render_template('inventario.html', productos = productos, nombre_usuario = session['usuario'])
+            return render_template('Inventario.html', productos = productos, nombre_usuario = session['usuario'])
         else:
             return render_template('catalogo.html', productos = productos)
     else:

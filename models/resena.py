@@ -5,7 +5,7 @@ import hashlib
 class Resena:
     @staticmethod
     def get_all():
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('mostrarResenas')
         resenas = cur.fetchall()
         cur.close()
@@ -13,7 +13,7 @@ class Resena:
     
     @staticmethod
     def get_by_id(resena_id):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerResena', (resena_id,))
         resena = cur.fetchone()
         cur.close()
@@ -21,7 +21,7 @@ class Resena:
     
     @staticmethod
     def get_by_producto(productoID):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerResenasProducto', (productoID,))
         resenas = cur.fetchall()
         cur.close()
@@ -29,7 +29,7 @@ class Resena:
     
     @staticmethod
     def get_by_cliente(idCliente):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerResenasCliente', (idCliente,))
         resenas = cur.fetchall()
         cur.close()

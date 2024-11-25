@@ -1220,7 +1220,7 @@ SELECT
     telefono,
     correo
 FROM
-    muestrareservas_vw
+    muestrareservas_vw;
 END // 
 DELIMITER ;
 

@@ -5,7 +5,7 @@ import hashlib
 class Reserva:
     @staticmethod
     def get_all():
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerReservas')
         reservas = cur.fetchall()
         cur.close()
@@ -13,7 +13,7 @@ class Reserva:
     
     @staticmethod
     def get_by_id(reserva_id):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerReserva', (reserva_id,))
         reserva = cur.fetchone()
         cur.close()
@@ -21,7 +21,7 @@ class Reserva:
     
     @staticmethod
     def get_by_cliente(IdCliente):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('obtenerReservasCliente', (IdCliente,))
         reservas = cur.fetchall()
         cur.close()
@@ -29,7 +29,7 @@ class Reserva:
     
     @staticmethod
     def get_by_dia(fecha):
-        cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         # Consulta SQL para obtener las horas ocupadas
         cur.execute('obtenerReservasDia', [fecha])
         horas_ocupadas = [row[0] for row in cur.fetchall()]
