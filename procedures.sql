@@ -60,11 +60,11 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE obtenerId(
-    IN idU INT,
+    IN idU INT
 )
 BEGIN
     SELECT idCliente
     FROM CLIENTES
-    WHERE idUsuario = idU
+    WHERE idUsuario = idU;
 END //
 DELIMITER ;

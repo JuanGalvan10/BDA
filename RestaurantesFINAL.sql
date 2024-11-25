@@ -6,9 +6,9 @@ CREATE TABLE ROLES (
 -- ROLES OFICIALES --
 
 INSERT INTO ROLES (nombre) VALUES
-('Cliente'),
-('Admin'),
-('Staff');
+('cliente'),
+('admin'),
+('staff');
 
 CREATE TABLE TIPOS_STAFF(
     idRolStaff INT PRIMARY KEY AUTO_INCREMENT,
