@@ -15,7 +15,6 @@ int main()
     ofstream ArchSalida3("output-3.out"); // Salida para recorridos DFS.
 
     // Declaración de variables para almacenar y procesar datos
-    string arrdatos[250][6]; // Matriz para almacenar datos leídos del archivo (aunque no se utiliza aquí).
     string datos, linea, ciudadA, ciudadB, DxTrain_s, DxCar_s, TxTrain_s, TxCar_s; // Variables auxiliares.
     string ciudad2, ciudadi, ciudadf; // Nombres de ciudades utilizadas en los menús.
     int DxTrain, DxCar; // Distancias en tren y auto.
