@@ -45,7 +45,7 @@ int Hora::aMin(Hora hora){
     return hora.hh * 60 + hora.mm;
 }
 
-Hora Hora::aHora(int min)
+Hora Hora::aHora(int min) //Metodo que transforma una hora a minutos
 {
     Hora horaFinal;
     if (min < 0)
