@@ -9,13 +9,14 @@ using namespace std;
 
 int main()
 {
-
+    //declaracion de archivos para importar y exportar
     ifstream ArchEntrada;
     ArchEntrada.open("EuropeCities.csv");
     ofstream ArchSalida1("output-1.out");
     ofstream ArchSalida2("output-2.out");
     ofstream ArchSalida3("output-3.out");
 
+    //declaracion de variables
     string arrdatos[250][6];
     string datos, linea, ciudadA, ciudadB, DxTrain_s, DxCar_s, TxTrain_s, TxCar_s;
     string ciudad2, ciudadi, ciudadf;
@@ -33,6 +34,7 @@ int main()
     {
         while (getline(ArchEntrada, linea))
         {
+            //Leer los valores de todo el archivo
             stringstream datos(linea);
             getline(datos, ciudadA, ',');
             getline(datos, ciudadB, ',');
@@ -44,10 +46,10 @@ int main()
             DxTrain = stoi(DxTrain_s); // convertir distancia string a entero
             DxCar = stoi(DxCar_s);     // convertir distancia string a entero
 
-            Hora TxTrain(TxTrain_s);
-            Hora TxCar(TxCar_s);
+            Hora TxTrain(TxTrain_s); //convierte de string a tipo Hora 
+            Hora TxCar(TxCar_s);   //convierte de string a tipo Hora
 
-            // Guarda todos las ciudades en una lista
+            // Busca si ya fue agergada anteriormente
             if (MiCiudad.findData(ciudadA) == -1)
             {
                 MiCiudad.addCiu(ciudadA);
@@ -57,8 +59,7 @@ int main()
                 MiCiudad.addCiu(ciudadB);
             }
 
-            // guarda los arcos con su ponderacion bidireccional
-            // mandar horas
+            // guarda los arcos con su ponderacion bidireccion
             MiCiudad.addRec(ciudadA, ciudadB, TxTrain, DxTrain, TxCar, DxCar);
 
             cont++;
@@ -148,7 +149,8 @@ int main()
         }
 
     } while (ans > 0 && ans < 4);
-
+    
+    //cerrar archivos utilizados
     ArchSalida1.close();
     ArchSalida2.close();
     ArchSalida3.close();
