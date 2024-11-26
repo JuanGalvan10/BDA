@@ -1,4 +1,4 @@
-
+//clases y bibliotecas a usar
 #include "NodoCiu.h"
 #include "QueueT.h"
 #include "Stack.h"
@@ -11,19 +11,19 @@ template <class T>
 class LinkedListPF
 {
 private:
-    int table[82][5];
+    int table[82][5]; //iniciar tablas para los recorridos Dijkstra
     NodoCiu<T> *headCiu;
     QueueT<T> queueT;
     Stack<T> stack;
     QueueT<T> procesados;
     int size;
 
-    int procesado(T data);
+    int procesado(T data); // metodo para saber si ya fue procesado 
 
-    int DijkstraRun_Carro(T from);
-    int DijkstraRun_Tren(T from);
-    void initTable(T from);
-    void printTable();
+    int DijkstraRun_Carro(T from); //Dijkstra recorrdio de carro 
+    int DijkstraRun_Tren(T from); //Dijkstra recorrido de tren
+    void initTable(T from); //inicializar la tabla
+    void printTable(); // imprimir tabla, no utilizado
 
 public:
     LinkedListPF() : headCiu(nullptr), size(0) {}
@@ -31,23 +31,23 @@ public:
 
     int getsize() { return size; }
     bool isempty() { return (size == 0) ? true : false; }
+
     // proyecto final funciones
-    void addCiu(T dato);
-    void printCiudad(ostream &os);
-    void addRec(T from, T to, Hora tiempotren, int distanciatren, Hora tiempocarro, int distanciacarr);
+    void addCiu(T dato); //agrega ciudad (Vertice)
+    void printCiudad(ostream &os); // imprime el grafo completo, ostream para imprimir en archivos
+    void addRec(T from, T to, Hora tiempotren, int distanciatren, Hora tiempocarro, int distanciacarr); //agrega las conexiones entre ciudades
     int findData(T dato); // busca con data el index
 
-    void BFS(T data, ostream &os);
-    void DFS(T data, ostream &os);
-    void resetProcesado();
-    void clearStack();
-    void clearprocesados();
+    void BFS(T data, ostream &os); // Recorrido de Anchura, ostream para imprimir en archivos
+    void DFS(T data, ostream &os); // Recorrdio de Profundidad, ostream para imprimir en archivos
+    void resetProcesado(); //Resetear si fueron procesados, util para utilizar BFS u DFS multiples veces.
+    void clearStack(); //Limpia el Stack ^^^
+    void clearprocesados(); //Limpia la Fila ^^^
+    int encontrado(T data); //Buscar index de dato (tenemos finddata pero regresa el dato), necesitabamos uno de index para verificar que la ciudad exista y hacer validacion
 
-    int encontrado(T data);
-
-    T getData(int index);
-    void DijkstraF(T from, T to);
-    void RutaCorta(T from);
+    T getData(int index); // Busca si la ciudad existe 
+    void DijkstraF(T from, T to); //DijkstraFinal junta ambos metodos (recorrido por tren y carro), para usar unicamente este en el cpp
+    void RutaCorta(T from); //Busca las ruta mas cortas e imprime la ruta, distancia y su tiempo.
 };
 
 template <class T>
@@ -132,7 +132,7 @@ void LinkedListPF<T>::printCiudad(ostream &os)
     }
 }
 
-// recibir tmb horas
+// recibe todos losparametros para agregar nodosadyacentes
 template <class T>
 void LinkedListPF<T>::addRec(T from, T to, Hora tiempotren, int distanciatren, Hora tiempocarro, int distanciacarr)
 {
@@ -150,7 +150,7 @@ void LinkedListPF<T>::addRec(T from, T to, Hora tiempotren, int distanciatren, H
     {
         if (aux2->data == to)
         {
-            cout << "La ciudad " << to << " ya fue agregada hacia " << from << endl;
+            cout << "La ciudad " << to << " ya fue agregada hacia " << from << endl; // validacion si ya fue agregada
             return;
         }
         aux2 = aux2->next;
@@ -158,7 +158,6 @@ void LinkedListPF<T>::addRec(T from, T to, Hora tiempotren, int distanciatren, H
 
     if (aux->nomciudad == from)
     {
-        // agregar horas
         NodoRec<T> *aux3 = new NodoRec<T>(to, tiempotren, distanciatren, tiempocarro, distanciacarr);
         NodoRec<T> *aux4;
         if (aux->adj == nullptr)
@@ -270,12 +269,12 @@ void LinkedListPF<T>::DFS(T data, ostream &os)
         {
             T sigNodo = stack.getTop();
             stack.pop();      // Eliminar el nodo procesado
-            DFS(sigNodo, os); // Llamar a DFS para el siguiente nodo en el stack
+            DFS(sigNodo, os); // Llamar a DFS para el siguiente nodo en el stack, recursivamente
         }
     }
 }
 
-template <class T>
+template <class T> //limpia las ciudades con status ya procesado para reutilizarse
 void LinkedListPF<T>::resetProcesado()
 {
     NodoCiu<T> *aux = headCiu;
@@ -292,7 +291,7 @@ void LinkedListPF<T>::resetProcesado()
     }
 }
 
-template <class T>
+template <class T> //limpia el stack
 void LinkedListPF<T>::clearStack()
 {
     while (!stack.isempty())
@@ -301,7 +300,7 @@ void LinkedListPF<T>::clearStack()
     }
 }
 
-template <class T>
+template <class T> //limpia la fila
 void LinkedListPF<T>::clearprocesados()
 {
     while (!procesados.isempty())
@@ -310,7 +309,7 @@ void LinkedListPF<T>::clearprocesados()
     }
 }
 
-template <class T>
+template <class T> // regresa el nombre de la ciudad
 T LinkedListPF<T>::getData(int i)
 {
     if (i < 0 || i >= size)
@@ -330,7 +329,7 @@ T LinkedListPF<T>::getData(int i)
     }
 }
 
-template <class T>
+template <class T> // busca si existe en los vertices (ciudades)
 int LinkedListPF<T>::encontrado(T dato)
 {
     NodoCiu<T> *aux = headCiu;
@@ -346,7 +345,7 @@ int LinkedListPF<T>::encontrado(T dato)
     return -1;
 }
 
-template <class T>
+template <class T> //inicializa la tabla para Dijkstra
 void LinkedListPF<T>::initTable(T from)
 {
     int pos = findData(from);
@@ -358,11 +357,11 @@ void LinkedListPF<T>::initTable(T from)
         table[i][3] = numeric_limits<int>::max();
         table[i][4] = -1;
     }
-    table[pos][1] = 1;
-    table[pos][3] = 0;
+    table[pos][1] = 1; // una vez inicializado se pone procesado o encontrado al dato inicial por el que comienza
+    table[pos][3] = 0; // se pone su costo o distancia de 0 ya que de ahi comienza
 }
 
-template <class T>
+template <class T> //muestra la tabla de datos y el path que es 
 void LinkedListPF<T>::printTable()
 {
     int ruta;
@@ -390,7 +389,7 @@ void LinkedListPF<T>::printTable()
     }
 }
 
-template <class T>
+template <class T> //Dijkstra de carro , guarda el camino mas corto desde from hacia todos los nodos
 int LinkedListPF<T>::DijkstraRun_Carro(T from)
 {
     int posO = findData(from);
@@ -453,7 +452,7 @@ int LinkedListPF<T>::DijkstraRun_Carro(T from)
     return 0;
 }
 
-template <class T>
+template <class T> //Muestra la ruta mas corta e imprime su distancia y tiempo
 void LinkedListPF<T>::RutaCorta(T to)
 {
     int pos = findData(to);
@@ -482,7 +481,7 @@ void LinkedListPF<T>::RutaCorta(T to)
     cout << endl;
 }
 
-template <class T>
+template <class T> //Dijkstra de tren, guarda el camino mas corto desde from hacia todos los nodos
 int LinkedListPF<T>::DijkstraRun_Tren(T from)
 {
     int posO = findData(from);
@@ -544,7 +543,10 @@ int LinkedListPF<T>::DijkstraRun_Tren(T from)
     return 0;
 }
 
-template <class T>
+/*template <class T> //DijkstrF, une todos los metodos por simplicidad, incianizandolo tomando datos de carro imprimiendoloes, inicializandolo 
+de nuevo e imprimirneo el camino mas corto de tren.*/
+
+template <class T> 
 void LinkedListPF<T>::DijkstraF(T from, T to)
 {
     initTable(from);
