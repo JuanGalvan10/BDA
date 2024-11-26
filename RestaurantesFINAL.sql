@@ -508,9 +508,6 @@ FROM
 where
     nombre_usuario = username;
 
-END / / 
-DELIMITER;
-
 DELIMITER //
 CREATE PROCEDURE registrarUsuario(
     nom varchar(50),
@@ -608,9 +605,6 @@ SELECT
     nombre_staff
 FROM
     mostrarUsuarios_vw;
-END //
-DELIMITER ;
-
 
  -- INSERTAR CLIENTES --
 
@@ -908,6 +902,7 @@ END $$
 DELIMITER ;
 
 --  (MUESTRA PLATILLOS DISPONIBLES) --
+
 CREATE VIEW
     PlatillosDisponibles_vw AS
 SELECT
