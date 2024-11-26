@@ -14,6 +14,9 @@ def agregarCarrito():
             session['productos'].append(producto)
             session['subtotal'] += cantidad*precio
             return redirect(url_for('mostrar_productos'))
+        else:
+            flash('Metodo incorrecto', 'error')
+            return redirect(url_for('mostrar_productos'))
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -95,6 +98,8 @@ def checkoutPago():
                 censurado = '*' * (len(num_tarjeta) - 4) + num_tarjeta[-4:]  
                 metodo['num_tarjeta'] = censurado
             return render_template('CheckoutPago.html', total = total, costo = costo, metodos = metodos, subtotal = session['subtotal'])
+        else:
+            return redirect(url_for('checkoutResumen'))
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -114,6 +119,8 @@ def pagar():
             else:
                 flash(mensaje)
                 return redirect(url_for('checkoutPago'))
+        else:
+            return redirect(url_for('checkoutResumen'))
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -129,6 +136,7 @@ def guardar_direccion():
                 return {"error": str(e)}, 500
         else:
             flash('Metodo de acceso incorrecto')
+            return redirect(url_for('checkoutResumen'))
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

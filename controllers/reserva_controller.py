@@ -33,6 +33,10 @@ def nuevo_reserva():
             idCliente = session['idCliente']
             Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente)
             return render_template('gracias_reserva.html')
+        else:
+            flash('Metodo de acceso incorrecto')
+            return render_template('reservas.html')
+        
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -62,6 +66,7 @@ def eliminar_reserva(id):
             return redirect(url_for('mostrar_reservas'))
         else:
             flash('Metodo de acceso incorrecto')
+            return render_template('reservas.html')
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

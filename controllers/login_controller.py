@@ -30,7 +30,7 @@ def register_user():
         success, message, idUsuario = register_usuario(username, password, rol)
         if success:
             flash('Registro exitoso', 'success')
-            return redirect(url_for('login')) # ruta para msotrar usuarios
+            return redirect(url_for('register_user')) # ruta para msotrar usuarios
         else:
             flash(message, 'error')
             return redirect(url_for('register')) # ruta para registrar usuarios
@@ -63,8 +63,11 @@ def register_client(idUsuario):
             return redirect(url_for('login'))
         else:
             flash(message, 'error')
-            return redirect(url_for('register'))
-    return render_template('registro_login.html')
+            return redirect(url_for('register_client', idUsuario = idUsuario))
+    if idUsuario:
+        return render_template('registro_login.html')
+    else:
+        return redirect(url_for('register_user'))
 
 def logout():
     session.clear()

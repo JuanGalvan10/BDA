@@ -89,6 +89,7 @@ def eliminar_pedido(id):
                 return {"error": str(e)}, 500
         else:
             flash('Metodo de acceso incorrecto')
+            return(url_for('mostrar_pedidos'))
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

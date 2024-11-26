@@ -36,6 +36,8 @@ def eliminar_resena(id):
             return redirect(url_for('mostrar_prodcutos'))
         else:
             flash('Metodo de acceso incorrecto')
+            return redirect(url_for('mostrar_resenas'))
+
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

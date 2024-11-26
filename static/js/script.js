@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
     fechaInput.setAttribute('min', today); 
 });
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const fechaInput = document.getElementById('fecha');
     const personasInput = document.getElementById('num_personas');
@@ -85,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
           : 'Tema: Ingresa un tema'; 
   });
 });
+
+
+
 
 function openNav() {
 document.getElementById("mySidenav").style.width = "250px";
