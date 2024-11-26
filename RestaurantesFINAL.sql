@@ -332,6 +332,7 @@ BEGIN
         SET MESSAGE_TEXT = 'No hay inventario suficiente de ese producto, hay que hacer stock.';
         END IF;
 END $$
+
 DELIMITER ;
 
 -- 2. NoStockProductoDeshabilitado
