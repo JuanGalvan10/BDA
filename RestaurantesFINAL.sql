@@ -1359,7 +1359,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE PromedioXTipoResenas_gr()
 BEGIN
-    SELECT nombre, AVG(puntuacion)
+    SELECT nombre AS Tipo, AVG(puntuacion) AS Puntuacion
 	FROM RESENAS NATURAL JOIN TIPOS_RESENA tr 
 	GROUP BY idTipoResena;
 END $$
