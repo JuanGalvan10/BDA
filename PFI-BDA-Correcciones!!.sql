@@ -327,10 +327,7 @@ INSERT INTO RESTAURANTES (nombre_sucursal, ubicacion, telefono, descripcion) VAL
 
 -- VIEWS --
 
-CREATE VIEW ProductosDisponibles AS
-SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
-FROM PLATILLOS p
-WHERE inventario > 0;
+
 
 -- HACERLO STORED PROCEDURE --
 CREATE VIEW PedidosCliente as
@@ -371,4 +368,37 @@ GROUP BY idCliente;
 
 
 
--- VIEWS PARA ADMINS -- 
+-- PROCS PARA PRODUCTOS (MUESTRA PRODUCTOS DISPONIBLES) -- 
+
+CREATE VIEW ProductosDisponibles AS
+SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
+FROM PLATILLOS p
+WHERE inventario > 0;
+
+DELIMITER //
+CREATE PROCEDURE mostrarProductos()
+BEGIN
+    SELECT 
+        idPlatillo, 
+        nombre, 
+        imagen_URL, 
+        precio, 
+        descripcion, 
+        inventario, 
+        idCategoria
+    FROM 
+        ProductosDisponibles;
+END //
+DELIMITER ;
+
+
+
+
+
+
+
+-- PROCS PARA RESENAS -- 
+
+create view mostrarResenas_vw as 
+select idCliente, nombre_usuario, idResena,puntuacion,titulo,comentario,fecha_comentario,idTipoResena,idPedido
+from USUARIOS_RESTAURANTE natural join CLIENTES natural join RESENAS ;
