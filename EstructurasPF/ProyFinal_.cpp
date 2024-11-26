@@ -74,7 +74,7 @@ int main()
         cout << "       ----- MENU -----        " << endl;
         cout << "1- Desplegar Ciudad " << endl;
         cout << "2- Desplegar recorrido por medio de una ciudad " << endl;
-        cout << "3- Ruta más corta" << endl;
+        cout << "3- Ruta mas corta" << endl;
         cout << "4- Salir" << endl;
         cin >> ans;
 
@@ -126,7 +126,7 @@ int main()
             else
             {
                 // Si la ciudad no se encuentra en la lista, muestra un mensaje de error
-                cout << "No se encontró esta ciudad" << endl;
+                cout << "No se encontro esta ciudad" << endl;
             }
             break;
 
