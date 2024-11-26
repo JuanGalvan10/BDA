@@ -45,7 +45,7 @@ class Pedido:
     @staticmethod
     def get_by_cliente(idCliente):
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.callproc('obtenerPedidosCliente', (idCliente,))
+        cur.callproc('obtenerPedidosCliente', (idCliente))
         pedidos = cur.fetchall()
         cur.close()
         return pedidos

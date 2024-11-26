@@ -56,7 +56,7 @@ def get_users():
         return False, str(e)
     
 def get_id_cliente(idCliente):
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur = mysql.connection.cursor()
     cur.callproc('obtenerId', (idCliente,))
     id = cur.fetchone()
     cur.close()

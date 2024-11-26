@@ -39,7 +39,7 @@ def vista_principal():
         else:
             return render_template('DashboardAdmins.html', nombre_usuario = session['usuario'])
     else:
-        return redirect(url_for('/'))
+        return redirect(url_for('inicio'))
 
 #RUTAS PARA LA AUTENTICACION
 app.add_url_rule('/login', view_func=login, methods = ['GET', 'POST'])
@@ -115,7 +115,7 @@ def menu():
     loggedin = False
     if 'loggedin' in session:
         loggedin= True
-    return render_template('menu.html',  nombre_usuario = session['usuario'] =  nombre_usuario = session['usuario'])
+    return render_template('menu.html',  nombre_usuario = session['usuario'])
 
 @app.route('/agregarUsuario')
 def agregarUser():

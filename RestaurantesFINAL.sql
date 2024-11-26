@@ -990,12 +990,12 @@ BEGIN
         WHERE
             p.idCategoria IN (
                 SELECT DISTINCT pl.idCategoria
-                FROM pedidos pd NATURAL JOIN DETALLESPEDIDO dp NATURAL JOIN PLATILLOS pl
+                FROM PEDIDOS pd NATURAL JOIN DETALLESPEDIDO dp NATURAL JOIN PLATILLOS pl
                 WHERE pd.idCliente = cliente_id
             )
             AND p.idPlatillo NOT IN (
                 SELECT dp.idPlatillo
-                FROM pedidos pd NATURAL JOIN detallespedido dp
+                FROM PEDIDOS pd NATURAL JOIN DETALLESPEDIDO dp
                 WHERE pd.idCliente = cliente_id
             )
         LIMIT 10;

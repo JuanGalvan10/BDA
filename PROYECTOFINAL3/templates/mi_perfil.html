@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mi perfil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </head>
+
+<body>
+    <header>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <button id="hamburgesa" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger" onclick="openNav()">&#9776;</span>
+              </button>
+              <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <h5 style="color: #FFFFFF; text-align: center; font-weight: 100;">MENU</h5>
+                <hr style="border-color: #FFFFFF;">
+                <a href="/dashboard">Inicio ></a> 
+                <a href="/productos">Productos ></a> 
+                <a href="/reservasC">Reservar ></a>
+                <a href="/galeria">Galeria ></a>
+                <a href="/menu">Menu ></a>
+                <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                    Mi perfil ↓
+                  </button>
+                  <div class="collapse closeNav" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="/reservas" class="link-dark rounded">Mis reservas ></a></li>
+                      <li><a href="/pedidos" class="link-dark rounded">Mis pedidos ></a></li>
+                      <li><a href="/resenas" class="link-dark rounded">Mis reseñas ></a></li>
+                      <li><a href="/clientes" class="link-dark rounded">Mi info ></a></li>
+                    </ul>
+                  </div>
+                </li>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end justify-content-md-end align-items-right">
+              <nav  class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <button onclick="location.href='/reservasC'" type="button" id="btn-header"> Reservar  
+                        <svg id="icono" xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor">
+                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button onclick="location.href='/checkoutResumen'" type="button" id="btn-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button onclick="location.href='/logout'" type="button" id="btn-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                          <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
+                      </button>
+                    </li>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </header>
+
+    <section id="titulo_reserva">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="big-text-b text-center align-items-center" >
+                        <h1 id="titulo">
+                            Mi Perfil
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-8">
+                <hr>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservas">
+        <div class="container py-3">
+            <div class="row py-3">
+                <div class="col-11">
+                </div>
+                <div class="col-1">
+                    <button onclick="location.href='/editar_cliente/{{cliente[1]}}'" type="button" style="padding-left: 20px;padding-right: 20px;" id="btn-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <path  d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                          </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Nombre de Usuario: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    {{username}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Nombre: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    {{cliente[4]}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Apellido: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    {{cliente[5]}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Telefono: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    {{cliente[6]}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Correo: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    {{cliente[7]}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Puntos: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    600
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12">
+                    <div class="row" style="padding-bottom: 20px;">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 5px 20px 5px 50px;">
+                                <span>
+                                    <strong>Direccion: </strong>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="small-text-b" style="padding: 0px 20px 5px 50px;">
+                                <span>
+                                    Colonia de las valles ei
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-3" style="height: 300px;">
+            <div class="row" id="recuadro-resenas" style="height: 100%;">
+                <!--Jinja aqui para imprimir todos los nombres del usuario-->
+                <div class="col-12 px-5" style="align-content: center;">
+                    <strong>NOMBRE IMAGEN .PNG O FORMATO</strong>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="map-container">
+        <hr>
+        <div class="scrolling-text" id="scrolling-text">
+          the future is female the future is female the future is female the future is female the future is female
+        </div>
+    
+          <footer>
+            <section id="Redes">
+              <div class="container">
+                <div class="row py-5 justify-content-center" style="display: flex; justify-content: center;">
+                <div class="col-12 text-center">
+                   <div class="container" id="recuadro">
+                    <div class="row py-3" style="justify-content: center;">
+                      <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="30" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                        </svg> 
+                        <span style="font-size: 18px;">@señoratanaka</span>
+                      </div>
+                      <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                        </svg> 
+                        <span style="font-size: 18px;">@señoratanaka</span>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </section>
+          </footer>
+    
+        </section>
+        <section id="texto" style="color: #FFFFFF">
+            <div class="container py-4" style="padding: 0 250px;">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <div class="small-text">
+                            <strong>MONTERREY</strong><br>
+                            Av. del Roble 660-l-102,<br>
+                            Valle del Campestre<br>
+                            San Pedro Garza García, N.L.<br>
+                            <strong>Reserva:</strong> Tel. (81) 2718 8980
+                        </div>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <div class="small-text">
+                            <strong>CDMX</strong><br>
+                            Av. Pdte. Masaryk 169 Polanco<br>
+                            Polanco V Secc, Miguel Hidalgo<br>
+                            11560 Ciudad de México, CDMX<br>
+                            <strong>Reserva:</strong> Tel. 55 2875 1870
+                        </div>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <div class="small-text">
+                            <strong>GUADALAJARA</strong><br>
+                            Av. Real Acueducto #110 Int. 9C<br>
+                            Puerta de Hierro<br>
+                            Zapopan, Jalisco<br>
+                            <strong>Reserva:</strong> Tel. 33 3835 1405
+                        </div>
+                    </div>
+    
+                    <br>
+                    <hr style="color:black;background-color:black">
+                    <br>
+                    <div class="col-8 text-center align-items-center">
+    
+                        <span class="small-text">
+                            <strong>Condiciones de uso | Aviso de privacidad</strong><br>
+                            © 2024 sratanaka.com Todos los derechos reservados. <br>
+                        </span>
+    
+    
+    
+                    </div>
+    
+                  
+                  </div>
+                </div>
+            </section>
+        </footer>
+    
+    </body>
+    </html> 
+    
+    <script>
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    
+    function scrollleft(){
+      document.getElementById("scrolling-text").style.left = '100%';
+      setTimeout(scrollleft, 25);
+    }
+    scrollleft();
+    </script>

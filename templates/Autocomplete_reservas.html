@@ -2,11 +2,11 @@
     {% for hora in ['13:00', '15:00', '17:00', '19:00', '21:00'] %}
         <div class="col-4">
             {% if hora in horas_ocupadas %}
-                <button type="button"  value="{{hora}}" id="btn-header" class="btn-hora" disabled style="background-color: gray; color: white;">
+                <input type="button"  value="{{hora}}" id="btn-header" class="btn-hora" disabled style="background-color: gray; color: white;">
                     {{ hora }}
-                </button>
+                </input>
             {% else %}
-            <input type="button" name="hora" value="{{ hora }}" class="btn-hora" id="btn-header"></input>
+            <input type="button" name="hora" value="{{hora}}" class="btn-hora" id="btn-header"></input>
             {% endif %}
         </div>
     {% endfor %}

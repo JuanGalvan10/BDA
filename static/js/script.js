@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', () => {
     const fechaInput = document.getElementById('fecha');
     const personasInput = document.getElementById('num_personas');
-    const horaInput = document.querySelectorAll('.btn-hora');
+    const horaInput = document.getElementById('btn-hora');
     const temaInput = document.getElementById('txt-reserva');
 
     const datoFecha = document.getElementById('dia-reserva');
