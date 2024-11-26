@@ -1,3 +1,4 @@
+
 CREATE TABLE ROLES (
     idRol INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50)
@@ -366,7 +367,7 @@ CREATE TRIGGER BloquearCambioPedidoCompletado
 BEFORE INSERT ON PEDIDOS
 FOR EACH ROW
 BEGIN
-    IF NEW.idStatus = 3 THEN
+    IF NEW.idStatus = 2 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El pedido ya no se puede modificar.';
         END IF;
@@ -381,7 +382,7 @@ BEFORE INSERT ON USUARIOS_RESTAURANTE
 FOR EACH ROW
 BEGIN 
     IF EXISTS (
-        SELECT 1 FROM USUARIOS_RESTAURANTE WHERE nombre_usuario = NEW.nombre_usuario.
+        SELECT 1 FROM USUARIOS_RESTAURANTE WHERE nombre_usuario = NEW.nombre_usuario
     ) THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Usuario ya registrado, intente on otro.';
@@ -412,13 +413,27 @@ CREATE TRIGGER NotificarPromocionExpirada
 BEFORE INSERT ON PROMOCIONES
 FOR EACH ROW
 BEGIN 
-    IF NEW.fecha_inicio > '2024-11-01' AND NEW.fecha_inicio < '2024-11-30' THEN
+    IF NEW.fecha_inicio >= '2024-06-01' AND NEW.fecha_inicio <= '2024-11-30' THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'La promoción ya ha expirado.';
         END IF;
 END $$
 
 DELIMITER ; 
+
+-- 8. ValidarFechaReserva
+DELIMITER $$
+CREATE TRIGGER ValidarFechaReserva
+BEFORE INSERT ON RESERVAS
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_reserva < '2024-11-30' THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'La reserva ha expirado.';
+    END IF;
+END $$
+
+DELIMITER;
 
 -- STORED PROCEDURES --
 
