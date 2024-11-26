@@ -353,7 +353,7 @@ void LinkedListPF<T>::initTable(T from)
     {
         table[i][0] = i;
         table[i][1] = 0;
-        table[i][2] = numeric_limits<int>::max();
+        table[i][2] = 0;
         table[i][3] = numeric_limits<int>::max();
         table[i][4] = -1;
     }
@@ -395,7 +395,6 @@ int LinkedListPF<T>::DijkstraRun_Carro(T from)
     int posO = findData(from);
     NodoCiu<T> *aux = headCiu;
     int pos = 0, posT, costo = table[posO][3];
-    int horaacum = 0;
 
     while (aux->nomciudad != from && pos < size)
     {
@@ -415,7 +414,7 @@ int LinkedListPF<T>::DijkstraRun_Carro(T from)
                     if (table[posT][3] > (costo + aux2->D_carro))
                     {
                         int tiempocar = aux2->T_carro.aMin(aux2->T_carro);
-                        horaacum += tiempocar;
+                        int horaacum = table[posO][2] + tiempocar;
                         table[posT][2] = horaacum;
                         table[posT][3] = costo + aux2->D_carro;
                         table[posT][4] = posO;
@@ -487,7 +486,6 @@ int LinkedListPF<T>::DijkstraRun_Tren(T from)
     int posO = findData(from);
     NodoCiu<T> *aux = headCiu;
     int pos = 0, posT, costo = table[posO][3];
-    int horaacum = 0;
     while (aux->nomciudad != from && pos < size)
     {
         aux = aux->next;
@@ -505,8 +503,8 @@ int LinkedListPF<T>::DijkstraRun_Tren(T from)
                 {
                     if (table[posT][3] > (costo + aux2->D_tren))
                     {
-                        int tiempocar = aux2->T_carro.aMin(aux2->T_carro);
-                        horaacum += tiempocar;
+                        int tiempocar = aux2->T_tren.aMin(aux2->T_tren);
+                        int horaacum = table[posO][2] + tiempocar;
                         table[posT][3] = costo + aux2->D_tren;
                         table[posT][2] = horaacum;
                         table[posT][4] = posO;
