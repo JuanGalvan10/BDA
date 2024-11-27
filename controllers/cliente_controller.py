@@ -73,7 +73,9 @@ def editar_cliente(id):
             correo = request.form['correo']
             telefono = request.form['telefono']
             direccion= request.form['direccion']
-            success, message = Cliente.update(nombre, apellidos, correo, telefono, direccion)
+            puntos = request.form['puntos']
+            idcliente = request.form['idCliente']
+            success, message = Cliente.update(idcliente, nombre, apellidos, correo, telefono, direccion, puntos)
             if success:
                 flash('Cliente actualizado correctamente', 'success')
                 return redirect(url_for('mostrar_clientes'))
@@ -90,7 +92,7 @@ def editar_cliente(id):
         else:
             success, cliente = Cliente.get_cliente_by_id(id)
             if success:
-                return render_template('Editar_cliente.html', cliente = cliente, nombre_usuario = session['usuario'])
+                return render_template('EditarCliente.html', cliente = cliente, nombre_usuario = session['usuario'])
             else:
                 flash(cliente,'error')
                 return redirect(url_for('mostrar_clientes'))

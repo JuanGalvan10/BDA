@@ -141,11 +141,13 @@
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
                                                     <form action="/eliminar_cliente/{{ cliente.idCliente }}" method="post" style="display:inline;">
-                                                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                                        <a style="margin-right: 20px;">
+                                                            <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                                        </a>
                                                     </form>
-                                                    <form action="/editar_cliente/{{ cliente.idCliente }}" method="post" style="display:inline;">
-                                                        <button class="btn btn-danger btn-sm" type="submit">Editar</button>
-                                                    </form>
+                                                        <a href="/editar_cliente/{{ cliente.idCliente }}" style="margin-right: 20px;">
+                                                            <button class="btn btn-success btn-sm" type="submit">editar</button>
+                                                        </a>                                                    
                                                 </div>
                                             </td>
                                         </tr>

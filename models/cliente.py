@@ -67,10 +67,10 @@ class Cliente:
             return False, str(e)
     
     @staticmethod
-    def update(nombre,apellidos,correo, telefono, direccion, puntos):
+    def update(idcliente,nombre,apellidos,correo, telefono, direccion, puntos):
         cur = mysql.connection.cursor()
         try:
-            cur.callproc("actualizaCliente(%s,%s,%s,%s,%s,%s)", (nombre,apellidos,correo, telefono, direccion, puntos))
+            cur.callproc("actualizaCliente", (nombre,apellidos,correo, telefono, direccion, puntos))
             mysql.connection.commit()
             cur.close()
             return True, 'Cliente actualizado exitosamente'

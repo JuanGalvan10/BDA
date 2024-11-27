@@ -105,36 +105,35 @@
                                     </h5>
                                 </div>
                                 <div class=" col-12">
-                                    <form>
+                                    <input type="hidden" name="idCliente" value="cliente.idCliente">
                                         <div class="form-row" style="display: flex; justify-content: left;">
                                             <div class="form-group" style="padding-left: 20px; width: 700px;">
                                             <label for="inputEmail4">Nombre:</label>
-                                            <input value="{{cliente.nombre}}" type="email" class="form-control" id="inputEmail4" placeholder="ej. María Fernanda"> <!--NOMBRE DE NUEVO CLIENTE-->
+                                            <input name="nombre" value="{{cliente.nombre}}" type="text" class="form-control" id="inputEmail4" placeholder="ej. María Fernanda"> <!--NOMBRE DE NUEVO CLIENTE-->
                                           </div>
                                         </div>
                                         <div class="form-row" style="display: flex; justify-content: left;">
                                             <div class="form-group" style="padding-left: 20px; width: 700px;">
                                               <label for="inputEmail4">Apellidos</label>
-                                              <input value="{{cliente.apellido}}" type="email" class="form-control" id="inputEmail4" placeholder="ej. Barras Oliveira"> <!--APELLIDO DE NUEVO CLIENTE-->
+                                              <input name="apellidos" value="{{cliente.apellido}}" type="text" class="form-control" id="inputEmail4" placeholder="ej. Barras Oliveira"> <!--APELLIDO DE NUEVO CLIENTE-->
                                             </div>
                                         </div>
                                         <div class="form-row" style="display: flex; justify-content: flex-start; padding-top: 20px;">
                                             <div class="form-group" style="padding-left: 20px; width: 350px;">
                                               <label for="inputEmail4">Correo</label>
-                                              <input value="{{cliente.correo}}" type="email" class="form-control" id="inputEmail4" placeholder="ej. correo@mail.com"> <!--CORREO DE NUEVO CLIENTE-->
+                                              <input name="correo" value="{{cliente.correo}}" type="email" class="form-control" id="inputEmail4" placeholder="ej. correo@mail.com"> <!--CORREO DE NUEVO CLIENTE-->
                                             </div>
                                             <div class="form-group" style="padding-left: 20px; width: 350px;">
                                               <label for="inputPassword4">Telefono</label>
-                                              <input value="{{cliente.telefono}}" type="text" class="form-control" id="inputPassword4" placeholder="ej. 81 1234 1234"> <!--TEL DE NUEVO CLIENTE-->
+                                              <input name="telefono" value="{{cliente.telefono}}" type="tel" class="form-control" id="inputPassword4" placeholder="ej. 81 1234 1234"> <!--TEL DE NUEVO CLIENTE-->
                                             </div>
                                         </div>
                                         <div class="form-row" style="display: flex; justify-content: left;">
                                             <div class="form-group" style="padding-left: 20px; width: 700px;">
                                               <label for="inputEmail4">Dirección</label>
-                                              <input value="{{cliente.direccion}}" type="email" class="form-control" id="inputEmail4" placeholder="ej. Rio Orinoco #540 Valle">  <!--DIRECCION DE NUEVO CLIENTE-->
+                                              <input name="direccion" value="{{cliente.direccion}}" type="text" class="form-control" id="inputEmail4" placeholder="ej. Rio Orinoco #540 Valle">  <!--DIRECCION DE NUEVO CLIENTE-->
                                             </div>
                                         </div>
-                                    </form>
                                 </div>                      
                             </div>
                             <div style="padding-top: 20px; padding-bottom: 20px; display: flex; align-items: center;">
@@ -144,7 +143,7 @@
                                 <div style="padding-top: 55px; padding-left: 20px;">
                                     <div class="form-group py-2" style="padding-left: 20px; width: 400px;">
                                         <label for="inputEmail4">Puntos</label>
-                                        <input value="{{cliente.puntos}}" type="email" name="puntos" class="form-control" id="inputEmail4" placeholder="ej. Rio Orinoco #540 Valle">  <!--DIRECCION DE NUEVO CLIENTE-->
+                                        <input value="{{cliente.puntos}}" type="number" name="puntos" class="form-control" id="inputEmail4" placeholder="ej. 600">  <!--DIRECCION DE NUEVO CLIENTE-->
                                       </div>
                                       <div class="form-group py-2" style="padding-left: 20px; width: 400px;">
                                         <label for="inputEmail4">Nombre de Usuario</label>
