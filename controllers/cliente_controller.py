@@ -18,8 +18,11 @@ def mostrar_clientes():
             return render_template('mi_perfil.html', cliente = cliente, username = username)
         else:
             clientes = Cliente.get_clientes()
-            pedidos = Pedido.get_pedidos()
-            return render_template('Clientes.html', clientes = clientes, pedidos = pedidos,nombre_usuario = session['usuario'])
+
+            pedidos = Pedido.get_all()
+            pedidos_unicos = {pedido['idPedido']: pedido for pedido in pedidos}.values()
+            print(pedidos)
+            return render_template('Clientes.html', clientes = clientes,pedidos = pedidos_unicos, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
