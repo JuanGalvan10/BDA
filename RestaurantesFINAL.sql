@@ -703,10 +703,10 @@ CREATE PROCEDURE eliminarCliente (
 BEGIN
     DELETE FROM CLIENTES
     WHERE idCliente = idCliente;
-END // 
+END //
 DELIMITER ;
 
-DELIMITER // 
+DELIMITER //
 CREATE PROCEDURE nuevaTarjetaCliente(
 	IN NEWidCliente INT,
     IN NEWnum_tarjeta INT,
@@ -730,7 +730,7 @@ begin
         VALUES (NEWnombre_metodo, NEWidCliente, idDetalleMetodoPago);
     END IF;
     
-END // 
+END //
 DELIMITER ; 
 
 DELIMITER //
@@ -890,7 +890,7 @@ CREATE PROCEDURE eliminarPedido (
 BEGIN 
     DELETE FROM PEDIDOS
     WHERE idPedido = New_idPedido;
-END // 
+END //
 DELIMITER ; 
 
 -- PROCS PARA PLATILLOS -- 
@@ -1077,7 +1077,7 @@ FROM
     NATURAL JOIN CLIENTES c
     NATURAL JOIN RESENAS;
 
-DELIMITER // 
+DELIMITER //
 CREATE PROCEDURE mostrarResenas()
 BEGIN
 SELECT
@@ -1258,7 +1258,7 @@ SELECT
     correo
 FROM
     muestrareservas_vw;
-END // 
+END //
 DELIMITER ;
 
 DELIMITER //
@@ -1280,7 +1280,7 @@ FROM
     muestrareservas_vw
 WHERE
     idCliente = id_Sesion;
-END // 
+END //
 DELIMITER ;
 
 DELIMITER //
