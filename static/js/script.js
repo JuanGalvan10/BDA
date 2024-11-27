@@ -1,19 +1,44 @@
-function increment(idprod) {
+function calculateSubtotal() {
+    const productos = document.querySelectorAll('.form-control.text-center');
+    let total = 0;
+
+    productos.forEach(input => {
+        const cantidad = parseInt(input.value, 10);
+        const precio = parseFloat(input.getAttribute('data-precio'));
+        total += cantidad * precio;
+    });
+
+    const subtotalElement = document.getElementById('subtotal-general');
+    subtotalElement.textContent = total.toFixed(2);
+}
+
+function increment(idprod, precio) {
     const quantityInput = document.getElementById(`quantity_${idprod}`);
-    let value = parseInt(quantityInput.value, 10);
-    if (value < 10) {
-        quantityInput.value = value + 1;
+    if (quantityInput) {
+        let value = parseInt(quantityInput.value, 10);
+        if (value < 10) {
+            value += 1;
+            quantityInput.value = value;
+            calculateSubtotal();
+        }
+    } else {
+        console.error(`No se encontró el input para el producto con ID ${idprod}`);
     }
 }
 
-function decrement(idprod) {
+function decrement(idprod, precio) {
     const quantityInput = document.getElementById(`quantity_${idprod}`);
-    let value = parseInt(quantityInput.value, 10);
-    if (value >= 1) {
-        quantityInput.value = value - 1;
+    if (quantityInput) {
+        let value = parseInt(quantityInput.value, 10);
+        if (value > 1) {
+            value -= 1;
+            quantityInput.value = value;
+            calculateSubtotal();
+        }
+    } else {
+        console.error(`No se encontró el input para el producto con ID ${idprod}`);
     }
 }
-
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
 })
