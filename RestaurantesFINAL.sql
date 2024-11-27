@@ -164,7 +164,7 @@ INSERT INTO RESERVAS (fecha_reserva, hora_reserva, num_personas, idStatus, tema,
 CREATE TABLE PLATILLOS (
     idPlatillo INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    imagen_URL VARCHAR(255) NOT NULL,
+    imagen_URL TEXT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
     descripcion VARCHAR(255),
     inventario INT,
@@ -173,17 +173,17 @@ CREATE TABLE PLATILLOS (
 );
 
 INSERT INTO PLATILLOS (nombre, imagen_URL, precio, descripcion, inventario, idCategoria) VALUES
-('Tostada de Atún', 'URL_de_imagen', 100.00, 'Aleta azul, aioli de búfalo, aguacate, cilantro', 20, 1),
-('Tostada de Hamachi Aji', 'URL_de_imagen', 120.00, 'Yuzu-soya, aji amarillo, mayo ajo tatemado, cebollín, furakake shiso', 0, 1),
-('Batera de Toro', 'URL_de_imagen', 140.00, 'Aleta azul, yuzu-aioli, aguacate, aji amarillo', 10, 1),
-('Batera de Salmón', 'URL_de_imagen', 130.00, 'Salmón, aioli habanero, lemon soy, cebollín, cilantro criollo', 18, 1),
-('Tartar de Toro', 'URL_de_imagen', 150.00, 'Aleta azul, vinagreta yuzu-trufa', 12, 1),
-('Edamame', 'URL_de_imagen', 80.00, 'Sal Maldon, salsa negra, polvo piquín', 0, 2),
-('Shishitos', 'URL_de_imagen', 90.00, 'Sal Maldon, limón california', 20, 2),
-('Papás Fritas', 'URL_de_imagen', 70.00, 'Sal matcha, soya-trufa', 30, 2),
-('Camarones Roca', 'URL_de_imagen', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
-('Jalapeño Poppers', 'URL_de_imagen', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
-('Huachinango Tempura', 'URL_de_imagen', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
+('Tostada de Atún', 'https://media-cdn.tripadvisor.com/media/photo-s/18/84/96/2b/tostada-de-atun-fresco.jpg', 100.00, 'Aleta azul, aioli de búfalo, aguacate, cilantro', 20, 1),
+('Tostada de Hamachi Aji', 'https://www.foodgal.com/wp-content/uploads/2022/10/Juniper-Ivy-hamachi-tostada.jpg', 120.00, 'Yuzu-soya, aji amarillo, mayo ajo tatemado, cebollín, furakake shiso', 0, 1),
+('Batera de Toro', 'https://losarrocesdekiko.com/wp-content/uploads/2022/04/Rabo-de-toro--scaled.jpg', 140.00, 'Aleta azul, yuzu-aioli, aguacate, aji amarillo', 10, 1),
+('Batera de Salmón', 'https://media-cdn.tripadvisor.com/media/photo-s/1d/3f/0b/0e/batera-de-salmao.jpg', 130.00, 'Salmón, aioli habanero, lemon soy, cebollín, cilantro criollo', 18, 1),
+('Tarta de Toro', 'https://cdn7.kiwilimon.com/recetaimagen/29776/960x720/31682.jpg.webp', 150.00, 'Aleta azul, vinagreta yuzu-trufa', 12, 1),
+('Edamame', 'https://misssushi.es/wp-content/uploads/edamame.jpg', 80.00, 'Sal Maldon, salsa negra, polvo piquín', 0, 2),
+('Shishitos', 'https://www.justonecookbook.com/wp-content/uploads/2022/08/Blistered-Shishito-Peppers-With-Ginger-Soy-Sauce-9223-II.jpg', 90.00, 'Sal Maldon, limón california', 20, 2),
+('Papás Fritas', 'https://kodamasushi.cl/wp-content/uploads/2019/08/papas-fritas-touri-sushi02.jpg', 70.00, 'Sal matcha, soya-trufa', 30, 2),
+('Camarones Roca', 'https://i0.wp.com/cucharamia.com/wp-content/uploads/2021/07/camarones-roca.jpg?w=798&ssl=1', 180.00, 'Soya dulce, mayo-picante, ajonjolí', 15, 2),
+('Jalapeño Poppers', 'https://www.recipetineats.com/tachyon/2024/02/Jalapeno-poppers_2.jpg?resize=1200%2C1500&zoom=0.54', 160.00, 'Cangrejo, atún aleta azul, queso feta, soya-yuzu', 25, 2),
+('Huachinango Tempura', 'https://tofuu.getjusto.com/orioneat-local/resized2/rcgzQe2pLxFQT8Ghw-800-x.webp', 200.00, 'Sal Maldon, salsa negra, polvo piquín', 18, 2);
 
 CREATE TABLE TIPOSPROMOCION (
     idTipoPromocion INT PRIMARY KEY AUTO_INCREMENT,
@@ -332,6 +332,7 @@ BEGIN
         SET MESSAGE_TEXT = 'No hay inventario suficiente de ese producto, hay que hacer stock.';
         END IF;
 END $$
+
 DELIMITER ;
 
 -- 2. NoStockProductoDeshabilitado
@@ -365,13 +366,29 @@ CREATE TRIGGER BloquearCambioPedidoCompletado
 BEFORE INSERT ON PEDIDOS
 FOR EACH ROW
 BEGIN
-    IF NEW.idStatus = 3 THEN
+    IF NEW.idStatus = 2 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El pedido ya no se puede modificar.';
         END IF;
 END $$
 
 DELIMITER ; 
+
+-- 5. usuarioOcupado
+DELIMITER $$
+CREATE TRIGGER usuarioOcupado
+BEFORE INSERT ON USUARIOS_RESTAURANTE
+FOR EACH ROW
+BEGIN 
+    IF EXISTS (
+        SELECT 1 FROM USUARIOS_RESTAURANTE WHERE nombre_usuario = NEW.nombre_usuario
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario ya registrado, intente on otro.';
+        END IF;
+END $$
+
+DELIMITER ;
 
 -- 6. CalcularTotalPedido
 DELIMITER $$
@@ -395,7 +412,7 @@ CREATE TRIGGER NotificarPromocionExpirada
 BEFORE INSERT ON PROMOCIONES
 FOR EACH ROW
 BEGIN 
-    IF NEW.fecha_inicio > '2024-11-01' AND NEW.fecha_inicio < '2024-11-30' THEN
+    IF NEW.fecha_inicio >= '2024-06-01' AND NEW.fecha_inicio <= '2024-11-30' THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'La promoción ya ha expirado.';
         END IF;
@@ -403,7 +420,22 @@ END $$
 
 DELIMITER ; 
 
+-- 8. ValidarFechaReserva
+DELIMITER $$
+CREATE TRIGGER ValidarFechaReserva
+BEFORE INSERT ON RESERVAS
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_reserva < '2024-11-30' THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'La reserva ha expirado.';
+    END IF;
+END $$
+
+DELIMITER;
+
 -- STORED PROCEDURES --
+
 -- PROCS PARA Restaurante --
 DELIMITER $$
 CREATE PROCEDURE obtenerDireccionesR()
@@ -414,6 +446,7 @@ END $$
 DELIMITER ;
 
 -- PROCS PARA Cliente --
+
 DELIMITER $$
 CREATE PROCEDURE nuevaDireccion(
     IN p_idUsuario INT,
@@ -453,8 +486,8 @@ BEGIN
     WHERE idPuntos = (SELECT idPuntos FROM CLIENTES WHERE idCliente = p_idCliente);
 END $$ 
 DELIMITER ;
--- PROCS PARA LOGIN --
 
+-- PROCS PARA LOGIN --
 
 CREATE VIEW
     InfoUsuario AS
@@ -467,6 +500,7 @@ FROM
     USUARIOS_RESTAURANTE ur
     JOIN ROLES r ON ur.idRol = r.idRol;
 
+<<<<<<< HEAD
 DELIMITER / / 
 CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) 
 BEGIN
@@ -478,6 +512,15 @@ BEGIN
         nombre_usuario = username;
 END / / 
 DELIMITER ;
+=======
+DELIMITER / / CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) BEGIN
+SELECT
+    *
+FROM
+    InfoUsuario
+where
+    nombre_usuario = username;
+>>>>>>> 8e25d15d54e291966ff1bd452800f0ba373c85f8
 
 DELIMITER //
 CREATE PROCEDURE registrarUsuario(
@@ -582,11 +625,8 @@ SELECT
     nombre_staff
 FROM
     mostrarUsuarios_vw;
-END //
-DELIMITER ;
 
-
- -- INSERTAR CLIENTES -------- - - - - - - -  - - - - - - - - - - - - - - -- - 
+ -- INSERTAR CLIENTES --
 
 DELIMITER / /
 CREATE PROCEDURE obtenerUser(
@@ -708,7 +748,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- PROCS PARA PEDIDOS ---------------------------------------------------------------------------------------------------
+-- PROCS PARA PEDIDOS --
 
 CREATE VIEW
     mostrarPedidos_vw AS
@@ -877,6 +917,7 @@ END $$
 DELIMITER ;
 
 --  (MUESTRA PLATILLOS DISPONIBLES) --
+
 CREATE VIEW
     PlatillosDisponibles_vw AS
 SELECT
@@ -1016,7 +1057,7 @@ BEGIN
 END //
 DELIMITTER ;
 
--- PROCS PARA RESEÑAS -------------------------------------------------------------------------------------------------
+-- PROCS PARA RESEÑAS --
 
 CREATE VIEW
     mostrarResenas_vw AS
@@ -1121,7 +1162,7 @@ WHERE
 END //
 DELIMITER ;
 
--- PROCS PARA RESERVAS -----------------------------------------------------------------------------------------------
+-- PROCS PARA RESERVAS --
 
 CREATE VIEW
     muestrareservas_vw AS
@@ -1305,7 +1346,7 @@ END / / DELIMITER;
 -- GRAFICAS --
 
 DELIMITER //
-CREATE PROCEDURE VentasXMes_gr ()
+CREATE PROCEDURE VentasXMes_gr () 
 BEGIN
 SELECT
     YEAR (fecha_pedido),
@@ -1322,11 +1363,11 @@ GROUP BY
 ORDER BY
     Mes;
 END //
+
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE UsuariosXRol_gr()
-BEGIN
+CREATE PROCEDURE UsuariosXRol_gr() 
     SELECT
         r.nombre AS rol_nombre,
         COUNT(*) AS total_usuarios
@@ -1337,34 +1378,21 @@ BEGIN
     GROUP BY
         r.idRol;
 END //
-DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE StatusReservas_gr()
-BEGIN
-    SELECT 
-        sr.Status_Reservas as Status, 
-        COUNT(r.idReserva) AS total
-    FROM 
-        RESERVAS r
-    NATURAL JOIN 
-        STATUS_RESERVAS sr
-    GROUP BY 
-        sr.idStatus;
-END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE PromedioXTipoResenas_gr()
 BEGIN
-    select nombre, AVG(puntuacion)
-	from RESENAS natural join TIPOS_RESENA tr 
-	group by idTipoResena;
+    SELECT nombre AS Tipo, AVG(puntuacion) AS Puntuacion
+	FROM RESENAS NATURAL JOIN TIPOS_RESENA tr 
+	GROUP BY idTipoResena;
 END $$
+
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE ComprasXCategoria_gr()
+CREATE PROCEDURE ComprasXCategoria_gr() 
 BEGIN
     SELECT ct.nombre AS Categoria, COUNT(pl.idCategoria) AS Total_Compras
     FROM PEDIDOS pe JOIN DETALLESPEDIDO dp 
@@ -1373,14 +1401,55 @@ BEGIN
     ON pl.idCategoria=ct.idCategoria
     GROUP BY ct.nombre;
 END $$
+
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE VentasXDia_gr()
+CREATE PROCEDURE VentasXDia_gr() 
 BEGIN
     SELECT fecha_entrega, sum(total_pedido) AS Ventas_totales
     FROM pedidosCompletos_vw
     GROUP BY fecha_entrega;
 END $$
+
 DELIMITER ;
 
+DELIMITER / / 
+CREATE PROCEDURE StatusDeClientes() 
+BEGIN
+    SELECT Status_Clientes, COUNT(*) AS Total
+    FROM STATUS_CLIENTES
+    GROUP BY Status_Clientes;
+END / /
+
+DELIMITER ;
+
+DELIMITER / /
+CREATE PROCEDURE resenasCalificaciones() 
+BEGIN
+    SELECT puntuacion, COUNT(*) AS Total
+    FROM RESENAS
+    GROUP BY puntuacion;
+END / /
+
+DELIMITER ;
+
+DELIMITER / /
+CREATE PROCEDURE Status_Reservas() 
+BEGIN
+    SELECT Status_Reservas, COUNT(*) AS Reservas
+    FROM STATUS_RESERVAS
+    GROUP BY Status_Reservas;
+END / /
+
+DELIMITER ; 
+
+DELIMITER / /
+CREATE PROCEDURE PlatillosStock() 
+BEGIN
+    SELECT inventario, COUNT(*) AS Stock
+    FROM PLATILLOS
+    GROUP BY inventario;
+END / /
+
+DELIMITER ;

@@ -10,8 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<<<<<<< HEAD:PROYECTOFINAL3/templates/DashboardAdmins.html
     <link rel="stylesheet" href="{{ url_for('static',filename='css/styleAdmin.css') }}" />
     <script src="{{ url_for('static',filename='js/scriptAdmin.js') }}"></script>
+=======
+    <link rel="stylesheet" href="styleAdmin.css" />
+>>>>>>> 8e25d15d54e291966ff1bd452800f0ba373c85f8:PROYECTOFINALJAJA/templates/DashboardAdmins.html
 </head> 
 
 <body>
@@ -73,23 +77,40 @@
                 <div class="text-center" style="padding-bottom: 20px; padding-top: 40px">
                     <span style="font-size: 50px; ">¡Hola, {{nombre_usuario}}!</span> <!--NOMBRE DE ADMIN-->
                 </div>
-                <hr>
+
                 <div class="row p-4">
                     <div class="col-6">
-                        <h5>Ventas Del Dia</h5>
+                        <h5>Status de Clientes</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <span style="font-size: 60px;">GRAFICA </span> <!-- Aqui va funcion de grafica -->
+                            <div id="status_de_clientes" style="width:100%;height:400px"></div> <!-- Aqui va funcion de grafica -->
                         </div>
                     </div>
                     <div class="col-6">
-                        <h5>Ordenes en curso</h5>
+                        <h5>Status de Reservas</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <span style="font-size: 60px;">GRAFICA </span> <!-- Aqui va funcion de grafica -->
+                            <div id="status_de_reservas" style="width:100%;height:400px"></div> <!-- Aqui va funcion de grafica -->
                         </div>
                     </div>
+                    <br>
                 </div>
                 <div>
-                    <hr>
+                    <div class="row p-4">
+                    <div class="col-6">
+                        <h5>Platillos en Stock</h5>
+                        <div id="recuadro_grafica" class="text-center">
+                            <div id="platillos_stock" style="width:100%;height:400px"></div>
+                        </div>
+                    </div>
+
+                        <div class="col-6">
+                            <h5>Calificaciones de Reseñas</h5>
+                            <div id="recuadro_grafica" class="text-center">
+                                <div id="resenas_calif" style="width:100%;height:400px"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
                     <br>
                 </div>
             </div>
@@ -166,7 +187,7 @@
         
                                 <span class="small-text">
                                     <strong>Condiciones de uso | Aviso de privacidad</strong><br>
-                                    © 2024, SéñoraTanaka.com, Todos los derechos reservados. <br>
+                                    © 2024, SeñoraTanaka.com, Todos los derechos reservados. <br>
                                 </span>
         
         
@@ -175,7 +196,7 @@
                         </div>
                     </div>
                 </section>
-            </footer>
+            </footer>
         </div>
 
     </div>
