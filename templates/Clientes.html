@@ -190,132 +190,29 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">IdCliente</th>
+                                        <th scope="col">fecha_entrega</th>
+                                        <th scope="col">total_pedido</th>
                                         <th scope="col" style="width: 110px;">Actions</th>
                                     </tr>
                                 </thead>
-                                <div class="scroll">
+                                <div class="scroll">  <!--INFO DEL PROC (MOSTRAR CLIENTES)-->
                                     <tbody>
+                                            {% for pedido in pedidos %}
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                                <th scope="row">{{pedido.idPedido}}</th>
+                                                <td>{{pedido.fecha_entrega}}</td>
+                                                <td>{{pedido.total_pedido}}</td>
+                                                <td>{{pedido.idCliente}}</td>
                                             <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
+                                                <div style="display: flex; justify-content: space-between;">                                                    
+                                                    <button onclick="location.href='/eliminar_pedido/{{pedido.idPedido}}'" class="btn btn-danger btn-sm" type="submit">
+                                                        <i class="bi bi-trash-fill"></i>  <!--ELIMINAR CLIENTE-->
                                                     </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: space-between;">
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                    <a href="#">
-                                                        <button class="btn btn-success btn-sm"
-                                                            type="submit">Editar</button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </div>
                             </table>
