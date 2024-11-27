@@ -140,12 +140,12 @@
                                             <td>{{cliente.cant_puntos}}</td>
                                             <td>
                                                 <div style="display: flex; justify-content: space-between;">
-                                                    <button onclick="location.href='/eliminar_cliente/{{cliente.idCliente}}'" class="btn btn-danger btn-sm" type="submit">
-                                                        <i class="bi bi-trash-fill"></i>  <!--ELIMINAR CLIENTE-->
-                                                    </button>
-                                                    <a href="/editar_cliente/{{cliente.idCliente}}">
-                                                        <button class="btn btn-success btn-sm">Editar</button>
-                                                    </a>
+                                                    <form action="/eliminar_cliente/{{ cliente.idCliente }}" method="post" style="display:inline;">
+                                                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                                    </form>
+                                                    <form action="/editar_cliente/{{ cliente.idCliente }}" method="post" style="display:inline;">
+                                                        <button class="btn btn-danger btn-sm" type="submit">Editar</button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
