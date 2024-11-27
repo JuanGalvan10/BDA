@@ -93,22 +93,33 @@ INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono,
 (4, 8, 1, 'Ana', 'Martínez', 4, 'ana.martinez@email.com', 4),
 (5, 9, 2, 'Luis', 'Sánchez', 5, 'luis.sanchez@email.com', 5);
 
+CREATE TABLE TELEFONOS_CLIENTE (
+    idtelefono INT PRIMARY KEY AUTO_INCREMENT,
+    idCliente INT NOT NULL,
+    telefono VARCHAR(14),
+    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
+);
 
-INSERT INTO TELEFONOS_CLIENTE (telefono) VALUES
-('5551234567'),
-('5552345678'),
-('5553456789'),
-('5554567890'),
-('5555678901');
+INSERT INTO TELEFONOS_CLIENTE (idCliente, telefono) VALUES
+(1,'5551234567'),
+(2,'5552345678'),
+(4,'5553456789'),
+(3,'5554567890'),
+(5,'5555678901');
 
+CREATE TABLE DIRECCIONES_CLIENTE (
+    iddireccion INT PRIMARY KEY AUTO_INCREMENT,
+    idCliente INT NOT NULL,
+    direccion VARCHAR(255),
+    FOREIGN KEY (idCliente) REFERENCES CLIENTES(idCliente)
+);
 
-
-INSERT INTO DIRECCIONES_CLIENTE (direccion) VALUES
-('Calle Falsa 123, Ciudad, CP 12345'),
-('Av. Siempre Viva 456, Ciudad, CP 67890'),
-('Boulevard de los Héroes 789, Ciudad, CP 11223'),
-('Paseo de la Reforma 101, Ciudad, CP 33445'),
-('Plaza Mayor 202, Ciudad, CP 55667');
+INSERT INTO DIRECCIONES_CLIENTE (idCliente, direccion) VALUES
+(1,'Calle Falsa 123, Ciudad, CP 12345'),
+(2,'Av. Siempre Viva 456, Ciudad, CP 67890'),
+(3,'Boulevard de los Héroes 789, Ciudad, CP 11223'),
+(4,'Paseo de la Reforma 101, Ciudad, CP 33445'),
+(5,'Plaza Mayor 202, Ciudad, CP 55667');
 
 CREATE TABLE DETALLES_METODOPAGOS (
     idDetalleMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
@@ -631,7 +642,19 @@ BEGIN
     VALUES (idCliente, direccion);
 END $$
 DELIMITER ;
+-- PROCS PARA DIRECCIONES --
 
+DELIMITER $$
+CREATE PROCEDURE actualizarDireccion(
+    IN idCliente INT,
+    IN direccion VARCHAR(255)
+)
+BEGIN
+    UPDATE DIRECCIONES_CLIENTE
+    SET direccion = direccion
+    WHERE iddireccion = (SELECT iddireccion FROM CLIENTES WHERE idCliente = idCliente LIMIT 1);
+END $$ 
+DELIMITER ;
 
 -- PROCS PARA LOGIN --
 
