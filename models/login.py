@@ -42,8 +42,10 @@ def login_user(username,password):
             stored_password = user['password']
             if stored_password == password:
                 return True, user
+            else:
+                return False, 'Contrasena incorrecta'
         else:
-            return None, 'Contrasena incorrecta'
+            return False, 'Usuario no encontrado'
     except MySQLdb.OperationalError as e:
         cur.close()
         return False, str(e)

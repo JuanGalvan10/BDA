@@ -8,7 +8,6 @@ def login():
         password = hashlib.sha256(request.form['password'].encode()).hexdigest()
         success, user = login_user(username,password)
         if success:
-            print(user)
             if user:
                 session['loggedin'] = True
                 session['idUsuario'] = user['idUsuario']

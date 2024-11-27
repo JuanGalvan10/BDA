@@ -12,11 +12,19 @@ def mostrar_reservas():
                 else:
                     return redirect(url_for('eliminar_reserva', id=id))
         if session['rol'] == 'admin':
-            reservas = Reserva.get_all()
-            return render_template('ReservasAdmin.html', reservas = reservas, nombre_usuario = session['usuario'])
+            success, reservas = Reserva.get_all()
+            if success:
+                return render_template('ReservasAdmin.html', reservas = reservas, nombre_usuario = session['usuario'])
+            else:
+                flash(reservas,'error')
+                return render_template('ReservasAdmin.html')
         else:
-            reservas = Reserva.get_by_cliente(session['idCliente'])
-            return render_template('mis_reservas.html', reservas = reservas)
+            success, reservas = Reserva.get_by_cliente(session['idCliente'])
+            if success:
+                return render_template('mis_reservas.html', reservas = reservas)
+            else:
+                flash(reservas,'error')
+                return render_template('mis_reservas.html')
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -31,12 +39,15 @@ def nuevo_reserva():
             idStatus = 2
             tema = request.form['tema']
             idCliente = session['idCliente']
-            Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente)
-            return render_template('gracias_reserva.html')
+            success, message = Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente)
+            if success:
+                return render_template('gracias_reserva.html')
+            else:
+                flash(message, 'error')
+                return(redirect(url_for('reservasC')))
         else:
-            flash('Metodo de acceso incorrecto')
+            flash('Metodo de acceso incorrecto', 'error')
             return render_template('reservas.html')
-        
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -61,11 +72,14 @@ def nuevo_reserva():
 def eliminar_reserva(id):
     if 'loggedin' in session:
         if request.method =='POST':
-            Reserva.delete(id,)
-            flash('Reserva eliminada correctamente', 'success')
+            success, message = Reserva.delete(id,)
+            if success:
+                flash('Reserva eliminada correctamente', 'success')
+            else:
+                flash(message, 'error')
             return redirect(url_for('mostrar_reservas'))
         else:
-            flash('Metodo de acceso incorrecto')
+            flash('Metodo de acceso incorrecto', 'error')
             return render_template('reservas.html')
     else:
         flash('Primero debes de ingresar.', 'error')
@@ -75,9 +89,7 @@ def horas_disponibles():
     fecha = request.form['fecha']
     if not fecha:
         return "Fecha no proporcionada", 400
-
     horas_ocupadas = Reserva.get_by_dia(fecha)
-
     return render_template('Autocomplete_reservas.html', horas_ocupadas=horas_ocupadas)
 
     

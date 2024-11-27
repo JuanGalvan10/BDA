@@ -13,6 +13,7 @@ def agregarCarrito():
             producto = {'id': productoID, 'cantidad': cantidad, 'precio': precio}
             session['productos'].append(producto)
             session['subtotal'] += cantidad*precio
+            flash('Producto agregado al carrito', 'info')
             return redirect(url_for('mostrar_productos'))
         else:
             flash('Metodo incorrecto', 'error')
@@ -27,10 +28,13 @@ def checkoutResumen():
         productos = []
         for producto in prods:
             idProducto = producto['id']
-            productos_checkout = Producto.get_by_id(idProducto)
-            productos_checkout['cantidad'] = producto['cantidad']
-            productos.append(productos_checkout)
-        print(productos)
+            success, productos_checkout = Producto.get_by_id(idProducto)
+            if success:
+                productos_checkout['cantidad'] = producto['cantidad']
+                productos.append(productos_checkout)
+            else:
+                message = productos_checkout
+                flash(message, 'error')
         return render_template('CheckoutResumen.html', productos = productos, subtotal = session['subtotal'])
     else:
         flash('Primero debes de ingresar.', 'error')
@@ -74,10 +78,18 @@ def checkoutEnvio():
                     })
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
-            usuario = Cliente.get_cliente_by_id(session['idCliente'])
-            direccionUser = usuario['direccion']
-            direcciones = Carrito.get_direccion_restaurantes()
-            return render_template('CheckoutDomicilio.html', subtotal=subtotal, direccionUser=direccionUser, direcciones=direcciones)
+            success, usuario = Cliente.get_cliente_by_id(session['idCliente'])
+            if success:
+                direccionUser = usuario['direccion']
+                success2, direcciones = Carrito.get_direccion_restaurantes()
+                if success2:
+                    return render_template('CheckoutDomicilio.html', subtotal=subtotal, direccionUser=direccionUser, direcciones=direcciones)
+                else:
+                    message2 = direcciones
+                    flash(message2, 'error')
+            else:
+                message = usuario
+                flash(message, 'error')
         return redirect(url_for('checkoutResumen'))
     else:
         flash('Primero debes de ingresar.', 'error')
@@ -92,12 +104,16 @@ def checkoutPago():
             if direccion == 'domicilio':
                 costo = 50
                 total += costo
-            metodos = Carrito.get_metodos(session['idUsuario'])
-            for metodo in metodos:
-                num_tarjeta = metodo['num_tarjeta']
-                censurado = '*' * (len(num_tarjeta) - 4) + num_tarjeta[-4:]  
-                metodo['num_tarjeta'] = censurado
-            return render_template('CheckoutPago.html', total = total, costo = costo, metodos = metodos, subtotal = session['subtotal'])
+            success, metodos = Carrito.get_metodos(session['idUsuario'])
+            if success:
+                for metodo in metodos:
+                    num_tarjeta = metodo['num_tarjeta']
+                    censurado = '*' * (len(num_tarjeta) - 4) + num_tarjeta[-4:]  
+                    metodo['num_tarjeta'] = censurado
+                return render_template('CheckoutPago.html', total = total, costo = costo, metodos = metodos, subtotal = session['subtotal'])
+            else:
+                message = metodos
+                flash(message, 'error')
         else:
             return redirect(url_for('checkoutResumen'))
     else: 
@@ -113,11 +129,12 @@ def pagar():
             for producto in productos:
                 idProductos.append(producto['id'])
                 cantidades.append(producto['cantidad'])
-            estado, mensaje = Pedido.insert(idProductos, cantidades, session["idUsuario"])
-            if estado:
+            success, mensaje = Pedido.insert(idProductos, cantidades, session["idUsuario"])
+            if success:
+                flash(mensaje, 'info')
                 return render_template('CheckoutConfirmacion.html')
             else:
-                flash(mensaje)
+                flash(mensaje, 'error')
                 return redirect(url_for('checkoutPago'))
         else:
             return redirect(url_for('checkoutResumen'))
@@ -128,14 +145,16 @@ def pagar():
 def guardar_direccion():
     if 'loggedin' in session:
         if request.method =='POST':
-            try:
-                nuevaDireccion = request.form['nuevaDireccion']
-                Cliente.update_direccion(session['idUsuario'], nuevaDireccion)
+            nuevaDireccion = request.form['nuevaDireccion']
+            success, message = Cliente.update_direccion(session['idUsuario'], nuevaDireccion)
+            if success:
+                flash(message, 'info')
                 redirect(url_for('CheckoutEnvio'))
-            except Exception as e:
-                return {"error": str(e)}, 500
+            else:
+                flash(message, 'error')
+                redirect(url_for('CheckoutEnvio'))
         else:
-            flash('Metodo de acceso incorrecto')
+            flash('Metodo de acceso incorrecto', 'error')
             return redirect(url_for('checkoutResumen'))
     else:
         flash('Primero debes de ingresar.', 'error')
@@ -144,25 +163,27 @@ def guardar_direccion():
 def nueva_tarjeta():
     if 'loggedin' in session:
         if request.method =='POST':
-            try:
-                num_tarjeta = request.form['nuevaDireccion']
-                fecha_expiracion = request.form['fecha']
-                if num_tarjeta.startswith("4"):
-                    nombre_metodo = "Visa"
-                elif num_tarjeta[:2] in ["51", "52", "53", "54", "55"] or \
-                    2221 <= int(num_tarjeta[:4]) <= 2720:
-                    nombre_metodo = "Mastercard"
-                elif num_tarjeta[:2] in ["34", "37"]:
-                    nombre_metodo = "American Express"
-                elif num_tarjeta[:4] == "6011" or num_tarjeta.startswith("65") or \
-                    622126 <= int(num_tarjeta[:6]) <= 622925:
-                    nombre_metodo = "Discover"
-                else:
-                    return "Desconocido"
-                Cliente.nueva_tarjeta(session['idCliente'], num_tarjeta, fecha_expiracion, nombre_metodo)
+            num_tarjeta = request.form['nuevaDireccion']
+            fecha_expiracion = request.form['fecha']
+            if num_tarjeta.startswith("4"):
+                nombre_metodo = "Visa"
+            elif num_tarjeta[:2] in ["51", "52", "53", "54", "55"] or \
+                2221 <= int(num_tarjeta[:4]) <= 2720:
+                nombre_metodo = "Mastercard"
+            elif num_tarjeta[:2] in ["34", "37"]:
+                nombre_metodo = "American Express"
+            elif num_tarjeta[:4] == "6011" or num_tarjeta.startswith("65") or \
+                622126 <= int(num_tarjeta[:6]) <= 622925:
+                nombre_metodo = "Discover"
+            else:
+                return "Desconocido"
+            success, message = Cliente.nueva_tarjeta(session['idCliente'], num_tarjeta, fecha_expiracion, nombre_metodo)
+            if success:
+                flash(message, 'info')
                 redirect(url_for('checkoutPago'))
-            except Exception as e:
-                return {"error": str(e)}, 500
+            else:
+                flash(message, 'error')
+                redirect(url_for(nueva_tarjeta))
         return render_template('AgregarNuevaTarjeta.html')
     else:
         flash('Primero debes de ingresar.', 'error')

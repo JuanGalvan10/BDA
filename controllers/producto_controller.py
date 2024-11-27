@@ -3,19 +3,23 @@ from models.producto import Producto
 from models.resena import Resena
 
 def mostrar_productos():
-    productos = Producto.get_all()
-    if 'loggedin' in session:
-        if request.method == 'POST':
-            accion = request.form['accion']
-            if accion:
-                id = request.form['id']
-                if accion == 'Editar':
-                    return redirect(url_for('editar_producto', id=id))
-                else:
-                    return redirect(url_for('eliminar_producto', id=id))
-    if session['rol'] == 'admin':
-        return render_template('Inventario.html', productos = productos)
-    return render_template('catalogo.html', productos = productos, nombre_usuario = session['usuario'])
+    success, productos = Producto.get_all()
+    if success:
+        if 'loggedin' in session:
+            if request.method == 'POST':
+                accion = request.form['accion']
+                if accion:
+                    id = request.form['id']
+                    if accion == 'Editar':
+                        return redirect(url_for('editar_producto', id=id))
+                    else:
+                        return redirect(url_for('eliminar_producto', id=id))
+        if session['rol'] == 'admin':
+            return render_template('Inventario.html', productos = productos)
+        return render_template('catalogo.html', productos = productos, nombre_usuario = session['usuario'])
+    else:
+        flash(productos, 'error')
+        return render_template('catalogo.html')
 
 def ver_producto(id):
     producto = Producto.get_by_id(id)
@@ -30,7 +34,11 @@ def nuevo_producto():
             precio = request.form['precio']
             descripcion= request.form['desc']
             categoria= request.form['categoria']
-            Producto.insert(nombre, imagen_URL, precio, descripcion, categoria)
+            success, message = Producto.insert(nombre, imagen_URL, precio, descripcion, categoria)
+            if success:
+                flash(message, 'info')
+            else:
+                flash(message, 'error')
             return redirect(url_for('mostrar_productos'))
         return render_template('Crear_producto.html', nombre_usuario = session['usuario'])
     else: 
@@ -45,10 +53,13 @@ def editar_producto(id):
             precio = request.form['precio']
             descripcion= request.form['desc']
             categoria= request.form['categoria']
-            Producto.update(nombre, imagen_URL, precio, descripcion, categoria)
-            flash('Prdocuto actualizado correctamente', 'success')
+            success, message = Producto.update(nombre, imagen_URL, precio, descripcion, categoria)
+            if success:
+                flash('Producto actualizado correctamente', 'success')
+            else:
+                flash(message, 'error')
             return redirect(url_for('mostrar_productos'))
-        producto = Producto.get_by_id(id)
+        success, producto = Producto.get_by_id(id)
         return render_template('Editar_producto.html', producto = producto, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
@@ -57,11 +68,14 @@ def editar_producto(id):
 def eliminar_producto(id):
     if 'loggedin' in session:
         if request.method =='POST':
-            Producto.delete(id,)
-            flash('Producto eliminado correctamente', 'success')
+            success, message = Producto.delete(id,)
+            if success:
+                flash('Producto eliminado correctamente', 'success')
+            else:
+                flash(message, 'error')
             return redirect(url_for('mostrar_prodcutos'))
         else:
-            flash('Metodo de acceso incorrecto')
+            flash('Metodo de acceso incorrecto', 'error')
             return redirect(url_for('mostrar_productos'))
     else:
         flash('Primero debes de ingresar.', 'error')

@@ -14,15 +14,25 @@ def mostrar_clientes():
                     return redirect(url_for('eliminar_cliente', id=id))
         if session['rol'] == 'cliente':
             username = session['usuario']
-            cliente = Cliente.get_cliente_by_id(session['idCliente'])
-            return render_template('mi_perfil.html', cliente = cliente, username = username)
+            success, cliente = Cliente.get_cliente_by_id(session['idCliente'])
+            if success:
+                return render_template('mi_perfil.html', cliente = cliente, username = username)
+            else:
+                flash(cliente, 'error')
+                redirect(url_for('mostrar_clientes'))
         else:
-            clientes = Cliente.get_clientes()
-
-            pedidos = Pedido.get_all()
-            pedidos_unicos = {pedido['idPedido']: pedido for pedido in pedidos}.values()
-            print(pedidos)
-            return render_template('Clientes.html', clientes = clientes,pedidos = pedidos_unicos, nombre_usuario = session['usuario'])
+            success, clientes = Cliente.get_clientes()
+            if success:
+                success2, pedidos = Pedido.get_all()
+                if success2:
+                    pedidos_unicos = {pedido['idPedido']: pedido for pedido in pedidos}.values()
+                    return render_template('Clientes.html', clientes = clientes,pedidos = pedidos_unicos, nombre_usuario = session['usuario'])
+                else:
+                    flash(pedidos, 'error')
+                    redirect(url_for('mostrar_clientes'))
+            else:
+                flash(cliente, 'error')
+                redirect(url_for('mostrar_clientes'))
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -39,9 +49,13 @@ def nuevo_cliente():
             puntos= request.form['puntos']
             password = request.form['password']
             nombre_usuario = request.form['nombre_usuario']
-            Cliente.insert(nombre, apellidos, correo, telefono, direccion, puntos, password, nombre_usuario)
-            flash('Cliente creado correctamente', 'success')
-            return redirect(url_for('mostrar_clientes'))
+            success, message = Cliente.insert(nombre, apellidos, correo, telefono, direccion, puntos, password, nombre_usuario)
+            if success:
+                flash('Cliente creado correctamente', 'success')
+                return redirect(url_for('mostrar_clientes'))
+            else:
+                flash(message, 'error')
+                redirect(url_for('mostrar_clientes'))
         if session['rol'] == 'admin':
             return render_template('Crear_cliente.html')
         else: 
@@ -59,15 +73,27 @@ def editar_cliente(id):
             correo = request.form['correo']
             telefono = request.form['telefono']
             direccion= request.form['direccion']
-            Cliente.update(nombre, apellidos, correo, telefono, direccion)
-            flash('Cliente actualizado correctamente', 'success')
-            return redirect(url_for('mostrar_clientes'))
+            success, message = Cliente.update(nombre, apellidos, correo, telefono, direccion)
+            if success:
+                flash('Cliente actualizado correctamente', 'success')
+                return redirect(url_for('mostrar_clientes'))
+            else:
+                flash(message, 'error')
+                return redirect(url_for('mostrar_clientes'))
         if session['rol'] == 'cliente':
-            cliente = Cliente.get_cliente_by_id(session['idCliente'])
-            return render_template('editar_mi_perfil.html', cliente = cliente)
+            success, cliente = Cliente.get_cliente_by_id(session['idCliente'])
+            if success:
+                return render_template('editar_mi_perfil.html', cliente = cliente)
+            else:
+                flash(cliente, 'error')
+                return redirect(url_for('mostrar_clientes'))
         else:
-            cliente = Cliente.get_cliente_by_id(id)
-            return render_template('Editar_cliente.html', cliente = cliente, nombre_usuario = session['usuario'])
+            success, cliente = Cliente.get_cliente_by_id(id)
+            if success:
+                return render_template('Editar_cliente.html', cliente = cliente, nombre_usuario = session['usuario'])
+            else:
+                flash(cliente,'error')
+                return redirect(url_for('mostrar_clientes'))
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
@@ -75,17 +101,14 @@ def editar_cliente(id):
 def eliminar_cliente(id):
     if 'loggedin' in session:
         if request.method =='POST':
-            try:
-                Cliente.delete(id,)
+            success, message = Cliente.delete(id,)
+            if success:
                 flash('cliente eliminado correctamente', 'success')
-                if session['rol'] == 'admin':
-                    clientes = Cliente.get_all()
-                    return render_template('Ventas.html', clientes = clientes, nombre_usuario = session['usuario'])
-            except Exception as e:
-                return {"error": str(e)}, 500
+            else:
+                flash(message, 'error')
         else:
-            flash('Metodo de acceso incorrecto')
-            return redirect(url_for('mostrar_clientes'))
+            flash('Metodo de acceso incorrecto', 'error')
+        return redirect(url_for('mostrar_clientes'))
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
