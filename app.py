@@ -100,10 +100,9 @@ def reservas():
     
 @app.route('/galeria')
 def galeria():
-    loggedin = False
     if 'loggedin' in session:
-        loggedin = True
-    return render_template('galeria.html', nombre_usuario = session['usuario'])
+        return render_template('galeria.html', nombre_usuario = session['usuario'])
+    return render_template('galeria.html')
 
 @app.route('/mi_perfil')
 def mi_perfil():
@@ -115,10 +114,9 @@ def mi_perfil():
 
 @app.route('/menu')
 def menu():
-    loggedin = False
     if 'loggedin' in session:
-        loggedin= True
-    return render_template('menu.html',  nombre_usuario = session['usuario'])
+        return render_template('menu.html',  nombre_usuario = session['usuario'])
+    return render_template('menu.html')
 
 @app.route('/agregarUsuario')
 def agregarUser():

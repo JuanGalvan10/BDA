@@ -14,9 +14,11 @@ def mostrar_productos():
                         return redirect(url_for('editar_producto', id=id))
                     else:
                         return redirect(url_for('eliminar_producto', id=id))
-        if session['rol'] == 'admin':
-            return render_template('Inventario.html', productos = productos)
-        return render_template('catalogo.html', productos = productos, nombre_usuario = session['usuario'])
+            if session['rol'] == 'admin':
+                return render_template('Inventario.html', productos = productos)
+            else:
+                 return render_template('catalogo.html', productos = productos, nombre_usuario = session['usuario'])
+        return render_template('catalogo.html', productos = productos)
     else:
         flash(productos, 'error')
         return render_template('catalogo.html')
