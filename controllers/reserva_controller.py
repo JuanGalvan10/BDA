@@ -44,7 +44,7 @@ def nuevo_reserva():
                 return render_template('gracias_reserva.html')
             else:
                 flash(message, 'error')
-                return(redirect(url_for('reservasC')))
+                return(redirect(url_for('mostrar_reservas')))
         else:
             flash('Metodo de acceso incorrecto', 'error')
             return render_template('reservas.html')
