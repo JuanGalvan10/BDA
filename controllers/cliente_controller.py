@@ -29,10 +29,10 @@ def mostrar_clientes():
                     return render_template('Clientes.html', clientes = clientes,pedidos = pedidos_unicos, nombre_usuario = session['usuario'])
                 else:
                     flash(pedidos, 'error')
-                    return redirect(url_for('vista_principal'))
+                    return render_template('Clientes.html')
             else:
                 flash(clientes, 'error')
-                return redirect(url_for('vista_principal'))
+                return render_template('Clientes.html')
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
