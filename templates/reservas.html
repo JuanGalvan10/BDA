@@ -13,7 +13,7 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="../static/js/script.js"></script>
 </head>
 <body>
   <header>
@@ -107,7 +107,7 @@
         <div class="col-8" style="border-right: 2px solid black;">
           <form method="POST" action="/nuevo_reserva">
             <p>Tema:</p>
-            <input type="text" name="tema" id="txt-reserva"/>
+            <input type="text" name="tema" id="txt-reserva" required/>
             <div class="row py-4">
               <div class="col-5" style="height: 100%;">
                 <label for="fecha">Fecha:</label>
@@ -119,85 +119,63 @@
               </div>
               <div class="col-7">
                 <label for="hora">Hora:</label>
-                <div class="row">
+                <div id="horas-disponibles" class="row">
+    
                   <div class="col-4">
-                      <input type="button" name="hora" value="2:00 PM" class="btn-hora" id="btn-header"></input>
+                      
+                    <input type="button" name="hora" value="13:00 PM" class="btn-hora" id="btn-header">
+                      
                   </div>
+              
                   <div class="col-4">
-                    <input type="button" name="hora" value="15:00" class="btn-hora" id="btn-header"></input>
+                      
+                      <input type="button" name="hora" value="15:00 PM" class="btn-hora" id="btn-header">
+                      
                   </div>
+              
                   <div class="col-4">
-                    <input type="button" name="hora" value="4:00" class="btn-hora" id="btn-header"></input>
+                      
+                      <input type="button" name="hora" value="17:00 PM" class="btn-hora" id="btn-header">
+                      
                   </div>
-                </div>               
+              
+                  <div class="col-4">
+                    
+                      <input type="button" name="hora" value="19:00 PM" class="btn-hora" id="btn-header">
+                      
+                  </div>
+              
+                  <div class="col-4">
+                      
+                      <input type="button" name="hora" value="21:00 PM" class="btn-hora" id="btn-header">
+                      
+                  </div>
+                </div>       
+              </div>
+            </div>
+          </div>
+          <div class="col-4" style="padding-left: 20px;">
+            <div class="row">
+              <div class="col-12">
+                <h4 class="py-2">Reserva:</h4>
+                <p id="tema-reserva"></p>
+                <p id="dia-reserva">Día: Selecciona un día</p>
+                <p id="hora-reserva">Hora: Selecciona una hora</p>
+                <p id="cant-reserva">Personas: Ingresa una cantidad</p>
+              </div>
+            </div>
+            <div class="row" style="padding-top: 100px;">
+              <div class="col-12">
+                <p style="font-size: 12px; padding-left: 20px;">*Reserva a nombre del usuario</p>
+                <p style="font-size: 12px; padding-left: 20px;">*Se tendrá tolerancia de 15 min.</p>
+              </div>
+              <div class="col-12">
+                  <button type="submit" id="btn-reserva"><p>Reservar</p></button>
+                </form>
                 </div>
-                <script>
-                  document.addEventListener('DOMContentLoaded', () => {
-                      const fechaInput = document.getElementById('fecha');
-                      const personasInput = document.getElementById('num_personas');
-                      const horaInput = document.querySelectorAll('.btn-hora');
-                      const temaInput = document.getElementById('txt-reserva');
-
-                      const datoFecha = document.getElementById('dia-reserva');
-                      const datoPersonas = document.getElementById('cant-reserva');
-                      const datoHora = document.getElementById('hora-reserva');
-                      const datoTema = document.getElementById('tema-reserva');
-              
-                      fechaInput.addEventListener('change', () => {
-                          const fechaSeleccionada = fechaInput.value;
-                          datoFecha.textContent = `Dia: ${fechaSeleccionada}`
-                      });
-              
-                      personasInput.addEventListener('input', () => {
-                          const numPersonas = personasInput.value;
-                          datoPersonas.textContent = `Personas: ${numPersonas}`
-                      });
-                      const botonesHora = document.querySelectorAll('.btn-hora');
-                      botonesHora.forEach((boton) => {
-                          boton.addEventListener('click', () => {
-                              const horaSeleccionada = boton.value;
-                              datoHora.textContent = `Hora: ${horaSeleccionada}`;
-                          });
-                      });
-                  });
-                  document.addEventListener('DOMContentLoaded', () => {
-                    const temaInput = document.getElementById('txt-reserva'); 
-                    const datoTema = document.getElementById('tema-reserva'); 
-
-                    datoTema.textContent = 'Tema: Ingresa un tema';
-
-                    temaInput.addEventListener('input', () => {
-                        const tema = temaInput.value.trim(); 
-                        datoTema.textContent = tema
-                            ? `Tema: ${tema}` 
-                            : 'Tema: Ingresa un tema'; 
-                    });
-                });
-              </script>
-              </div>
-            </div>
-            <br>
-        </div>
-        <div class="col-4" style="padding-left: 20px;">
-          <div class="row">
-            <div class="col-12">
-              <h4 class="py-2">Reserva:</h4>
-              <p id="tema-reserva"></p>
-              <p id="dia-reserva">Día: Selecciona un día</p>
-              <p id="hora-reserva">Hora: Selecciona una hora</p>
-              <p id="cant-reserva">Personas: Ingresa una cantidad</p>
             </div>
           </div>
-          <div class="row" style="padding-top: 100px;">
-            <div class="col-12">
-              <p style="font-size: 12px; padding-left: 20px;">*Reserva a nombre del usuario</p>
-              <p style="font-size: 12px; padding-left: 20px;">*Se tendrá tolerancia de 15 min.</p>
-            </div>
-            <div class="col-12">
-                <button type="submit" id="btn-reserva"><p>Reservar</p></button>
-              </form>
-              </div>
-          </div>
+          <br>
         </div>
       </div>
     </div>
@@ -304,4 +282,55 @@ function scrollleft(){
   setTimeout(scrollleft, 25);
 }
 scrollleft();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fechaInput = document.getElementById('fecha');
+    const today = new Date().toISOString().split('T')[0]; 
+    fechaInput.setAttribute('min', today); 
+});
+
+  document.addEventListener('DOMContentLoaded', () => {
+      const fechaInput = document.getElementById('fecha');
+      const personasInput = document.getElementById('num_personas');
+      const horaInput = document.querySelectorAll('.btn-hora');
+      const temaInput = document.getElementById('txt-reserva');
+
+      const datoFecha = document.getElementById('dia-reserva');
+      const datoPersonas = document.getElementById('cant-reserva');
+      const datoHora = document.getElementById('hora-reserva');
+      const datoTema = document.getElementById('tema-reserva');
+
+      fechaInput.addEventListener('change', () => {
+          const fechaSeleccionada = fechaInput.value;
+          datoFecha.textContent = `Dia: ${fechaSeleccionada}`
+      });
+
+      personasInput.addEventListener('input', () => {
+          const numPersonas = personasInput.value;
+          datoPersonas.textContent = `Personas: ${numPersonas}`
+      });
+      const botonesHora = document.querySelectorAll('.btn-hora');
+      botonesHora.forEach((boton) => {
+          boton.addEventListener('click', () => {
+              const horaSeleccionada = boton.value;
+              datoHora.textContent = `Hora: ${horaSeleccionada}`;
+          });
+      });
+      const inputHidden = horaSeleccionada;
+                
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    const temaInput = document.getElementById('txt-reserva'); 
+    const datoTema = document.getElementById('tema-reserva'); 
+
+    datoTema.textContent = 'Tema: Ingresa un tema';
+
+    temaInput.addEventListener('input', () => {
+        const tema = temaInput.value.trim(); 
+        datoTema.textContent = tema
+            ? `Tema: ${tema}` 
+            : 'Tema: Ingresa un tema'; 
+    });
+});
 </script>

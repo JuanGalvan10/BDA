@@ -23,7 +23,7 @@ def nuevo_resena():
             comentario = request.form['comentario']
             Resena.insert(puntuacion, titulo, comentario, session['idCliente'], idTipoRes)
             return redirect(url_for('mostrar_resenas'))
-        return render_template('Crear_resena.html') #HTML de crear
+        return render_template('AgregarNuevaResena.html') #HTML de crear
     else: 
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))

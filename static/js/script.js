@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', () => {
     const fechaInput = document.getElementById('fecha');
     const personasInput = document.getElementById('num_personas');
-    const horaInput = document.getElementById('btn-hora');
+    const horaInput = document.querySelectorAll('.btn-hora');
     const temaInput = document.getElementById('txt-reserva');
 
     const datoFecha = document.getElementById('dia-reserva');
@@ -68,8 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const botonesHora = document.querySelectorAll('.btn-hora');
     botonesHora.forEach((boton) => {
-        boton.addEventListener('click', () => {
-            const horaSeleccionada = boton.value;
+        boton.addEventListener('click', (event) => {
+            const horaSeleccionada = event.target;
+            console.log(`Hora seleccionada: ${horaSeleccionada}`);
             datoHora.textContent = `Hora: ${horaSeleccionada}`;
         });
     });
