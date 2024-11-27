@@ -22,8 +22,8 @@ app.secret_key = SECRET_KEY
 
 init_app(app)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == '_main_':
+    app.run(debug=True)
 
     
 #definimos la ruta del landing
@@ -196,6 +196,3 @@ def promedio_resenas_calif():
     resultado = cur.fetchall()
     cur.close()
     return jsonify([{"name": row[0], "y": row[1]} for row in resultado])
-
-if _name_ == '_main_':
-    app.run(debug=True)

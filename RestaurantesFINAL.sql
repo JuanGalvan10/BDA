@@ -1400,7 +1400,8 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE UsuariosXRol_gr() 
+CREATE PROCEDURE UsuariosXRol_gr()
+BEGIN
     SELECT
         r.nombre AS rol_nombre,
         COUNT(*) AS total_usuarios
