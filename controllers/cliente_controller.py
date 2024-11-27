@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models.cliente import Cliente
+from models.pedido import Pedido
 
 def mostrar_clientes():
     if 'loggedin' in session:
@@ -17,7 +18,8 @@ def mostrar_clientes():
             return render_template('mi_perfil.html', cliente = cliente, username = username)
         else:
             clientes = Cliente.get_clientes()
-            return render_template('Clientes.html', clientes = clientes, nombre_usuario = session['usuario'])
+            pedidos = Pedido.get_pedidos()
+            return render_template('Clientes.html', clientes = clientes, pedidos = pedidos,nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
