@@ -72,6 +72,21 @@
             <div class="main p-3">
                 <div class="text-center" style="padding-top: 20px; padding-bottom: 40px;">
                     <span style="font-size: 70px; ">Crear Usuario</span>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                      <ul>
+                        {% for category, message in messages %}
+                          {% if category == 'success' %}
+                            <li class="success">{{ message }}</li>
+                          {% elif category == 'info' %}
+                            <li class="info">{{ message }}</li>
+                          {% elif category == 'error' %}
+                            <li class="error">{{ message }}</li>
+                          {% endif %}
+                          {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
                 </div>
                 <hr>
                 <div style="height: 50px; align-items: center; display: flex; justify-content: space-between;">

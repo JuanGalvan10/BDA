@@ -83,7 +83,21 @@
       </div>
     </div>
   </header>
-
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        {% if category == 'success' %}
+          <li class="success">{{ message }}</li>
+        {% elif category == 'info' %}
+          <li class="info">{{ message }}</li>
+        {% elif category == 'error' %}
+          <li class="error">{{ message }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
   <div style="text-align: center; margin-top: 110px;">
     <img src="https://images.prismic.io/familiaarboleda/bb4a419c-47ec-4303-9e32-7825625580cd_sra_tanaka-removebg-preview.png?auto=compress,format" alt="Señora Tanaka" width="290">
   </div>  

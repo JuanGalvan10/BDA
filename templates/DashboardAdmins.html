@@ -83,6 +83,21 @@
             <div class="main p-3">
                 <div class="text-center" style="padding-bottom: 20px; padding-top: 40px">
                     <span style="font-size: 50px; ">¡Hola, {{nombre_usuario}}!</span> <!--NOMBRE DE ADMIN-->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                      <ul>
+                        {% for category, message in messages %}
+                          {% if category == 'success' %}
+                            <li class="success">{{ message }}</li>
+                          {% elif category == 'info' %}
+                            <li class="info">{{ message }}</li>
+                          {% elif category == 'error' %}
+                            <li class="error">{{ message }}</li>
+                          {% endif %}
+                          {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
                 </div>
 
                 <div class="row p-4">
