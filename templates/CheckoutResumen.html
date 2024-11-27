@@ -143,9 +143,9 @@
                                 <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 150px;">
                                     <span>
                                         <div class="input-group mb-3" style="max-width: 150px;">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="decrement()">-</button>
-                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto.idPlatillo}}" id="quantity_{{ producto.idPlatillo}}" readonly>
-                                            <button class="btn btn-outline-secondary" type="button" onclick="increment()">+</button>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="decrement({{ producto.idPlatillo }})">-</button>
+                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto.idPlatillo}}" id="quantity_{{producto.idPlatillo}}" readonly>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="increment({{ producto.idPlatillo }})">+</button>
                                         </div>
                                     </span>
                                 </div>
@@ -293,3 +293,4 @@
         </section>
     </footer>
 </body>
+</html>

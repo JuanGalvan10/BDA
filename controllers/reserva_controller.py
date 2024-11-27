@@ -33,7 +33,6 @@ def mostrar_reservas():
 def nuevo_reserva():
     if 'loggedin' in session:
         if request.method =='POST':
-            print(request.form)
             fecha_reserva = datetime.strptime(request.form['fecha'], "%Y-%m-%d").date()
             hora_reserva = datetime.strptime(request.form['hora'], "%H:%M").time()
             num_personas = int(request.form['num_personas'])

@@ -14,7 +14,7 @@ def login():
                 session['usuario'] = user['nombre_usuario']
                 session['rol'] = user['nombre']
                 if session['rol'] == 'cliente':
-                    session['idCliente'] = get_id_cliente(session['idUsuario'])
+                    message, session['idCliente'] = get_id_cliente(session['idUsuario'])
                 session['productos'] = []
                 session['subtotal'] = 0
                 return redirect(url_for('vista_principal'))

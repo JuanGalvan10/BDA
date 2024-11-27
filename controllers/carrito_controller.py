@@ -25,6 +25,7 @@ def agregarCarrito():
 def checkoutResumen():
     if 'loggedin' in session:
         prods = session['productos']
+        print(session['productos'])
         productos = []
         for producto in prods:
             idProducto = producto['id']
