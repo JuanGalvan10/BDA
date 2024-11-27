@@ -49,7 +49,6 @@ def register_user_client():
         success, message, idUsuario = register_usuario(username, password, rol)
         print(success)
         if success:
-            flash('Registro exitoso', 'success')
             return redirect(url_for('register_client', idUsuario = idUsuario))
         else:
             flash(message, 'error')

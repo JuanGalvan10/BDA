@@ -11,7 +11,7 @@ class Producto:
             productos = cur.fetchall()
             cur.close()
             return True, productos
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -23,7 +23,7 @@ class Producto:
             producto = cur.fetchone()
             cur.close()
             return True, producto
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -35,7 +35,7 @@ class Producto:
             mysql.connection.commit()
             cur.close()
             return True, 'Platillo agregado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -47,7 +47,7 @@ class Producto:
             mysql.connection.commit()
             cur.close()
             return True, 'Platillo actualizado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -59,7 +59,7 @@ class Producto:
             mysql.connection.commit()
             cur.close()
             return True, 'Platillo eliminado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -71,7 +71,7 @@ class Producto:
             productos = cur.fetchall()
             cur.close()
             return True, productos
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 

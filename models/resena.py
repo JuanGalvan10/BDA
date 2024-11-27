@@ -11,7 +11,7 @@ class Resena:
             resenas = cur.fetchall()
             cur.close()
             return True, resenas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -23,7 +23,7 @@ class Resena:
             resena = cur.fetchone()
             cur.close()
             return True, resena
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -35,7 +35,7 @@ class Resena:
             resenas = cur.fetchall()
             cur.close()
             return True, resenas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -47,7 +47,7 @@ class Resena:
             resenas = cur.fetchall()
             cur.close()
             return True, resenas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -59,7 +59,7 @@ class Resena:
             mysql.connection.commit()
             cur.close()
             return True, 'Resena insertada exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -71,6 +71,6 @@ class Resena:
             mysql.connection.commit()
             cur.close()
             return True, 'Resena eliminada exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)

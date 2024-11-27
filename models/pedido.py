@@ -11,7 +11,7 @@ class Pedido:
             pedidos = cur.fetchall()
             cur.close()
             return True, pedidos
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -34,7 +34,7 @@ class Pedido:
             cur.close()
             return True, 'Pedido exitoso'
 
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -46,7 +46,7 @@ class Pedido:
             pedido = cur.fetchone()
             cur.close()
             return True, pedido
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -58,7 +58,7 @@ class Pedido:
             pedidos = cur.fetchall()
             cur.close()
             return True, pedidos
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -70,7 +70,7 @@ class Pedido:
             mysql.connection.commit()
             cur.close()
             return True, 'Pedido eliminado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 

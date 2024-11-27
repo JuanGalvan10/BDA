@@ -11,7 +11,7 @@ class Reserva:
             reservas = cur.fetchall()
             cur.close()
             return True, reservas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -23,7 +23,7 @@ class Reserva:
             reserva = cur.fetchone()
             cur.close()
             return True, reserva
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -35,7 +35,7 @@ class Reserva:
             reservas = cur.fetchall()
             cur.close()
             return reservas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -48,7 +48,7 @@ class Reserva:
             horas_ocupadas = [row[0] for row in cur.fetchall()]
             cur.close()    
             return horas_ocupadas
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -59,7 +59,7 @@ class Reserva:
             cur.callproc("nuevaReserva(%s,%s,%s,%s,%s)", (fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente))
             mysql.connection.commit()
             cur.close()
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -70,6 +70,6 @@ class Reserva:
             cur.callproc('eliminarReserva', (reserva_id,))
             mysql.connection.commit()
             cur.close()
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)

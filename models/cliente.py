@@ -11,7 +11,7 @@ class Cliente:
             users = cur.fetchall()
             cur.close()
             return True , users
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -23,7 +23,7 @@ class Cliente:
             clientes = cur.fetchall()
             cur.close()
             return True, clientes
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -38,7 +38,7 @@ class Cliente:
             mysql.connection.commit()
             cur.close()
             return True, 'Registro exitoso'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -50,7 +50,7 @@ class Cliente:
             User = cur.fetchone()
             cur.close()
             return True, User
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -62,7 +62,7 @@ class Cliente:
             Cliente = cur.fetchone()
             cur.close()
             return True, Cliente
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
     
@@ -74,7 +74,7 @@ class Cliente:
             mysql.connection.commit()
             cur.close()
             return True, 'Cliente actualizado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -86,7 +86,7 @@ class Cliente:
             mysql.connection.commit()
             cur.close()
             return True, 'Cliente eliminado exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -98,7 +98,7 @@ class Cliente:
             mysql.connection.commit()
             cur.close()
             return True, 'Nueva direccion agregada'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 
@@ -110,7 +110,7 @@ class Cliente:
             mysql.connection.commit()
             cur.close()
             return True, 'Tarjeta agregada exitosamente'
-        except MySQLdb.OperationalError as e:
+        except Exception as e:
             cur.close()
             return False, str(e)
 

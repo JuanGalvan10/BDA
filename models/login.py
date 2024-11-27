@@ -27,7 +27,7 @@ def register_cliente(idUsuario, nombre,apellido, telefono, correo, direccion):
         mysql.connection.commit()
         cur.close()
         return True, 'Registro existoso'
-    except MySQLdb.OperationalError as e:
+    except Exception as e:
         cur.close()
         return False, str(e)
 
