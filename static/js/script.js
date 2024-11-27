@@ -18,25 +18,25 @@ $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
 })
 
-$(document).ready(function(){
-    $('#fecha').change(function(){
-        const fechaSeleccionada = $(this).val();
+// $(document).ready(function(){
+//     $('#fecha').change(function(){
+//         const fechaSeleccionada = $(this).val();
         
-        if (!fechaSeleccionada) return;
+//         if (!fechaSeleccionada) return;
 
-        $.ajax({
-            type: 'POST',
-            url: '/horas_disponibles',
-            data: { fecha: fechaSeleccionada },
-            success: function(data){
-                $('#horas-disponibles').html(data);
-            },
-            error: function(){
-                alert('No se cargaron las horas');
-            }
-        });
-    });
-});
+//         $.ajax({
+//             type: 'POST',
+//             url: '/horas_disponibles',
+//             data: { fecha: fechaSeleccionada },
+//             success: function(data){
+//                 $('#horas-disponibles').html(data);
+//             },
+//             error: function(){
+//                 alert('No se cargaron las horas');
+//             }
+//         });
+//     });
+// });
 
 document.addEventListener('DOMContentLoaded', function () {
     const fechaInput = document.getElementById('fecha');

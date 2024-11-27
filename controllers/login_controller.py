@@ -17,7 +17,6 @@ def login():
                     session['idCliente'] = get_id_cliente(session['idUsuario'])
                 session['productos'] = []
                 session['subtotal'] = 0
-                flash('Acceso exitoso', 'success')
                 return redirect(url_for('vista_principal'))
             else:
                 flash('Usuario o password incorrecto, verifique de nuevo', 'error')
