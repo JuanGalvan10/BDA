@@ -67,3 +67,11 @@ window.guardarImagen = () => {
         alert('Error al guardar la imagen.');
     });
 };
+
+function toggleCheckbox(selectedCheckbox) {
+    document.querySelectorAll('input[name="idTipoPromocion"]').forEach((checkbox) => {
+        if (checkbox !== selectedCheckbox) {
+            checkbox.checked = false;
+        }
+    });
+}
