@@ -22,7 +22,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/accessibility.js"></script>
-    <script src="{{ url_for('static',filename='js/graphs.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/scriptGraficas.js') }}"></script>
 </head>
 
 <body>
@@ -104,13 +104,13 @@
                     <div class="col-6">
                         <h5>Status de Clientes:</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <div id="status_de_clientes" style="width:100%;height:400px"></div> <!-- Aqui va funcion de grafica -->
+                            <div id="status_de_clientes" style="width:100%;height:100%;border-radius: 20px;"></div> <!-- Aqui va funcion de grafica -->
                         </div>
                     </div>
                     <div class="col-6">
                         <h5>Status de Reservas:</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <div id="status_de_reservas" style="width:100%;height:400px"></div> <!-- Aqui va funcion de grafica -->
+                            <div id="status_de_reservas" style="width:100%;height:100%;border-radius: 20px;"></div> <!-- Aqui va funcion de grafica -->
                         </div>
                     </div>
                     <br>
@@ -120,34 +120,16 @@
                     <div class="col-6">
                         <h5>Platillos en Stock:</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <div id="platillos_stock" style="width:100%;height:400px"></div>
+                            <div id="platillos_stock" style="width:100%;height:100%;border-radius: 20px;"></div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <h5>Compras por Categoría:</h5>
+                        <h5>Reseñas y Valoraciones:</h5>
                         <div id="recuadro_grafica" class="text-center">
-                            <div id="resenas_calif" style="width:100%;height:400px"></div>
+                            <div id="resenas_calif" style="width:100%;height:100%;border-radius: 20px;"></div>
                         </div>
                     </div>
                     </div>
-
-                </div>
-                        
-                    <div class="row p-4">
-                        <div class="col-6">
-                            <h5>Ventas por Mes:</h5>
-                            <div id="recuadro_grafica" class="text-center">
-                            <div id="ventas_por_mes" style="width:100%;height:400px"></div>
-                        </div>
-                    </div>
-
-                        <div class="col-6">
-                            <h5>Ventas por Día:</h5>
-                            <div id="recuadro_grafica" class="text-center">
-                            <div id="ventas_por_dia" style="width:100%;height:400px"></div>
-                        </div>
-                    </div>
-                    <br>
                 </div>
 
                     <div class="row p-4">

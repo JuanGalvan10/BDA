@@ -42,7 +42,7 @@ def checkoutResumen():
     
 def checkoutEnvio():
     if 'loggedin' in session:
-        if request.method == 'POST':
+        if request.method == 'POST' or request.method == 'GET':
             cambios = []
             subtotal = 0
             nuevos_productos = []

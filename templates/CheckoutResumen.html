@@ -125,35 +125,41 @@
             </div-->
         </div>
         <div class="row justify-content-start">
-            <form action="/checkoutEnvio" method="post">
+            <form action="/checkoutEnvio" method="post"  id="envio">
                 <div class="col-9">
+                  {% for producto in productos %}
                     <div class="row"> 
-                        {% for producto in productos %}
-                        <div class="col-sm-4 col-md-4">
+                        <form action="/agregarCarrito" method="post" id="form_{{ producto.idPlatillo }}">
+                          <input type="hidden" name="productoID" value="{{producto.idPlatillo}}">
+                          <input type="hidden" name="precio" value="{{producto.precio}}">
+                          <div class="col-sm-4 col-md-4">
                             <div>
                                 <img src="{{producto.imagen_URL}}" class="img-fluid rounded" alt="{{producto.nombre}}" style=" box-shadow: 0px 4px 6px black;">
                             </div>
-                        </div>
+                          </div>
                         <div class="col-sm-8 col-md-8">
                             <div class="mt-3">
                                 <h4 class="fs-3">{{producto.nombre}} - ${{producto.precio}}</h4>
                             </div>
                             <div style="display: flex; justify-content: space-between;  align-items: center;">
                                 <p style="font-size: 15px; width:380px;">{{producto.descripcion}}</p>
-                                <div style="display: flex; justify-content: flex-end; align-items: flex-end; width: 150px;">
-                                    <span>
-                                        <div class="input-group mb-3" style="max-width: 150px;">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="decrement({{ producto.idPlatillo }})">-</button>
-                                            <input type="number" class="form-control text-center" value="{{producto.cantidad}}" name="cantidad_{{producto.idPlatillo}}" id="quantity_{{producto.idPlatillo}}" readonly>
-                                            <button class="btn btn-outline-secondary" type="button" onclick="increment({{ producto.idPlatillo }})">+</button>
-                                        </div>
-                                    </span>
-                                </div>
+                                <div class="input-group mb-3" style="max-width: 150px;">
+                                  <label for="cantidad_{{ producto.idPlatillo }}" class="form-label">Cantidad:</label>
+                                  <select class="form-select" 
+                                          id="cantidad_{{ producto.idPlatillo }}" 
+                                          name="cantidad" 
+                                          onchange="document.getElementById('form_{{ producto.idPlatillo }}').submit()">
+                                      {% for i in range(0, 11) %}
+                                          <option value="{{ i }}" {% if i == producto.cantidad %}selected{% endif %}>{{ i }}</option>
+                                      {% endfor %}
+                                  </select>
+                              </div>
                             </div>
                         </div>
+                        </form>
                         <hr>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
     
                 <!--div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
@@ -197,7 +203,7 @@
 
         <div class="row">
             <div class="col-md-9 text-end">
-                <button class="btn btn-lg active" type="submit" aria-pressed="true" style="background-color: #57ff35d0; border: none; font-weight: bold; width: 200px;">Continuar</button>
+                <button class="btn btn-lg active" onclick="document.getElementById('envio').submit()" aria-pressed="true" style="background-color: #57ff35d0; border: none; font-weight: bold; width: 200px;">Continuar</button>
             </div>
         </div>
     </form>

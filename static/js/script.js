@@ -1,44 +1,18 @@
-function calculateSubtotal() {
-    const productos = document.querySelectorAll('.form-control.text-center');
-    let total = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.form-select');
 
-    productos.forEach(input => {
-        const cantidad = parseInt(input.value, 10);
-        const precio = parseFloat(input.getAttribute('data-precio'));
-        total += cantidad * precio;
+    selects.forEach(select => {
+        select.addEventListener('change', () => {
+            // Asegúrate de que el select pertenece a un formulario con un ID relacionado con un producto
+            const form = select.closest('form');
+            if (form && form.id.startsWith('form_')) {
+                form.submit(); // Solo envía el formulario del producto
+            }
+        });
     });
+});
 
-    const subtotalElement = document.getElementById('subtotal-general');
-    subtotalElement.textContent = total.toFixed(2);
-}
 
-function increment(idprod, precio) {
-    const quantityInput = document.getElementById(`quantity_${idprod}`);
-    if (quantityInput) {
-        let value = parseInt(quantityInput.value, 10);
-        if (value < 10) {
-            value += 1;
-            quantityInput.value = value;
-            calculateSubtotal();
-        }
-    } else {
-        console.error(`No se encontró el input para el producto con ID ${idprod}`);
-    }
-}
-
-function decrement(idprod, precio) {
-    const quantityInput = document.getElementById(`quantity_${idprod}`);
-    if (quantityInput) {
-        let value = parseInt(quantityInput.value, 10);
-        if (value > 1) {
-            value -= 1;
-            quantityInput.value = value;
-            calculateSubtotal();
-        }
-    } else {
-        console.error(`No se encontró el input para el producto con ID ${idprod}`);
-    }
-}
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
 })
