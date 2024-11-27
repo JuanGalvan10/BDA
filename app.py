@@ -18,10 +18,14 @@ app.config['MYSQL_HOST'] = MYSQL_HOST
 app.config['MYSQL_USER'] = MYSQL_USER
 app.config['MYSQL_PASSWORD'] = MYSQL_PASSWORD
 app.config['MYSQL_DB'] = MYSQL_DB
+app.config['MYSQL_PORT'] = 3306  
 app.secret_key = SECRET_KEY
 
 init_app(app)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+    
 #definimos la ruta del landing
 @app.route('/')
 def inicio():

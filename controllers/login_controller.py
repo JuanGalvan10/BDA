@@ -6,20 +6,26 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = hashlib.sha256(request.form['password'].encode()).hexdigest()
-        user = login_user(username,password)
-        if user:
-            session['loggedin'] = True
-            session['idUsuario'] = user['idUsuario']
-            session['usuario'] = user['nombre_usuario']
-            session['rol'] = user['nombre']
-            if session['rol'] == 'cliente':
-                session['idCliente'] = get_id_cliente(session['idUsuario'])
-            session['productos'] = []
-            session['subtotal'] = 0
-            flash('Acceso exitoso', 'success')
-            return redirect(url_for('vista_principal'))
+        success, user = login_user(username,password)
+        if success:
+            print(user)
+            if user:
+                session['loggedin'] = True
+                session['idUsuario'] = user['idUsuario']
+                session['usuario'] = user['nombre_usuario']
+                session['rol'] = user['nombre']
+                if session['rol'] == 'cliente':
+                    session['idCliente'] = get_id_cliente(session['idUsuario'])
+                session['productos'] = []
+                session['subtotal'] = 0
+                flash('Acceso exitoso', 'success')
+                return redirect(url_for('vista_principal'))
+            else:
+                flash('Usuario o password incorrecto, verifique de nuevo', 'error')
         else:
-            flash('Usuario o password incorrecto, verifique de nuevo', 'error')
+            message = user
+            flash(message, 'error')
+            return redirect(url_for('login'))
     return render_template('login.html')
 
 def register_user():

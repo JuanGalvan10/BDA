@@ -6,22 +6,34 @@ class Carrito:
     @staticmethod
     def get_metodos(idUser):
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.callproc('mostrarMetodoPagoCliente',(idUser,))
-        metodos = cur.fetchall()
-        cur.close()
-        return metodos
+        try:
+            cur.callproc('mostrarMetodoPagoCliente',(idUser,))
+            metodos = cur.fetchall()
+            cur.close()
+            return True, metodos
+        except MySQLdb.OperationalError as e:
+            cur.close()
+            return False, str(e)
     
     def get_direccion_User(idUser):
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.callproc('obtenerDireccion',(idUser,))
-        direcccion = cur.fetchall()
-        cur.close()
-        return direcccion
+        try:
+            cur.callproc('obtenerDireccion',(idUser,))
+            direcccion = cur.fetchall()
+            cur.close()
+            return True, direcccion
+        except MySQLdb.OperationalError as e:
+            cur.close()
+            return False, str(e)
 
     def get_direccion_restaurantes():
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.callproc('obtenerDireccionesR')
-        direccciones = cur.fetchall()
-        cur.close()
-        return direccciones
+        try:
+            cur.callproc('obtenerDireccionesR')
+            direccciones = cur.fetchall()
+            cur.close()
+            return True , direccciones
+        except MySQLdb.OperationalError as e:
+            cur.close()
+            return False, str(e)
     

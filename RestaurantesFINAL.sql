@@ -480,19 +480,21 @@ CREATE PROCEDURE actualizaCliente(
 )
 BEGIN
     UPDATE CLIENTES
-    SET 
-        nombre = nombre, 
-        apellido = apellido,
-        correo = correo,
-        telefono = telefono,
-        direccion = direccion
+    SET nombre = nombre, apellido = apellido, correo = correo
     WHERE idCliente = p_idCliente;
+
+    UPDATE TELEFONOS_CLIENTE
+    SET telefono = telefono
+    WHERE idtelefono = (SELECT idtelefono FROM CLIENTES WHERE idCliente = p_idCliente);
+
+    UPDATE DIRECCIONES_CLIENTE
+    SET direccion = direccion
+    WHERE iddireccion = (SELECT iddireccion FROM CLIENTES WHERE idCliente = p_idCliente);
     
     UPDATE PUNTOS_CLIENTES
-    SET 
-        cant_puntos = cant_puntos
+    SET cant_puntos = cant_puntos
     WHERE idPuntos = (SELECT idPuntos FROM CLIENTES WHERE idCliente = p_idCliente);
-END $$ 
+END $$
 DELIMITER ;
 
 -- PROCS PARA LOGIN --

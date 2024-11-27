@@ -33,16 +33,20 @@ def register_cliente(idUsuario, nombre,apellido, telefono, correo, direccion):
 
 def login_user(username,password): 
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.callproc('BuscaUsuario', [username])
-    user = cur.fetchone()
-    cur.close()
+    try:
+        cur.callproc('BuscaUsuario', [username])
+        user = cur.fetchone()
+        cur.close()
 
-    if user:
-        stored_password = user['password']
-        if stored_password == password:
-            return user
-    else:
-        return None
+        if user:
+            stored_password = user['password']
+            if stored_password == password:
+                return True, user
+        else:
+            return None, 'Contrasena incorrecta'
+    except MySQLdb.OperationalError as e:
+        cur.close()
+        return False, str(e)
 
 def get_users():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
@@ -50,14 +54,18 @@ def get_users():
         cur.callproc('mostrarUsuarios')
         usuarios = cur.fetchone()
         cur.close()
-        return usuarios
+        return True, usuarios
     except MySQLdb.OperationalError as e:
         cur.close()
         return False, str(e)
     
 def get_id_cliente(idCliente):
     cur = mysql.connection.cursor()
-    cur.callproc('obtenerId', (idCliente,))
-    id = cur.fetchone()
-    cur.close()
-    return id
+    try:
+        cur.callproc('obtenerId', (idCliente,))
+        id = cur.fetchone()
+        cur.close()
+        return id
+    except MySQLdb.OperationalError as e:
+            cur.close()
+            return False, str(e)

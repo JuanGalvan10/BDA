@@ -19,6 +19,21 @@
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col-md-4 login-container text-center" style="background-color: black; padding: 40px; border-radius: 40px; color: #FFFFFF;">
               <h5 class="mb-4">Inicio de Sesión:</h5>
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul>
+                  {% for category, message in messages %}
+                    {% if category == 'success' %}
+                      <li class="success">{{ message }}</li>
+                    {% elif category == 'info' %}
+                      <li class="info">{{ message }}</li>
+                    {% elif category == 'error' %}
+                      <li class="error">{{ message }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
               <form method="post" action="/login">
                 <div class="mb-3">
                     <p>Usuario:</p>
