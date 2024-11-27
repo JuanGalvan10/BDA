@@ -23,7 +23,8 @@ app.secret_key = SECRET_KEY
 init_app(app)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
+
     
 #definimos la ruta del landing
 @app.route('/')

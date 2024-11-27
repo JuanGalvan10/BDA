@@ -134,39 +134,14 @@
               </div>
               <div class="col-7">
                 <label for="hora">Hora:</label>
-                <div id="horas-disponibles" class="row">
-    
-                  <div class="col-4">
-                      
-                    <input type="button" name="hora" value="13:00 PM" class="btn-hora" id="btn-header">
-                      
-                  </div>
-              
-                  <div class="col-4">
-                      
-                      <input type="button" name="hora" value="15:00 PM" class="btn-hora" id="btn-header">
-                      
-                  </div>
-              
-                  <div class="col-4">
-                      
-                      <input type="button" name="hora" value="17:00 PM" class="btn-hora" id="btn-header">
-                      
-                  </div>
-              
-                  <div class="col-4">
-                    
-                      <input type="button" name="hora" value="19:00 PM" class="btn-hora" id="btn-header">
-                      
-                  </div>
-              
-                  <div class="col-4">
-                      
-                      <input type="button" name="hora" value="21:00 PM" class="btn-hora" id="btn-header">
-                      
-                  </div>
-                </div>       
-                <input type="hidden" id="hora-seleccionada" name="hora">
+                <select id="hora" name="hora" class="form-select" required>
+                  <option value="" selected disabled>Selecciona una hora</option>
+                  <option value="13:00">13:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="21:00">21:00</option>
+                </select>   
               </div>
             </div>
           </div>
@@ -305,37 +280,38 @@ scrollleft();
     const today = new Date().toISOString().split('T')[0]; 
     fechaInput.setAttribute('min', today); 
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const fechaInput = document.getElementById('fecha');
+    const personasInput = document.getElementById('num_personas');
+    const temaInput = document.getElementById('txt-reserva');
 
-  document.addEventListener('DOMContentLoaded', () => {
-      const fechaInput = document.getElementById('fecha');
-      const personasInput = document.getElementById('num_personas');
-      const horaInput = document.querySelectorAll('.btn-hora');
-      const temaInput = document.getElementById('txt-reserva');
+    const datoFecha = document.getElementById('dia-reserva');
+    const datoPersonas = document.getElementById('cant-reserva');
+    const datoTema = document.getElementById('tema-reserva');
 
-      const datoFecha = document.getElementById('dia-reserva');
-      const datoPersonas = document.getElementById('cant-reserva');
-      const datoHora = document.getElementById('hora-reserva');
-      const datoTema = document.getElementById('tema-reserva');
+    fechaInput.addEventListener('change', () => {
+        const fechaSeleccionada = fechaInput.value;
+        datoFecha.textContent = `Día: ${fechaSeleccionada}`;
+    });
 
-      fechaInput.addEventListener('change', () => {
-          const fechaSeleccionada = fechaInput.value;
-          datoFecha.textContent = `Dia: ${fechaSeleccionada}`
-      });
-
-      personasInput.addEventListener('input', () => {
-          const numPersonas = personasInput.value;
-          datoPersonas.textContent = `Personas: ${numPersonas}`
-      });
-      const botonesHora = document.querySelectorAll('.btn-hora');
-      botonesHora.forEach((boton) => {
-          boton.addEventListener('click', () => {
-              const horaSeleccionada = boton.value;
-              datoHora.textContent = `Hora: ${horaSeleccionada}`;
-          });
-      });
-      const inputHidden = horaSeleccionada;
+    personasInput.addEventListener('input', () => {
+        const numPersonas = personasInput.value;
+        datoPersonas.textContent = `Personas: ${numPersonas}`;
+    });
                 
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const horaSelect = document.getElementById('hora');
+    const datoHora = document.getElementById('hora-reserva');
+
+    horaSelect.addEventListener('change', () => {
+        const horaSeleccionada = horaSelect.value;
+        datoHora.textContent = `Hora: ${horaSeleccionada}`;
+    });
+});
+
+
   document.addEventListener('DOMContentLoaded', () => {
     const temaInput = document.getElementById('txt-reserva'); 
     const datoTema = document.getElementById('tema-reserva'); 

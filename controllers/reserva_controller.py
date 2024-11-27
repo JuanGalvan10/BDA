@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from datetime import datetime
 from models.reserva import Reserva
 
 def mostrar_reservas():
@@ -32,13 +33,17 @@ def mostrar_reservas():
 def nuevo_reserva():
     if 'loggedin' in session:
         if request.method =='POST':
+            print(request.form)
             fechaReserva = request.form['fecha']
-            hora_reserva = request.form['hora']
-            num_personas = request.form['num_personas']
+            horaseleccionada = request.form.get('hora', '').strip()
+            print(horaseleccionada)
+            #hora_reserva = hora_reserva.strip()
+            #hora_reserva = datetime.strptime(hora_reserva, "%I:%M %p").time()
+            num_personas = int(request.form['num_personas'])
             idStatus = 2
             tema = request.form['tema']
             idCliente = session['idCliente']
-            success, message = Reserva.insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente)
+            success, message = Reserva.insert(fechaReserva, horaseleccionada,num_personas, idStatus, tema, idCliente)
             if success:
                 return render_template('gracias_reserva.html')
             else:
