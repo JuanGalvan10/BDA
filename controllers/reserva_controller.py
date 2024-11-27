@@ -29,7 +29,6 @@ def mostrar_reservas():
         flash('Primero debes de ingresar.', 'error')
         return redirect(url_for('login'))
 
-
 def nuevo_reserva():
     if 'loggedin' in session:
         if request.method =='POST':
