@@ -47,6 +47,7 @@ def register_user_client():
         password = hashlib.sha256(request.form['password'].encode()).hexdigest()
         rol = 'cliente'
         success, message, idUsuario = register_usuario(username, password, rol)
+        print(success)
         if success:
             flash('Registro exitoso', 'success')
             return redirect(url_for('register_client', idUsuario = idUsuario))
