@@ -1,0 +1,82 @@
+Ankara: Istanbul 05:36 576 04:30 433 - 
+Istanbul: Ankara 05:36 576 04:51 434 - Sofia 11:40 789 06:30 530 - 
+Athens: Thessaloniki 05:23 502 05:27 502 - Patras 04:40 220 02:21 211 - 
+Thessaloniki: Athens 05:10 502 05:52 501 - Skopje 06:20 246 02:30 220 - Sofia 05:50 365 04:30 350 - 
+Patras: Athens 04:40 220 02:27 211 - Bari 16:30 970 13:35 651 - 
+Barcelona: Montpellier 01:55 160 03:42 344 - Madrid 02:45 625 07:11 623 - Sevilla 05:40 550 09:49 994 - Valencia 03:15 310 03:38 349 - 
+Montpellier: Barcelona 01:55 160 03:48 344 - Marseille 01:18 150 01:30 140 - 
+Madrid: Barcelona 02:30 625 06:25 626 - Valencia 02:35 309 03:30 350 - Málaga 02:40 504 05:15 450 - Sevilla 02:35 474 02:55 430 - Santiago de Compostela 07:45 610 05:20 500 - Santander 03:50 400 04:20 440 - Pamplona 05:20 325 04:05 300 - Bordeaux 07:45 673 07:10 670 - 
+Sevilla: Barcelona 05:40 550 10:16 993 - Madrid 02:35 474 02:55 430 - Faro 05:10 274 03:50 300 - 
+Valencia: Barcelona 03:15 310 03:47 348 - Madrid 02:35 309 03:30 350 - 
+Belfast: Dublin 03:00 270 01:48 167 - 
+Dublin: Belfast 03:00 270 01:46 166 - Cork 03:15 266 02:45 270 - Holyhead 01:25 224 02:15 224 - Westport 03:30 234 02:55 236 - 
+Belgrade: Zagreb 05:30 357 04:04 398 - Bucharest 09:25 620 08:23 595 - Sofia 11:25 482 04:27 391 - Skopje 04:15 250 04:26 432 - Budapest 08:30 412 05:48 400 - 
+Zagreb: Belgrade 05:30 357 04:11 396 - Budapest 05:36 360 04:32 330 - Ljubljana 02:51 166 02:20 160 - Split 06:40 418 04:20 380 - 
+Bari: Patras 16:30 970 13:11 653 - 
+Bucharest: Belgrade 09:25 620 08:07 599 - Budapest 08:50 513 06:10 520 - Sofia 07:40 487 05:40 410 - 
+Sofia: Belgrade 11:25 482 04:32 393 - Bucharest 07:40 487 05:40 410 - Skopje 04:50 264 03:25 250 - Thessaloniki 05:50 365 04:30 350 - Istanbul 11:40 789 06:30 530 - 
+Skopje: Belgrade 04:15 250 04:38 432 - Thessaloniki 06:20 246 02:30 220 - Sofia 04:50 264 03:25 250 - 
+Berlin: Amsterdam 03:19 650 07:28 656 - Cologne 02:58 507 06:39 574 - Munich 05:19 585 06:23 586 - Prague 04:25 267 04:01 350 - Poznan 02:59 274 03:12 272 - Hamburg 01:44 280 03:50 280 - 
+Amsterdam: Berlin 03:19 650 07:17 657 - Brussels 02:25 214 02:54 208 - Cologne 03:20 220 02:54 208 - 
+Cologne: Berlin 02:58 507 06:28 574 - Brussels 01:45 190 02:25 212 - Amsterdam 03:20 220 02:54 208 - Frankfurt 01:25 165 01:48 190 - 
+Munich: Berlin 05:17 585 06:36 585 - Hamburg 05:52 631 06:03 786 - Vienna 04:15 485 04:50 440 - Frankfurt 03:30 494 04:20 426 - Milan 06:10 504 04:45 450 - Prague 05:20 407 04:40 400 - 
+Prague: Berlin 04:25 267 03:58 350 - Munich 05:20 407 04:40 400 - Vienna 04:50 357 04:20 350 - Wroclaw 05:24 334 04:10 330 - 
+Poznan: Berlin 02:59 274 03:00 273 - Warsaw 02:40 309 03:30 290 - 
+Bern: Milan 03:35 260 04:32 353 - Rome 07:20 580 10:28 851 - Frankfurt 04:47 460 04:40 421 - Lyon 03:50 240 03:23 307 - 
+Milan: Bern 03:35 260 04:22 350 - Bologna 01:14 67 02:42 219 - Munich 06:10 504 04:45 450 - Nice 03:40 255 03:30 250 - Venice 02:20 256 02:45 270 - 
+Rome: Bern 07:20 580 11:00 936 - Napoles 01:10 218 02:45 230 - Florence 01:25 276 03:45 280 - 
+Frankfurt: Bern 04:47 460 04:57 420 - Brussels 04:18 457 04:45 515 - Cologne 01:25 165 01:48 190 - Hamburg 03:02 494 04:20 426 - Munich 03:30 494 04:20 426 - Paris 03:07 580 06:22 580 - 
+Lyon: Bern 03:50 240 03:26 307 - Bordeaux 02:41 459 05:24 554 - Marseille 01:40 314 02:30 180 - Paris 02:00 490 02:44 480 - 
+Bialystok: Vilnius 04:24 322 04:23 303 - Warsaw 03:20 214 02:15 200 - 
+Vilnius: Bialystok 04:24 322 04:09 302 - Klaipeda 04:52 313 03:25 312 - Riga 04:20 308 03:20 300 - 
+Bologna: Milan 01:14 67 02:45 227 - Florence 01:30 114 01:27 111 - 
+Florence: Bologna 01:30 114 01:31 112 - Rome 01:25 276 03:45 280 - Venice 02:30 285 03:15 270 - 
+Bordeaux: Lyon 02:41 459 05:24 554 - Madrid 07:45 673 07:10 670 - Paris 02:04 516 05:50 580 - 
+Brussels: Frankfurt 04:18 457 04:45 515 - London 02:03 380 05:12 358 - Cologne 01:45 190 02:25 212 - Amsterdam 02:25 214 02:54 208 - Paris 01:22 304 03:25 310 - 
+London: Brussels 02:03 380 05:12 358 - Penzance 05:37 553 06:21 462 - Bristol 01:33 152 02:15 153 - Birmingham 01:24 193 02:11 169 - Paris 02:15 346 05:30 460 - 
+Budapest: Krakau 06:15 470 04:42 410 - Vienna 02:56 248 02:35 240 - Bucharest 08:50 513 06:10 520 - Ljubljana 10:06 490 04:45 463 - Zagreb 05:36 360 04:32 330 - Belgrade 08:30 412 05:48 400 - 
+Krakau: Budapest 06:15 470 04:42 410 - 
+Vienna: Budapest 02:56 248 02:35 240 - Munich 04:15 485 04:50 440 - Prague 04:50 357 04:20 350 - Venice 05:50 452 04:50 450 - Warsaw 09:10 625 06:40 600 - 
+Ljubljana: Budapest 10:06 490 04:45 463 - Zagreb 02:51 166 02:20 160 - Venice 02:45 165 02:15 150 - 
+Copenhagen: Stockholm 05:20 550 06:30 650 - Hamburg 06:44 618 05:30 550 - Oslo 07:45 570 08:30 600 - 
+Stockholm: Copenhagen 05:20 550 06:30 650 - Kiruna 14:37 1300 12:01 1402 - Oslo 05:30 520 06:15 580 - Östersund 05:50 422 04:30 420 - Tallinn 03:30 310 05:50 390 - 
+Cork: Dublin 03:15 266 02:45 270 - 
+Edinburgh: Birmingham 04:47 442 05:18 420 - Aberdeen 03:50 262 02:54 250 - Glasgow 01:14 79 01:16 80 - 
+Birmingham: Edinburgh 04:47 442 05:18 420 - Holyhead 04:18 344 04:23 344 - London 01:24 193 02:11 169 - 
+Aberdeen: Edinburgh 03:50 262 02:54 250 - 
+Glasgow: Edinburgh 01:14 79 01:16 80 - 
+Hamburg: Copenhagen 06:44 618 05:30 550 - Berlin 01:44 280 03:50 280 - Munich 05:52 631 06:03 786 - Frankfurt 03:02 494 04:20 426 - 
+Helsinki: Tallinn 03:50 328 05:10 419 - Turku 03:20 187 02:45 169 - Rovaniemi 09:58 610 11:18 875 - 
+Tallinn: Helsinki 03:50 328 05:10 419 - Riga 05:50 342 04:30 330 - Stockholm 03:30 310 05:50 390 - 
+Turku: Helsinki 03:20 187 02:45 169 - 
+Rovaniemi: Helsinki 09:58 610 11:18 875 - 
+Holyhead: Birmingham 04:18 344 04:23 344 - Dublin 01:25 224 02:15 224 - 
+Kiruna: Stockholm 14:37 1300 12:01 1402 - 
+Klaipeda: Vilnius 04:52 313 03:25 312 - 
+Lisboa: Faro 04:10 275 02:30 212 - Porto 02:50 310 03:00 310 - 
+Faro: Lisboa 04:10 275 02:30 212 - Sevilla 05:10 274 03:50 300 - 
+Porto: Lisboa 02:50 310 03:00 310 - 
+Penzance: London 05:37 553 06:21 462 - 
+Bristol: London 01:33 152 02:15 153 - 
+Málaga: Madrid 02:40 504 05:15 450 - 
+Santiago de Compostela: Madrid 07:45 610 05:20 500 - 
+Santander: Madrid 03:50 400 04:20 440 - 
+Pamplona: Madrid 05:20 325 04:05 300 - 
+Marseille: Lyon 01:40 314 02:30 180 - Montpellier 01:18 150 01:30 140 - Nice 02:53 180 02:30 170 - 
+Napoles: Rome 01:10 218 02:45 230 - Catania 06:20 310 04:52 300 - 
+Catania: Napoles 06:20 310 04:52 300 - 
+Nice: Milan 03:40 255 03:30 250 - Marseille 02:53 180 02:30 170 - 
+Oslo: Stockholm 05:30 520 06:15 580 - Bergen 07:15 519 06:45 500 - Copenhagen 07:45 570 08:30 600 - 
+Bergen: Oslo 07:15 519 06:45 500 - 
+Östersund: Stockholm 05:50 422 04:30 420 - Trondheim 04:45 370 03:50 400 - 
+Trondheim: Östersund 04:45 370 03:50 400 - 
+Paris: Bordeaux 02:04 516 05:50 580 - Lyon 02:00 490 02:44 480 - Frankfurt 03:07 580 06:22 580 - Rennes 02:05 350 03:20 260 - Brussels 01:22 304 03:25 310 - London 02:15 346 05:30 460 - 
+Rennes: Paris 02:05 350 03:20 260 - 
+Wroclaw: Prague 05:24 334 04:10 330 - Warsaw 04:40 383 04:20 360 - 
+Riga: Vilnius 04:20 308 03:20 300 - Tallinn 05:50 342 04:30 330 - 
+Split: Zagreb 06:40 418 04:20 380 - 
+Venice: Vienna 05:50 452 04:50 450 - Ljubljana 02:45 165 02:15 150 - Milan 02:20 256 02:45 270 - Florence 02:30 285 03:15 270 - 
+Warsaw: Poznan 02:40 309 03:30 290 - Wroclaw 04:40 383 04:20 360 - Vienna 09:10 625 06:40 600 - Krakow 03:20 239 02:30 230 - Gdansk 04:50 321 04:30 330 - Bialystok 03:20 214 02:15 200 - 
+Krakow: Warsaw 03:20 239 02:30 230 - 
+Gdansk: Warsaw 04:50 321 04:30 330 - 
+Westport: Dublin 03:30 234 02:55 236 - 
