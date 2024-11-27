@@ -15,6 +15,23 @@ body {
   padding-top: 60px;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li.success {
+  color: green;
+}
+
+li.error {
+  color: red;
+}
+
+li.info {
+  color: blue;
+}
+
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
