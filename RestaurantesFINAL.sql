@@ -985,11 +985,11 @@ CREATE VIEW ListaPlatillos AS
 SELECT * FROM PLATILLOS;
 
 DELIMITER $$
-CREATE PROCEDURE obtenerPlatillo(IN idPlatillo INT)
+CREATE PROCEDURE obtenerPlatillo(IN id INT)
 BEGIN
     SELECT idPlatillo, nombre, imagen_URL, precio, descripcion, inventario, idCategoria
     FROM ListaPlatillos
-    WHERE idPlatillo = idPlatillo;
+    WHERE idPlatillo = id;
 END $$
 DELIMITER ;
 

@@ -25,17 +25,18 @@ def agregarCarrito():
 def checkoutResumen():
     if 'loggedin' in session:
         prods = session['productos']
-        print(session['productos'])
         productos = []
         for producto in prods:
             idProducto = producto['id']
             success, productos_checkout = Producto.get_by_id(idProducto)
+            print(productos_checkout)
             if success:
                 productos_checkout['cantidad'] = producto['cantidad']
                 productos.append(productos_checkout)
             else:
                 message = productos_checkout
                 flash(message, 'error')
+        print(productos)
         return render_template('CheckoutResumen.html', productos = productos, subtotal = session['subtotal'])
     else:
         flash('Primero debes de ingresar.', 'error')
