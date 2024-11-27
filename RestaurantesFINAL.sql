@@ -467,6 +467,17 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE obtenerId(
+    IN p_idUsuario INT,
+)
+BEGIN
+    SELECT idCliente
+    FROM CLIENTES
+    WHERE idUsuario = p_idUsuario;
+END $$ 
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE actualizaCliente(
     IN p_idCliente INT,
     IN nombre VARCHAR(50),

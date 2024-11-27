@@ -56,9 +56,10 @@ class Reserva:
     def insert(fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente):
         cur = mysql.connection.cursor()
         try:
-            cur.callproc("nuevaReserva(%s,%s,%s,%s,%s)", (fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente))
+            cur.callproc("nuevaReserva", (fechaReserva, hora_reserva, num_personas, idStatus, tema, idCliente))
             mysql.connection.commit()
             cur.close()
+            return True, 'Reserva agendada exitosamente'
         except Exception as e:
             cur.close()
             return False, str(e)

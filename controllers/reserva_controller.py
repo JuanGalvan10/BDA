@@ -34,16 +34,13 @@ def nuevo_reserva():
     if 'loggedin' in session:
         if request.method =='POST':
             print(request.form)
-            fechaReserva = request.form['fecha']
-            horaseleccionada = request.form.get('hora', '').strip()
-            print(horaseleccionada)
-            #hora_reserva = hora_reserva.strip()
-            #hora_reserva = datetime.strptime(hora_reserva, "%I:%M %p").time()
+            fecha_reserva = datetime.strptime(request.form['fecha'], "%Y-%m-%d").date()
+            hora_reserva = datetime.strptime(request.form['hora'], "%H:%M").time()
             num_personas = int(request.form['num_personas'])
             idStatus = 2
             tema = request.form['tema']
-            idCliente = session['idCliente']
-            success, message = Reserva.insert(fechaReserva, horaseleccionada,num_personas, idStatus, tema, idCliente)
+            print(session['idCliente'])
+            success, message = Reserva.insert(fecha_reserva, hora_reserva,num_personas, idStatus, tema, session['idCliente'])
             if success:
                 return render_template('gracias_reserva.html')
             else:
