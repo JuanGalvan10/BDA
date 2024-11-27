@@ -526,7 +526,6 @@ FROM
     USUARIOS_RESTAURANTE ur
     JOIN ROLES r ON ur.idRol = r.idRol;
 
-<<<<<<< HEAD
 DELIMITER / / 
 CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) 
 BEGIN
@@ -538,15 +537,6 @@ BEGIN
         nombre_usuario = username;
 END / / 
 DELIMITER ;
-=======
-DELIMITER / / CREATE PROCEDURE BuscaUsuario (IN username varchar(50)) BEGIN
-SELECT
-    *
-FROM
-    InfoUsuario
-where
-    nombre_usuario = username;
->>>>>>> 8e25d15d54e291966ff1bd452800f0ba373c85f8
 
 DELIMITER //
 CREATE PROCEDURE registrarUsuario(
