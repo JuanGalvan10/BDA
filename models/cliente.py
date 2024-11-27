@@ -62,7 +62,7 @@ class Cliente:
             Cliente = cur.fetchone()
             cur.close()
             return True, Cliente
-        except Exception as e:
+        except MySQLdb.OperationalError as e:
             cur.close()
             return False, str(e)
     

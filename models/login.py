@@ -68,6 +68,6 @@ def get_id_cliente(idCliente):
         id = cur.fetchone()
         cur.close()
         return id
-    except Exception as e:
-            cur.close()
-            return False, str(e)
+    except MySQLdb.OperationalError as e:
+        cur.close()
+        return False, str(e)

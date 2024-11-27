@@ -11,7 +11,7 @@ class Carrito:
             metodos = cur.fetchall()
             cur.close()
             return True, metodos
-        except Exception as e:
+        except MySQLdb.OperationalError as e:
             cur.close()
             return False, str(e)
     
@@ -22,7 +22,7 @@ class Carrito:
             direcccion = cur.fetchall()
             cur.close()
             return True, direcccion
-        except Exception as e:
+        except MySQLdb.OperationalError as e:
             cur.close()
             return False, str(e)
 
@@ -33,7 +33,7 @@ class Carrito:
             direccciones = cur.fetchall()
             cur.close()
             return True , direccciones
-        except Exception as e:
+        except MySQLdb.OperationalError as e:
             cur.close()
             return False, str(e)
     

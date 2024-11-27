@@ -78,6 +78,7 @@ def checkoutEnvio():
                     })
             session['productos'] = nuevos_productos
             session['subtotal'] = subtotal
+            print(session['idCliente'])
             success, usuario = Cliente.get_cliente_by_id(session['idCliente'])
             if success:
                 direccionUser = usuario['direccion']
