@@ -361,17 +361,6 @@ END $$
 
 DELIMITER ;
 
--- 2. NoStockProductoDeshabilitado
-DELIMITER $$
-CREATE TRIGGER NoStockProductoDeshabilitado 
-AFTER DELETE ON PLATILLOS
-FOR EACH ROW
-BEGIN
-    DELETE FROM inventario
-    WHERE inventario = 0;
-END $$
-
-DELIMITER ;
 
 -- 3. ActualizarPuntosCliente
 DELIMITER $$
@@ -921,15 +910,16 @@ WHERE
 END //
 DELIMITER ;
 
-DELIMITER //
-CREATE PROCEDURE eliminarPedido (
-    IN New_idPedido INT
-)
+DELIMITER // 
+CREATE PROCEDURE eliminarPedido ( 
+	IN New_idPedido INT 
+) 
 BEGIN 
-    DELETE FROM PEDIDOS
-    WHERE idPedido = New_idPedido;
-END //
-DELIMITER ; 
+	DELETE FROM DETALLESPEDIDO WHERE idPedido = New_idPedido;
+	DELETE FROM RESENAS WHERE idPedido = New_idPedido;
+	DELETE FROM PEDIDOS WHERE idPedido = New_idPedido; 
+END // 
+DELIMITER ;
 
 -- PROCS PARA PLATILLOS -- 
 DELIMITER $$
