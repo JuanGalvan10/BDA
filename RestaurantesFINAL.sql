@@ -946,7 +946,8 @@ SELECT
     idCategoria
 FROM
     PlatillosDisponibles_vw;
-END // DELIMITER ;
+END //
+DELIMITER ;
 
 CREATE VIEW ListaPlatillos AS
 SELECT * FROM PLATILLOS;
