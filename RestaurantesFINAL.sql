@@ -78,9 +78,9 @@ CREATE TABLE CLIENTES (
     idStatus INT NOT NULL DEFAULT 1,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-    idtelefono INT NOT NULL,
+    telefono VARCHAR(50) NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
-    iddireccion INT NOT NULL,
+    direccion VARCHAR(50) NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
     FOREIGN KEY (idPuntos) REFERENCES PUNTOS_CLIENTES(idPuntos),
     FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus),
@@ -95,10 +95,6 @@ INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono,
 (4, 8, 1, 'Ana', 'Martínez', 4, 'ana.martinez@email.com', 4),
 (5, 9, 2, 'Luis', 'Sánchez', 5, 'luis.sanchez@email.com', 5);
 
-CREATE TABLE TELEFONOS_CLIENTE (
-    idtelefono INT PRIMARY KEY AUTO_INCREMENT,
-    telefono VAR(14)
-);
 
 INSERT INTO TELEFONOS_CLIENTE (telefono) VALUES
 ('5551234567'),
@@ -107,10 +103,7 @@ INSERT INTO TELEFONOS_CLIENTE (telefono) VALUES
 ('5554567890'),
 ('5555678901');
 
-CREATE TABLE DIRECCIONES_CLIENTE (
-    iddireccion INT PRIMARY KEY AUTO_INCREMENT,
-    direccion VAR(255)
-);
+
 
 INSERT INTO DIRECCIONES_CLIENTE (direccion) VALUES
 ('Calle Falsa 123, Ciudad, CP 12345'),
