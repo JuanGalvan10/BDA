@@ -83,9 +83,7 @@ CREATE TABLE CLIENTES (
     direccion VARCHAR(50) NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
     FOREIGN KEY (idPuntos) REFERENCES PUNTOS_CLIENTES(idPuntos),
-    FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus),
-    FOREIGN KEY (idtelefono) REFERENCES TELEFONOS_CLIENTE(idtelefono),
-    FOREIGN KEY (iddireccion) REFERENCES DIRECCIONES_CLIENTE(iddireccion)
+    FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus)
 );
 
 INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono, correo, direccion) VALUES
