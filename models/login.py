@@ -16,7 +16,7 @@ def register_usuario(username,password, rol):
 
         mysql.connection.commit()
         return True, 'Registro de usuario exitoso', idUsuario
-    except MySQLdb.OperationalError as e:
+    except Exception as e:
         cur.close()
         return False, str(e), None
     
@@ -46,7 +46,7 @@ def login_user(username,password):
                 return False, 'Contrasena incorrecta'
         else:
             return False, 'Usuario no encontrado'
-    except MySQLdb.OperationalError as e:
+    except Exception as e:
         cur.close()
         return False, str(e)
 
@@ -57,7 +57,7 @@ def get_users():
         usuarios = cur.fetchone()
         cur.close()
         return True, usuarios
-    except MySQLdb.OperationalError as e:
+    except Exception as e:
         cur.close()
         return False, str(e)
     
@@ -68,6 +68,6 @@ def get_id_cliente(idCliente):
         id = cur.fetchone()
         cur.close()
         return id
-    except MySQLdb.OperationalError as e:
+    except Exception as e:
             cur.close()
             return False, str(e)
