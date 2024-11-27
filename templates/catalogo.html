@@ -127,7 +127,7 @@
         <div class="row" > 
           {% for producto in productos %}
           <div class="col-4" style="height: max-content;"> 
-            <img src="{{producto.URL_de_imagen}}" alt="platillo" id="imagen"/>
+            <img src="{{producto.imagen_URL}}" alt="platillo" id="imagen"/>
             <input type="hidden" name ="productoID" value="{{producto.idPlatillo}}">
             <input type="hidden" name ="precio" value="{{producto.precio}}">
             <h2 style="text-align: center;">{{producto.nombre}}</h2>
