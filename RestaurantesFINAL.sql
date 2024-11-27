@@ -78,20 +78,46 @@ CREATE TABLE CLIENTES (
     idStatus INT NOT NULL DEFAULT 1,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
+    idtelefono INT NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
-    direccion VARCHAR(255) NOT NULL,
+    iddireccion INT NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
     FOREIGN KEY (idPuntos) REFERENCES PUNTOS_CLIENTES(idPuntos),
-    FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus)
+    FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus),
+    FOREIGN KEY (idtelefono) REFERENCES TELEFONOS_CLIENTE(idtelefono),
+    FOREIGN KEY (iddireccion) REFERENCES DIRECCIONES_CLIENTE(iddireccion)
 );
 
 INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono, correo, direccion) VALUES
-(1, 5, 1, 'Juan', 'Pérez', '5551234567', 'juan.perez@email.com', 'Calle Falsa 123, Ciudad, CP 12345'),
-(2, 6, 1, 'María', 'López', '5552345678', 'maria.lopez@email.com', 'Av. Siempre Viva 456, Ciudad, CP 67890'),
-(3, 7, 2, 'Carlos', 'Gómez', '5553456789', 'carlos.gomez@email.com', 'Boulevard de los Héroes 789, Ciudad, CP 11223'),
-(4, 8, 1, 'Ana', 'Martínez', '5554567890', 'ana.martinez@email.com', 'Paseo de la Reforma 101, Ciudad, CP 33445'),
-(5, 9, 2, 'Luis', 'Sánchez', '5555678901', 'luis.sanchez@email.com', 'Plaza Mayor 202, Ciudad, CP 55667');
+(1, 5, 1, 'Juan', 'Pérez', 1, 'juan.perez@email.com', 1),
+(2, 6, 1, 'María', 'López', 2, 'maria.lopez@email.com', 2),
+(3, 7, 2, 'Carlos', 'Gómez', 3, 'carlos.gomez@email.com', 3),
+(4, 8, 1, 'Ana', 'Martínez', 4, 'ana.martinez@email.com', 4),
+(5, 9, 2, 'Luis', 'Sánchez', 5, 'luis.sanchez@email.com', 5);
+
+CREATE TABLE TELEFONOS_CLIENTE (
+    idtelefono INT PRIMARY KEY AUTO_INCREMENT,
+    telefono VAR(14)
+);
+
+INSERT INTO TELEFONOS_CLIENTE (telefono) VALUES
+('5551234567'),
+('5552345678'),
+('5553456789'),
+('5554567890'),
+('5555678901');
+
+CREATE TABLE DIRECCIONES_CLIENTE (
+    iddireccion INT PRIMARY KEY AUTO_INCREMENT,
+    direccion VAR(255)
+);
+
+INSERT INTO DIRECCIONES_CLIENTE (direccion) VALUES
+('Calle Falsa 123, Ciudad, CP 12345'),
+('Av. Siempre Viva 456, Ciudad, CP 67890'),
+('Boulevard de los Héroes 789, Ciudad, CP 11223'),
+('Paseo de la Reforma 101, Ciudad, CP 33445'),
+('Plaza Mayor 202, Ciudad, CP 55667');
 
 CREATE TABLE DETALLES_METODOPAGOS (
     idDetalleMetodoPago INT PRIMARY KEY AUTO_INCREMENT,
