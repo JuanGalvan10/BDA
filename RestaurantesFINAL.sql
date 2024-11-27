@@ -506,6 +506,133 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE actualizaCliente(
+    IN NEWidCliente INT,
+    IN NEWnombre VARCHAR(50),
+    IN NEWapellido VARCHAR(50),
+    IN NEWcorreo VARCHAR(100),
+    IN NEWcant_puntos INT
+)
+BEGIN
+    UPDATE CLIENTES
+    SET nombre = NEWnombre, apellido = NEWapellido, correo = NEWcorreo
+    WHERE idCliente = NEWidCliente;
+
+    UPDATE PUNTOS_CLIENTES
+    SET cant_puntos = NEWcant_puntos
+    WHERE idPuntos = (SELECT idPuntos FROM CLIENTES WHERE idCliente = NEWidCliente);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE eliminarCliente(
+    IN p_idCliente INT
+)
+BEGIN
+    DECLARE vidUsuario INT;
+    DECLARE vidPuntos INT;
+    DECLARE vidPedido INT;
+    DECLARE vidDetalleMetodoPago INT;
+
+    SELECT idPedido INTO vidPedido
+    FROM PEDIDOS
+    WHERE idCliente = p_idCliente
+    LIMIT 1;
+
+    SELECT idUsuario INTO vidUsuario
+    FROM CLIENTES
+    WHERE idCliente = p_idCliente
+    LIMIT 1;
+
+    SELECT idPuntos INTO vidPuntos
+    FROM CLIENTES
+    WHERE idCliente = p_idCliente
+    LIMIT 1;
+
+    SELECT idDetalleMetodoPago INTO vidDetalleMetodoPago
+    FROM METODOPAGOS
+    WHERE idcliente = p_idCliente
+    LIMIT 1;
+
+    SET FOREIGN_KEY_CHECKS=0;
+
+    DELETE FROM DETALLES_METODOPAGOS
+    WHERE idDetalleMetodoPago = vidDetalleMetodoPago;
+
+    DELETE FROM PUNTOS_CLIENTES
+    WHERE idPuntos = vidPuntos;
+
+    DELETE FROM USUARIOS_RESTAURANTE
+    WHERE idUsuario = vidUsuario;
+
+    SET FOREIGN_KEY_CHECKS=1;
+
+    DELETE FROM  TELEFONOS_CLIENTE
+    WHERE idCliente = p_idCliente;
+
+    DELETE FROM DIRECCIONES_CLIENTE
+    WHERE idCliente = p_idCliente;
+
+    DELETE FROM METODOPAGOS
+    WHERE idCliente = p_idCliente;
+
+    DELETE FROM RESERVAS
+    WHERE idCliente = p_idCliente;
+
+    DELETE FROM DETALLESPEDIDO
+    WHERE idPedido IN (SELECT idPedido FROM PEDIDOS WHERE idCliente = p_idCliente);
+
+    UPDATE RESENAS
+    SET idCliente = NULL
+    WHERE idCliente = p_idCliente;
+
+    SET FOREIGN_KEY_CHECKS=0;
+
+    DELETE FROM PEDIDOS
+    WHERE idCliente = p_idCliente;
+
+    DELETE FROM CLIENTES
+    WHERE idCliente = p_idCliente;
+
+    SET FOREIGN_KEY_CHECKS=1;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE insertarCliente(
+    IN idUsuario INT,
+    IN idStatus INT,
+    IN nombre VARCHAR(50),
+    IN apellido VARCHAR(50),
+    IN correo VARCHAR(100),
+    IN telefono VARCHAR(14),
+    IN direccion VARCHAR(255)
+)
+BEGIN
+    DECLARE idCliente INT;
+    DECLARE idPuntos INT;
+
+    INSERT INTO PUNTOS_CLIENTES(cant_puntos)
+    VALUES (0);
+
+    SET idPuntos = LAST_INSERT_ID();
+
+    INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, correo)
+    VALUES (idPuntos, idUsuario, idStatus, nombre, apellido, correo);
+
+    SET idCliente = LAST_INSERT_ID();
+
+    INSERT INTO TELEFONOS_CLIENTE (idCliente, telefono)
+    VALUES (idCliente, telefono);
+
+    INSERT INTO DIRECCIONES_CLIENTE (idCliente, direccion)
+    VALUES (idCliente, direccion);
+END $$
+DELIMITER ;
+
+
 -- PROCS PARA LOGIN --
 
 CREATE VIEW
@@ -1487,3 +1614,6 @@ BEGIN
 END / /
 
 DELIMITER ;
+
+
+
