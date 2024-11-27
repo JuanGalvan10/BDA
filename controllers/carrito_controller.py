@@ -152,10 +152,10 @@ def guardar_direccion():
             success, message = Cliente.update_direccion(session['idUsuario'], nuevaDireccion)
             if success:
                 flash(message, 'info')
-                redirect(url_for('CheckoutEnvio'))
+                return redirect(url_for('checkoutEnvio'))
             else:
                 flash(message, 'error')
-                redirect(url_for('CheckoutEnvio'))
+                return redirect(url_for('checkoutEnvio'))
         else:
             flash('Metodo de acceso incorrecto', 'error')
             return redirect(url_for('checkoutResumen'))
