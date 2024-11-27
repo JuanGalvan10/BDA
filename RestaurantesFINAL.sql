@@ -1294,7 +1294,7 @@ WHERE
     fecha_reserva = fecha
 GROUP BY hora_reserva
 HAVING COUNT(*) >= 10;
-END // 
+END //
 DELIMITER ;
 
 DELIMITER $$
