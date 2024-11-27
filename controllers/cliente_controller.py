@@ -16,7 +16,7 @@ def mostrar_clientes():
             cliente = Cliente.get_cliente_by_id(session['idCliente'])
             return render_template('mi_perfil.html', cliente = cliente, username = username)
         else:
-            clientes = Cliente.get_all()
+            clientes = Cliente.get_clientes()
             return render_template('Clientes.html', clientes = clientes, nombre_usuario = session['usuario'])
     else:
         flash('Primero debes de ingresar.', 'error')

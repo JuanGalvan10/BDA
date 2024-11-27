@@ -535,7 +535,7 @@ BEGIN
         InfoUsuario
     where
         nombre_usuario = username;
-END / / 
+END / /
 DELIMITER ;
 
 DELIMITER //
@@ -763,6 +763,28 @@ BEGIN
         idCliente = id_Sesion;
 END //
 DELIMITER ;
+
+create view mostrarClientes_vw as
+select * 
+from CLIENTES natural join PUNTOS_CLIENTES
+
+DELIMITER //
+CREATE PROCEDURE mostrarClientes()
+BEGIN
+    SELECT 
+        idCliente, 
+        nombre, 
+        apellido, 
+        telefono, 
+        correo, 
+        direccion, 
+        cant_puntos
+    FROM 
+        mostrarClientes_vw;
+END //
+DELIMITER ;
+
+
 
 -- PROCS PARA PEDIDOS --
 

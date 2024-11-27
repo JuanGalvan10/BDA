@@ -4,12 +4,20 @@ import hashlib
 
 class Cliente:
     @staticmethod
-    def get_all():
+    def get_usuarios():
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.callproc('mostrarUsuarios')
         users = cur.fetchall()
         cur.close()
         return users
+    
+    @staticmethod
+    def get_clientes():
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.callproc('mostrarClientes')
+        clientes = cur.fetchall()
+        cur.close()
+        return clientes
     
     @staticmethod
     def insert(nombre,apellidos,correo, telefono, direccion, puntos, password, nombre_usuario):
