@@ -94,7 +94,7 @@ class Cliente:
     def update_direccion(idUsuario, nuevadireccion):
         cur = mysql.connection.cursor()
         try:
-            cur.callproc('nuevaDireccion(%s,%s)', (idUsuario,nuevadireccion,))
+            cur.callproc('nuevaDireccion', (idUsuario,nuevadireccion,))
             mysql.connection.commit()
             cur.close()
             return True, 'Nueva direccion agregada'
