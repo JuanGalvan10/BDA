@@ -78,20 +78,18 @@ CREATE TABLE CLIENTES (
     idStatus INT NOT NULL DEFAULT 1,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-    telefono VARCHAR(50) NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
-    direccion VARCHAR(50) NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
     FOREIGN KEY (idPuntos) REFERENCES PUNTOS_CLIENTES(idPuntos),
     FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus)
 );
 
-INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, telefono, correo, direccion) VALUES
-(1, 5, 1, 'Juan', 'Pérez', 1, 'juan.perez@email.com', 1),
-(2, 6, 1, 'María', 'López', 2, 'maria.lopez@email.com', 2),
-(3, 7, 2, 'Carlos', 'Gómez', 3, 'carlos.gomez@email.com', 3),
-(4, 8, 1, 'Ana', 'Martínez', 4, 'ana.martinez@email.com', 4),
-(5, 9, 2, 'Luis', 'Sánchez', 5, 'luis.sanchez@email.com', 5);
+INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, correo) VALUES
+(1, 5, 1, 'Juan', 'Perez', 'juan.perez@email.com'),
+(2, 6, 1, 'María', 'Lopez', 'maria.lopez@email.com'),
+(3, 7, 2, 'Carlos', 'Gomez', 'carlos.gomez@email.com'),
+(4, 8, 1, 'Ana', 'Martinez', 'ana.martinez@email.com'),
+(5, 9, 2, 'Luis', 'Sanchez', 'luis.sanchez@email.com');
 
 CREATE TABLE TELEFONOS_CLIENTE (
     idtelefono INT PRIMARY KEY AUTO_INCREMENT,
