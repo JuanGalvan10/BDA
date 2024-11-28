@@ -152,6 +152,17 @@
                     </div>
                 </div>
             </div>
+            <!-- Redes sociales: -->
+            <div class="col-12 mt-3">
+              <div class="d-flex justify-content-start">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ url_for('resena', resena_id=resena[0], _external=True) }}" target="_blank" class="btn btn-primary brn-sm me-2">
+                  Comparte tu reseña por Facebook.
+                </a>
+                <a href="https://api.whatsapp.com/send?text=Mi%20reseña%20en%20Señora%20%20Tanaka%20{{resena[4]}}:%20{{ url_for('resena', resena_id=resena[0], _external=True) }}" target="_blank" class="btn btn-success btn-sm">
+                  Comparte tu reseña por Whatsapp.
+                </a>
+              </div>
+            </div>
             {% endfor %}
             <br>
             <hr>
