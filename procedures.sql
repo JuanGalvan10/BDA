@@ -142,7 +142,7 @@ BEGIN
     where nombre = rol;
 
     INSERT INTO USUARIOS_RESTAURANTE(nombre_usuario, password, idRol)
-    VALUES (nom, pass, rolU);
+    VALUES (nom, SHA2(pass, 256), rolU);
 
     SELECT LAST_INSERT_ID() AS idUsuario;
 END //
