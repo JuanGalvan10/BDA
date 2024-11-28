@@ -99,21 +99,7 @@ END $$
 
 DELIMITER ;
 
-
--- 3. ActualizarPuntosCliente
-DELIMITER $$
-CREATE TRIGGER ActualizarPuntosCliente
-BEFORE UPDATE ON PUNTOS_CLIENTES 
-FOR EACH ROW
-BEGIN
-    UPDATE CLIENTES
-    SET cant_puntos = cant_puntos + (NEW.cant_puntos - OLD.cant_puntos)
-    WHERE idPuntos = NEW.idPuntos;
-END $$
-
-DELIMITER ;
-
--- 4. BloquearCambioPedidoCompletado
+-- 2. BloquearCambioPedidoCompletado
 DELIMITER $$
 CREATE TRIGGER BloquearCambioPedidoCompletado
 BEFORE INSERT ON PEDIDOS
@@ -127,7 +113,7 @@ END $$
 
 DELIMITER ; 
 
--- 5. usuarioOcupado
+-- 3. usuarioOcupado
 DELIMITER $$
 CREATE TRIGGER usuarioOcupado
 BEFORE INSERT ON USUARIOS_RESTAURANTE
@@ -143,7 +129,7 @@ END $$
 
 DELIMITER ;
 
--- 6. CalcularTotalPedido
+-- 4. CalcularTotalPedido
 DELIMITER $$
 CREATE TRIGGER CalcularTotalPedido
 AFTER INSERT ON DETALLESPEDIDO
@@ -159,7 +145,7 @@ END $$
 
 DELIMITER ;
 
--- 7. NotificarPromocionExpirada 
+-- 5. NotificarPromocionExpirada 
 DELIMITER $$
 CREATE TRIGGER NotificarPromocionExpirada
 BEFORE INSERT ON PROMOCIONES
@@ -173,7 +159,7 @@ END $$
 
 DELIMITER ; 
 
--- 8. ValidarFechaReserva
+-- 6. ValidarFechaReserva
 DELIMITER $$
 CREATE TRIGGER ValidarFechaReserva
 BEFORE INSERT ON RESERVAS
