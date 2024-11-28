@@ -214,15 +214,15 @@ DELIMITER ;
 
  -- INSERTAR CLIENTES --
 
-DELIMITER / /
+DELIMITER //
 CREATE PROCEDURE obtenerUser(
-    IN idUsuario INT
+    IN newidUsuario INT
 )
 BEGIN
     SELECT idUsuario, nombre_usuario, idRol
     FROM USUARIOS_RESTAURANTE
-    WHERE idUsuario = idUsuario;
-END / /
+    WHERE idUsuario = newidUsuario;
+END //
 DELIMITER ;
 
 DELIMITER //
