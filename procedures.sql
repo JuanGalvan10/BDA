@@ -83,12 +83,6 @@ BEGIN
 END $$
 
 
-
-
-
--- VIEJOS -- 
-
-
 -- TRIGGERS -- 
 
 -- 1. NoStockProducto
@@ -672,6 +666,20 @@ DELIMITER ;
 
 
 -- PROCS PARA PEDIDOS --
+
+DELIMITER //
+CREATE PROCEDURE eliminarPedido (
+    IN New_idPedido INT
+)
+BEGIN
+    DELETE FROM DETALLESPEDIDO
+    WHERE idPedido = New_idPedido;
+
+    DELETE FROM PEDIDOS
+    WHERE idPedido = New_idPedido;
+END //
+DELIMITER ; 
+
 
 CREATE VIEW
     mostrarPedidos_vw AS
