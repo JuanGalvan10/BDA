@@ -48,16 +48,17 @@ DELIMITER ;
 
 -- 6. CalcularTotalPedido
 DELIMITER $$
-CREATE TRIGGER CalcularTotalPedido
+
+CREATE TRIGGER actualizarTotalSuma
 AFTER INSERT ON DETALLESPEDIDO
 FOR EACH ROW
-BEGIN 
+BEGIN
     UPDATE PEDIDOS 
-    SET total_suma = total_suma + 
-        (SELECT precio
-        FROM PLATILLOS p 
-        WHERE p.idPlatillo = NEW.idPlatillo)
-        WHERE idPedido = NEW.idPedido;
+    SET total_pedido = total_pedido + 
+        (SELECT precio 
+         FROM PLATILLOS 
+         WHERE idPlatillo = NEW.idPlatillo)
+    WHERE idPedido = NEW.idPedido;
 END $$
 
 DELIMITER ;
@@ -351,18 +352,22 @@ END / /
 DELIMITER ;
 
 
-DELIMITER / /
+DELIMITER $$
 CREATE PROCEDURE insertarDetallesPedido (
     IN New_idPedido INT,
     IN New_idPlatillo INT,
     IN New_cantidad INT
 )
 BEGIN
-    INSERT INTO DETALLESPEDIDO(idPedido, idPlatillo, cantidad, precio_unitario)
-    SELECT New_idPedido, New_idPlatillo, New_cantidad, precio 
+    DECLARE unitario DECIMAL(10,2);
+
+    SELECT precio INTO unitario
     FROM PLATILLOS
     WHERE idPlatillo = New_idPlatillo;
-END / /
+
+    INSERT INTO DETALLESPEDIDO(idPedido, idPlatillo, cantidad, precio_unitario)
+    VALUES (New_idPedido, New_idPlatillo, New_cantidad, unitario);
+END $$
 DELIMITER ; 
 
 DELIMITER $$
