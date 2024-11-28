@@ -653,6 +653,11 @@ DELIMITER ;
 
 -- PROCS PARA PEDIDOS --
 
+CREATE VIEW pedidosCompletos_vw AS 
+    SELECT *
+    FROM PEDIDOS NATURAL JOIN STATUS_PEDIDO
+    WHERE nombre_status = "Pedido Completo";
+
 DELIMITER //
 CREATE PROCEDURE eliminarPedido (
     IN New_idPedido INT
