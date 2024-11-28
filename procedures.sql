@@ -100,20 +100,6 @@ BEGIN
 END $$ 
 DELIMITER ;
 
--- PROCS PARA Cliente --
-
-DELIMITER $$
-CREATE PROCEDURE nuevaDireccion(
-    IN p_idUsuario INT,
-    IN direc INT
-)
-BEGIN
-    UPDATE CLIENTES
-    SET 
-        direccion = direc
-    WHERE idUsuario = p_idUsuario;
-END $$ 
-DELIMITER ;
 
 -- PROCS PARA LOGIN --
 
