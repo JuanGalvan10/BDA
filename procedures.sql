@@ -817,6 +817,32 @@ END //
 DELIMITER ;
 
 -- PROCS PARA PLATILLOS -- 
+
+DELIMITER $$
+CREATE PROCEDURE mostrarCategorias() 
+BEGIN
+    select idCategoria, nombre
+from CATEGORIAS c;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE eliminarPlatillo(
+    IN NEWidPlatillo INT
+)
+BEGIN
+
+    DELETE FROM DETALLESPEDIDO
+    WHERE idPlatillo = NEWidPlatillo;
+
+    DELETE FROM PROMOCIONES
+    WHERE idPlatillo = NEWidPlatillo;
+
+    DELETE FROM PLATILLOS
+    WHERE idPlatillo = NEWidPlatillo;
+END $$
+DELIMITER ;
+
 DELIMITER $$
 CREATE PROCEDURE actualizaPlatillo(
     IN idPlatillo INT,
