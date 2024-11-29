@@ -31,6 +31,64 @@ CREATE TABLE IF NOT EXISTS USUARIOS_RESTAURANTE (
     FOREIGN KEY (idRol) REFERENCES ROLES(idRol) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
+INSERT INTO USUARIOS_RESTAURANTE (nombre_usuario, password, idRol) VALUES
+('JuanGalvan', SHA2('666', 256), 2),
+('FernandoOlivares', SHA2('666', 256), 2),
+('PamelaRodriguez', SHA2('666', 256), 2),
+('EstefaniaNajera', SHA2('666', 256), 2),
+('JuanPe', SHA2('666', 256), 3),
+('MariaLo', SHA2('666', 256), 1),
+('CarlosGo', SHA2('666', 256), 1),
+('AnaMar', SHA2('666', 256), 1),
+('LuisSa', SHA2('666', 256), 1);
+
+CREATE TABLE ROLES_STAFF (
+    idUsuario INT NOT NULL,
+    idRolStaff INT NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
+    FOREIGN KEY (idRolStaff) REFERENCES TIPOS_STAFF(idRolStaff)
+);
+
+INSERT INTO ROLES_STAFF VALUES
+('5', '1');
+
+CREATE TABLE PUNTOS_CLIENTES (
+    idPuntos INT PRIMARY KEY AUTO_INCREMENT,
+    cant_puntos INT NOT NULL
+);
+
+INSERT INTO PUNTOS_CLIENTES (cant_puntos) VALUES
+(100),
+(150),
+(200),
+(50),
+(75);
+
+CREATE TABLE STATUS_CLIENTES (
+    idStatus INT PRIMARY KEY AUTO_INCREMENT,
+    Status_Clientes VARCHAR(255)
+);
+
+INSERT INTO STATUS_CLIENTES (Status_Clientes) VALUES
+('Activo'),
+('Inactivo');
+
+
+CREATE TABLE CLIENTES (
+    idCliente INT PRIMARY KEY AUTO_INCREMENT,
+    idPuntos INT NOT NULL DEFAULT 0,
+    idUsuario INT NOT NULL,
+    idStatus INT NOT NULL DEFAULT 1,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES USUARIOS_RESTAURANTE(idUsuario),
+    FOREIGN KEY (idPuntos) REFERENCES PUNTOS_CLIENTES(idPuntos),
+    FOREIGN KEY (idStatus) REFERENCES STATUS_CLIENTES(idStatus)
+);
+
+
 INSERT INTO CLIENTES (idPuntos, idUsuario, idStatus, nombre, apellido, correo) VALUES
 (1, 5, 1, 'Juan', 'Pérez','juan.perez@email.com'),
 (2, 6, 1, 'María', 'López','maria.lopez@email.com'),
